@@ -1,0 +1,32 @@
+This product includes software developed by [Your Name], the creator of the following:
+- TriageX platform
+- TITAN (Threat Investigation and Analysis Network)
+
+These projects are designed to assist in Digital Forensics and Incident Response (DFIR) by leveraging Natural Language Processing (NLP), AI models, and automated investigation workflows.
+
+NOTICE: This project includes third-party software and libraries that are used under their respective open-source licenses. Below is a list of the external libraries and models utilized in this project, along with their licenses and links to the respective repositories.
+
+Third-party software used in this project:
+
+- **GPT-2** (MIT License)
+  - https://github.com/openai/gpt-2
+- **spaCy** (MIT License)
+  - https://github.com/explosion/spaCy
+- **NLTK** (Apache License 2.0)
+  - https://www.nltk.org/
+- **Timesketch API Client** (Apache License 2.0)
+  - https://github.com/google/timesketch
+- **Pandas** (BSD 3-Clause License)
+  - https://github.com/pandas-dev/pandas
+- **Flask** (BSD 3-Clause License)
+  - https://github.com/pallets/flask
+- **Zircolite** (MIT License)
+  - https://github.com/wagga40/Zircolite
+
+The creators of the aforementioned tools and libraries retain their respective copyright and license. Please refer to the individual repositories for detailed license information.
+
+---
+
+If you use, modify, or distribute this project, please provide appropriate credit to the original author, [David Terrey], as per the conditions of the Apache License 2.0.
+
+Special thanks to the developers of the open-source projects mentioned above for their contributions to the open-source community, without which this project would not be possible.
