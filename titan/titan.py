@@ -91,13 +91,13 @@ MITRE_TACTIC_MAPPINGS = {
 }
 
 # Initialize export folder variable
-export_folder = "/home/titan/Downloads/TITAN/"
+export_folder = "/home/titan/titan/"
 
 # File to store all extracted IOCs persistently
-iocs_storage_file = '/home/titan/Downloads/TITAN/iocs_storage.json'
+iocs_storage_file = '/home/titan/titan/iocs_storage.json'
 
 # Specify the path to the mitrecti.py script
-mitrecti_path = '/home/titan/Downloads/TITAN/mitrecti.py'
+mitrecti_path = '/home/titan/titan/mitrecti.py'
 
 # API Key for URLScan.io
 API_KEY = "71999b57-0017-4055-956f-a38e8a8710a7"
@@ -125,7 +125,7 @@ def load_predefined_questions(filepath):
         data = json.load(file)
     return data
 
-predefined_questions = load_predefined_questions('/home/titan/Downloads/TITAN/predefined_questions.json')
+predefined_questions = load_predefined_questions('/home/titan/titan/predefined_questions.json')
 
 # Load event descriptions
 def load_event_descriptions(filepath):
@@ -133,7 +133,7 @@ def load_event_descriptions(filepath):
         event_descriptions = json.load(file)
     return event_descriptions
 
-event_descriptions = load_event_descriptions('/home/titan/Downloads/TITAN/event_descriptions.json')
+event_descriptions = load_event_descriptions('/home/titan/titan/event_descriptions.json')
 
 # Load mitrecti.py dynamically
 def load_mitrecti_module(path):
@@ -146,10 +146,10 @@ def load_mitrecti_module(path):
 mitrecti = load_mitrecti_module(mitrecti_path)
 
 # Path to the attack folder
-attack_folder = '/home/titan/Downloads/TITAN/mitrecti'
+attack_folder = '/home/titan/titan/mitrecti'
 
 # Cache file for attack_data
-attack_data_cache_file = '/home/titan/Downloads/TITAN/attack_data_cache.pkl'
+attack_data_cache_file = '/home/titan/titan/attack_data_cache.pkl'
 
 # Load attack data with caching
 def load_attack_data(attack_folder, cache_file):
@@ -683,9 +683,9 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
 
 def handle_zircolite_import():
     # Paths to the Node.js script and data.js
-    nodejs_script_path = '/home/titan/Downloads/TITAN/extract_data.js'  # Replace with the actual path
-    data_js_path = '/home/titan/Downloads/TITAN/data.js'  # Replace with the actual path
-    json_output_directory = '/home/titan/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
+    nodejs_script_path = '/home/titan/titan/extract_data.js'  # Replace with the actual path
+    data_js_path = '/home/titan/titan/data.js'  # Replace with the actual path
+    json_output_directory = '/home/titan/titan/zircolite'  # Same as outputDirectory in extract_data.js
 
     # Ensure the JSON output directory exists
     if not os.path.exists(json_output_directory):
@@ -745,7 +745,7 @@ def interpret_question(question):
     match = re.match(r'show me all (.+) events', question.lower())
     if match:
         category = match.group(1).strip()
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/titan/titan/data.js'  # Update this path to your actual data.js file
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
         return None, None, action, extra_params
@@ -762,7 +762,7 @@ def interpret_question(question):
 
     # Handle 'show me the full timeline of events' command
     if "show me the full timeline of events" in question.lower():
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/titan/titan/data.js'  # Update this path to your actual data.js file
         category = 'full timeline'
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
@@ -857,7 +857,7 @@ def interpret_question(question):
                 scan_data = get_scan_results(scan_id)
                 if scan_data:
                     folder_name = create_safe_folder_name(url)
-                    folder_path = os.path.join('/home/titan/Downloads/TITAN/url', folder_name)
+                    folder_path = os.path.join('/home/titan/titan/url', folder_name)
                     os.makedirs(folder_path, exist_ok=True)
                     display_results(scan_data)
                     export_results_to_csv(scan_data, folder_path)
@@ -1387,7 +1387,7 @@ def main():
 
     # Example questions based on chain of events
     example_questions = [
-        "upload /home/titan/Downloads/TITAN/iocs.csv",
+        "upload /home/titan/titan/iocs.csv",
         "search for iocs in timesketch and tag iocs",
         "search for iocs in timesketch and export to iocs.csv",
         "import zircolite data",
@@ -1440,7 +1440,7 @@ def main():
         console.print(f"- {q}", style="cyan")
 
     # Enable command history with readline
-    histfile = "/home/titan/Downloads/TITAN/.adam_history"  # Path to store the command history
+    histfile = "/home/titan/titan/.adam_history"  # Path to store the command history
 
     # Try to read the history file if it exists
     try:
