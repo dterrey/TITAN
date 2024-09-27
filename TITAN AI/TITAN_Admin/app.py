@@ -237,7 +237,7 @@ def progress():
     return render_template('progress.html')
 
 # Define the path to the TITAN Console app.py
-TITAN_SCRIPT_PATH = '/home/titan/Downloads/TITAN/TITAN_Admin/TITAN_CONSOLE/app.py'
+TITAN_SCRIPT_PATH = '/opt/TITAN_Admin/TITAN_CONSOLE/app.py'
 
 # Start TITAN Console in the background
 def start_titan_console():
@@ -253,7 +253,7 @@ def start_titan_console():
 @login_required
 def terminal():
     # Redirect to TITAN Console running on port 5232
-    return redirect("http://0.0.0.0:5232")
+    return redirect("http://localhost:5232")
 
 # Run main Flask app and start TITAN Console automatically
 if __name__ == '__main__':
@@ -267,5 +267,4 @@ if __name__ == '__main__':
     time.sleep(2)
 
     # Start the main Flask app on port 5111
-    socketio.run(app, debug=True, host='0.0.0.0', port=5111)
-
+    socketio.run(app, debug=True, host='localhost', port=5111)
