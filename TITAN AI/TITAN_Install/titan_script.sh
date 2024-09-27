@@ -360,7 +360,7 @@ pip install scikit-learn
 pip install pandas spacy timesketch-api-client PyPDF2 python-docx openpyxl gensim IPython tabulate
 python3 -m spacy download en_core_web_sm
 pip install os re json pandas spacy requests timesketch-api-client ipython PyPDF2 python-docx openpyxl sumy nltk rich scikit-learn logging readline
-
+pip install sumy
 pip install yara-python pandas requests gitpython
 
 
