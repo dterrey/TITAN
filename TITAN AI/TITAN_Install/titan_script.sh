@@ -21,13 +21,13 @@ export USERNAME
 export PASSWORD
 
 # Define the paths based on the base directory
-CONFIG_FILE="$BASE_DIR/titan/config.json"
-JSON_FILE="$BASE_DIR/titan/titan_NR_Flow.json"
-FLASK_APP_FILE="$BASE_DIR/titan/Flask/app.py"
-BASE_HTML_FILE="$BASE_DIR/titan/Flask/templates/base.html"
-DEPLOY_TIMESKETCH_EXPECT="$BASE_DIR/titan/deploy_timesketch_expect.sh"
-NODE_RED_INSTALL="$BASE_DIR/titan/node_red_install.sh"
-FLASK_DIR="$BASE_DIR/titan/Flask"
+CONFIG_FILE="$BASE_DIR/titan/TITAN_Install/config.json"
+JSON_FILE="$BASE_DIR/titan/TITAN_Install/titan_NR_Flow.json"
+FLASK_APP_FILE="$BASE_DIR/titan/TITAN_Admin/app.py"
+BASE_HTML_FILE="$BASE_DIR/titan/TITAN_Admin/templates/base.html"
+DEPLOY_TIMESKETCH_EXPECT="$BASE_DIR/titan/TITAN_Install/deploy_timesketch_expect.sh"
+NODE_RED_INSTALL="$BASE_DIR/titan/TITAN_Install/node_red_install.sh"
+FLASK_DIR="$BASE_DIR/titan/TITAN_Admin"
 
 # Extract local IP address
 LOCAL_IP=$(hostname -I | awk '{print $1}')
@@ -171,16 +171,20 @@ if {![file exists "/tmp/update_script.sh"]} {
 set UPDATE_SCRIPT_OPTIONS "--confirm-root --confirm-install --skip-pi --no-init --nodered-user=\$username --restart"
 
 # Run the Node-RED install script with automated responses
-spawn sudo -u \$username bash -c "bash /tmp/update_script.sh \$UPDATE_SCRIPT_OPTIONS"
-expect {
-    "*?assword for \$username:*" {pip install PyPDF2
+spawn sudo -u $username bash -c "bash /tmp/update_script.sh $UPDATE_SCRIPT_OPTIONS"
 
-        send_user "\nSending password for \$username: \$password\n"
-        send "\$password\r"
+expect {
+    "*?assword for $username:*" {
+        # Install the required package before sending the password
+        exec pip install PyPDF2
+        
+        send_user "\nSending password for $username: $password\n"
+        send "$password\r"
         exp_continue
     }
     eof
 }
+
 
 # Wait for Node-RED to be fully started
 sleep 20
@@ -307,7 +311,8 @@ touch /cases/processor/logfile/logfile.txt
 sudo add-apt-repository universe -y
 add-apt-repository ppa:gift/stable -y
 apt-get update
-apt-get install plaso-tools -y
+pip install plaso
+sudo apt install xmount
 
 # Install Timesketch import client to assist with larger plaso uploads
 pip3 install timesketch-import-client
@@ -362,10 +367,6 @@ sudo sh -c "echo 'PATH=\$PATH:\$HOME/.local/bin' >> $HOME/.bashrc"
 source ~/.bashrc
 
 sudo -u $USERNAME pip3 install --upgrade pip
-sudo -u $USERNAME pip3 install notebook
-
-cd /
-git clone https://github.com/dterrey/JupPlas_lib
 
 pip install matplotlib
 pip install Flask
@@ -405,8 +406,8 @@ sudo mv $FLASK_DIR /opt/
 sudo chmod 777 -R /opt/
 
 SERVICE_FILE="/etc/systemd/system/flaskui.service"
-APP_PATH="/opt/Flask/app.py"
-WORKING_DIR="/opt/Flask"
+APP_PATH="/opt/TITAN_Admin/app.py"
+WORKING_DIR="/opt/TITAN_Admin"
 USER=$USERNAME
 PYTHON_PATH="/usr/bin/python3"
 
