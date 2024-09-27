@@ -224,35 +224,35 @@ sudo docker run -d -p 9000:9000 --restart always -v /var/run/docker.sock:/var/ru
 
 # Download and install Timesketch
 git clone https://github.com/google/timesketch
-#sudo curl -s -O https://raw.githubusercontent.com/google/timesketch/master/contrib/deploy_timesketch.sh
-#sudo chmod 777 deploy_timesketch.sh
-#sudo chmod 777 -R /opt/
-#sudo mv deploy_timesketch.sh /opt/
-#cd /opt/
+sudo curl -s -O https://raw.githubusercontent.com/google/timesketch/master/contrib/deploy_timesketch.sh
+sudo chmod 777 deploy_timesketch.sh
+sudo chmod 777 -R /opt/
+sudo mv deploy_timesketch.sh /opt/
+cd /opt/
 
 # Run the expect script for Timesketch installation
-#expect $DEPLOY_TIMESKETCH_EXPECT
+expect $DEPLOY_TIMESKETCH_EXPECT
 
 # Update Timesketch URL in base.html
-#update_timesketch_url "$LOCAL_IP" "$BASE_HTML_FILE"
+update_timesketch_url "$LOCAL_IP" "$BASE_HTML_FILE"
 
 # Function to create the Timesketch database and role in PostgreSQL
-#create_timesketch_db_and_role() {
-#    # Wait for the PostgreSQL container to be up and running
-#    until sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "\l"; do
-#        echo "Waiting for PostgreSQL to be available..."
-#        sleep 5
-#    done
-#
-#    # Create the role (user)
-#    sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "CREATE ROLE $USERNAME WITH LOGIN PASSWORD '$PASSWORD';"
-#
-#    # Grant privileges to the role
-#    sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "ALTER ROLE $USERNAME CREATEDB;"
-#
-#    # Create the database owned by the role
-#    sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "CREATE DATABASE timesketch OWNER $USERNAME;"
-# }
+create_timesketch_db_and_role() {
+    # Wait for the PostgreSQL container to be up and running
+    until sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "\l"; do
+        echo "Waiting for PostgreSQL to be available..."
+        sleep 5
+    done
+
+    # Create the role (user)
+#   sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "CREATE ROLE $USERNAME WITH LOGIN PASSWORD '$PASSWORD';"
+
+    # Grant privileges to the role
+    sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "ALTER ROLE $USERNAME CREATEDB;"
+
+#   # Create the database owned by the role
+    sudo docker exec -it $(sudo docker ps -qf "name=postgres") psql -U postgres -c "CREATE DATABASE timesketch OWNER $USERNAME;"
+ }
 
 
 # Continue with the rest of the installation script
