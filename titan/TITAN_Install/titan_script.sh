@@ -176,7 +176,7 @@ spawn sudo -u $username bash -c "bash /tmp/update_script.sh $UPDATE_SCRIPT_OPTIO
 expect {
     "*?assword for $username:*" {
         # Install the required package before sending the password
-        exec pip install PyPDF2
+        exec  PyPDF2
         
         send_user "\nSending password for $username: $password\n"
         send "$password\r"
@@ -284,7 +284,6 @@ touch /cases/processor/logfile/logfile.txt
 sudo add-apt-repository universe -y
 add-apt-repository ppa:gift/stable -y
 apt-get update
-pip install plaso
 sudo apt install xmount
 
 # Install Timesketch import client to assist with larger plaso uploads
@@ -362,7 +361,8 @@ python3 -m spacy download en_core_web_sm
 pip install os re json pandas spacy requests timesketch-api-client ipython PyPDF2 python-docx openpyxl sumy nltk rich scikit-learn logging readline
 pip install sumy
 pip install yara-python pandas requests gitpython
-
+pip install plaso
+pip install fpdf
 
 python -c "import nltk; nltk.download('punkt')"
 
