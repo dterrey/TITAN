@@ -15,23 +15,25 @@
 # -----------------------------------------------------------------------------
 
 import os
-import re
+import json
 import pandas as pd
-from datetime import datetime
-from fpdf import FPDF
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from timesketch_api_client import client, search
 from rich.console import Console
-import unicodedata
 
 # Initialize console for output
 console = Console()
 
+# Define local paths for GPT-2 model and tokenizer
+LOCAL_MODEL_PATH = "./local_gpt2_model"
+LOCAL_TOKENIZER_PATH = "./local_gpt2_tokenizer"
+
 # Connect to Timesketch
-ts_client = client.TimesketchApi('http://localhost', username='titan', password='admin')
+ts_client = client.TimesketchApi('http://localhost', username='triagex', password='admin')
 sketch_id = 4  # Replace with your sketch ID
 sketch = ts_client.get_sketch(sketch_id)
 
-# MITRE ATT&CK Mappings, including severity levels
+# MITRE ATT&CK Mappings
 MITRE_TACTIC_MAPPINGS = {
     'InitialAccessData': {'tag': 'Initial Access'},
     'PersistenceData': {'tag': 'Persistence'},
@@ -45,22 +47,29 @@ MITRE_TACTIC_MAPPINGS = {
     'ExfiltrationData': {'tag': 'Exfiltration'},
     'CommandAndControlData': {'tag': 'Command and Control'},
     'ImpactData': {'tag': 'Impact'},
-    'LowData': {'tag': 'Low Severity'},
-    'MediumData': {'tag': 'Medium Severity'},
-    'HighData': {'tag': 'High Severity'},
-    'CriticalData': {'tag': 'Critical Severity'},
-    'InformationalData': {'tag': 'Informational'},
+    'OtherData': {'tag': 'Other'},
     'UnknownData': {'tag': 'Unknown'},
-    'OtherData': {'tag': 'Other'}
 }
 
-# List of fields to exclude from the report
-EXCLUDE_FIELDS = [
-    'sigma_yml', 'row_id', 'ProcessGuid', 'EventRecordID', 'ThreadID', 
-    'Keywords', 'Level', 'Guid', 'UserID', 'Version', 'OriginalLogfile', 
-    'Company', 'FileVersion', 'IntegrityLevel', 'LogonGuid', 'LogonId', 
-    'ParentProcessGuid', 'Product', 'variable_name', 'tag'
-]
+# Function to check and download GPT-2 model and tokenizer if they don't exist
+def check_and_download_gpt2():
+    if not os.path.exists(LOCAL_MODEL_PATH) or not os.path.exists(LOCAL_TOKENIZER_PATH):
+        console.print("GPT-2 model or tokenizer not found locally. Downloading...", style="bold yellow")
+        model = GPT2LMHeadModel.from_pretrained("gpt2")
+        tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+        model.save_pretrained(LOCAL_MODEL_PATH)
+        tokenizer.save_pretrained(LOCAL_TOKENIZER_PATH)
+        console.print("GPT-2 model and tokenizer downloaded and saved locally.", style="bold green")
+    else:
+        console.print("GPT-2 model and tokenizer found locally.", style="bold green")
+
+# Initialize GPT-2 model and tokenizer from local files (offline)
+def initialize_gpt2():
+    check_and_download_gpt2()  # Ensure the model and tokenizer are available locally
+    console.print("Initializing GPT-2 model for AI analysis (Offline)...", style="bold blue")
+    tokenizer = GPT2Tokenizer.from_pretrained(LOCAL_TOKENIZER_PATH)
+    model = GPT2LMHeadModel.from_pretrained(LOCAL_MODEL_PATH)
+    return tokenizer, model
 
 # Function to load Zircolite data from Timesketch using MITRE ATT&CK tags
 def load_zircolite_data(sketch):
@@ -81,167 +90,75 @@ def load_zircolite_data(sketch):
     console.print(f"Loaded {len(events_df)} Zircolite events.", style="bold green")
     return events_df
 
-# Function to convert the microseconds epoch time to UTC
-def convert_epoch_to_utc(epoch_time):
-    try:
-        epoch_seconds = int(epoch_time) / 1000000
-        utc_time = datetime.utcfromtimestamp(epoch_seconds).strftime('%Y-%m-%d %H:%M:%S UTC')
-        return utc_time
-    except ValueError:
-        return epoch_time
+# Function to perform GPT-2 analysis and generate structured paragraphs
+def generate_zircolite_report(events_df, tokenizer, model, output_file):
+    if events_df.empty:
+        console.print("No events to analyze.", style="bold red")
+        return
 
-# Function to sanitize strings to latin-1 by removing or replacing problematic characters
-def sanitize_text(text):
-    # Normalize the text to remove any non-latin characters
-    text = unicodedata.normalize('NFKD', text).encode('latin-1', 'ignore').decode('latin-1')
-    return text
+    summary_data = []
 
-# **Updated Function:** Filter out lines in the description that match the [field] = value pattern
-def filter_description(description):
-    """
-    Removes lines that match [field] = value from the description.
-    """
-    # Split by comma or newline to handle different separators
-    lines = re.split(r'[,\n]', description)
-    # Use regex to exclude lines with the EXCLUDE_FIELDS
-    filtered_lines = [line.strip() for line in lines if not any(f"[{field}]" in line for field in EXCLUDE_FIELDS)]
-    # Join the remaining lines with newline for better formatting in PDF
-    return '\n'.join(filtered_lines)
+    # Convert the timeline into a summary input for AI model
+    event_texts = events_df['message'].tolist()
 
-# Create a PDF report with UTF-8 encoding support
-def create_pdf_report(events_df, output_file):
-    pdf = FPDF(orientation='P', unit='mm', format='A4')
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.add_page()
+    # GPT-2 has a token limit of 1024, so we'll set a max token limit for each chunk
+    max_tokens_per_chunk = 900  # Keep a buffer from 1024 to prevent overflow
 
-    # Title
-    pdf.set_font("Arial", 'B', 16)
-    pdf.set_text_color(0, 0, 128)
-    pdf.cell(200, 10, txt=sanitize_text("Zircolite Incident Report"), ln=True, align='C')
+    input_text_chunks = []
+    current_chunk = ""
 
-    # Total events
-    pdf.ln(10)
-    pdf.set_font("Arial", 'B', 12)
-    pdf.set_text_color(0, 0, 0)
-    pdf.cell(200, 10, txt=sanitize_text(f"Total Events: {len(events_df)}"), ln=True)
+    for event_text in event_texts:
+        tokens = tokenizer.encode(event_text)
+        if len(tokens) > max_tokens_per_chunk:
+            truncated_tokens = tokens[:max_tokens_per_chunk]
+            current_chunk = tokenizer.decode(truncated_tokens, skip_special_tokens=True)
+            input_text_chunks.append(current_chunk)
+            current_chunk = ""
+        elif len(current_chunk) + len(tokens) > max_tokens_per_chunk:
+            input_text_chunks.append(current_chunk)
+            current_chunk = event_text
+        else:
+            current_chunk += "\n" + event_text
 
-    # Loop through each MITRE tactic and add data
-    for tactic, details in MITRE_TACTIC_MAPPINGS.items():
-        tag = details['tag']
-        tactic_events = events_df[events_df['tag'].apply(lambda tags: tag in tags if tags else False)]
+    if current_chunk:
+        input_text_chunks.append(current_chunk)
 
-        if tactic_events.empty:
-            continue
+    console.print(f"Performing AI analysis on {len(event_texts)} events split into {len(input_text_chunks)} chunks...", style="bold blue")
 
-        # Add section heading
-        pdf.ln(10)
-        pdf.set_font("Arial", 'B', 14)
-        pdf.set_text_color(255, 0, 0)
-        pdf.cell(200, 10, txt=sanitize_text(f"{tag} ({len(tactic_events)} events)"), ln=True)
+    # Process each chunk separately
+    for chunk_idx, input_text in enumerate(input_text_chunks):
+        console.print(f"Processing chunk {chunk_idx + 1} of {len(input_text_chunks)}...", style="bold cyan")
 
-        # Add description and mitigation recommendations
-        pdf.set_font("Arial", '', 12)
-        pdf.set_text_color(0, 0, 0)
-        pdf.multi_cell(0, 10, txt=sanitize_text(f"This section covers all events tagged with {tag}, providing detailed information and timestamps."))
+        inputs = tokenizer.encode(input_text, return_tensors='pt')
 
-        for event in tactic_events.itertuples():
-            utc_time = sanitize_text(convert_epoch_to_utc(event.timestamp))
-            raw_description = event.message if event.message else "No description available"
-            # **Apply filtering to remove unwanted [field] = value lines**
-            filtered_description = filter_description(raw_description)
-            description = sanitize_text(filtered_description)
-            event_id = sanitize_text(event.id) if hasattr(event, 'id') else "Unknown ID"
-
-            # Format the event details with line breaks for each key field
-            pdf.set_font("Arial", 'B', 10)
-            pdf.multi_cell(0, 10, txt=sanitize_text(f"Event ID: {event_id}"))
-            pdf.set_font("Arial", 'B', 10)
-            pdf.multi_cell(0, 10, txt=sanitize_text(f"Time: {utc_time}"))
-            pdf.set_font("Arial", 'B', 10)
-            pdf.multi_cell(0, 10, txt=sanitize_text("Description:"))
-            pdf.set_font("Arial", '', 10)
-
-            # **Split by newline since we've filtered out [field] = value lines**
-            description_lines = description.split('\n')
-            for line in description_lines:
-                if line:  # Avoid adding empty lines
-                    pdf.multi_cell(0, 10, txt=f"{line}")
-
-        # Mitigation recommendations
-        pdf.ln(5)
-        pdf.set_font("Arial", 'I', 12)
-        
-        # Add customized mitigation recommendations based on the tactic
-        mitigation_recommendation = sanitize_text(get_mitigation_recommendation(tag))
-        pdf.multi_cell(0, 10, txt=sanitize_text(f"Mitigation Recommendations for {tag}: {mitigation_recommendation}\n"))
-
-    # Save the PDF
-    try:
-        pdf.output(output_file, 'F')
-        console.print(f"Incident report saved as PDF to {output_file}", style="bold green")
-    except Exception as e:
-        console.print(f"Failed to save PDF: {e}", style="bold red")
-
-# Function to provide meaningful and tactic-specific mitigation recommendations
-def get_mitigation_recommendation(tactic):
-    recommendations = {
-        'Initial Access': (
-            "Ensure that proper network segmentation is in place to limit the impact of compromised assets. "
-            "Enable multi-factor authentication (MFA) for remote access and monitor all ingress points for unusual behavior."
-        ),
-        'Persistence': (
-            "Monitor for changes to persistence mechanisms, such as modifications to the Windows Registry or scheduled tasks. "
-            "Utilize Endpoint Detection and Response (EDR) solutions to detect and block unusual persistence activity."
-        ),
-        'Privilege Escalation': (
-            "Ensure that users have only the minimum necessary privileges. Regularly audit accounts for proper permission levels. "
-            "Monitor for the creation of new administrator accounts or the modification of privilege levels."
-        ),
-        'Defense Evasion': (
-            "Implement logging mechanisms to detect tampering with security logs or services. "
-            "Monitor for unexpected or unauthorized disabling of security software."
-        ),
-        'Credential Access': (
-            "Utilize strong password policies and implement multi-factor authentication (MFA) to prevent credential theft. "
-            "Monitor for abnormal credential usage or attempts to access high-privilege accounts."
-        ),
-        'Discovery': (
-            "Monitor network traffic for unusual activity that indicates lateral movement or scanning of internal systems. "
-            "Limit the use of unnecessary services and ensure proper access control."
-        ),
-        'Lateral Movement': (
-            "Use network segmentation and firewalls to limit lateral movement. "
-            "Monitor for unusual remote access or file transfer activity between internal systems."
-        ),
-        'Execution': (
-            "Restrict the use of PowerShell and other scripting languages to authorized users. "
-            "Monitor for unusual script execution and suspicious process creation events."
-        ),
-        'Collection': (
-            "Encrypt sensitive data both at rest and in transit. "
-            "Monitor for large or unusual file access requests that could indicate data exfiltration attempts."
-        ),
-        'Exfiltration': (
-            "Monitor for unusual outbound network traffic that may indicate data exfiltration. "
-            "Use Data Loss Prevention (DLP) tools to detect and block unauthorized data transfers."
-        ),
-        'Command and Control': (
-            "Monitor for beaconing behavior or suspicious network connections to known malicious command-and-control servers. "
-            "Implement network-based detection mechanisms to block suspicious outbound connections."
-        ),
-        'Impact': (
-            "Develop and regularly test an incident response plan to quickly respond to destructive attacks. "
-            "Use backup solutions to mitigate the damage from ransomware or other destructive actions."
-        ),
-        'Other': (
-            "Review logs for any unusual activity that does not fit into specific categories. "
-            "Implement general cybersecurity best practices to minimize the risk of undetected threats."
+        outputs = model.generate(
+            inputs.to(model.device), 
+            max_new_tokens=200,  # Limit new token generation
+            num_return_sequences=1, 
+            do_sample=True, 
+            temperature=0.7
         )
-    }
-    return recommendations.get(tactic, "Please review specific mitigation strategies to enhance defenses.")
 
-# Main function
+        # Decode the generated analysis
+        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+        # Construct a summary entry for each event
+        for event in events_df.itertuples():
+            file_path = getattr(event, 'message', 'Unknown')
+
+            summary_data.append({
+                "File Path Detected": file_path,
+                "AI Generated Analysis": generated_text
+            })
+
+    # Export the results to a CSV file
+    output_df = pd.DataFrame(summary_data)
+    output_df.to_csv(output_file, index=False)
+    console.print(f"Zircolite report saved to {output_file}", style="bold green")
+
+# Main function for Zircolite report generation
 def main():
+    # Option to choose between report generation
     console.print("Select an option:", style="bold yellow")
     console.print("1. Generate Zircolite report", style="bold green")
     console.print("2. IOC Hunt and Report", style="bold green")
@@ -255,12 +172,14 @@ def main():
             console.print("No Zircolite data available for report generation.", style="bold red")
             return
 
-        # Generate PDF report
-        output_file = '/home/titan/Downloads/zircolite_report.pdf'
-        create_pdf_report(events_df, output_file)
+        # Initialize GPT-2 model and tokenizer
+        tokenizer, model = initialize_gpt2()
+
+        # Perform AI-based analysis on the Zircolite data and generate the report
+        output_file = '/home/triagex/Downloads/ADAM/zircolite_report.csv'  # Specify the output file path
+        generate_zircolite_report(events_df, tokenizer, model, output_file)
 
     elif option == "2":
-        # Placeholder for IOC Hunt and Report functionality
         console.print("IOC Hunt and Report option will be implemented.", style="bold blue")
         # You can integrate the existing IOC hunt functionality here
     else:
@@ -268,4 +187,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
