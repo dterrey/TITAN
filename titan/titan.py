@@ -1361,7 +1361,7 @@ def display_results(results):
 # ---------------------------
 
 def print_adam_description(font_size=14):
-    text = Text("Artificial Digital Analysis Machine", style=f"bold magenta")
+    text = Text("Threat Investigation and Tactical Analysis Network", style=f"bold magenta")
     console.print(text)
 
 #adam_ascii_art = r"""
