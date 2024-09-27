@@ -288,7 +288,7 @@ pip install plaso
 sudo apt install xmount
 
 # Install Timesketch import client to assist with larger plaso uploads
-pip3 install timesketch-import-client cors
+pip3 install timesketch-import-client cors flask_cors
 
 # Download the latest tags file from dterrey forked repo
 sudo wget -Nq https://raw.githubusercontent.com/dterrey/titan/master/tags.yaml -O /opt/timesketch/etc/timesketch/tags.yaml
