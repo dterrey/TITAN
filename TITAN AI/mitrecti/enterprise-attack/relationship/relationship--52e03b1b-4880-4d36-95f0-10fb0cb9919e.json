@@ -1,0 +1,26 @@
+{
+    "type": "bundle",
+    "id": "bundle--733945d0-330f-48d3-a811-404551b126c6",
+    "spec_version": "2.0",
+    "objects": [
+        {
+            "type": "relationship",
+            "id": "relationship--52e03b1b-4880-4d36-95f0-10fb0cb9919e",
+            "created": "2022-03-30T14:26:51.847Z",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "revoked": false,
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "modified": "2023-08-23T21:02:26.233Z",
+            "description": "Monitor for newly constructed network connections that are sent or received by untrusted hosts. \n\nNote: Network Analysis frameworks such as Zeek can be used to capture, decode, and alert on TCP network connection creation.  ",
+            "relationship_type": "detects",
+            "source_ref": "x-mitre-data-component--181a9f8c-c780-4f1f-91a8-edb770e904ba",
+            "target_ref": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+            "x_mitre_deprecated": false,
+            "x_mitre_version": "0.1",
+            "x_mitre_attack_spec_version": "3.1.0",
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5"
+        }
+    ]
+}

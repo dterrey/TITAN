@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <div class="centered-title">
+    {% include "title.html" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h1>Action Log</h1>
+  <div class="log-container" style="max-height: 200px; overflow-y: scroll;">
+    <ul class="list-group">
+      {% for log in logs %}
+        <li class="list-group-item">
+          {{ log.timestamp }} - {{ log.action }} by {{ log.user.username if log.user else 'Node-RED' }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a href="{{ url_for('download_log') }}" class="btn btn-secondary mt-3">Download Log</a>
+{% endblock %}

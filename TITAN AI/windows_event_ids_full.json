@@ -1,0 +1,54 @@
+{
+    "4624": {
+        "description": "An account was successfully logged on.",
+        "analyst_summary": "Review these logons for unauthorized access, especially during off-hours."
+    },
+    "4625": {
+        "description": "An account failed to log on.",
+        "analyst_summary": "Check for potential brute force attempts or misconfigured accounts."
+    },
+    "4634": {
+        "description": "An account was logged off.",
+        "analyst_summary": "Correlate this logoff with previous activities to ensure no unauthorized actions were taken."
+    },
+    "4648": {
+        "description": "A logon was attempted using explicit credentials.",
+        "analyst_summary": "Analyze the credentials used to determine if this was a legitimate attempt or part of a broader attack."
+    },
+    "4656": {
+        "description": "A handle to an object was requested.",
+        "analyst_summary": "Investigate the process that requested the handle to determine if it was legitimate."
+    },
+    "4670": {
+        "description": "Permissions on an object were changed.",
+        "analyst_summary": "Review the context of the permission change to ensure no unauthorized privilege escalation occurred."
+    },
+    "4688": {
+        "description": "A new process has been created.",
+        "analyst_summary": "Investigate the newly created process, especially if it was not part of routine operations."
+    },
+    "4689": {
+        "description": "A process has exited.",
+        "analyst_summary": "Review the process lifecycle, especially if the exit was unexpected or abnormal."
+    },
+    "4697": {
+        "description": "A service was installed in the system.",
+        "analyst_summary": "Ensure the service installation is authorized and not related to malware or persistence mechanisms."
+    },
+    "4703": {
+        "description": "A token right was adjusted.",
+        "analyst_summary": "Investigate the reason for adjusting token rights, as this may indicate privilege escalation attempts."
+    },
+    "4776": {
+        "description": "The computer attempted to validate the credentials for an account.",
+        "analyst_summary": "Check for failed attempts to validate credentials, indicating potential unauthorized access."
+    },
+    "4798": {
+        "description": "A user's local group membership was enumerated.",
+        "analyst_summary": "Review the reason for the enumeration, as this could be a precursor to privilege escalation."
+    },
+    "4826": {
+        "description": "Boot Configuration Data loaded.",
+        "analyst_summary": "Ensure that the BCD load was not manipulated, as this could be used to tamper with boot integrity."
+    }
+}

@@ -1,0 +1,263 @@
+<!-- -----------------------------------------------------------------------------
+TITAN (Threat Investigation and Tactical Analysis Network)
+Created by: <a href="https://www.linkedin.com/in/david-terrey-a06b1312/" target="_blank">David Terrey</a>
+Copyright (c) 2024 <a href="https://www.linkedin.com/in/david-terrey-a06b1312/" target="_blank">David Terrey</a>
+Licensed under the Apache License, Version 2.0 (the "License");
+You may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+----------------------------------------------------------------------------- -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITAN-X Console</title>
+    <!-- Import Fira Code Font (monospaced font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default browser styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: #181818;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .console-container {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100vw; /* Full width */
+            height: 100vh; /* Full height */
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #00FF7F;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        pre#output {
+            flex-grow: 1;
+            background-color: #000;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #32CD32;
+            overflow-y: auto;
+            padding: 10px;
+            white-space: pre-wrap; /* Allows wrapping but maintains spaces */
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            display: flex;
+            width: 100%;
+        }
+
+        .input-container input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px 0 0 4px;
+            border: none;
+            background-color: #2c2c2c;
+            color: white;
+        }
+
+        .input-container button {
+            padding: 10px 15px;
+            background-color: #00b894;
+            border: none;
+            color: white;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-container button:hover {
+            background-color: #019875;
+        }
+
+        .button-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .start-button {
+            background-color: #0984e3;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .start-button:hover {
+            background-color: #066bbd;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="console-container">
+        <h1>TITAN-X Console</h1>
+        <pre id="output"></pre>
+        
+        <div class="input-container">
+            <input type="text" id="commandInput" placeholder="Type a command..." autocomplete="off" />
+            <button onclick="sendCommand()">Send</button>
+        </div>
+        <div class="button-container">
+            <button class="start-button" onclick="startTitan()">Run TITAN-X</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to start the TITAN-X script
+        function startTitan() {
+            const output = document.getElementById('output');
+            output.textContent = 'Starting TITAN-X...\n';
+
+            // Fetch and stream output from Flask
+            fetch('/run_titan', { method: 'POST' })
+                .then(response => {
+                    if (!response.body) {
+                        throw new Error('ReadableStream not yet supported in this browser.');
+                    }
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder("utf-8");
+                    let buffer = '';
+
+                    function readStream() {
+                        reader.read().then(({ done, value }) => {
+                            if (done) {
+                                if (buffer.length > 0) {
+                                    const formattedChunk = formatOutput(buffer);
+                                    output.textContent += formattedChunk + '\n';
+                                    scrollToBottom(); // Scroll to bottom after appending output
+                                }
+                                return;
+                            }
+                            buffer += decoder.decode(value, { stream: true });
+                            // Split the buffer into lines
+                            const lines = buffer.split(/\r?\n/);
+                            // Keep the last partial line in the buffer
+                            buffer = lines.pop();
+                            lines.forEach(line => {
+                                const formattedLine = formatOutput(line);
+                                output.textContent += formattedLine + '\n';
+                                scrollToBottom(); // Scroll to bottom after each line
+                            });
+                            readStream();
+                        }).catch(err => {
+                            output.textContent += 'Error reading stream: ' + err + '\n';
+                        });
+                    }
+                    readStream();
+                })
+                .catch(err => {
+                    output.textContent += 'Error starting TITAN-X: ' + err + '\n';
+                });
+        }
+
+        // Function to send commands to the console
+        function sendCommand() {
+            const commandInput = document.getElementById('commandInput');
+            const command = commandInput.value.trim();
+            const output = document.getElementById('output');
+
+            if (command) {
+                output.textContent += '\n$ ' + command + '\n';
+                scrollToBottom(); // Scroll to bottom after each command
+                fetch('/send_command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ command: command })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.output) {
+                        const formattedOutput = formatOutput(data.output);
+                        output.textContent += formattedOutput + '\n';
+                        scrollToBottom(); // Scroll to bottom after receiving response
+                    }
+                })
+                .catch(err => {
+                    output.textContent += 'Error: ' + err + '\n';
+                });
+                
+                commandInput.value = '';  // Clear the input field
+            }
+        }
+
+        // Send command when 'Enter' key is pressed
+        document.getElementById('commandInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        });
+
+        // Scroll to bottom of the output
+        function scrollToBottom() {
+            const output = document.getElementById('output');
+            output.scrollTop = output.scrollHeight;
+        }
+
+        /**
+         * Function to format output by removing leading spaces and HTML tags.
+         * @param {string} output - The raw output string from the backend.
+         * @returns {string} - The formatted output string.
+         */
+        function formatOutput(output) {
+            // Remove all leading whitespace (spaces, tabs) from each line
+            let formatted = output.replace(/^[ \t]+/gm, '');
+
+            // Remove HTML tags if present
+            formatted = formatted.replace(/<\/?[^>]+(>|$)/g, "");
+
+            // Optionally, replace multiple spaces with a single space
+            formatted = formatted.replace(/[ ]{2,}/g, ' ');
+
+            // Ensure consistent line breaks
+            formatted = formatted.replace(/\r?\n/g, '\n');
+
+            return formatted;
+        }
+    </script>
+</body>
+</html>
+

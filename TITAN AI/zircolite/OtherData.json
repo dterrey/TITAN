@@ -1,0 +1,33 @@
+[
+  {
+    "Rule level": "high",
+    "title": "Suspicious Computer Account Name Change CVE-2021-42287",
+    "sigma_yml": "win_samaccountname_spoofing_cve_2021_42287.yml",
+    "description": "Detects the renaming of an existing computer account to a account name that doesn't contain a $ symbol as seen in attacks against CVE-2021-42287",
+    "row_id": 35572,
+    "ProcessId": 624,
+    "Channel": "Security",
+    "Computer": "01566s-win16-ir.threebeesco.com",
+    "EventID": 4781,
+    "EventRecordID": 2982094,
+    "ThreadID": 3652,
+    "Keywords": "0x8020000000000000",
+    "Level": 0,
+    "Opcode": 0,
+    "Guid": "54849625-5478-4994-A5BA-3E3B0328C30D",
+    "Provider_Name": "Microsoft-Windows-Security-Auditing",
+    "Task": 13824,
+    "SystemTime": "2021-12-12T17:57:52.375105Z",
+    "Version": 0,
+    "OriginalLogfile": "samaccount_spoofing_CVE-2021-42287_CVE-2021-42278_DC_securitylogs.evtx-9FZ8OWXT.json",
+    "SubjectDomainName": "3B",
+    "SubjectLogonId": "0x738ce4",
+    "SubjectUserName": "lgrove",
+    "SubjectUserSid": "S-1-5-21-308926384-506822093-3341789130-101606",
+    "PrivilegeList": "-",
+    "TargetDomainName": "3B",
+    "TargetSid": "S-1-5-21-308926384-506822093-3341789130-220105",
+    "NewTargetUserName": "01566s-win16-ir",
+    "OldTargetUserName": "DC012$"
+  }
+]

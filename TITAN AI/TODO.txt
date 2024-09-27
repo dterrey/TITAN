@@ -1,0 +1,11 @@
+Currently working on
+NODE RED .E01 processing flow
+
+final test Zircolite
+Implement Hayabusa and Chainsaw Scanning
+
+test adam.py to make sure its good
+Update triagex readme and install script
+
+
+

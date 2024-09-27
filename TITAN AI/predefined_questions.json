@@ -1,0 +1,1452 @@
+{
+  "questions": [
+    {
+      "question": "Show me all logon events",
+      "query": "4624 OR 4648 OR 4768 OR 4776 OR 4964",
+      "category": "windows_event",
+      "description": "Displays all logon events, including interactive, network, and service logons.",
+      "summary_template": {
+        "title": "Summary of All Logon Events",
+        "content": [
+          "Total Events: {total} logon events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users involved were {users}.",
+          "Time of Events: Most logons occurred between {peak_hours}. However, there were unusual logon attempts from {suspicious_users} at {suspicious_hours}.",
+          "Notable IPs: Logon attempts were made from the following IP addresses: {ip_addresses}.",
+          "Potential Security Concerns: {suspicious_users} logged in from unfamiliar IP addresses, which could indicate potential unauthorized access."
+        ],
+        "detailed_analysis": [
+          "Review these logon events for any unusual patterns, such as failed logon attempts followed by successful logons. Pay attention to logons from accounts that normally do not have remote access.",
+          "Correlate these logon events with concurrent changes in user privileges, as attackers often escalate privileges after gaining access.",
+          "Investigate the logon attempts during off-hours, particularly those by {suspicious_users}, as these could be indicators of compromised accounts."
+        ],
+        "suggestions": [
+          "Show me failed logon attempts",
+          "Show me logon events outside business hours",
+          "Show me recent changes in user privileges",
+          "Show me lateral movement attempts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all logoff events",
+      "query": "4634 OR 4647",
+      "category": "windows_event",
+      "description": "Displays all logoff events, including interactive and remote logoffs.",
+      "summary_template": {
+        "title": "Summary of All Logoff Events",
+        "content": [
+          "Total Events: {total} logoff events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users logging off were {users}.",
+          "Time of Events: The majority of logoffs occurred between {peak_hours}, aligning with normal user activity patterns.",
+          "Unusual Logoff Activity: Logoff events by {suspicious_users} during {suspicious_hours} may indicate an attempt to cover tracks after unauthorized access."
+        ],
+        "detailed_analysis": [
+          "Correlate these logoff events with prior logon events and any changes made during the session. Identify any suspicious file deletions or system modifications.",
+          "Investigate logoffs that occur immediately after administrative activities or installation of services, as these could be attempts to hide malicious activity.",
+          "Check if there is a pattern of frequent logoffs from a specific user, which may indicate that the account is compromised."
+        ],
+        "suggestions": [
+          "Show me file deletions after logoff events",
+          "Show me service installations before logoff",
+          "Show me network traffic before logoff events",
+          "Show me recent logon attempts before logoff"
+        ]
+      }
+    },
+    {
+      "question": "Show me all service logon events",
+      "query": "4624 OR 4648 OR 4672",
+      "category": "windows_event",
+      "description": "Displays all service logon events, indicating when services log on to the system.",
+      "summary_template": {
+        "title": "Summary of Service Logon Events",
+        "content": [
+          "Total Events: {total} service logon events detected between {start_time} and {end_time}.",
+          "Services Involved: The primary services involved were {services}.",
+          "Time of Events: Most service logons occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual service logons from {suspicious_services} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Investigate service logons that occur during off-hours or involve services that do not typically log on.",
+          "Correlate these logons with changes in service configurations or installations to detect unauthorized activities.",
+          "Review service logons from accounts that normally do not perform service-related tasks."
+        ],
+        "suggestions": [
+          "Show me service logons outside business hours",
+          "Show me recent service installations",
+          "Show me changes in service configurations"
+        ]
+      }
+    },
+    {
+      "question": "Show me all network logon events",
+      "query": "4624 OR 4672 OR 4776",
+      "category": "windows_event",
+      "description": "Displays all network logon events, including remote logons and domain authentications.",
+      "summary_template": {
+        "title": "Summary of Network Logon Events",
+        "content": [
+          "Total Events: {total} network logon events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users involved were {users}.",
+          "Time of Events: Most network logons occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual network logons from {suspicious_users} at {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review network logon events for signs of lateral movement or unauthorized remote access.",
+          "Correlate these logon events with network traffic to detect data exfiltration or C2 communication.",
+          "Investigate network logons from unusual IP addresses or domains."
+        ],
+        "suggestions": [
+          "Show me remote logon attempts",
+          "Show me network traffic associated with logons",
+          "Show me logons from unusual IP addresses"
+        ]
+      }
+    },
+    {
+      "question": "Show me all failed logon events",
+      "query": "4625 OR 4768 OR 4771 OR 4776",
+      "category": "windows_event",
+      "description": "Displays all failed logon events, including interactive, network, and service logons.",
+      "summary_template": {
+        "title": "Summary of Failed Logon Events",
+        "content": [
+          "Total Events: {total} failed logon events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users involved in failed logons were {users}.",
+          "Time of Events: Most failed logons occurred between {peak_hours}.",
+          "Potential Security Concerns: Repeated failed logons from {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review failed logon attempts to identify potential brute-force attacks or unauthorized access.",
+          "Correlate these events with successful logons to detect privilege escalation.",
+          "Investigate accounts with a high number of failed logon attempts."
+        ],
+        "suggestions": [
+          "Show me accounts with repeated failed logons",
+          "Show me successful logons after failed attempts",
+          "Show me failed logons from unusual IP addresses"
+        ]
+      }
+    },
+    {
+      "question": "Show me all special privilege use events",
+      "query": "4672 OR 4673 OR 4674",
+      "category": "windows_event",
+      "description": "Displays all special privilege use events, including sensitive privilege assignments and usage.",
+      "summary_template": {
+        "title": "Summary of Special Privilege Use Events",
+        "content": [
+          "Total Events: {total} special privilege use events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users with special privileges were {users}.",
+          "Time of Events: Most special privilege use occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual privilege use by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review special privilege use to detect any unauthorized changes or privilege escalations.",
+          "Correlate these events with logon and logoff events to identify patterns of suspicious activity.",
+          "Investigate accounts that have gained special privileges unexpectedly."
+        ],
+        "suggestions": [
+          "Show me privilege use outside business hours",
+          "Show me recent changes in user privileges",
+          "Show me logons associated with special privilege use"
+        ]
+      }
+    },
+    {
+      "question": "Show me all account management events",
+      "query": "4720 OR 4722 OR 4723 OR 4724 OR 4725 OR 4726 OR 4738",
+      "category": "windows_event",
+      "description": "Displays all account management events, including user account creation, deletion, and modification.",
+      "summary_template": {
+        "title": "Summary of Account Management Events",
+        "content": [
+          "Total Events: {total} account management events detected between {start_time} and {end_time}.",
+          "Accounts Involved: The primary accounts affected were {users}.",
+          "Time of Events: Most account management occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual account changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review account management events to detect unauthorized account creation, deletion, or modifications.",
+          "Correlate these events with logon and logoff activities to identify patterns of suspicious behavior.",
+          "Investigate any accounts that have been created, deleted, or modified without prior authorization."
+        ],
+        "suggestions": [
+          "Show me account creation events",
+          "Show me account deletions",
+          "Show me recent changes in user accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all object access events",
+      "query": "4656 OR 4660 OR 4663",
+      "category": "windows_event",
+      "description": "Displays all object access events, including file, folder, and registry key access.",
+      "summary_template": {
+        "title": "Summary of Object Access Events",
+        "content": [
+          "Total Events: {total} object access events detected between {start_time} and {end_time}.",
+          "Objects Accessed: The primary objects accessed were {files}.",
+          "Time of Events: Most object access occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual object access by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review object access events for any unauthorized access to sensitive files, folders, or registry keys.",
+          "Correlate these events with process creation and network activity to detect suspicious behavior.",
+          "Investigate any access to objects that should not be accessed by regular users."
+        ],
+        "suggestions": [
+          "Show me file access events",
+          "Show me registry key access events",
+          "Show me access to sensitive files"
+        ]
+      }
+    },
+    {
+      "question": "Show me all process creation events",
+      "query": "4688 OR 4697 OR 4698 OR 4699",
+      "category": "windows_event",
+      "description": "Displays all process creation events, including the creation of services and scheduled tasks.",
+      "summary_template": {
+        "title": "Summary of Process Creation Events",
+        "content": [
+          "Total Events: {total} process creation events detected between {start_time} and {end_time}.",
+          "Processes Created: The primary processes created were {processes}.",
+          "Time of Events: Most process creation occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual process creation by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review process creation events to detect the execution of unauthorized or malicious software.",
+          "Correlate these events with file access and network activity to identify patterns of suspicious behavior.",
+          "Investigate any processes that should not be running on the system."
+        ],
+        "suggestions": [
+          "Show me service creation events",
+          "Show me scheduled task creation events",
+          "Show me processes running under unusual accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all firewall events",
+      "query": "5156 OR 5157 OR 5158",
+      "category": "windows_event",
+      "description": "Displays all firewall events, including allowed and blocked connections.",
+      "summary_template": {
+        "title": "Summary of Firewall Events",
+        "content": [
+          "Total Events: {total} firewall events detected between {start_time} and {end_time}.",
+          "Connections Allowed: The primary connections allowed were to {ip_addresses}.",
+          "Time of Events: Most firewall events occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual connections to {suspicious_ips} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review firewall events to detect unauthorized inbound or outbound connections.",
+          "Correlate these events with network logon and process creation events to identify potential threats.",
+          "Investigate any connections to IP addresses or domains associated with malicious activity."
+        ],
+        "suggestions": [
+          "Show me allowed connections to suspicious IPs",
+          "Show me blocked connections",
+          "Show me connections to unusual domains"
+        ]
+      }
+    },
+    {
+      "question": "Show me all audit logon events",
+      "query": "4624 OR 4625 OR 4648 OR 4768 OR 4769 OR 4776",
+      "category": "windows_event",
+      "description": "Displays all audit logon events, including successful and failed logon attempts.",
+      "summary_template": {
+        "title": "Summary of Audit Logon Events",
+        "content": [
+          "Total Events: {total} audit logon events detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users involved in audit logons were {users}.",
+          "Time of Events: Most audit logons occurred between {peak_hours}.",
+          "Potential Security Concerns: Repeated failed logons by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review audit logon events to identify potential unauthorized access attempts.",
+          "Correlate these events with changes in user privileges or system configurations.",
+          "Investigate any patterns of repeated failed logon attempts."
+        ],
+        "suggestions": [
+          "Show me repeated failed logons",
+          "Show me successful logons after failed attempts",
+          "Show me audit logons outside business hours"
+        ]
+      }
+    },
+    {
+      "question": "Show me all account lockout events",
+      "query": "4740",
+      "category": "windows_event",
+      "description": "Displays all account lockout events, indicating when accounts have been locked due to too many failed logon attempts.",
+      "summary_template": {
+        "title": "Summary of Account Lockout Events",
+        "content": [
+          "Total Events: {total} account lockout events detected between {start_time} and {end_time}.",
+          "Accounts Locked: The primary accounts locked were {users}.",
+          "Time of Events: Most account lockouts occurred between {peak_hours}.",
+          "Potential Security Concerns: Repeated lockouts of {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review account lockout events to detect potential brute-force attacks.",
+          "Correlate these events with successful logons to identify privilege escalation attempts.",
+          "Investigate accounts that have been repeatedly locked out."
+        ],
+        "suggestions": [
+          "Show me accounts with repeated lockouts",
+          "Show me successful logons after lockouts",
+          "Show me account lockouts outside business hours"
+        ]
+      }
+    },
+    {
+      "question": "Show me all Kerberos service ticket operations",
+      "query": "4769 OR 4770 OR 4771 OR 4772 OR 4773 OR 4774",
+      "category": "windows_event",
+      "description": "Displays all Kerberos service ticket operations, including ticket requests, renewals, and failures.",
+      "summary_template": {
+        "title": "Summary of Kerberos Service Ticket Operations",
+        "content": [
+          "Total Events: {total} Kerberos service ticket operations detected between {start_time} and {end_time}.",
+          "Users Involved: The primary users involved were {users}.",
+          "Time of Events: Most ticket operations occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual ticket operations by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review Kerberos service ticket operations to detect potential pass-the-ticket attacks.",
+          "Correlate these events with changes in user privileges or system configurations.",
+          "Investigate any unusual ticket requests or renewals."
+        ],
+        "suggestions": [
+          "Show me failed Kerberos ticket requests",
+          "Show me Kerberos operations outside business hours",
+          "Show me Kerberos renewals linked to privileged accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all group membership changes",
+      "query": "4728 OR 4729 OR 4732 OR 4733 OR 4756 OR 4757",
+      "category": "windows_event",
+      "description": "Displays all group membership changes, including additions and removals of users to security groups.",
+      "summary_template": {
+        "title": "Summary of Group Membership Changes",
+        "content": [
+          "Total Events: {total} group membership changes detected between {start_time} and {end_time}.",
+          "Groups Affected: The primary groups affected were {groups}.",
+          "Time of Events: Most group membership changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual membership changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review group membership changes to detect unauthorized additions or removals.",
+          "Correlate these changes with logon events to identify potential privilege escalation.",
+          "Investigate any membership changes involving sensitive or administrative groups."
+        ],
+        "suggestions": [
+          "Show me changes to administrative groups",
+          "Show me group membership changes outside business hours",
+          "Show me recent additions to security groups"
+        ]
+      }
+    },
+    {
+      "question": "Show me all registry key changes",
+      "query": "4657 OR 4661",
+      "category": "windows_event",
+      "description": "Displays all registry key changes, including key creation, deletion, and modification.",
+      "summary_template": {
+        "title": "Summary of Registry Key Changes",
+        "content": [
+          "Total Events: {total} registry key changes detected between {start_time} and {end_time}.",
+          "Keys Modified: The primary registry keys modified were {keys}.",
+          "Time of Events: Most registry key changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual registry key changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review registry key changes to detect unauthorized modifications to system settings.",
+          "Correlate these changes with process creation and logon events to identify potential threats.",
+          "Investigate any registry changes that could impact security configurations."
+        ],
+        "suggestions": [
+          "Show me registry key deletions",
+          "Show me registry key changes outside business hours",
+          "Show me registry key changes linked to recent logons"
+        ]
+      }
+    },
+    {
+      "question": "Show me all service creation events",
+      "query": "4697 OR 4698",
+      "category": "windows_event",
+      "description": "Displays all service creation events, including new services and changes to existing services.",
+      "summary_template": {
+        "title": "Summary of Service Creation Events",
+        "content": [
+          "Total Events: {total} service creation events detected between {start_time} and {end_time}.",
+          "Services Created: The primary services created were {services}.",
+          "Time of Events: Most service creation occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual service creation by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review service creation events to detect unauthorized or malicious services.",
+          "Correlate these events with logon and process creation events to identify patterns of suspicious activity.",
+          "Investigate any services that should not be present on the system."
+        ],
+        "suggestions": [
+          "Show me service creation outside business hours",
+          "Show me recent changes to existing services",
+          "Show me services created by unusual accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all file deletion events",
+      "query": "4663 OR 4660",
+      "category": "windows_event",
+      "description": "Displays all file deletion events, including user-initiated and system-initiated deletions.",
+      "summary_template": {
+        "title": "Summary of File Deletion Events",
+        "content": [
+          "Total Events: {total} file deletion events detected between {start_time} and {end_time}.",
+          "Files Deleted: The primary files deleted were {files}.",
+          "Time of Events: Most file deletions occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual file deletions by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review file deletion events to detect potential tampering or cleanup by malicious actors.",
+          "Correlate these deletions with logon and process creation events to identify patterns of suspicious activity.",
+          "Investigate any deletions of system-critical files or logs."
+        ],
+        "suggestions": [
+          "Show me file deletions outside business hours",
+          "Show me deletions of system-critical files",
+          "Show me file deletions linked to recent logons"
+        ]
+      }
+    },
+    {
+      "question": "Show me all scheduled task creation events",
+      "query": "4698 OR 4699",
+      "category": "windows_event",
+      "description": "Displays all scheduled task creation events, including new tasks and changes to existing tasks.",
+      "summary_template": {
+        "title": "Summary of Scheduled Task Creation Events",
+        "content": [
+          "Total Events: {total} scheduled task creation events detected between {start_time} and {end_time}.",
+          "Tasks Created: The primary tasks created were {tasks}.",
+          "Time of Events: Most scheduled task creation occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual task creation by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review scheduled task creation events to detect unauthorized or malicious tasks.",
+          "Correlate these events with logon and process creation events to identify patterns of suspicious activity.",
+          "Investigate any tasks that should not be present on the system."
+        ],
+        "suggestions": [
+          "Show me task creation outside business hours",
+          "Show me recent changes to existing tasks",
+          "Show me tasks created by unusual accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all policy change events",
+      "query": "4670 OR 4671 OR 4672",
+      "category": "windows_event",
+      "description": "Displays all policy change events, including changes to audit policies, user rights, and trust policies.",
+      "summary_template": {
+        "title": "Summary of Policy Change Events",
+        "content": [
+          "Total Events: {total} policy change events detected between {start_time} and {end_time}.",
+          "Policies Changed: The primary policies changed were {policies}.",
+          "Time of Events: Most policy changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual policy changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review policy change events to detect unauthorized modifications to security policies.",
+          "Correlate these changes with logon events and system modifications to identify potential threats.",
+          "Investigate any policy changes that could weaken security configurations."
+        ],
+        "suggestions": [
+          "Show me changes to audit policies",
+          "Show me changes to user rights",
+          "Show me policy changes linked to recent logons"
+        ]
+      }
+    },
+    {
+      "question": "Show me all account management events",
+      "query": "4720 OR 4722 OR 4723 OR 4724 OR 4725 OR 4726",
+      "category": "windows_event",
+      "description": "Displays all account management events, including account creation, deletion, and modification.",
+      "summary_template": {
+        "title": "Summary of Account Management Events",
+        "content": [
+          "Total Events: {total} account management events detected between {start_time} and {end_time}.",
+          "Accounts Managed: The primary accounts managed were {users}.",
+          "Time of Events: Most account management occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual account management by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review account management events to detect unauthorized account creation, deletion, or modifications.",
+          "Correlate these events with logon and logoff activities to identify patterns of suspicious behavior.",
+          "Investigate any accounts that have been created, deleted, or modified without prior authorization."
+        ],
+        "suggestions": [
+          "Show me account creation events",
+          "Show me account deletions",
+          "Show me recent changes in user accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all object access events",
+      "query": "4656 OR 4660 OR 4663",
+      "category": "windows_event",
+      "description": "Displays all object access events, including file, folder, and registry key access.",
+      "summary_template": {
+        "title": "Summary of Object Access Events",
+        "content": [
+          "Total Events: {total} object access events detected between {start_time} and {end_time}.",
+          "Objects Accessed: The primary objects accessed were {files}.",
+          "Time of Events: Most object access occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual object access by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review object access events for any unauthorized access to sensitive files, folders, or registry keys.",
+          "Correlate these events with process creation and network activity to detect suspicious behavior.",
+          "Investigate any access to objects that should not be accessed by regular users."
+        ],
+        "suggestions": [
+          "Show me file access events",
+          "Show me registry key access events",
+          "Show me access to sensitive files"
+        ]
+      }
+    },
+    {
+      "question": "Show me all process creation events",
+      "query": "4688 OR 4697 OR 4698 OR 4699",
+      "category": "windows_event",
+      "description": "Displays all process creation events, including the creation of services and scheduled tasks.",
+      "summary_template": {
+        "title": "Summary of Process Creation Events",
+        "content": [
+          "Total Events: {total} process creation events detected between {start_time} and {end_time}.",
+          "Processes Created: The primary processes created were {processes}.",
+          "Time of Events: Most process creation occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual process creation by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review process creation events to detect the execution of unauthorized or malicious software.",
+          "Correlate these events with file access and network activity to identify patterns of suspicious behavior.",
+          "Investigate any processes that should not be running on the system."
+        ],
+        "suggestions": [
+          "Show me service creation events",
+          "Show me scheduled task creation events",
+          "Show me processes running under unusual accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all firewall events",
+      "query": "5156 OR 5157 OR 5158",
+      "category": "windows_event",
+      "description": "Displays all firewall events, including allowed and blocked connections.",
+      "summary_template": {
+        "title": "Summary of Firewall Events",
+        "content": [
+          "Total Events: {total} firewall events detected between {start_time} and {end_time}.",
+          "Connections Allowed: The primary connections allowed were to {ip_addresses}.",
+          "Time of Events: Most firewall events occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual connections to {suspicious_ips} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review firewall events to detect unauthorized inbound or outbound connections.",
+          "Correlate these events with network logon and process creation events to identify potential threats.",
+          "Investigate any connections to IP addresses or domains associated with malicious activity."
+        ],
+        "suggestions": [
+          "Show me allowed connections to suspicious IPs",
+          "Show me blocked connections",
+          "Show me connections to unusual domains"
+        ]
+      }
+    },
+    {
+      "question": "Show me all user account disabled events",
+      "query": "4725",
+      "category": "windows_event",
+      "description": "Displays all events related to the disabling of user accounts.",
+      "summary_template": {
+        "title": "Summary of User Account Disabled Events",
+        "content": [
+          "Total Events: {total} user account disabled events detected between {start_time} and {end_time}.",
+          "Accounts Disabled: The primary accounts disabled were {users}.",
+          "Time of Events: Most account disabling occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual account disabling by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review account disabling events to detect potential attempts to lock out legitimate users.",
+          "Correlate these events with failed logon attempts or password changes to identify potential threats.",
+          "Investigate accounts that have been disabled without prior authorization."
+        ],
+        "suggestions": [
+          "Show me accounts disabled after failed logons",
+          "Show me accounts disabled outside business hours",
+          "Show me accounts disabled by unusual users"
+        ]
+      }
+    },
+    {
+      "question": "Show me all user account enabled events",
+      "query": "4722",
+      "category": "windows_event",
+      "description": "Displays all events related to the enabling of user accounts.",
+      "summary_template": {
+        "title": "Summary of User Account Enabled Events",
+        "content": [
+          "Total Events: {total} user account enabled events detected between {start_time} and {end_time}.",
+          "Accounts Enabled: The primary accounts enabled were {users}.",
+          "Time of Events: Most account enabling occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual account enabling by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review account enabling events to detect potential unauthorized account reactivations.",
+          "Correlate these events with logon attempts or password changes to identify potential threats.",
+          "Investigate accounts that have been enabled without prior authorization."
+        ],
+        "suggestions": [
+          "Show me accounts enabled after failed logons",
+          "Show me accounts enabled outside business hours",
+          "Show me accounts enabled by unusual users"
+        ]
+      }
+    },
+    {
+      "question": "Show me all user account password reset events",
+      "query": "4723",
+      "category": "windows_event",
+      "description": "Displays all events related to user account password resets.",
+      "summary_template": {
+        "title": "Summary of User Account Password Reset Events",
+        "content": [
+          "Total Events: {total} user account password reset events detected between {start_time} and {end_time}.",
+          "Accounts Reset: The primary accounts reset were {users}.",
+          "Time of Events: Most password resets occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual password resets by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review password reset events to detect potential unauthorized account access.",
+          "Correlate these events with logon attempts or account lockouts to identify potential threats.",
+          "Investigate accounts that have been reset without prior authorization."
+        ],
+        "suggestions": [
+          "Show me password resets after failed logons",
+          "Show me password resets outside business hours",
+          "Show me accounts with multiple password resets"
+        ]
+      }
+    },
+    {
+      "question": "Show me all user account password change events",
+      "query": "4724",
+      "category": "windows_event",
+      "description": "Displays all events related to user account password changes.",
+      "summary_template": {
+        "title": "Summary of User Account Password Change Events",
+        "content": [
+          "Total Events: {total} user account password change events detected between {start_time} and {end_time}.",
+          "Accounts Changed: The primary accounts with password changes were {users}.",
+          "Time of Events: Most password changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual password changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review password change events to detect potential unauthorized account access.",
+          "Correlate these events with logon attempts or account lockouts to identify potential threats.",
+          "Investigate accounts that have been changed without prior authorization."
+        ],
+        "suggestions": [
+          "Show me password changes after failed logons",
+          "Show me password changes outside business hours",
+          "Show me accounts with multiple password changes"
+        ]
+      }
+    },
+    {
+      "question": "Show me all service start events",
+      "query": "4697",
+      "category": "windows_event",
+      "description": "Displays all events related to service start operations.",
+      "summary_template": {
+        "title": "Summary of Service Start Events",
+        "content": [
+          "Total Events: {total} service start events detected between {start_time} and {end_time}.",
+          "Services Started: The primary services started were {services}.",
+          "Time of Events: Most service starts occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual service starts by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review service start events to detect potential unauthorized or malicious service activations.",
+          "Correlate these events with process creation and logon attempts to identify potential threats.",
+          "Investigate services that should not be running on the system."
+        ],
+        "suggestions": [
+          "Show me service starts outside business hours",
+          "Show me services started by unusual accounts",
+          "Show me services with multiple start attempts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all service stop events",
+      "query": "4698",
+      "category": "windows_event",
+      "description": "Displays all events related to service stop operations.",
+      "summary_template": {
+        "title": "Summary of Service Stop Events",
+        "content": [
+          "Total Events: {total} service stop events detected between {start_time} and {end_time}.",
+          "Services Stopped: The primary services stopped were {services}.",
+          "Time of Events: Most service stops occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual service stops by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review service stop events to detect potential unauthorized or malicious service deactivations.",
+          "Correlate these events with process creation and logon attempts to identify potential threats.",
+          "Investigate services that should not be stopped on the system."
+        ],
+        "suggestions": [
+          "Show me service stops outside business hours",
+          "Show me services stopped by unusual accounts",
+          "Show me services with multiple stop attempts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all network connection allowed events",
+      "query": "5156",
+      "category": "windows_event",
+      "description": "Displays all events related to allowed network connections.",
+      "summary_template": {
+        "title": "Summary of Network Connection Allowed Events",
+        "content": [
+          "Total Events: {total} network connection allowed events detected between {start_time} and {end_time}.",
+          "IPs Allowed: The primary IP addresses allowed were {ip_addresses}.",
+          "Time of Events: Most allowed connections occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual allowed connections to {suspicious_ips} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review allowed connection events to detect potential unauthorized or suspicious outbound traffic.",
+          "Correlate these events with logon and process creation events to identify potential threats.",
+          "Investigate connections to IP addresses or domains associated with malicious activity."
+        ],
+        "suggestions": [
+          "Show me connections allowed to suspicious IPs",
+          "Show me allowed connections outside business hours",
+          "Show me allowed connections from unusual domains"
+        ]
+      }
+    },
+    {
+      "question": "Show me all network connection blocked events",
+      "query": "5157",
+      "category": "windows_event",
+      "description": "Displays all events related to blocked network connections.",
+      "summary_template": {
+        "title": "Summary of Network Connection Blocked Events",
+        "content": [
+          "Total Events: {total} network connection blocked events detected between {start_time} and {end_time}.",
+          "IPs Blocked: The primary IP addresses blocked were {ip_addresses}.",
+          "Time of Events: Most blocked connections occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual blocked connections to {suspicious_ips} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review blocked connection events to detect potential unauthorized or suspicious inbound traffic.",
+          "Correlate these events with logon and process creation events to identify potential threats.",
+          "Investigate connections to IP addresses or domains associated with malicious activity."
+        ],
+        "suggestions": [
+          "Show me connections blocked to suspicious IPs",
+          "Show me blocked connections outside business hours",
+          "Show me blocked connections from unusual domains"
+        ]
+      }
+    },
+    {
+      "question": "Show me all DNS query events",
+      "query": "5158",
+      "category": "windows_event",
+      "description": "Displays all events related to DNS queries.",
+      "summary_template": {
+        "title": "Summary of DNS Query Events",
+        "content": [
+          "Total Events: {total} DNS query events detected between {start_time} and {end_time}.",
+          "Domains Queried: The primary domains queried were {domains}.",
+          "Time of Events: Most DNS queries occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual DNS queries for {suspicious_domains} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review DNS query events to detect potential unauthorized or suspicious domain lookups.",
+          "Correlate these events with network connections and logon events to identify potential threats.",
+          "Investigate queries to domains associated with malicious activity."
+        ],
+        "suggestions": [
+          "Show me DNS queries to suspicious domains",
+          "Show me DNS queries outside business hours",
+          "Show me DNS queries linked to unusual IPs"
+        ]
+      }
+    },
+    {
+      "question": "Show me all file creation events",
+      "query": "4660",
+      "category": "windows_event",
+      "description": "Displays all events related to file creation.",
+      "summary_template": {
+        "title": "Summary of File Creation Events",
+        "content": [
+          "Total Events: {total} file creation events detected between {start_time} and {end_time}.",
+          "Files Created: The primary files created were {files}.",
+          "Time of Events: Most file creation occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual file creation by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review file creation events to detect potential unauthorized or malicious file creation.",
+          "Correlate these events with process creation and logon events to identify potential threats.",
+          "Investigate files that should not be present on the system."
+        ],
+        "suggestions": [
+          "Show me file creation outside business hours",
+          "Show me files created by unusual accounts",
+          "Show me files with suspicious names"
+        ]
+      }
+    },
+    {
+      "question": "Show me all file modification events",
+      "query": "4663",
+      "category": "windows_event",
+      "description": "Displays all events related to file modification.",
+      "summary_template": {
+        "title": "Summary of File Modification Events",
+        "content": [
+          "Total Events: {total} file modification events detected between {start_time} and {end_time}.",
+          "Files Modified: The primary files modified were {files}.",
+          "Time of Events: Most file modification occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual file modification by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review file modification events to detect potential unauthorized or malicious file tampering.",
+          "Correlate these events with process creation and logon events to identify potential threats.",
+          "Investigate files that should not have been modified."
+        ],
+        "suggestions": [
+          "Show me file modification outside business hours",
+          "Show me files modified by unusual accounts",
+          "Show me files with suspicious changes"
+        ]
+      }
+    },
+    {
+      "question": "Show me all file deletion events",
+      "query": "4663",
+      "category": "windows_event",
+      "description": "Displays all events related to file deletion.",
+      "summary_template": {
+        "title": "Summary of File Deletion Events",
+        "content": [
+          "Total Events: {total} file deletion events detected between {start_time} and {end_time}.",
+          "Files Deleted: The primary files deleted were {files}.",
+          "Time of Events: Most file deletions occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual file deletions by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review file deletion events to detect potential unauthorized or malicious file removal.",
+          "Correlate these events with process creation and logon events to identify potential threats.",
+          "Investigate files that should not have been deleted."
+        ],
+        "suggestions": [
+          "Show me file deletions outside business hours",
+          "Show me files deleted by unusual accounts",
+          "Show me files with suspicious deletions"
+        ]
+      }
+    },
+    {
+      "question": "Show me all audit policy change events",
+      "query": "4719",
+      "category": "windows_event",
+      "description": "Displays all events related to changes in audit policies.",
+      "summary_template": {
+        "title": "Summary of Audit Policy Change Events",
+        "content": [
+          "Total Events: {total} audit policy change events detected between {start_time} and {end_time}.",
+          "Policies Changed: The primary policies changed were {policies}.",
+          "Time of Events: Most audit policy changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual audit policy changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review audit policy change events to detect potential unauthorized or malicious changes.",
+          "Correlate these events with process creation and logon events to identify potential threats.",
+          "Investigate policies that should not have been changed."
+        ],
+        "suggestions": [
+          "Show me audit policy changes outside business hours",
+          "Show me policies changed by unusual accounts",
+          "Show me policies with suspicious modifications"
+        ]
+      }
+    },
+    {
+      "question": "Show me all group membership changes",
+      "query": "4728, 4732, 4756",
+      "category": "windows_event",
+      "description": "Displays all events related to changes in group memberships.",
+      "summary_template": {
+        "title": "Summary of Group Membership Changes",
+        "content": [
+          "Total Events: {total} group membership change events detected between {start_time} and {end_time}.",
+          "Groups Changed: The primary groups with membership changes were {groups}.",
+          "Time of Events: Most group membership changes occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual group membership changes by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review group membership change events to detect potential unauthorized access.",
+          "Correlate these events with logon attempts to identify potential threats.",
+          "Investigate groups that should not have had changes in their memberships."
+        ],
+        "suggestions": [
+          "Show me group membership changes outside business hours",
+          "Show me groups changed by unusual accounts",
+          "Show me suspicious group membership changes"
+        ]
+      }
+    },
+    {
+      "question": "Show me all user account creation events",
+      "query": "4720",
+      "category": "windows_event",
+      "description": "Displays all events related to the creation of new user accounts.",
+      "summary_template": {
+        "title": "Summary of User Account Creation Events",
+        "content": [
+          "Total Events: {total} user account creation events detected between {start_time} and {end_time}.",
+          "Accounts Created: The primary accounts created were {accounts}.",
+          "Time of Events: Most user account creations occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual user account creations by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review user account creation events to detect potential unauthorized account creation.",
+          "Correlate these events with logon attempts to identify potential threats.",
+          "Investigate accounts that should not have been created."
+        ],
+        "suggestions": [
+          "Show me user account creations outside business hours",
+          "Show me accounts created by unusual accounts",
+          "Show me suspicious user account creations"
+        ]
+      }
+    },
+    {
+      "question": "Show me all process creation events",
+      "query": "4688",
+      "category": "windows_event",
+      "description": "Displays all events related to process creation.",
+      "summary_template": {
+        "title": "Summary of Process Creation Events",
+        "content": [
+          "Total Events: {total} process creation events detected between {start_time} and {end_time}.",
+          "Processes Created: The primary processes created were {processes}.",
+          "Time of Events: Most process creations occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual process creations by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review process creation events to detect potential unauthorized or malicious processes.",
+          "Correlate these events with logon attempts and service starts to identify potential threats.",
+          "Investigate processes that should not be running on the system."
+        ],
+        "suggestions": [
+          "Show me process creations outside business hours",
+          "Show me processes created by unusual accounts",
+          "Show me processes with suspicious command lines"
+        ]
+      }
+    },
+    {
+      "question": "Show me all process termination events",
+      "query": "4689",
+      "category": "windows_event",
+      "description": "Displays all events related to process termination.",
+      "summary_template": {
+        "title": "Summary of Process Termination Events",
+        "content": [
+          "Total Events: {total} process termination events detected between {start_time} and {end_time}.",
+          "Processes Terminated: The primary processes terminated were {processes}.",
+          "Time of Events: Most process terminations occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual process terminations by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review process termination events to detect potential unauthorized or malicious process terminations.",
+          "Correlate these events with process creation and logon attempts to identify potential threats.",
+          "Investigate processes that should not have been terminated."
+        ],
+        "suggestions": [
+          "Show me process terminations outside business hours",
+          "Show me processes terminated by unusual accounts",
+          "Show me processes with suspicious termination reasons"
+        ]
+      }
+    },
+    {
+      "question": "Show me all scheduled task creation events",
+      "query": "4698",
+      "category": "windows_event",
+      "description": "Displays all events related to the creation of scheduled tasks.",
+      "summary_template": {
+        "title": "Summary of Scheduled Task Creation Events",
+        "content": [
+          "Total Events: {total} scheduled task creation events detected between {start_time} and {end_time}.",
+          "Tasks Created: The primary tasks created were {tasks}.",
+          "Time of Events: Most scheduled tasks were created between {peak_hours}.",
+          "Potential Security Concerns: Unusual scheduled tasks created by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review scheduled task creation events to detect potential unauthorized or malicious tasks.",
+          "Correlate these events with logon attempts and process creations to identify potential threats.",
+          "Investigate tasks that should not be scheduled on the system."
+        ],
+        "suggestions": [
+          "Show me scheduled tasks created outside business hours",
+          "Show me tasks created by unusual accounts",
+          "Show me suspicious scheduled tasks"
+        ]
+      }
+    },
+    {
+      "question": "Show me all scheduled task deletion events",
+      "query": "4699",
+      "category": "windows_event",
+      "description": "Displays all events related to the deletion of scheduled tasks.",
+      "summary_template": {
+        "title": "Summary of Scheduled Task Deletion Events",
+        "content": [
+          "Total Events: {total} scheduled task deletion events detected between {start_time} and {end_time}.",
+          "Tasks Deleted: The primary tasks deleted were {tasks}.",
+          "Time of Events: Most scheduled tasks were deleted between {peak_hours}.",
+          "Potential Security Concerns: Unusual scheduled tasks deleted by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review scheduled task deletion events to detect potential unauthorized or malicious deletions.",
+          "Correlate these events with logon attempts and process terminations to identify potential threats.",
+          "Investigate tasks that should not have been deleted."
+        ],
+        "suggestions": [
+          "Show me scheduled tasks deleted outside business hours",
+          "Show me tasks deleted by unusual accounts",
+          "Show me suspicious scheduled task deletions"
+        ]
+      }
+    },
+    {
+      "question": "Show me all system shutdown events",
+      "query": "1074 OR 1076",
+      "category": "windows_event",
+      "description": "Displays all events related to system shutdown.",
+      "summary_template": {
+        "title": "Summary of System Shutdown Events",
+        "content": [
+          "Total Events: {total} system shutdown events detected between {start_time} and {end_time}.",
+          "Shutdown Reasons: The primary shutdown reasons were {reasons}.",
+          "Time of Events: Most system shutdowns occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual shutdowns by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review system shutdown events to detect potential unauthorized or malicious shutdowns.",
+          "Correlate these events with process terminations and logon attempts to identify potential threats.",
+          "Investigate shutdowns that should not have occurred on the system."
+        ],
+        "suggestions": [
+          "Show me system shutdowns outside business hours",
+          "Show me shutdowns triggered by unusual accounts",
+          "Show me suspicious shutdown events"
+        ]
+      }
+    },
+    {
+      "question": "Show me all system restart events",
+      "query": "1074 OR 1076",
+      "category": "windows_event",
+      "description": "Displays all events related to system restart.",
+      "summary_template": {
+        "title": "Summary of System Restart Events",
+        "content": [
+          "Total Events: {total} system restart events detected between {start_time} and {end_time}.",
+          "Restart Reasons: The primary restart reasons were {reasons}.",
+          "Time of Events: Most system restarts occurred between {peak_hours}.",
+          "Potential Security Concerns: Unusual restarts by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review system restart events to detect potential unauthorized or malicious restarts.",
+          "Correlate these events with process terminations and logon attempts to identify potential threats.",
+          "Investigate restarts that should not have occurred on the system."
+        ],
+        "suggestions": [
+          "Show me system restarts outside business hours",
+          "Show me restarts triggered by unusual accounts",
+          "Show me suspicious restart events"
+        ]
+      }
+    },
+    {
+      "question": "Show me all initial access events",
+      "query": "mitre.attack.initial_access",
+      "category": "mitre_attack",
+      "description": "Displays all events related to initial access tactics, which involve adversaries trying to gain entry into your environment.",
+      "summary_template": {
+        "title": "Summary of Initial Access Events",
+        "content": [
+          "Total Events: {total} initial access events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary initial access techniques involved were {techniques}.",
+          "Time of Events: Most initial access attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious initial access attempts by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these initial access events for attempts to exploit external-facing services, spear phishing, or the use of valid accounts.",
+          "Correlate these events with subsequent execution or persistence activities to identify the full attack chain.",
+          "Investigate any unusual account activities or network traffic that may indicate successful initial access."
+        ],
+        "suggestions": [
+          "Show me all phishing attempts",
+          "Show me successful exploitation attempts",
+          "Show me events linked to external-facing services"
+        ]
+      }
+    },
+    {
+      "question": "Show me all execution events",
+      "query": "mitre.attack.execution",
+      "category": "mitre_attack",
+      "description": "Displays all events related to execution tactics, which involve adversaries running malicious code on a local or remote system.",
+      "summary_template": {
+        "title": "Summary of Execution Events",
+        "content": [
+          "Total Events: {total} execution events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary execution techniques involved were {techniques}.",
+          "Time of Events: Most execution attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious execution activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these execution events for signs of malicious code execution, including the use of scripting languages, command-line interfaces, or exploitation of application vulnerabilities.",
+          "Correlate these events with defense evasion techniques to uncover sophisticated attack chains.",
+          "Investigate any processes that appear to execute code unexpectedly or in unusual contexts."
+        ],
+        "suggestions": [
+          "Show me PowerShell execution attempts",
+          "Show me command-line executions",
+          "Show me events linked to script execution"
+        ]
+      }
+    },
+    {
+      "question": "Show me all persistence events",
+      "query": "mitre.attack.persistence",
+      "category": "mitre_attack",
+      "description": "Displays all events related to persistence tactics, which involve adversaries maintaining their foothold on systems across restarts, changed credentials, and other interruptions.",
+      "summary_template": {
+        "title": "Summary of Persistence Events",
+        "content": [
+          "Total Events: {total} persistence events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary persistence techniques involved were {techniques}.",
+          "Time of Events: Most persistence attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious persistence activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these persistence events to detect the creation of scheduled tasks, startup items, or the use of valid accounts for persistent access.",
+          "Correlate these events with prior initial access or execution events to understand the full scope of the attack.",
+          "Investigate any user accounts or services that have recently gained persistence mechanisms."
+        ],
+        "suggestions": [
+          "Show me scheduled task creation events",
+          "Show me startup item changes",
+          "Show me persistence linked to valid accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all privilege escalation events",
+      "query": "mitre.attack.privilege_escalation",
+      "category": "mitre_attack",
+      "description": "Displays all events related to privilege escalation tactics, where adversaries attempt to gain higher-level permissions on a system.",
+      "summary_template": {
+        "title": "Summary of Privilege Escalation Events",
+        "content": [
+          "Total Events: {total} privilege escalation events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary privilege escalation techniques involved were {techniques}.",
+          "Time of Events: Most privilege escalation attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious privilege escalation activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these privilege escalation events to identify unauthorized attempts to gain elevated access.",
+          "Correlate these events with initial access and execution activities to detect potential attack chains.",
+          "Investigate accounts or processes that have unexpectedly gained administrative privileges."
+        ],
+        "suggestions": [
+          "Show me all successful privilege escalation attempts",
+          "Show me privilege escalation linked to initial access",
+          "Show me suspicious changes in user privileges"
+        ]
+      }
+    },
+    {
+      "question": "Show me all defense evasion events",
+      "query": "mitre.attack.defense_evasion",
+      "category": "mitre_attack",
+      "description": "Displays all events related to defense evasion tactics, including activities aimed at avoiding detection or circumventing defenses.",
+      "summary_template": {
+        "title": "Summary of Defense Evasion Events",
+        "content": [
+          "Total Events: {total} defense evasion events detected between {start_time} and {end_time}.",
+          "Tags Used: The primary tags involved were {tag}.",
+          "Time of Events: Most defense evasion activities occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious defense evasion techniques by {suspicious_users} during {suspicious_hours}."
+        ],
+        "custom_table": [
+          {
+            "title": "Tag",
+            "description": "Description of the Tag",
+            "total_events": "Total Events for this Tag"
+          },
+          {
+            "title": "{tag_1}",
+            "description": "{tag_1_description}",
+            "total_events": "{tag_1_total_events}"
+          },
+          {
+            "title": "{tag_2}",
+            "description": "{tag_2_description}",
+            "total_events": "{tag_2_total_events}"
+          }
+        ],
+      "detailed_analysis": [
+        "Review these defense evasion events to identify attempts to disable or bypass security tools such as antivirus or logging mechanisms.",
+        "Correlate these events with process creation and privilege escalation activities to detect sophisticated attacks.",
+        "Investigate users or processes that consistently use defense evasion techniques."
+      ],
+      "suggestions": [
+        "Show me all obfuscation techniques used",
+        "Show me attempts to disable security tools",
+        "Show me events linked to privilege escalation"
+      ]
+      }
+    },
+    {
+      "question": "Show me all credential access events",
+      "query": "mitre.attack.credential_access",
+      "category": "mitre_attack",
+      "description": "Displays all events related to credential access tactics, which involve adversaries stealing account names and passwords.",
+      "summary_template": {
+        "title": "Summary of Credential Access Events",
+        "content": [
+          "Total Events: {total} credential access events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary credential access techniques involved were {techniques}.",
+          "Time of Events: Most credential access attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious credential access activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these credential access events for attempts to steal passwords, hashes, or tokens.",
+          "Correlate these events with initial access or lateral movement activities to identify broader attack campaigns.",
+          "Investigate accounts or processes involved in suspicious credential access activities."
+        ],
+        "suggestions": [
+          "Show me all password theft attempts",
+          "Show me events linked to hash dumping",
+          "Show me suspicious credential access activities"
+        ]
+      }
+    },
+    {
+      "question": "Show me all discovery events",
+      "query": "mitre.attack.discovery",
+      "category": "mitre_attack",
+      "description": "Displays all events related to discovery tactics, where adversaries try to gain knowledge about the system and network they have accessed.",
+      "summary_template": {
+        "title": "Summary of Discovery Events",
+        "content": [
+          "Total Events: {total} discovery events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary discovery techniques involved were {techniques}.",
+          "Time of Events: Most discovery attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious discovery activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these discovery events to identify attempts to enumerate users, groups, and network shares.",
+          "Correlate these events with lateral movement and privilege escalation activities to detect potential threats.",
+          "Investigate any unusual discovery techniques that could indicate preparation for further attacks."
+        ],
+        "suggestions": [
+          "Show me all network discovery events",
+          "Show me user and group enumeration attempts",
+          "Show me suspicious discovery activities"
+        ]
+      }
+    },
+    {
+      "question": "Show me all lateral movement events",
+      "query": "mitre.attack.lateral_movement",
+      "category": "mitre_attack",
+      "description": "Displays all events related to lateral movement tactics, where adversaries try to move through your environment.",
+      "summary_template": {
+        "title": "Summary of Lateral Movement Events",
+        "content": [
+          "Total Events: {total} lateral movement events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary lateral movement techniques involved were {techniques}.",
+          "Time of Events: Most lateral movement attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious lateral movement activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these lateral movement events to detect the use of valid accounts, Pass-the-Hash, or remote services.",
+          "Correlate these events with privilege escalation and execution activities to identify the full attack path.",
+          "Investigate accounts or systems that have been accessed unexpectedly during lateral movement."
+        ],
+        "suggestions": [
+          "Show me all remote service access attempts",
+          "Show me Pass-the-Hash attempts",
+          "Show me lateral movement linked to valid accounts"
+        ]
+      }
+    },
+    {
+      "question": "Show me all collection events",
+      "query": "mitre.attack.collection",
+      "category": "mitre_attack",
+      "description": "Displays all events related to collection tactics, where adversaries gather data from your environment.",
+      "summary_template": {
+        "title": "Summary of Collection Events",
+        "content": [
+          "Total Events: {total} collection events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary collection techniques involved were {techniques}.",
+          "Time of Events: Most collection attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious collection activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these collection events to detect data gathering activities, such as keylogging, screen capturing, or file collection.",
+          "Correlate these events with exfiltration attempts to detect full attack chains.",
+          "Investigate any unauthorized data collection attempts, especially those targeting sensitive information."
+        ],
+        "suggestions": [
+          "Show me keylogging attempts",
+          "Show me screen capture activities",
+          "Show me suspicious file collection events"
+        ]
+      }
+    },
+    {
+      "question": "Show me all command and control events",
+      "query": "mitre.attack.command_and_control",
+      "category": "mitre_attack",
+      "description": "Displays all events related to command and control tactics, where adversaries try to communicate with compromised systems.",
+      "summary_template": {
+        "title": "Summary of Command and Control Events",
+        "content": [
+          "Total Events: {total} command and control events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary command and control techniques involved were {techniques}.",
+          "Time of Events: Most command and control attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious command and control activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these command and control events to detect communication with external IPs or domains.",
+          "Correlate these events with execution and exfiltration activities to identify ongoing attacks.",
+          "Investigate any unusual network traffic that could indicate command and control channels."
+        ],
+        "suggestions": [
+          "Show me connections to known malicious domains",
+          "Show me unusual outbound traffic",
+          "Show me command and control linked to exfiltration"
+        ]
+      }
+    },
+    {
+      "question": "Show me all exfiltration events",
+      "query": "mitre.attack.exfiltration",
+      "category": "mitre_attack",
+      "description": "Displays all events related to exfiltration tactics, where adversaries try to steal data from your environment.",
+      "summary_template": {
+        "title": "Summary of Exfiltration Events",
+        "content": [
+          "Total Events: {total} exfiltration events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary exfiltration techniques involved were {techniques}.",
+          "Time of Events: Most exfiltration attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious exfiltration activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these exfiltration events to detect the use of protocols like HTTP, HTTPS, or FTP for data theft.",
+          "Correlate these events with command and control activities to detect full attack paths.",
+          "Investigate any data transfers to external locations, especially those involving large amounts of data."
+        ],
+        "suggestions": [
+          "Show me data exfiltration attempts",
+          "Show me large data transfers to external IPs",
+          "Show me suspicious outbound traffic"
+        ]
+      }
+    },
+    {
+      "question": "Show me all impact events",
+      "query": "mitre.attack.impact",
+      "category": "mitre_attack",
+      "description": "Displays all events related to impact tactics, where adversaries try to disrupt your operations or destroy data.",
+      "summary_template": {
+        "title": "Summary of Impact Events",
+        "content": [
+          "Total Events: {total} impact events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary impact techniques involved were {techniques}.",
+          "Time of Events: Most impact attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious impact activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these impact events to detect attempts to encrypt, destroy, or corrupt data.",
+          "Correlate these events with initial access and lateral movement activities to understand the full attack context.",
+          "Investigate any unauthorized system shutdowns, file deletions, or ransomware activities."
+        ],
+        "suggestions": [
+          "Show me ransomware-related events",
+          "Show me unauthorized system shutdowns",
+          "Show me data destruction activities"
+        ]
+      }
+    },
+    {
+      "question": "Show me all resource development events",
+      "query": "mitre.attack.resource_development",
+      "category": "mitre_attack",
+      "description": "Displays all events related to resource development tactics, where adversaries try to establish resources they can use for operations.",
+      "summary_template": {
+        "title": "Summary of Resource Development Events",
+        "content": [
+          "Total Events: {total} resource development events detected between {start_time} and {end_time}.",
+          "Techniques Used: The primary resource development techniques involved were {techniques}.",
+          "Time of Events: Most resource development attempts occurred between {peak_hours}.",
+          "Potential Security Concerns: Suspicious resource development activities by {suspicious_users} during {suspicious_hours}."
+        ],
+        "detailed_analysis": [
+          "Review these resource development events to detect attempts to create or acquire infrastructure, such as domains, accounts, or tools.",
+          "Correlate these events with initial access and execution activities to identify broader campaigns.",
+          "Investigate any activities related to setting up malicious infrastructure or acquiring resources for future attacks."
+        ],
+        "suggestions": [
+          "Show me domain registrations linked to attacks",
+          "Show me infrastructure setup attempts",
+          "Show me resource acquisition activities"
+        ]
+      }
+    }
+  ]
+}
+
+
+
