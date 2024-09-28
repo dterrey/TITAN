@@ -24,7 +24,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Define the full path to your titan.py script
-TITAN_SCRIPT_PATH = "/home/titan/titan/titan.py"
+TITAN_SCRIPT_PATH = "/home/triagex/Downloads/TITAN/titan.py"
 
 # Keep a global process reference to the running titan.py process
 process = None
@@ -32,17 +32,23 @@ process = None
 # Function to run the titan.py script
 def run_titan_script():
     global process
-    process = subprocess.Popen(['python3', TITAN_SCRIPT_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, text=True)
-    
+    process = subprocess.Popen(
+        ['python3', '-u', TITAN_SCRIPT_PATH],  # '-u' for unbuffered output
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        stdin=subprocess.PIPE,
+        text=True,
+        bufsize=1  # Line-buffered
+    )
+
     # Stream stdout
     while True:
         output = process.stdout.readline()
         if output == '' and process.poll() is not None:
             break
         if output:
-            # Yield output as is, without stripping spaces or newlines
+            # Yield output as is
             yield output
-
     # Capture any remaining stderr output after process ends
     error_output = process.stderr.read()
     if error_output:
@@ -52,6 +58,7 @@ def run_titan_script():
 @app.route('/run_titan', methods=['POST'])
 def run_titan():
     return app.response_class(run_titan_script(), mimetype='text/plain')
+
 
 # Route to send commands to the running titan.py process
 @app.route('/send_command', methods=['POST'])
@@ -67,14 +74,14 @@ def send_command():
             process.stdin.write(command + "\n")
             process.stdin.flush()
 
-            # Capture stdout or stderr output
-            output = process.stdout.readline()
-            if not output:
-                # If no stdout, check for stderr
-                error_output = process.stderr.readline().strip()
-                return jsonify({'output': f"Error: {error_output}"})
-            else:
-                return jsonify({'output': output.strip() + '\n'})
+            # Read the output until the next prompt or EOF
+            output = ''
+            while True:
+                line = process.stdout.readline()
+                if not line or line.strip() == '':
+                    break
+                output += line
+            return jsonify({'output': output})
         except Exception as e:
             return jsonify({'output': f"Error sending command: {str(e)}"})
     else:
@@ -87,4 +94,4 @@ def index():
 
 # Run Flask app
 if __name__ == "__main__":
-    app.run(debug=True, host='localhost', port=5232)
+    app.run(debug=True, host='0.0.0.0', port=5232)
