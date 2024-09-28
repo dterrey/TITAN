@@ -87,7 +87,8 @@ gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2")
 nlp = spacy.load("en_core_web_lg")
 
 # Initialize console for styled text output
-console = Console()
+#console = Console()
+console = Console(width=200)  # Adjust width as needed
 
 # Initialize Codex
 cg = CodexGigasInfo()
@@ -1881,8 +1882,6 @@ def handle_user_input(command, sketch):
         console.print("Analyzing PowerShell events...", style="bold cyan")
         analyze_powershell_events(sketch)
         
-    else:
-        console.print(f"Unknown command: {command}", style="bold red")
 
 # ---------------------------
 # URLScan.io Utilities
@@ -1900,7 +1899,7 @@ def display_results(results):
 # ---------------------------
 
 def print_titan_description(font_size=14):
-    text = Text("Artificial Digital Analysis Machine", style=f"bold magenta")
+    text = Text("Threat Investigation and Tactical Analysis Network", style=f"bold magenta")
     console.print(text)
 
 #adam_ascii_art = r"""
@@ -1984,7 +1983,11 @@ def main():
 
     # Main loop for asking questions
     while True:
-        question = input("\nPlease enter your question (or type 'exit' to quit): ")
+        # Print the prompt and flush stdout
+        console.print("\nPlease ask a question (or type 'exit' to quit):", style="bold magenta")
+
+        # Read input from stdin
+        question = sys.stdin.readline().strip()
 
         if question.lower() == "exit":
             console.print("Exiting the program.", style="bold red")
