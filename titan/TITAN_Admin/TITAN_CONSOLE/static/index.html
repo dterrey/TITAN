@@ -1,26 +1,9 @@
-<!-- -----------------------------------------------------------------------------
-TITAN (Threat Investigation and Tactical Analysis Network)
-Created by: <a href="https://www.linkedin.com/in/david-terrey-a06b1312/" target="_blank">David Terrey</a>
-Copyright (c) 2024 <a href="https://www.linkedin.com/in/david-terrey-a06b1312/" target="_blank">David Terrey</a>
-Licensed under the Apache License, Version 2.0 (the "License");
-You may not use this file except in compliance with the License.
-You may obtain a copy of the License at:
-<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
------------------------------------------------------------------------------ -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITAN-X Console</title>
+    <title>TITAN Console</title>
     <!-- Import Fira Code Font (monospaced font) -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <style>
@@ -60,29 +43,8 @@ limitations under the License.
         h1 {
             color: #00FF7F;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-
-        /* Adjusted status-container to be more visible */
-        .status-container {
-            display: flex;
-            justify-content: center;
             margin-bottom: 20px;
-        }
-
-        .status {
-            margin: 0 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: red;
+            font-size: 28px;
         }
 
         pre#output {
@@ -153,47 +115,23 @@ limitations under the License.
 </head>
 <body>
     <div class="console-container">
-        <h1>TITAN-X Console</h1>
-        
-        <!-- Status Indicators for GPT and NLP -->
-        <div class="status-container">
-            <div class="status">
-                <div id="gptStatus" class="status-dot"></div>
-                <span>GPT: Disconnected</span>
-            </div>
-            <div class="status">
-                <div id="nlpStatus" class="status-dot"></div>
-                <span>NLP: Disconnected</span>
-            </div>
-        </div>
-        
+        <h1>TITAN Console</h1>
         <pre id="output"></pre>
-
+        
         <div class="input-container">
             <input type="text" id="commandInput" placeholder="Type a command..." autocomplete="off" />
             <button onclick="sendCommand()">Send</button>
         </div>
         <div class="button-container">
-            <button class="start-button" onclick="startTitan()">Run TITAN-X</button>
+            <button class="start-button" onclick="startTitan()">Run TITAN</button>
         </div>
     </div>
 
     <script>
-        // Function to start the TITAN-X script
+        // Function to start the TITAN script
         function startTitan() {
             const output = document.getElementById('output');
-            output.textContent = 'Starting TITAN-X...\n';
-
-            // Update GPT and NLP status as starting
-            setTimeout(() => {
-                output.textContent += 'Starting GPT...\n';
-                updateStatus('gptStatus', 'GPT: Connected', 'green');
-            }, 1000); // Simulating GPT connection delay
-
-            setTimeout(() => {
-                output.textContent += 'Starting NLP...\n';
-                updateStatus('nlpStatus', 'NLP: Connected', 'green');
-            }, 2000); // Simulating NLP connection delay
+            output.textContent = 'Starting TITAN...\n';
 
             // Fetch and stream output from Flask
             fetch('/run_titan', { method: 'POST' })
@@ -216,8 +154,10 @@ limitations under the License.
                                 return;
                             }
                             buffer += decoder.decode(value, { stream: true });
+                            // Split the buffer into lines
                             const lines = buffer.split(/\r?\n/);
-                            buffer = lines.pop(); // Keep the last partial line in the buffer
+                            // Keep the last partial line in the buffer
+                            buffer = lines.pop();
                             lines.forEach(line => {
                                 const formattedLine = formatOutput(line);
                                 output.textContent += formattedLine + '\n';
@@ -231,15 +171,8 @@ limitations under the License.
                     readStream();
                 })
                 .catch(err => {
-                    output.textContent += 'Error starting TITAN-X: ' + err + '\n';
+                    output.textContent += 'Error starting TITAN: ' + err + '\n';
                 });
-        }
-
-        // Function to update the GPT and NLP status
-        function updateStatus(elementId, statusText, color) {
-            const statusDot = document.getElementById(elementId);
-            statusDot.style.backgroundColor = color;
-            statusDot.nextElementSibling.textContent = statusText;
         }
 
         // Function to send commands to the console
@@ -287,12 +220,24 @@ limitations under the License.
             output.scrollTop = output.scrollHeight;
         }
 
-        // Function to format output by removing leading spaces and HTML tags
+        /**
+         * Function to format output by removing leading spaces and HTML tags.
+         * @param {string} output - The raw output string from the backend.
+         * @returns {string} - The formatted output string.
+         */
         function formatOutput(output) {
-            let formatted = output.replace(/^[ \t]+/gm, ''); // Remove leading spaces
-            formatted = formatted.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
-            formatted = formatted.replace(/[ ]{2,}/g, ' '); // Replace multiple spaces
-            formatted = formatted.replace(/\r?\n/g, '\n'); // Ensure consistent line breaks
+            // Remove all leading whitespace (spaces, tabs) from each line
+            let formatted = output.replace(/^[ \t]+/gm, '');
+
+            // Remove HTML tags if present
+            formatted = formatted.replace(/<\/?[^>]+(>|$)/g, "");
+
+            // Optionally, replace multiple spaces with a single space
+            formatted = formatted.replace(/[ ]{2,}/g, ' ');
+
+            // Ensure consistent line breaks
+            formatted = formatted.replace(/\r?\n/g, '\n');
+
             return formatted;
         }
     </script>
