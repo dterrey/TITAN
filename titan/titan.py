@@ -116,13 +116,13 @@ MITRE_TACTIC_MAPPINGS = {
 }
 
 # Initialize export folder variable
-export_folder = "/home/titan/Downloads/TITAN/"
+export_folder = "/home/triagex/Downloads/TITAN/"
 
 # File to store all extracted IOCs persistently
-iocs_storage_file = '/home/titan/Downloads/TITAN/iocs_storage.json'
+iocs_storage_file = '/home/triagex/Downloads/TITAN/iocs_storage.json'
 
 # Specify the path to the mitrecti.py script
-mitrecti_path = '/home/titan/Downloads/TITAN/mitrecti.py'
+mitrecti_path = '/home/triagex/Downloads/TITAN/mitrecti.py'
 
 # API Key for URLScan.io
 API_KEY = "71999b57-0017-4055-956f-a38e8a8710a7"
@@ -163,7 +163,7 @@ def load_predefined_questions(filepath):
         data = json.load(file)
     return data
 
-predefined_questions = load_predefined_questions('/home/titan/Downloads/TITAN/predefined_questions.json')
+predefined_questions = load_predefined_questions('/home/triagex/Downloads/TITAN/predefined_questions.json')
 
 # Load event descriptions
 def load_event_descriptions(filepath):
@@ -171,7 +171,7 @@ def load_event_descriptions(filepath):
         event_descriptions = json.load(file)
     return event_descriptions
 
-event_descriptions = load_event_descriptions('/home/titan/Downloads/TITAN/event_descriptions.json')
+event_descriptions = load_event_descriptions('/home/triagex/Downloads/TITAN/event_descriptions.json')
 
 # Load mitrecti.py dynamically
 def load_mitrecti_module(path):
@@ -184,10 +184,10 @@ def load_mitrecti_module(path):
 mitrecti = load_mitrecti_module(mitrecti_path)
 
 # Path to the attack folder
-attack_folder = '/home/titan/Downloads/TITAN/mitrecti'
+attack_folder = '/home/triagex/Downloads/TITAN/mitrecti'
 
 # Cache file for attack_data
-attack_data_cache_file = '/home/titan/Downloads/TITAN/attack_data_cache.pkl'
+attack_data_cache_file = '/home/triagex/Downloads/TITAN/attack_data_cache.pkl'
 
 # Load attack data with caching
 def load_attack_data(attack_folder, cache_file):
@@ -1073,9 +1073,9 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
 
 def handle_zircolite_import():
     # Paths to the Node.js script and data.js
-    nodejs_script_path = '/home/titan/Downloads/TITAN/extract_data.js'  # Replace with the actual path
-    data_js_path = '/home/titan/Downloads/TITAN/data.js'  # Replace with the actual path
-    json_output_directory = '/home/titan/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
+    nodejs_script_path = '/home/triagex/Downloads/TITAN/extract_data.js'  # Replace with the actual path
+    data_js_path = '/home/triagex/Downloads/TITAN/data.js'  # Replace with the actual path
+    json_output_directory = '/home/triagex/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
 
     # Ensure the JSON output directory exists
     if not os.path.exists(json_output_directory):
@@ -1268,7 +1268,7 @@ def interpret_question(question):
     match = re.match(r'show me all (.+) events', question.lower())
     if match:
         category = match.group(1).strip()
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/triagex/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
         return None, None, action, extra_params
@@ -1285,7 +1285,7 @@ def interpret_question(question):
 
     # Handle 'show me the full timeline of events' command
     if "show me the full timeline of events" in question.lower():
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/triagex/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
         category = 'full timeline'
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
@@ -1380,7 +1380,7 @@ def interpret_question(question):
                 scan_data = get_scan_results(scan_id)
                 if scan_data:
                     folder_name = create_safe_folder_name(url)
-                    folder_path = os.path.join('/home/titan/Downloads/TITAN/url', folder_name)
+                    folder_path = os.path.join('/home/triagex/Downloads/TITAN/url', folder_name)
                     os.makedirs(folder_path, exist_ok=True)
                     display_results(scan_data)
                     export_results_to_csv(scan_data, folder_path)
@@ -1899,8 +1899,8 @@ def display_results(results):
 # Printing and Display
 # ---------------------------
 
-def print_adam_description(font_size=14):
-    text = Text("Artificial Digital Analysis Machine", style=f"bold magenta")
+def print_titan_description(font_size=14):
+    text = Text("Threat Investigation and Tactical Analysis Network", style=f"bold magenta")
     console.print(text)
 
 #adam_ascii_art = r"""
@@ -1917,8 +1917,8 @@ def print_adam_description(font_size=14):
 # ---------------------------
 
 def main():
-    # Print the "Artificial Digital Analysis Machine" description
-    print_adam_description(font_size=18)
+    # Print the "Threat Investigation and Tactical Analysis Network" description
+    print_titan_description(font_size=18)
     
     # Example questions
     example_questions = [
@@ -1975,7 +1975,7 @@ def main():
         console.print(f"- {q}", style="cyan")
 
     # Enable command history with readline
-    histfile = "/home/titan/Downloads/TITAN/.adam_history"  # Path to store the command history
+    histfile = "/home/triagex/Downloads/TITAN/.adam_history"  # Path to store the command history
     try:
         readline.read_history_file(histfile)
     except FileNotFoundError:
@@ -2094,7 +2094,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 def start_titan():
     # Print or log the starting message
-    console.print("TITAN-X script started.", style="bold green")
+    console.print("TITAN script started.", style="bold green")
     
     # Call the main function to execute the core logic
     main()
