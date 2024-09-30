@@ -191,6 +191,10 @@
                 <div id="bertStatus" class="status-dot"></div>
                 <span id="bertStatusText">BERT: Disconnected</span>
             </div>
+            <div class="status">
+                <div id="t5Status" class="status-dot"></div>
+                <span id="t5StatusText">T5: Disconnected</span>
+            </div>
         </div>
         
         <pre id="output"></pre>
@@ -224,17 +228,6 @@
             output = output.replace(/,\s*(?![^=]*>)/g, ',\n'); // Handle commas not in scripts or tags
             output = output.replace(/\[([^\]]+)\]\s*=\s*(.+)/g, '\n[$1] = $2'); // Ensure [Keyword] = format
             //output = output.replace(/(\[\w+\])\s*=/g, '\n$1 ='); // Ensure [Keyword] is followed by a new line and equals sign
-            
-            // Prevent breaking lines for specific fields (after '=')
-            const noBreakFields = ['ParentCommandLine', 'CommandLine', 'Guid', 'Channel', 'Image'];
-            noBreakFields.forEach(field => {
-                const pattern = new RegExp(`(${field})\\s*=\\s*([^\\n]+)\\n+([^,]+)`, 'g');
-                output = output.replace(pattern, `$1 = $2 $3`); // Join lines after '='
-            });
-
-            // Handle cases where the value after '=' is enclosed in quotes or brackets (e.g., scripts)
-            output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1$2'); // Avoid splitting values after '='
-            
             
             // Handle multiline values (like scripts) that are indented or spaced irregularly
             // output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1\n$2'); // New line after equals when not followed by comma
@@ -446,6 +439,11 @@
                 output.textContent += 'Starting BERT...\n';
                 updateStatus('bertStatus', 'BERT: Connected', 'green', 'bertStatusText');
             }, 3000);
+            
+            setTimeout(() => {
+                output.textContent += 'Starting T5...\n';
+                updateStatus('t5Status', 'T5: Connected', 'green', 't5StatusText');
+            }, 4000); // Delay to simulate the startup sequence for T5
 
             fetch('/run_titan', { method: 'POST' })
                 .then(response => response.body.getReader())
@@ -497,8 +495,8 @@
             output.textContent += '\nShutting down TITAN...\n';
 
             setTimeout(() => {
-                output.textContent += 'Shutting down BERT...\n';
-                updateStatus('bertStatus', 'BERT: Disconnected', 'red', 'bertStatusText');
+                output.textContent += 'Shutting down GPT...\n';
+                updateStatus('gptStatus', 'GPT: Disconnected', 'red', 'gptStatusText');
                 scrollToBottom();
             }, 1000);
 
@@ -509,10 +507,16 @@
             }, 2000);
 
             setTimeout(() => {
-                output.textContent += 'Shutting down GPT...\n';
-                updateStatus('gptStatus', 'GPT: Disconnected', 'red', 'gptStatusText');
+                output.textContent += 'Shutting down BERT...\n';
+                updateStatus('bertStatus', 'BERT: Disconnected', 'red', 'bertStatusText');
                 scrollToBottom();
             }, 3000);
+            
+            setTimeout(() => {
+                output.textContent += 'Shutting down T5...\n';
+                updateStatus('t5Status', 'T5: Disconnected', 'red', 't5StatusText');
+                scrollToBottom();
+            }, 4000); // Delay for T5 shutdown
 
             setTimeout(() => {
                 output.textContent += 'Shutdown completed.\n';
