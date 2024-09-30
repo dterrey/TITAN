@@ -1278,6 +1278,15 @@ def interpret_question(question):
     if "generate zircolite report" in question.lower():
         return None, None, "zircolite_report", None
 
+    # Handle 'analyze event' command
+    match = re.search(r'analyze event (.+)', question.lower())
+    if match:
+        input_query = match.group(1).strip()
+        if input_query.isdigit():
+            query = f"event_identifier:{input_query}"
+        else:
+            query = f"message:\"{input_query}\""
+        return query, None, "analyze_event", None
 
     # Handle specific tag removal
     if question.lower().startswith("remove ") and " tag" in question.lower():
@@ -2027,6 +2036,12 @@ def main():
 
             elif action == "json_search":
                 handle_search_query(question)
+
+            # Handle query results based on action
+            if action == "analyze_event":
+                console.print(f"Analyzing event: {query}", style="bold blue")
+                analyze_event(query, sketch)
+
 
             # Debugging prints to ensure information is visible
             console.print(f"Query: {query}", style="bold yellow")
