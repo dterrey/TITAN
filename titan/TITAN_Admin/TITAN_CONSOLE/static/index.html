@@ -227,10 +227,20 @@
             output = output.replace(/,\s*([^[])/g, ',\n$1'); // Add new line after comma if not followed by a square bracket
             output = output.replace(/,\s*(?![^=]*>)/g, ',\n'); // Handle commas not in scripts or tags
             output = output.replace(/\[([^\]]+)\]\s*=\s*(.+)/g, '\n[$1] = $2'); // Ensure [Keyword] = format
-            //output = output.replace(/(\[\w+\])\s*=/g, '\n$1 ='); // Ensure [Keyword] is followed by a new line and equals sign
+            output = output.replace(/(\[\w+\])\s*=/g, '\n$1 ='); // Ensure [Keyword] is followed by a new line and equals sign
+            
+            // Prevent breaking lines for specific fields (after '=')
+            const noBreakFields = ['ParentCommandLine', 'CommandLine', 'Guid', 'Channel', 'Image'];
+            noBreakFields.forEach(field => {
+                const pattern = new RegExp(`(${field})\\s*=\\s*([^\\n]+)\\n+([^,]+)`, 'g');
+                output = output.replace(pattern, `$1 = $2 $3`); // Join lines after '='
+            });            
             
             // Handle multiline values (like scripts) that are indented or spaced irregularly
             // output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1\n$2'); // New line after equals when not followed by comma
+    
+            // Handle cases where the value after '=' is enclosed in quotes or brackets (e.g., scripts)
+            output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1$2'); // Avoid splitting values after '='    
     
             // Add extra handling for known multiline blocks (e.g., XML, long JSON strings)
             output = output.replace(/(var\s+[^=]+=\s*")([^"]+)(";)/g, '$1\n$2\n$3'); // Format long script/variable definitions
@@ -243,6 +253,11 @@
  
             // Replace multiple spaces with a single space
             output = output.replace(/[ ]{2,}/g, ' ');
+
+            // Add extra handling for known multiline blocks (e.g., long JSON strings)
+            output = output.replace(/(var\s+[^=]+=\s*")([^"]+)(";)/g, '$1$2$3'); // Format long script/variable definitions
+
+
 
             // Remove HTML tags
             output = output.replace(/<\/?[^>]+(>|$)/g, "");
