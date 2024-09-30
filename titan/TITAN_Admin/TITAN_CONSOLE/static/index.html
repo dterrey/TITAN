@@ -113,7 +113,13 @@
         }
 
         .input-container button {
-            padding: 10px 15px;
+            padding: 10px 15px;        console.print(f"Time: {timestamp}", style="cyan")
+        console.print(f"Event ID: {event_id}", style="green")
+        console.print(f"Source: {source}", style="yellow")
+        console.print(f"User: {user}", style="blue")
+        console.print(f"Computer: {computer}", style="blue")
+        console.print(f"Tags: {tag}", style="magenta")
+        console.print(f"Message: {message}\n", style="white")
             background-color: #00b894;
             border: none;
             color: white;
@@ -157,6 +163,13 @@
         .button-container button {
             margin-left: 10px;
         }
+
+        /* ANSI color classes for rich text formatting */
+        .ansi-lime { color: #32CD32; }
+        .ansi-red { color: red; }
+        .ansi-yellow { color: yellow; }
+        .ansi-blue { color: #007ACC; }
+        .ansi-bold { font-weight: bold; }
     </style>
 </head>
 <body>
@@ -184,7 +197,7 @@
 
         <div class="input-container">
             <input type="text" id="commandInput" placeholder="Type a command..." autocomplete="off" />
-            <button onclick="sendCommand()">Send</button>
+            <button onclick="sendCommand()">Send</button> 
         </div>
         <div class="button-container">
             <button class="start-button" onclick="startTitan()">Start TITAN</button>
@@ -194,7 +207,220 @@
 
     <script>
         let titanRunning = false;
-        let titanReader = null; // To keep track of the reader for streaming
+        let titanReader = null;
+
+        function formatOutput(output) {
+            // Normalize line endings
+            output = output.replace(/\r\n/g, '\n');
+
+            // Replace multiple line breaks with a single line break
+            output = output.replace(/\n{3,}/g, '\n\n');
+
+            // Remove leading and trailing spaces
+            output = output.replace(/^[ \t]+|[ \t]+$/gm, '');
+           
+            // Format each line to start with [Keyword] or field name
+            output = output.replace(/,\s*([^[])/g, ',\n$1'); // Add new line after comma if not followed by a square bracket
+            output = output.replace(/,\s*(?![^=]*>)/g, ',\n'); // Handle commas not in scripts or tags
+            output = output.replace(/\[([^\]]+)\]\s*=\s*(.+)/g, '\n[$1] = $2'); // Ensure [Keyword] = format
+            //output = output.replace(/(\[\w+\])\s*=/g, '\n$1 ='); // Ensure [Keyword] is followed by a new line and equals sign
+            
+            // Prevent breaking lines for specific fields (after '=')
+            const noBreakFields = ['ParentCommandLine', 'CommandLine', 'Guid', 'Channel', 'Image'];
+            noBreakFields.forEach(field => {
+                const pattern = new RegExp(`(${field})\\s*=\\s*([^\\n]+)\\n+([^,]+)`, 'g');
+                output = output.replace(pattern, `$1 = $2 $3`); // Join lines after '='
+            });
+
+            // Handle cases where the value after '=' is enclosed in quotes or brackets (e.g., scripts)
+            output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1$2'); // Avoid splitting values after '='
+            
+            
+            // Handle multiline values (like scripts) that are indented or spaced irregularly
+            // output = output.replace(/(\s*=\s*)([^,\n]+)/g, '$1\n$2'); // New line after equals when not followed by comma
+    
+            // Add extra handling for known multiline blocks (e.g., XML, long JSON strings)
+            output = output.replace(/(var\s+[^=]+=\s*")([^"]+)(";)/g, '$1\n$2\n$3'); // Format long script/variable definitions
+     
+            // Prevent keywords from breaking across lines
+            output = output.replace(/\n\s*(\[[^\]]+\])/g, '\n$1');
+
+            // Ensure proper newline after block end indicators like closing quotes or brackets
+            output = output.replace(/("[^"]+")/g, '\n$1\n'); // For strings within quotes
+ 
+            // Replace multiple spaces with a single space
+            output = output.replace(/[ ]{2,}/g, ' ');
+
+            // Remove HTML tags
+            output = output.replace(/<\/?[^>]+(>|$)/g, "");
+
+            // Apply color coding based on keywords
+            output = output.replace(/high|error/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/info|success/gi, '<span style="color: lime;">$&</span>');
+            output = output.replace(/warn|warning/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/notice|startup/gi, '<span style="color: blue;">$&</span>');
+            
+           // Apply color coding based on keywords (mapping console.print styles from titan.py)
+            
+              
+            // General information
+            output = output.replace(/Successfully connected to Timesketch/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Failed to connect to Timesketch/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Cache not found/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Loaded attack_data from cache/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Building MitreCTI cache/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/No events to process./gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/TITAN script started./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Exiting the program./gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Switching to Timesketch mode./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Switching to file mode./gi, '<span style="color: green;">$&</span>');
+
+            // BERT and GPT-2 outputs
+            output = output.replace(/Event Classification \(BERT\):/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Entities Detected \(BERT\):/gi, '<span style="color: cyan;">$&</span>');
+            output = output.replace(/Event Summary \(GPT-2\):/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Classification \(BERT\):/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Entities Extracted \(BERT\):/gi, '<span style="color: cyan;">$&</span>');
+            output = output.replace(/Summary \(GPT-2\):/gi, '<span style="color: green;">$&</span>');
+
+            // Suspicious and normal behavior
+            output = output.replace(/Suspicious Events Detected/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/No suspicious events detected/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Suspicious Event \d+:/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/User:/gi, '<span style="color: cyan;">$&</span>');
+            output = output.replace(/Message:/gi, '<span style="color: ansi-pink;">$&</span>');
+
+            // Timesketch and file upload
+            output = output.replace(/CSV file '.*' uploaded./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/JSON file '.*' uploaded./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/PDF file '.*' uploaded and summarized./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Word document '.*' uploaded and summarized./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Excel file '.*' uploaded./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Unsupported file format.*/gi, '<span style="color: red;">$&</span>');
+
+            // Sigma rule processing
+            output = output.replace(/Processing Sigma rule:/gi, '<span style="color: magenta;">$&</span>');
+            output = output.replace(/Tagged \d+ events with tag '.*'./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/No new tags were applied; all relevant events are already tagged./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/No events found for Sigma rule '.*'./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Failed to query Timesketch for Sigma rule '.*': .*/gi, '<span style="color: red;">$&</span>');
+
+
+            // Zircolite report and imports
+            output = output.replace(/Zircolite report generated successfully./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error in generating Zircolite report: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Data successfully imported into Timesketch using ImportStreamer./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error importing file into Timesketch: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Node\.js script executed successfully./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error executing Node\.js script: .*/gi, '<span style="color: red;">$&</span>');
+
+            // MITRE ATT&CK
+            output = output.replace(/Events tagged with MITRE ATT&CK techniques found:/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/No events tagged with MITRE ATT&CK techniques found in Timesketch./gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Initial Access/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Persistence/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Privilege Escalation/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Defense Evasion/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Credential Access/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Discovery/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Lateral Movement/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Execution/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Collection/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Exfiltration/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Command and Control/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Impact/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Other/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Unknown/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Low Severity/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Medium Severity/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/High Severity/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Critical Severity/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Informational/gi, '<span style="color: red;">$&</span>');
+
+            // IOCs
+            output = output.replace(/IOCs extracted and stored from the CSV./gi, '<span style="color: cyan;">$&</span>');
+            output = output.replace(/No IOCs found in storage to search in Timesketch./gi, '<span style="color: yellow;">$&</span>');
+
+            // General tagged events
+            output = output.replace(/Tagged \d+ events with '.*'./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/No new tags were applied; all relevant events are already tagged./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/No results found./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/View more events at: .*/gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/Results successfully exported to .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Failed to export results to CSV: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/No valid query was generated./gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/An unexpected error occurred: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Total number of events matching '.*': \d+/gi, '<span style="color: green;">$&</span>');
+
+            // PowerShell specific events
+            output = output.replace(/PowerShell Event Classification \(BERT\):/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/PowerShell Event Summary \(GPT-2\):/gi, '<span style="color: green;">$&</span>');
+
+            // Event Display
+            output = output.replace(/Time:/gi, '<span style="color: cyan;">$&</span>');
+            output = output.replace(/Event ID:/gi, '<span style="color: magenta;">$&</span>');
+            output = output.replace(/Source:/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/User:/gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/Computer:/gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/Tags:/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Message:/gi, '<span style="color: pink;">$&</span>');
+            // Match [Rule level] = <any characters up to a comma>, regardless of the value
+            output = output.replace(/\[Rule level\] = [^,]+,/gi, '<span style="color: red;">$&</span>');
+
+            // Match [Image] = <any characters up to a comma>, regardless of the value
+            output = output.replace(/\[Image\] = [^,\n]+[,\n]?/gi, '<span style="color: cyan;">$&</span>');
+
+            
+
+            // TITAN Startup and Shutdown
+            output = output.replace(/TITAN script started./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Exiting the program./gi, '<span style="color: red;">$&</span>');
+
+            // Other statuses
+            output = output.replace(/Analyzing event .*.../gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/No valid action determined./gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Invalid command.*/gi, '<span style="color: red;">$&</span>');
+
+            // Warnings and Errors
+            output = output.replace(/Warning:/gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Error:/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/An error occurred while running the Zircolite report: .*/gi, '<span style="color: red;">$&</span>');
+
+            // Codex Integration
+            output = output.replace(/Retrieving antivirus results for hash:/gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/Antivirus results retrieved successfully./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error retrieving antivirus results: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Retrieving metadata for hash:/gi, '<span style="color: blue;">$&</span>');
+            output = output.replace(/Metadata retrieved successfully./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error retrieving metadata: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/File sent for processing successfully./gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error sending file: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Failed to retrieve file hash.*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Processing hash: .*/gi, '<span style="color: blue;">$&</span>');
+
+            // URLScan.io Integration
+            output = output.replace(/Scan initiated successfully. Scan ID: .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error initiating scan: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Scan is still in progress...waiting 10 seconds./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Error retrieving scan results: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Scan results saved to JSON at: .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Error saving results to JSON: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Scan results exported to CSV at: .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Screenshot saved at: .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Failed to download screenshot: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Error saving screenshot: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/No screenshot URL found in scan data./gi, '<span style="color: yellow;">$&</span>');
+            output = output.replace(/Response \d+ saved at: .*/gi, '<span style="color: green;">$&</span>');
+            output = output.replace(/Failed to download response \d+: .*/gi, '<span style="color: red;">$&</span>');
+            output = output.replace(/Error downloading response \d+: .*/gi, '<span style="color: red;">$&</span>');
+            
+            return output.trim();
+        }
+
+        function scrollToBottom() {
+            const output = document.getElementById('output');
+            output.scrollTop = output.scrollHeight;
+        }
 
         // Function to start the TITAN script
         function startTitan() {
@@ -206,7 +432,6 @@
             const output = document.getElementById('output');
             output.textContent = 'Starting TITAN...\n';
 
-            // Update statuses as starting
             setTimeout(() => {
                 output.textContent += 'Starting GPT...\n';
                 updateStatus('gptStatus', 'GPT: Connected', 'green', 'gptStatusText');
@@ -222,15 +447,11 @@
                 updateStatus('bertStatus', 'BERT: Connected', 'green', 'bertStatusText');
             }, 3000);
 
-            // Fetch and stream output from Flask
             fetch('/run_titan', { method: 'POST' })
-                .then(response => {
-                    if (!response.body) {
-                        throw new Error('ReadableStream not yet supported in this browser.');
-                    }
+                .then(response => response.body.getReader())
+                .then(reader => {
                     titanRunning = true;
-                    const reader = response.body.getReader();
-                    titanReader = reader; // Save the reader to close it on shutdown
+                    titanReader = reader;
                     const decoder = new TextDecoder("utf-8");
                     let buffer = '';
 
@@ -239,7 +460,7 @@
                             if (done) {
                                 if (buffer.length > 0) {
                                     const formattedChunk = formatOutput(buffer);
-                                    output.textContent += formattedChunk + '\n';
+                                    output.innerHTML += formattedChunk + '<br>';
                                     scrollToBottom();
                                 }
                                 titanRunning = false;
@@ -247,10 +468,10 @@
                             }
                             buffer += decoder.decode(value, { stream: true });
                             const lines = buffer.split(/\r?\n/);
-                            buffer = lines.pop(); // Keep the last partial line in the buffer
+                            buffer = lines.pop();
                             lines.forEach(line => {
                                 const formattedLine = formatOutput(line);
-                                output.textContent += formattedLine + '\n';
+                                output.innerHTML += formattedLine + '<br>';
                                 scrollToBottom();
                             });
                             readStream();
@@ -266,7 +487,6 @@
                 });
         }
 
-        // Function to handle the shutdown sequence
         function shutdownTitan() {
             if (!titanRunning) {
                 alert('TITAN is not running.');
@@ -276,7 +496,6 @@
             const output = document.getElementById('output');
             output.textContent += '\nShutting down TITAN...\n';
 
-            // Begin shutdown sequence in reverse
             setTimeout(() => {
                 output.textContent += 'Shutting down BERT...\n';
                 updateStatus('bertStatus', 'BERT: Disconnected', 'red', 'bertStatusText');
@@ -298,8 +517,6 @@
             setTimeout(() => {
                 output.textContent += 'Shutdown completed.\n';
                 scrollToBottom();
-
-                // Close the reader to stop streaming
                 if (titanReader) {
                     titanReader.cancel();
                     titanReader = null;
@@ -308,7 +525,19 @@
             }, 4000);
         }
 
-        // Function to handle command input
+        function updateStatus(elementId, statusText, color, textElementId) {
+            const statusDot = document.getElementById(elementId);
+            statusDot.style.backgroundColor = color;
+            const statusTextElement = document.getElementById(textElementId);
+            statusTextElement.textContent = statusText;
+        }
+
+        document.getElementById('commandInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        });
+
         function sendCommand() {
             const commandInput = document.getElementById('commandInput');
             const command = commandInput.value.trim();
@@ -325,7 +554,7 @@
             }
 
             if (command) {
-                output.textContent += '\n$ ' + command + '\n';
+                output.innerHTML += '\n$ ' + command + '\n';
                 scrollToBottom();
                 fetch('/send_command', {
                     method: 'POST',
@@ -338,57 +567,16 @@
                 .then(data => {
                     if (data.output) {
                         const formattedOutput = formatOutput(data.output);
-                        output.textContent += formattedOutput;
+                        output.innerHTML += formattedOutput;
                         scrollToBottom();
                     }
                 })
                 .catch(err => {
-                    output.textContent += 'Error: ' + err + '\n';
+                    output.innerHTML += 'Error: ' + err + '\n';
                 });
 
-                commandInput.value = '';  // Clear the input field
+                commandInput.value = '';  
             }
-        }
-
-        // Function to update statuses
-        function updateStatus(elementId, statusText, color, textElementId) {
-            const statusDot = document.getElementById(elementId);
-            statusDot.style.backgroundColor = color;
-            const statusTextElement = document.getElementById(textElementId);
-            statusTextElement.textContent = statusText;
-        }
-
-        // Send command when 'Enter' key is pressed
-        document.getElementById('commandInput').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                sendCommand();
-            }
-        });
-
-        // Scroll to bottom of the output
-        function scrollToBottom() {
-            const output = document.getElementById('output');
-            output.scrollTop = output.scrollHeight;
-        }
-
-        // Function to format output
-        function formatOutput(output) {
-            // Normalize line endings
-            output = output.replace(/\r\n/g, '\n');
-
-            // Replace multiple line breaks with a single line break
-            output = output.replace(/\n{3,}/g, '\n\n');
-
-            // Remove leading and trailing spaces
-            output = output.replace(/^[ \t]+|[ \t]+$/gm, '');
-
-            // Replace multiple spaces with a single space
-            output = output.replace(/[ ]{2,}/g, ' ');
-
-            // Remove HTML tags
-            output = output.replace(/<\/?[^>]+(>|$)/g, "");
-
-            return output.trim();
         }
     </script>
 </body>
