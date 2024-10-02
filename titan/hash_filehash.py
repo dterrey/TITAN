@@ -53,7 +53,7 @@ def count_files(directory):
     return total_files
 
 def process_directory(directory, output_jsonl, log_file):
-    """Hash files in a directory and save to a JSONL file with a live progress counter."""
+    """Hash files in a directory and save to a JSONL file with individual fields and a live progress counter."""
     total_files = count_files(directory)
     files_processed = 0
     skipped_files_no_extension = 0  # Track skipped files without extension
@@ -85,11 +85,19 @@ def process_directory(directory, output_jsonl, log_file):
                     # Process the file and calculate hashes
                     hashes = calculate_hashes(file_path)
                     if hashes:
+                        # Create the message for Timesketch
                         message = f"Filename: {file_path}, MD5: {hashes['MD5']}, SHA1: {hashes['SHA1']}, SHA256: {hashes['SHA256']}"
+                        
+                        # Create a JSONL entry with individual fields
                         jsonl_entry = {
                             "datetime": datetime.datetime.now().isoformat(),
                             "message": message,
                             "timestamp_desc": "File hashes",
+                            "Filename": file_path,
+                            "MD5": hashes['MD5'],
+                            "SHA1": hashes['SHA1'],
+                            "SHA256": hashes['SHA256'],
+                            "Size": file_size
                         }
                         jsonl_file.write(json.dumps(jsonl_entry) + '\n')
                         logging.info(f"Successfully processed file: {file_path}")
@@ -151,5 +159,6 @@ if __name__ == "__main__":
 
     # Process all files in mounted partitions using the base name of the image for output files
     process_partitions(args.output_dir, log_file, args.output_base_name)
+
 
 
