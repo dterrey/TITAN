@@ -14,11 +14,14 @@
 # limitations under the License.
 # -----------------------------------------------------------------------------
 
+#Usage sudo python3 hash_filehash.py -o /cases/processor/hashes/ -b filename
+
 import os
 import hashlib
 import logging
 import json
 import argparse
+import datetime
 
 def setup_logging(log_file):
     """Set up logging to capture which files are being processed."""
@@ -49,18 +52,17 @@ def count_files(directory):
         total_files += len(files)
     return total_files
 
-def process_directory(directory, output_json, log_file):
-    """Hash files in a directory and save to a JSON file."""
+def process_directory(directory, output_jsonl, log_file):
+    """Hash files in a directory and save to a JSONL file with a live progress counter."""
     total_files = count_files(directory)
     files_processed = 0
     skipped_files_no_extension = 0  # Track skipped files without extension
+    skipped_zero_byte_files = 0  # Track skipped zero-byte files
 
     print(f"Total number of files to process in {directory}: {total_files}\n")
+    logging.info(f"Starting to process directory: {directory}, Total files: {total_files}")
 
-    with open(output_json, 'w') as json_file:
-        json_file.write('{\n')
-        first_entry = True
-
+    with open(output_jsonl, 'w') as jsonl_file:
         for root, dirs, files in os.walk(directory):
             for file_name in files:
                 file_path = os.path.join(root, file_name)
@@ -71,55 +73,43 @@ def process_directory(directory, output_json, log_file):
                     logging.info(f"Skipping file with no extension: {file_path}")
                     continue
 
-                logging.info(f"Processing file: {file_path}")
                 try:
                     file_size = os.path.getsize(file_path)
+                    
+                    # Skip files that are 0 bytes in size
+                    if file_size == 0:
+                        skipped_zero_byte_files += 1
+                        logging.info(f"Skipping 0-byte file: {file_path}")
+                        continue
+
+                    # Process the file and calculate hashes
                     hashes = calculate_hashes(file_path)
                     if hashes:
-                        if not first_entry:
-                            json_file.write(',\n')
-                        else:
-                            first_entry = False
-                        json_entry = json.dumps({
-                            'filename': file_path,
-                            'MD5': hashes['MD5'],
-                            'SHA1': hashes['SHA1'],
-                            'SHA256': hashes['SHA256'],
-                            'Size': file_size
-                        })
-                        json_file.write(f'"{file_path}": {json_entry}')
+                        message = f"Filename: {file_path}, MD5: {hashes['MD5']}, SHA1: {hashes['SHA1']}, SHA256: {hashes['SHA256']}"
+                        jsonl_entry = {
+                            "datetime": datetime.datetime.now().isoformat(),
+                            "message": message,
+                            "timestamp_desc": "File hashes",
+                        }
+                        jsonl_file.write(json.dumps(jsonl_entry) + '\n')
+                        logging.info(f"Successfully processed file: {file_path}")
                     files_processed += 1
 
                     # Display progress count in real-time
                     print(f"Progress: {files_processed}/{total_files} files processed in {directory}", end='\r')
 
+                except FileNotFoundError as e:
+                    logging.error(f"File not found: {file_path}. Error: {e}")
+                    continue  # Skip and move to the next file
+
                 except Exception as e:
                     logging.error(f"Error processing file {file_path}: {e}")
-                    pass
-        
-        json_file.write('\n}\n')
+                    continue
 
-    print(f"\nProcessing complete for {directory}. Skipped {skipped_files_no_extension} files without extensions.")
+    print(f"\nProcessing complete for {directory}. Skipped {skipped_files_no_extension} files without extensions and {skipped_zero_byte_files} 0-byte files.")
+    logging.info(f"Processing complete for directory: {directory}. Total processed: {files_processed}. Skipped: {skipped_files_no_extension} files without extensions, {skipped_zero_byte_files} zero-byte files.")
 
-def convert_json_to_jsonl(input_json_file, output_jsonl_file):
-    """Convert the generated JSON file to JSONL format for Timesketch."""
-    import datetime
-    system_time = datetime.datetime.now().isoformat()  # Use current system time
-
-    with open(input_json_file, 'r') as f:
-        data = json.load(f)
-
-    with open(output_jsonl_file, 'w') as out_file:
-        for file_path, details in data.items():
-            message = f"Filename: {details['filename']}, MD5: {details['MD5']}, SHA1: {details['SHA1']}, SHA256: {details['SHA256']}"
-            jsonl_entry = {
-                "datetime": system_time,
-                "message": message,
-                "timestamp_desc": "File hashes",
-            }
-            out_file.write(json.dumps(jsonl_entry) + '\n')
-
-def process_partitions(output_dir, log_file, image_base_name):
+def process_partitions(output_dir, log_file, output_base_name="partition_hashes"):
     """Process all files in the mounted partitions."""
     base_partition_dir = "/mnt/partition"
     
@@ -127,38 +117,29 @@ def process_partitions(output_dir, log_file, image_base_name):
     directories_to_process = [f"{base_partition_dir}_{i}" for i in range(10)]
     
     for directory in directories_to_process:
-        if os.path.exists(directory) and os.path.ismount(directory):
+        if os.path.exists(directory) and os.path.ismount(directory):  # Corrected to use os.path.ismount()
             print(f"Processing files in {directory}...\n")
-            # Use the image base name for the output files
-            output_json = os.path.join(output_dir, f"{image_base_name}.json")
-            output_jsonl = os.path.join(output_dir, f"{image_base_name}.jsonl")
+            # Use the base name for the output files
+            output_jsonl = os.path.join(output_dir, f"{output_base_name}.jsonl")
             
-            process_directory(directory, output_json, log_file)
-            convert_json_to_jsonl(output_json, output_jsonl)
+            process_directory(directory, output_jsonl, log_file)
         else:
             print(f"{directory} does not exist or is not mounted. Skipping...")
-
-def get_image_base_name(image_path):
-    """Extract the base name of the image file (e.g., fileserver from fileserver.E01)."""
-    return os.path.splitext(os.path.basename(image_path))[0]
 
 def parse_arguments():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
         description="Hash files in mounted partitions for DFIR analysis. "
                     "Calculates MD5, SHA1, and SHA256 hashes for each file in the mounted partitions, "
-                    "and saves the results in a JSON file."
+                    "and saves the results in a JSONL file."
     )
-    parser.add_argument('--image-file', '-i', required=True, help="Path to the original image file (e.g., fileserver.E01).")
-    parser.add_argument('--output-dir', '-o', required=True, help="Directory where the JSON output files will be saved.")
+    parser.add_argument('--output-dir', '-o', required=True, help="Directory where the JSONL output files will be saved.")
+    parser.add_argument('--output-base-name', '-b', required=False, default="partition_hashes", help="Base name for the output JSONL file (default: partition_hashes).")
     return parser.parse_args()
 
 if __name__ == "__main__":
     # Parse command-line arguments
     args = parse_arguments()
-
-    # Get the base name of the image file (e.g., fileserver from fileserver.E01)
-    image_base_name = get_image_base_name(args.image_file)
 
     # Set up logging
     log_file = "file_processing.log"
@@ -169,5 +150,6 @@ if __name__ == "__main__":
         os.makedirs(args.output_dir)
 
     # Process all files in mounted partitions using the base name of the image for output files
-    process_partitions(args.output_dir, log_file, image_base_name)
+    process_partitions(args.output_dir, log_file, args.output_base_name)
+
 
