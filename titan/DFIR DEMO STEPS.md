@@ -20,3 +20,22 @@ Once the DFIR Analyst tagged all the iocs, malicious events.
 
 4. ADAM AI exports all tagged events to a CSV.
 5. (COMING SOON) ADAM AI, builds custom report based on all tagged events. 
+
+Process
+Log2timeline .E01 file
+Mount .E01
+Filehash everything
+Zircolite .E01
+Hayabusa / Chainsaw .E01
+Unmount .E01
+
+Titan Script to Import Zircolite Data
+
+def handle_zircolite_import():
+    # Paths to the Node.js script and data.js
+    nodejs_script_path = '/home/triagex/Downloads/TITAN/extract_data.js'  # Replace with the actual path
+    data_js_path = '/home/triagex/Downloads/TITAN/data.js'  # Replace with the actual path
+    json_output_directory = '/home/triagex/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
+
+titan.py
+import zircolite data
