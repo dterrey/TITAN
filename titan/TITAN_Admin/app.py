@@ -236,8 +236,20 @@ app.register_blueprint(static_bp, url_prefix='/zircogui')
 def progress():
     return render_template('progress.html')
 
+# Define the path to the TITAN_IOC app.py
+TITAN_IOC_PATH = '/home/triagex/Downloads/TITAN/TITAN_IOC/app.py'
+
+# Start TITAN_IOC in the background
+def start_titan_ioc():
+    try:
+        # Start TITAN_IOC Flask app on port 5112
+        subprocess.Popen(['python3', TITAN_IOC_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print("TITAN IOC started on port 5112")
+    except Exception as e:
+        print(f"Error launching TITAN IOC: {str(e)}")
+
 # Define the path to the TITAN Console app.py
-TITAN_SCRIPT_PATH = '/opt/TITAN_Admin/TITAN_CONSOLE/app.py'
+TITAN_SCRIPT_PATH = '/home/triagex/Downloads/TITAN/TITAN_Admin/TITAN_CONSOLE/app.py'
 
 # Start TITAN Console in the background
 def start_titan_console():
@@ -253,12 +265,15 @@ def start_titan_console():
 @login_required
 def terminal():
     # Redirect to TITAN Console running on port 5232
-    return redirect("http://localhost:5232")
+    return redirect("http://0.0.0.0:5232")
 
 # Run main Flask app and start TITAN Console automatically
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+
+    # Start TITAN_IOC before the main Flask app
+    start_titan_ioc()
 
     # Start TITAN Console before the main Flask app
     start_titan_console()
@@ -267,4 +282,4 @@ if __name__ == '__main__':
     time.sleep(2)
 
     # Start the main Flask app on port 5111
-    socketio.run(app, debug=True, host='localhost', port=5111)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5111)
