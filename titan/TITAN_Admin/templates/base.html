@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?v=1.0.0">
-    <title>TITAN</title>
+    <title>TRIAGEX</title>
+      <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/titan_favicon.ico') }}" type="image/x-icon">
     <style>
       html, body {
         height: 100%;
@@ -163,6 +165,7 @@
       <a href="http://{{ request.host.split(':')[0] }}:1880" target="_blank">Node-RED</a>
       <a href="{{ url_for('mitre_dashboard') }}" target="_blank">Mitre Dashboard</a>
       <a href="{{ url_for('terminal') }}" target="_blank">Run Titan-X AI</a>
+      <a href="http://{{ request.host.split(':')[0] }}:5112" target="_blank">TITAN IOC</a>
       <a href="{{ url_for('logout') }}" id="logout-button">Logout</a>
     </div>
     <div class="container">
