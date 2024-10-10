@@ -11,13 +11,17 @@ def index():
     return render_template('index.html', iocs=iocs)
 
 def identify_ioc_type(ioc):
-    if re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", ioc):
+    # IPv4 regex
+    if re.match(r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", ioc):
         return "IP"
+    # SHA256 hash regex (64 hexadecimal characters)
     elif re.match(r"^[0-9a-fA-F]{64}$", ioc):
         return "Hash"
+    # URL regex
     elif re.match(r"^https?:\/\/", ioc):
         return "URL"
-    elif re.match(r"^[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}$", ioc):
+    # Domain regex
+    elif re.match(r"^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$", ioc):
         return "Domain"
     else:
         return "Filename"
@@ -33,15 +37,18 @@ def add_iocs():
         new_ioc = IOC(indicator=ioc, type=ioc_type, timestamp=datetime.now(), tag=tag)
         db.session.add(new_ioc)
 
-    db.session.commit()
+    db.session.commit()  # Commit once, after adding all the IOCs to the database
 
-    # Now iterate through the list of IOCs and pass each to the search_and_tag_iocs_in_timesketch function
+    # Now pass all the IOCs to the Timesketch tagging function
+    results = []
     for ioc in ioc_list:
         result = search_and_tag_iocs_in_timesketch(ioc, tag)
-        flash(f"IOCs added and {result}")
+        results.append(result)
+    
+    # Flash messages only after everything is done
+    flash(f"IOCs added and tagged in Timesketch: {results}")
 
     return redirect('/')
-
 
 @app.route('/gohunt', methods=['POST'])
 def go_hunt():
@@ -126,7 +133,7 @@ def remove_tag():
 
     for ioc_id in selected_iocs:
         ioc = IOC.query.get(ioc_id)
-        if ioc:
+        if ioc and ioc.tag:  # Check if the tag exists
             try:
                 # Remove the tag but keep the IOC in the table
                 result = remove_ioc_or_tag(ioc.indicator, ioc.tag, remove_ioc=False)
@@ -143,7 +150,7 @@ def remove_tag():
         'success': successful_removals,
         'failed': failed_removals
     })
-
+    
 # Helper function to verify that the tag was removed from Timesketch
 def verify_removal_from_timesketch(tag):
     ts_client, sketch = connect_timesketch()
@@ -153,10 +160,13 @@ def verify_removal_from_timesketch(tag):
         return -1  # Return -1 on failure
 
     query = f'tag:"{tag}"'
-    search_obj = sketch.explore(query_string=query)
-    search_results = search_obj.to_dict()
-
-    return len(search_results['objects'])  # Return the number of remaining events
+    try:
+        search_obj = sketch.explore(query_string=query)
+        search_results = search_obj.to_dict()
+        return len(search_results['objects'])  # Return the number of remaining events
+    except Exception as e:
+        print(f"Error querying Timesketch: {e}")
+        return -1  # Return -1 on failure
     
 @app.route('/get_updated_table')
 def get_updated_table():
