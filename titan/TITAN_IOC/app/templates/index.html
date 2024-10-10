@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOC Dashboard - TITAN</title>
-    <!-- Import Fira Code Font (monospaced font) -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         /* Reset default browser styles */
@@ -52,7 +51,6 @@
             font-weight: normal;
         }
 
-        /* Adjusted IOC table */
         table {
             width: 100%;
             margin-bottom: 20px;
@@ -81,42 +79,15 @@
             background-color: #00b894;
         }
 
-        .input-container {
-            display: flex;
-            width: 100%;
-        }
-
-        .input-container input {
-            flex-grow: 1;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 4px 0 0 4px;
-            border: none;
-            background-color: #2c2c2c;
-            color: white;
-        }
-
-        .input-container button {
-            padding: 10px 15px;
-            background-color: #00b894;
-            border: none;
-            color: white;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .input-container button:hover {
-            background-color: #019875;
-        }
-
+        /* Button container */
         .button-container {
-            margin-top: 20px;
             display: flex;
             justify-content: center;
+            gap: 10px; /* Space between buttons */
+            margin-top: 20px;
         }
 
-        .go-hunt-button {
+        .button-container button {
             padding: 10px 25px;
             background-color: #0984e3;
             border: none;
@@ -127,7 +98,84 @@
             transition: background-color 0.3s ease;
         }
 
-        .go-hunt-button:hover {
+        .button-container button:hover {
+            background-color: #066bbd;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #2c2c2c;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: 1px solid #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Spinner */
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 6px solid #0984e3;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Styling the OK and Cancel buttons */
+        .styled-btn {
+            padding: 10px 25px;
+            background-color: #0984e3;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .styled-btn:hover {
             background-color: #066bbd;
         }
     </style>
@@ -137,10 +185,11 @@
         <h1>IOC Dashboard - TITAN</h1>
         <h2>Indicator of Compromise Records</h2>
 
-        <!-- Display IOC table -->
+        <!-- IOC Table -->
         <table>
             <thead>
                 <tr>
+                    <th><input type="checkbox" id="select-all"></th>
                     <th>ID</th>
                     <th>Indicator</th>
                     <th>Type</th>
@@ -151,29 +200,218 @@
             <tbody>
                 {% for ioc in iocs %}
                 <tr>
+                    <td><input type="checkbox" class="select-ioc" value="{{ ioc.id }}"></td>
                     <td>{{ ioc.id }}</td>
                     <td>{{ ioc.indicator }}</td>
                     <td>{{ ioc.type }}</td>
                     <td>{{ ioc.timestamp }}</td>
-                    <td>{{ ioc.tag }}</td> <!-- Display the tag associated with each IOC -->
+                    <td>{{ ioc.tag }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <!-- Input form for uploading IOCs with a label/tag -->
-        <form class="input-container" action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="ioc_file" required>
-            <input type="text" name="label" placeholder="Tag for IOC" required> <!-- Label input -->
-            <button type="submit">Upload</button>
-        </form>
-
-        <!-- Go Hunt button to trigger Timesketch query and tagging -->
+        <!-- Button container -->
         <div class="button-container">
-            <form action="/gohunt" method="POST">
-                <button type="submit" class="go-hunt-button">Go Hunt</button>
-            </form>
+            <button id="add-ioc-btn">Add IOCs</button>
+            <button id="delete-ioc-btn">Remove IOC</button>
+            <button id="change-tag-btn">Add/Change Tag</button>
+            <button id="remove-tag-btn">Remove Tag</button>
+            <button id="go-hunt-btn">Go Hunt</button>
+        </div>
+
+        <!-- Modal for Add IOCs -->
+        <div id="add-ioc-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add IOCs</h2>
+                <form id="add-ioc-form" action="/add_iocs" method="POST">
+                    <textarea name="ioc_data" placeholder="Enter IOCs (IP, Hash, Filename, URL, etc.) - one per line or comma-separated" required></textarea>
+                    <input type="text" name="tag" placeholder="Optional: Tag to apply to all IOCs">
+                    <div class="button-container">
+                        <button id="ok-add-ioc-btn" class="styled-btn" type="submit">OK</button>
+                        <button id="cancel-add-ioc-btn" class="styled-btn" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Remove IOC Status Modal -->
+        <div id="remove-ioc-status-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Remove IOC Status</h2>
+                <div id="remove-ioc-status-container">
+                    <p>Status: <span id="remove-ioc-status"></span></p>
+                </div>
+                <button id="ok-remove-ioc-btn" class="styled-btn">OK</button>
+            </div>
+        </div>
+
+        <!-- Remove Tag Status Modal -->
+        <div id="remove-tag-status-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Remove Tag Status</h2>
+                <div id="remove-tag-status-container">
+                    <p>Status: <span id="remove-tag-status"></span></p>
+                </div>
+                <button id="ok-remove-tag-btn" class="styled-btn">OK</button>
+            </div>
+        </div>
+
+        <!-- Modal for Hunt Status -->
+        <div id="hunt-status-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Hunt Status</h2>
+                <div id="hunt-status-container">
+                    <div class="loader"></div>
+                    <p>Hunting in progress... Please wait</p>
+                </div>
+                <div id="hunt-status-results"></div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Get modals and buttons
+        var addIocModal = document.getElementById("add-ioc-modal");
+        var huntStatusModal = document.getElementById("hunt-status-modal");
+        var goHuntBtn = document.getElementById("go-hunt-btn");
+        var addIocBtn = document.getElementById("add-ioc-btn");
+        var spanCloseBtns = document.getElementsByClassName("close");
+
+        // Show Add IOC modal when Add IOC button is clicked
+        addIocBtn.onclick = function() {
+            addIocModal.style.display = "block";
+        }
+
+        // Cancel button for Add IOCs modal
+        var cancelAddIocBtn = document.getElementById('cancel-add-ioc-btn');
+        cancelAddIocBtn.onclick = function() {
+            addIocModal.style.display = 'none';
+        };
+
+        // Remove IOC and Remove Tag buttons
+        var removeIocBtn = document.getElementById("delete-ioc-btn");
+        var removeTagBtn = document.getElementById("remove-tag-btn");
+
+        // Modal for Remove IOC Status
+        var removeIocStatusModal = document.getElementById("remove-ioc-status-modal");
+        var removeTagStatusModal = document.getElementById("remove-tag-status-modal");
+
+        // Status containers for Remove IOC and Tag
+        var removeIocStatusContainer = document.getElementById("remove-ioc-status");
+        var removeTagStatusContainer = document.getElementById("remove-tag-status");
+
+        // Get selected IOCs
+        function getSelectedIocs() {
+            var checkboxes = document.querySelectorAll(".select-ioc:checked");
+            var selectedIocs = Array.from(checkboxes).map(cb => cb.value);
+            return selectedIocs;
+        }
+
+        // Handle Remove IOC
+        removeIocBtn.onclick = function() {
+            var selectedIocs = getSelectedIocs();
+            if (selectedIocs.length === 0) {
+                alert('Please select at least one IOC.');
+                return;
+            }
+
+            // Make AJAX request to remove IOCs
+            fetch('/delete_iocs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ selected_iocs: selectedIocs })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success.length > 0) {
+                    removeIocStatusContainer.innerHTML = `Successfully removed IOCs: ${data.success.join(', ')}`;
+                }
+                if (data.failed.length > 0) {
+                    removeIocStatusContainer.innerHTML += `<br>Failed to remove IOCs: ${data.failed.join(', ')}`;
+                }
+                removeIocStatusModal.style.display = "block";
+            })
+            .catch(error => {
+                removeIocStatusContainer.innerHTML = `An error occurred: ${error.message}`;
+                removeIocStatusModal.style.display = "block";
+            });
+        };
+
+        // Handle Remove Tag
+        removeTagBtn.onclick = function() {
+            var selectedIocs = getSelectedIocs();
+            if (selectedIocs.length === 0) {
+                alert('Please select at least one IOC.');
+                return;
+            }
+
+            // Make AJAX request to remove tags
+            fetch('/remove_tag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ selected_iocs: selectedIocs })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success.length > 0) {
+                    removeTagStatusContainer.innerHTML = `Successfully removed tags from IOCs: ${data.success.join(', ')}`;
+                }
+                if (data.failed.length > 0) {
+                    removeTagStatusContainer.innerHTML += `<br>Failed to remove tags from IOCs: ${data.failed.join(', ')}`;
+                }
+                removeTagStatusModal.style.display = "block";
+            })
+            .catch(error => {
+                removeTagStatusContainer.innerHTML = `An error occurred: ${error.message}`;
+                removeTagStatusModal.style.display = "block";
+            });
+        };
+
+        // Handle OK button for Remove IOC Status
+        var okRemoveIocBtn = document.getElementById('ok-remove-ioc-btn');
+        okRemoveIocBtn.onclick = function() {
+            location.reload();  // Refresh the page
+        };
+
+        // Handle OK button for Remove Tag Status
+        var okRemoveTagBtn = document.getElementById('ok-remove-tag-btn');
+        okRemoveTagBtn.onclick = function() {
+            removeTagStatusModal.style.display = 'none';
+        };
+
+        // Close modals
+        Array.from(spanCloseBtns).forEach(function(btn) {
+            btn.onclick = function() {
+                btn.closest('.modal').style.display = "none";
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        // Select all checkboxes
+        document.getElementById("select-all").addEventListener("change", function() {
+            var checkboxes = document.querySelectorAll(".select-ioc");
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        function huntStatus() {
+            document.getElementById('hunt-status-container').style.display = 'block';
+            document.getElementById('hunt-status-results').innerHTML = '';
+        }
+    </script>
 </body>
 </html>
