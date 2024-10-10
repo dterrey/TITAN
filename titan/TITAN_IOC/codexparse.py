@@ -2,6 +2,7 @@ import sqlite3
 import json
 import os
 
+# Define paths
 codex_db_path = '/home/triagex/Downloads/TITAN/TITAN_IOC/instance/codex_db.db'
 codex_folder_path = '/home/triagex/Downloads/TITAN/codex/'
 parsed_output_path = '/home/triagex/Downloads/TITAN/codex/parsed_codex_output.json'
@@ -10,7 +11,7 @@ parsed_output_path = '/home/triagex/Downloads/TITAN/codex/parsed_codex_output.js
 def recreate_table():
     conn = sqlite3.connect(codex_db_path)
     cursor = conn.cursor()
-    
+
     # Drop the old table if it exists
     cursor.execute("DROP TABLE IF EXISTS codex_ioc")
 
@@ -26,6 +27,34 @@ def recreate_table():
     conn.commit()
     conn.close()
     print("Table recreated successfully.")
+
+# Function to extract the last two parts of a file path
+def extract_last_two_parts(filepath):
+    parts = filepath.split('\\')
+    if len(parts) >= 3:
+        return '\\'.join(parts[-2:])
+    return filepath
+
+# Recursive function to find all occurrences of a key in a nested dictionary/list
+def find_key_recursively(data, target_key):
+    results = []
+    
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key == target_key:
+                if isinstance(value, list):
+                    results.extend(value)
+                else:
+                    results.append(value)
+            elif isinstance(value, (dict, list)):
+                results.extend(find_key_recursively(value, target_key))
+
+    elif isinstance(data, list):
+        for item in data:
+            if isinstance(item, (dict, list)):
+                results.extend(find_key_recursively(item, target_key))
+
+    return results
 
 # Function to create codex_db and import the parsed JSON
 def create_and_import_codex_db():
@@ -48,72 +77,67 @@ def create_and_import_codex_db():
         with open(file_path, 'r') as f:
             try:
                 data = json.load(f)
-                print(f"Successfully loaded {file_name}")
             except json.JSONDecodeError:
                 print(f"Error decoding JSON from {file_name}. Skipping.")
                 continue
 
-        # Debug dynamic data parsing
         dynamic_data = data.get("metadata", {}).get("dynamic", {})
         dropped_files = dynamic_data.get("dropped", [])
-        network_data = dynamic_data.get("network", {})
-        tools_data = dynamic_data.get("tools", [])
-        commands_data = dynamic_data.get("commands", [])
+        process_paths = [item.get("filepath", "") for item in dropped_files if "filepath" in item]
 
-        print(f"Parsed dropped files: {dropped_files}")
-        print(f"Parsed network data: {network_data}")
-        print(f"Parsed tools: {tools_data}")
-        print(f"Parsed commands: {commands_data}")
-
-        # Process dropped files (hashes, filenames)
+        # Process file paths (hashes, filenames, URLs, process paths)
         for dropped in dropped_files:
             hash_value = dropped.get("sha1", "")
             filename = dropped.get("name", "")
+            filepath = dropped.get("filepath", "")
             urls = ', '.join(dropped.get("urls", []))
 
             # Insert hash as an indicator
-            print(f"Inserting hash: {hash_value}, filename: {filename}")
-            cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
-                              VALUES (?, ?, ?)''', 
-                           (hash_value, "Hash", file_name))
+            if hash_value:
+                cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
+                                  VALUES (?, ?, ?)''', 
+                               (hash_value, "Hash", file_name))
 
             # Insert filename as an indicator
+            if filename:
+                cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
+                                  VALUES (?, ?, ?)''', 
+                               (filename, "Filename", file_name))
+
+            # Insert file paths (last two parts) as indicators
+            if filepath:
+                truncated_path = extract_last_two_parts(filepath)
+                cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
+                                  VALUES (?, ?, ?)''', 
+                               (truncated_path, "File Path", file_name))
+
+            # Insert URLs as indicators (if they exist)
+            if urls:
+                cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
+                                  VALUES (?, ?, ?)''', 
+                               (urls, "URL", file_name))
+
+        # Process extracted process paths similarly
+        for process_path in process_paths:
+            truncated_process_path = extract_last_two_parts(process_path)
             cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
                               VALUES (?, ?, ?)''', 
-                           (filename, "Filename", file_name))
+                           (truncated_process_path, "Process Path", file_name))
 
-        # Process IP addresses and domains
-        for ip in network_data.get("hosts", []):
-            print(f"Inserting IP: {ip}")
+        # Search for all occurrences of file_created in the entire JSON
+        all_file_created = find_key_recursively(data, "file_created")
+
+        # Insert file_created paths
+        for created_file in all_file_created:
+            truncated_created_file = extract_last_two_parts(created_file)
             cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
                               VALUES (?, ?, ?)''', 
-                           (ip, "IP Address", file_name))
+                           (truncated_created_file, "File Created", file_name))
 
-        for domain in network_data.get("domains", []):
-            print(f"Inserting domain: {domain}")
-            cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
-                              VALUES (?, ?, ?)''', 
-                           (domain, "Domain", file_name))
-
-        # Process tools and commands
-        for tool in tools_data:
-            print(f"Inserting tool: {tool}")
-            cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
-                              VALUES (?, ?, ?)''', 
-                           (tool, "Tool", file_name))
-
-        for command in commands_data:
-            print(f"Inserting command: {command}")
-            cursor.execute('''INSERT INTO codex_ioc (indicator, type, parsed_file)
-                              VALUES (?, ?, ?)''', 
-                           (command, "Command", file_name))
-
-        # Commit after processing each file
-        conn.commit()
-        print(f"Committed IOCs from {file_name} to the database.")
-
+    conn.commit()
     conn.close()
 
+    # Save the parsed results to a JSON file for verification
     with open(parsed_output_path, 'w') as outfile:
         json.dump(parsed_results, outfile, indent=4)
 
