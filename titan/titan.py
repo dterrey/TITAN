@@ -29,6 +29,7 @@ import spacy
 import requests
 import time
 import datetime
+import sqlite3  # Assuming SQLite is used, but you can change it to the appropriate DB library
 import logging
 import readline
 import yaml
@@ -117,13 +118,13 @@ MITRE_TACTIC_MAPPINGS = {
 }
 
 # Initialize export folder variable
-export_folder = "/home/titan/Downloads/TITAN/"
+export_folder = "/home/triagex/Downloads/TITAN/"
 
 # File to store all extracted IOCs persistently
-iocs_storage_file = '/home/titan/Downloads/TITAN/iocs_storage.json'
+iocs_storage_file = '/home/triagex/Downloads/TITAN/iocs_storage.json'
 
 # Specify the path to the mitrecti.py script
-mitrecti_path = '/home/titan/Downloads/TITAN/mitrecti.py'
+mitrecti_path = '/home/triagex/Downloads/TITAN/mitrecti.py'
 
 # API Key for URLScan.io
 API_KEY = "71999b57-0017-4055-956f-a38e8a8710a7"
@@ -164,7 +165,7 @@ def load_predefined_questions(filepath):
         data = json.load(file)
     return data
 
-predefined_questions = load_predefined_questions('/home/titan/Downloads/TITAN/predefined_questions.json')
+predefined_questions = load_predefined_questions('/home/triagex/Downloads/TITAN/predefined_questions.json')
 
 # Load event descriptions
 def load_event_descriptions(filepath):
@@ -172,7 +173,7 @@ def load_event_descriptions(filepath):
         event_descriptions = json.load(file)
     return event_descriptions
 
-event_descriptions = load_event_descriptions('/home/titan/Downloads/TITAN/event_descriptions.json')
+event_descriptions = load_event_descriptions('/home/triagex/Downloads/TITAN/event_descriptions.json')
 
 # Load mitrecti.py dynamically
 def load_mitrecti_module(path):
@@ -185,10 +186,10 @@ def load_mitrecti_module(path):
 mitrecti = load_mitrecti_module(mitrecti_path)
 
 # Path to the attack folder
-attack_folder = '/home/titan/Downloads/TITAN/mitrecti'
+attack_folder = '/home/triagex/Downloads/TITAN/mitrecti'
 
 # Cache file for attack_data
-attack_data_cache_file = '/home/titan/Downloads/TITAN/attack_data_cache.pkl'
+attack_data_cache_file = '/home/triagex/Downloads/TITAN/attack_data_cache.pkl'
 
 # Load attack data with caching
 def load_attack_data(attack_folder, cache_file):
@@ -248,6 +249,69 @@ def extract_entities_with_bert(text):
         })
     return entities
 
+def analyze_logon_events(sketch):
+    """
+    Analyze logon events (event IDs 4624 and 4625) from Timesketch, build a summary, 
+    and identify suspicious logons from rare usernames.
+    """
+    # Query Timesketch for event IDs 4624 (successful logon) and 4625 (failed logon)
+    query = 'event_identifier:4624 OR event_identifier:4625'
+    search_obj = search.Search(sketch=sketch)
+    search_obj.query_string = query
+    search_results = search_obj.table
+    events_df = pd.DataFrame(search_results)
+    
+    if events_df.empty:
+        console.print("No logon events found.", style="bold red")
+        return
+    
+    # Check if 'username' field is available
+    if 'username' not in events_df.columns:
+        console.print("Username field not found in events. Attempting to extract from messages...", style="bold yellow")
+        # Try to extract usernames from the 'message' field
+        events_df['username'] = events_df['message'].apply(extract_username_from_message)
+    
+    # Remove entries without usernames
+    events_df = events_df[events_df['username'].notna()]
+    
+    # Compute logon counts per username
+    user_counts = events_df['username'].value_counts()
+    
+    # Display total counts per username
+    console.print("\n--- Logon Counts per Username ---", style="bold magenta")
+    for username, count in user_counts.items():
+        console.print(f"{username}: {count}", style="cyan")
+    
+    # Identify rare usernames
+    threshold = 3  # Define a threshold for rare usernames
+    rare_usernames = user_counts[user_counts < threshold]
+    
+    # Display rare usernames
+    if not rare_usernames.empty:
+        console.print("\n--- Rare Usernames (Potentially Suspicious) ---", style="bold red")
+        for username, count in rare_usernames.items():
+            console.print(f"{username}: {count} logon(s)", style="yellow")
+    else:
+        console.print("\nNo rare usernames detected.", style="bold green")
+    
+    # Generate paragraph about normal vs suspicious activity
+    console.print("\n--- Analysis ---", style="bold magenta")
+    console.print(f"Most users have logon counts above {threshold}, which is considered normal activity.", style="cyan")
+    if not rare_usernames.empty:
+        console.print("The following usernames have a low number of logons, which could indicate suspicious activity:", style="cyan")
+        for username in rare_usernames.index:
+            console.print(f"- {username}", style="cyan")
+    else:
+        console.print("No usernames with unusually low logon counts were found.", style="cyan")
+
+def extract_username_from_message(message):
+    """
+    Attempt to extract the username from the event message using regex.
+    """
+    match = re.search(r'Account Name:\s+([^\s]+)', message)
+    if match:
+        return match.group(1)
+    return None
 
 
 # ---------------------------
@@ -557,74 +621,123 @@ def analyze_powershell_events(sketch):
         console.print(f"Entities: {event['entities']}")
         console.print(f"Summary: {event['summary']}\n")
 
+
+
 # ---------------------------
-# IOCs Management
+# Database Connection for IOCs (Replace file-based storage)
 # ---------------------------
 
-def load_iocs():
-    if os.path.exists(iocs_storage_file):
-        if os.stat(iocs_storage_file).st_size == 0:
-            return {
-                "hashes": [],
-                "ips": [],
-                "domains": [],
-                "tools": [],
-                "commands": []
-            }
-        with open(iocs_storage_file, 'r') as file:
-            return json.load(file)
-    return {
-        "hashes": [],
-        "ips": [],
-        "domains": [],
-        "tools": [],
-        "commands": []
-    }
+# Function to connect to TITAN_IOC database and fetch iocs
+def load_iocs_from_db():
+    try:
+        conn = sqlite3.connect('/home/triagex/Downloads/TITAN/TITAN_IOC/instance/ioc_database.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM ioc")
+        rows = cursor.fetchall()
 
-def save_iocs(iocs):
-    with open(iocs_storage_file, 'w') as file:
-        json.dump(iocs, file, indent=4)
+        iocs = {
+            "hashes": [],
+            "ips": [],
+            "domains": [],
+            "tools": [],
+            "commands": [],
+            "filenames": []
+        }
 
-def update_iocs(new_iocs):
-    iocs = load_iocs()
-    for key in iocs.keys():
-        iocs[key].extend(new_iocs.get(key, []))
-        iocs[key] = list(set(iocs[key]))  # Remove duplicates
-    save_iocs(iocs)
+        for row in rows:
+            indicator_type = row[2].lower()  # 'type' is the 3rd column (index 2)
+            indicator_value = row[1]  # 'indicator' is the 2nd column (index 1)
 
-def extract_and_store_iocs_from_csv(dataframe):
-    iocs = {
-        "hashes": [],
-        "ips": [],
-        "domains": [],
-        "tools": [],
-        "commands": []
-    }
+            if indicator_type == "hash":
+                iocs["hashes"].append(indicator_value)
+            elif indicator_type == "ip":
+                iocs["ips"].append(indicator_value)
+            elif indicator_type == "domain":
+                iocs["domains"].append(indicator_value)
+            elif indicator_type == "tool":
+                iocs["tools"].append(indicator_value)
+            elif indicator_type == "command":
+                iocs["commands"].append(indicator_value)
+            elif indicator_type == "filename":
+                iocs["filenames"].append(indicator_value)
 
-    # Extract IOCs from the dataframe
-    for ioc in dataframe.iloc[:, 0]:
-        if re.match(r'\b[A-Fa-f0-9]{64}\b', ioc):
-            iocs["hashes"].append(ioc)
-        elif re.match(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', ioc):
-            iocs["ips"].append(ioc)
-        elif re.match(r'\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b', ioc):
-            iocs["domains"].append(ioc)
-        elif re.match(r'\b[A-Za-z0-9_\-\\/:]+\.exe\b', ioc):
-            iocs["commands"].append(ioc)
-        else:
-            # If not matched by other types, consider it a tool or generic keyword
-            iocs["tools"].append(ioc)
+        conn.close()
 
-    # Update persistent IOCs storage
-    update_iocs(iocs)
-    console.print("IOCs extracted and stored from the CSV.", style="bold cyan")
+        console.print(iocs, style="bold blue")  # Debug: print loaded IOCs
+        console.print("IOCs loaded from TITAN_IOC database.", style="bold green")
+        return iocs
+
+    except sqlite3.Error as e:
+        console.print(f"Error loading IOCs from database: {e}", style="bold red")
+        return {
+            "hashes": [],
+            "ips": [],
+            "domains": [],
+            "tools": [],
+            "commands": [],
+            "filenames": []
+        }
+
+
+# ---------------------------
+# Search IOCs in Timesketch
+# ---------------------------
+
+def search_for_iocs_in_timesketch(sketch):
+    iocs = load_iocs_from_db()
+
+    query_parts = []
+    for key, ioc_list in iocs.items():
+        if ioc_list:
+            query_parts.append(" OR ".join([f"indicator:{ioc}" for ioc in ioc_list]))  # Use the correct field
+
+    combined_query = " OR ".join(query_parts)
+    if not combined_query:
+        console.print("No IOCs found in the database to search in Timesketch.", style="bold yellow")
+        return pd.DataFrame()
+
+    console.print(f"Constructed Timesketch query: {combined_query}", style="bold blue")
+
+    # Execute Timesketch query
+    search_obj = search.Search(sketch=sketch)
+    search_obj.query_string = combined_query
+    search_results = search_obj.table
+    events_df = pd.DataFrame(search_results)
+
+    if events_df.empty:
+        console.print("No events found matching IOCs.", style="bold yellow")
+        return events_df
+
+    # Display the first 5 events
+    display_events_line_by_line(events_df.head(5))
+    
+    return events_df
+
+
+# ---------------------------
+# Main IOC Search Handler
+# ---------------------------
+
+def handle_search_for_iocs_in_timesketch(sketch):
+    """
+    Handles the command to search for IOCs in Timesketch.
+    It uses the IOCs from the TITAN_IOC database and performs a Timesketch search.
+    """
+    console.print("Searching for IOCs in Timesketch...", style="bold blue")
+    iocs_events_df = search_for_iocs_in_timesketch(sketch)
+    
+    if not iocs_events_df.empty:
+        console.print(f"Total events matching IOCs: {len(iocs_events_df)}", style="bold green")
+    else:
+        console.print("No events matched IOCs from the database.", style="bold yellow")
+
 
 # ---------------------------
 # File Processing
 # ---------------------------
 
-def extract_indicators(text, indicator_type=None):
-    indicators = {
+def extract_ioc(text, indicator_type=None):
+    ioc = {
         "hashes": [],
         "ips": [],
         "domains": [],
@@ -632,32 +745,32 @@ def extract_indicators(text, indicator_type=None):
         "commands": []
     }
 
-    # Regex patterns for extracting indicators
+    # Regex patterns for extracting ioc
     hash_pattern = r'\b[A-Fa-f0-9]{64}\b'
     ip_pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
     domain_pattern = r'\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b'
 
-    # Extracting indicators
-    indicators["hashes"] = re.findall(hash_pattern, text)
-    indicators["ips"] = re.findall(ip_pattern, text)
-    indicators["domains"] = re.findall(domain_pattern, text)
+    # Extracting ioc
+    ioc["hashes"] = re.findall(hash_pattern, text)
+    ioc["ips"] = re.findall(ip_pattern, text)
+    ioc["domains"] = re.findall(domain_pattern, text)
 
     # Extract tools and commands based on known keywords
     tools_keywords = ["AdFind", "Mimikatz", "RClone", "WinRAR", "PowerShell", "Ngrok"]
     for keyword in tools_keywords:
         if keyword.lower() in text.lower():
-            indicators["tools"].append(keyword)
+            ioc["tools"].append(keyword)
 
     command_pattern = r'\b[A-Za-z0-9_\-\\/:]+\.exe\b'
-    indicators["commands"] = re.findall(command_pattern, text)
+    ioc["commands"] = re.findall(command_pattern, text)
 
     # Update persistent IOCs storage
-    update_iocs(indicators)
+    update_iocs(ioc)
 
     if indicator_type:
-        return {indicator_type: indicators[indicator_type]}
+        return {indicator_type: ioc[indicator_type]}
     
-    return indicators
+    return ioc
 
 def extract_text_from_pdf(file_path):
     with open(file_path, 'rb') as file:
@@ -697,7 +810,7 @@ def upload_and_analyze_file(file_path):
             uploaded_data = pd.json_normalize(data)
             uploaded_text = json.dumps(data)
         console.print(f"JSON file '{file_path}' uploaded.", style="bold green")
-        iocs = extract_indicators(uploaded_text)
+        iocs = extract_ioc(uploaded_text)
         console.print(iocs, style="bold cyan")
     elif file_path.endswith('.pdf'):
         uploaded_text = extract_text_from_pdf(file_path)
@@ -989,14 +1102,14 @@ def export_to_jsonl(data, output_file):
 
 def parse_datetime_column(df, column_name):
     try:
-        df[column_name] = pd.to_datetime(df[column_name], utc=True, errors='raise')
+        df[column_name] = pd.to_datetime(df[column_name], errors='coerce', infer_datetime_format=True, utc=True)
     except Exception as e:
         logging.error(f"Error parsing datetime column '{column_name}': {e}")
         df[column_name] = pd.NaT
     return df
-
+    
 # ---------------------------
-# Zircolite Import Handling
+# Zircolite Import Handling (Modified to ignore specific events)
 # ---------------------------
 
 def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
@@ -1004,6 +1117,12 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
     json_files = [f for f in os.listdir(json_folder_path) if f.endswith('.json')]
 
     all_events = []
+
+    # Descriptions to ignore
+    ignore_descriptions = [
+        "Detects creation of WMI event subscription persistence method",
+        "Detects when an application acquires a certificate private key"
+    ]
 
     for json_file in json_files:
         var_name = os.path.splitext(json_file)[0]  # Get the variable name from the filename
@@ -1016,14 +1135,12 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
                 try:
                     data = json.loads(data)
                 except json.JSONDecodeError as e:
-                    console.print(f"Error decoding JSON data in file {json_file}: {e}", style="bold red")
                     continue
 
             # Ensure data is a list
             if isinstance(data, dict):
                 data = [data]
             if not isinstance(data, list):
-                console.print(f"Unexpected data format in file {json_file}. Skipping.", style="bold red")
                 continue
 
             # Process each event in the data list
@@ -1032,12 +1149,14 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
                     try:
                         event = json.loads(event)
                     except json.JSONDecodeError as e:
-                        console.print(f"Error decoding event in file {json_file}: {e}", style="bold red")
                         continue
                 if not isinstance(event, dict):
-                    console.print(f"Skipping invalid event in file {json_file}.", style="bold red")
                     continue
                 
+                # Filter out events with specific descriptions without printing
+                if event.get('description') in ignore_descriptions:
+                    continue
+
                 # Add the variable name as 'variable_name' and tag
                 event['variable_name'] = var_name
                 tag_info = MITRE_TACTIC_MAPPINGS.get(var_name, {'tag': var_name})
@@ -1050,7 +1169,6 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
                         parsed_timestamp = pd.to_datetime(timestamp, infer_datetime_format=True, utc=True, errors='raise')
                         event['datetime'] = parsed_timestamp.isoformat()
                     except Exception as e:
-                        console.print(f"Error parsing timestamp '{timestamp}' in file {json_file}: {e}", style="bold red")
                         event['datetime'] = datetime.datetime.utcnow().isoformat()
                 else:
                     event['datetime'] = datetime.datetime.utcnow().isoformat()
@@ -1071,12 +1189,13 @@ def import_zircolite_json_files_into_timesketch(json_folder_path, sketch):
         console.print("Data successfully imported into Timesketch using ImportStreamer.", style="bold green")
     except Exception as e:
         console.print(f"Error importing file into Timesketch: {e}", style="bold red")
-
+        
+# Handle zircolite import command
 def handle_zircolite_import():
     # Paths to the Node.js script and data.js
-    nodejs_script_path = '/home/titan/Downloads/TITAN/extract_data.js'  # Replace with the actual path
-    data_js_path = '/home/titan/Downloads/TITAN/data.js'  # Replace with the actual path
-    json_output_directory = '/home/titan/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
+    nodejs_script_path = '/home/triagex/Downloads/TITAN/extract_data.js'  # Replace with the actual path
+    data_js_path = '/home/triagex/Downloads/TITAN/data.js'  # Replace with the actual path
+    json_output_directory = '/home/triagex/Downloads/TITAN/zircolite'  # Same as outputDirectory in extract_data.js
 
     # Ensure the JSON output directory exists
     if not os.path.exists(json_output_directory):
@@ -1094,7 +1213,7 @@ def handle_zircolite_import():
     # Proceed to import the JSON files into Timesketch
     console.print(f"Importing Zircolite data from JSON files in {json_output_directory} into Timesketch...", style="bold blue")
     import_zircolite_json_files_into_timesketch(json_output_directory, sketch)
-
+    
 # ---------------------------
 # BERT/GPT2 Process Event
 # ---------------------------
@@ -1200,6 +1319,45 @@ def analyze_event(input_query, sketch):
 
 
 # ---------------------------
+# History Management Section
+# ---------------------------
+
+def setup_command_history():
+    """
+    Sets up the command history functionality for the application.
+    Loads the history from a file and ensures that it is saved upon exit.
+    """
+    histfile = "/home/triagex/Downloads/TITAN/.titan_history"
+
+    # Ensure directory for history file exists
+    os.makedirs(os.path.dirname(histfile), exist_ok=True)
+
+    # Load command history
+    try:
+        if os.path.exists(histfile):
+            readline.read_history_file(histfile)
+            console.print(f"Command history loaded from {histfile}", style="bold green")
+        else:
+            console.print(f"No existing history file found. A new history file will be created at {histfile}.", style="bold yellow")
+    except FileNotFoundError:
+        console.print(f"History file not found: {histfile}", style="bold red")
+    except Exception as e:
+        console.print(f"Error loading history: {e}", style="bold red")
+
+    # Save command history when the program exits
+    atexit.register(lambda: save_command_history(histfile))
+
+def save_command_history(histfile):
+    """
+    Saves the command history to a file before the program exits.
+    """
+    try:
+        readline.write_history_file(histfile)
+        console.print(f"Command history saved to {histfile}", style="bold green")
+    except Exception as e:
+        console.print(f"Error saving history: {e}", style="bold red")
+
+# ---------------------------
 # Main Analyze Function
 # ---------------------------
 
@@ -1269,7 +1427,7 @@ def interpret_question(question):
     match = re.match(r'show me all (.+) events', question.lower())
     if match:
         category = match.group(1).strip()
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/triagex/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
         return None, None, action, extra_params
@@ -1288,6 +1446,15 @@ def interpret_question(question):
             query = f"message:\"{input_query}\""
         return query, None, "analyze_event", None
 
+    # Handle 'analyze event logons' command
+    if question.lower() == "analyze event logons":
+        return None, None, "analyze_logon_events", None
+        
+    
+    # Handle IOC search and tagging in Timesketch
+    if "search for iocs in timesketch" in question.lower():
+        return "search_for_iocs", None, "timesketch_ioc_search", None
+
     # Handle specific tag removal
     if question.lower().startswith("remove ") and " tag" in question.lower():
         tag_to_remove = question.lower().split("remove ")[1].split(" tag")[0].strip()
@@ -1295,7 +1462,7 @@ def interpret_question(question):
 
     # Handle 'show me the full timeline of events' command
     if "show me the full timeline of events" in question.lower():
-        js_file_path = '/home/titan/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
+        js_file_path = '/home/triagex/Downloads/TITAN/data.js'  # Update this path to your actual data.js file
         category = 'full timeline'
         action = 'data_parser'
         extra_params = {'action': 'show_category', 'js_file': js_file_path, 'category': category}
@@ -1390,7 +1557,7 @@ def interpret_question(question):
                 scan_data = get_scan_results(scan_id)
                 if scan_data:
                     folder_name = create_safe_folder_name(url)
-                    folder_path = os.path.join('/home/titan/Downloads/TITAN/url', folder_name)
+                    folder_path = os.path.join('/home/triagex/Downloads/TITAN/url', folder_name)
                     os.makedirs(folder_path, exist_ok=True)
                     display_results(scan_data)
                     export_results_to_csv(scan_data, folder_path)
@@ -1885,12 +2052,49 @@ def handle_user_input(command, sketch):
         # Handle the 4624 event analysis
         console.print("Analyzing event 4624...", style="bold cyan")
         analyze_4624_events(sketch)
-        
+
     elif command.lower().startswith("analyze event powershell"):
         # Handle PowerShell event analysis
         console.print("Analyzing PowerShell events...", style="bold cyan")
         analyze_powershell_events(sketch)
+
+    elif command.lower().startswith("search for iocs in timesketch"):
+        # Handle IOC search in Timesketch
+        console.print("Searching for IOCs in Timesketch...", style="bold blue")
+        iocs = load_iocs_from_db()  # Load IOCs from the database
+
+        if not iocs:
+            console.print("No IOCs found in the database.", style="bold red")
+            return
+
+        # Construct the query using the IOCs
+        query_parts = []
+        for key, ioc_list in iocs.items():
+            if ioc_list:
+                query_parts.append(" OR ".join([f"message:{ioc}" for ioc in ioc_list]))
+
+        combined_query = " OR ".join(query_parts)
         
+        if not combined_query:
+            console.print("No IOCs available to construct a Timesketch query.", style="bold yellow")
+            return
+
+        # Execute Timesketch query
+        search_obj = search.Search(sketch=sketch)
+        search_obj.query_string = combined_query
+        search_results = search_obj.table
+        events_df = pd.DataFrame(search_results)
+
+        if events_df.empty:
+            console.print("No events found matching IOCs in Timesketch.", style="bold yellow")
+        else:
+            console.print(f"Total events matching IOCs: {len(events_df)}", style="bold green")
+            # Display first few events
+            display_events_line_by_line(events_df.head(5))
+
+    else:
+        console.print(f"Command not recognized: {command}", style="bold red")
+           
 
 # ---------------------------
 # URLScan.io Utilities
@@ -1983,7 +2187,7 @@ def main():
         console.print(f"- {q}", style="cyan")
 
     # Enable command history with readline
-    histfile = "/home/titan/Downloads/TITAN/.adam_history"  # Path to store the command history
+    histfile = "/home/triagex/Downloads/TITAN/.titan_history"  # Path to store the command history
     try:
         readline.read_history_file(histfile)
     except FileNotFoundError:
@@ -2005,6 +2209,7 @@ def main():
         elif question.lower().startswith("upload "):
             file_path = question[7:].strip()
             upload_and_analyze_file(file_path)
+
 
         elif question.lower().startswith("what is"):  # Handle "What is" queries with mitrecti.py
             search_term = question[8:].strip()  # Extract the term after "What is"
@@ -2058,6 +2263,10 @@ def main():
                 events_df = search_timesketch_and_tag_iocs(query, extra_params, summary_template, action)
                 if summary_template:
                     generate_nlg_summary(events_df, summary_template)
+
+            if action == "analyze_logon_events":
+                console.print("Analyzing logon events...", style="bold cyan")
+                analyze_logon_events(sketch)
 
             elif action == "zircolite_report":
                 run_zircolite_report()
