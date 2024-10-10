@@ -1,5 +1,10 @@
 ADAM DEMO
 
+1. IOC Platform
+2. Codex hash
+3. Parse Codex button
+4. titan - search for iocs in timesketch
+
 1. Victim calls about a Cyber Attack on a Workstation
 2. DFIR Team questions victim about what happened.
 3. DFIR gathers information about the threat seen on workstation and Initial IOCS.
