@@ -1,9 +1,11 @@
+#routes.py
+
 from flask import request, redirect, render_template, flash, jsonify, session
 from app import app, db
 from models import IOC, CodexIOC
 from datetime import datetime
 import re
-from timesketch_client import search_and_tag_iocs_in_timesketch, remove_ioc_or_tag
+from timesketch_client import search_and_tag_iocs_in_timesketch, remove_ioc_or_tag, fetch_total_tagged_events
 import subprocess
 
 @app.route('/')
@@ -17,6 +19,11 @@ def index():
         iocs = IOC.query.all()  # Default to User IOCs from the main ioc_database.db
         if not iocs:
             flash("No User IOCs found in the database.")
+
+    # Fetch the total tagged events for each IOC
+    for ioc in iocs:
+        ioc.total_tagged_events = fetch_total_tagged_events(ioc.tag)
+        print(f"IOC: {ioc.indicator}, Total tagged events: {ioc.total_tagged_events}")  # Debug
 
     return render_template('index.html', iocs=iocs)
 
@@ -230,22 +237,26 @@ def get_updated_table():
     iocs = IOC.query.all()  # Fetch the updated IOC data from the database
     return render_template('partials/ioc_table_body.html', iocs=iocs)  # Render only the table rows
     
-    # Route to trigger Codex file parsing
 @app.route('/parse_codex', methods=['POST'])
 def parse_codex_files():
+    print("Codex IOC parsing started")  # This line should appear in your console logs when the route is hit
     try:
         # Run the codexparse.py script
-        result = subprocess.run(['python3', '/path/to/codexparse.py'], capture_output=True, text=True)
+        result = subprocess.run(['python3', '/home/triagex/Downloads/TITAN/TITAN_IOC/codexparse.py'], capture_output=True, text=True)
 
         # Capture the output and flash it for user feedback
         if result.returncode == 0:
             flash("Codex files parsed successfully.")
+            print(f"Success: {result.stdout}")
         else:
             flash(f"Error parsing Codex files: {result.stderr}")
+            print(f"Error: {result.stderr}")
     except Exception as e:
         flash(f"Error running Codex parse script: {e}")
+        print(f"Exception: {e}")
 
     return redirect('/')
+
     
 # Function to switch between User IOCs and Codex IOCs
 @app.route('/switch_iocs', methods=['POST'])
@@ -262,3 +273,19 @@ def switch_iocs():
         iocs = IOC.query.all()  # Fetch User IOCs
 
     return redirect('/')  # Refresh the page to show the updated IOCs
+    
+@app.route('/show_iocs')
+def show_iocs():
+    # Assuming you have a way to get IOCs, here's how you can get tagged events count for each IOC
+    iocs = get_all_iocs_from_db()  # Replace this with your actual function to retrieve IOCs
+
+    iocs_with_tagged_events = []
+    for ioc in iocs:
+        ioc_indicator = ioc['indicator']  # Replace this with your actual field
+        total_tagged_events = fetch_total_tagged_events(ioc['tag'])  # Fetch using the tag
+        ioc['total_tagged_events'] = total_tagged_events  # Add this info to each IOC
+        
+        iocs_with_tagged_events.append(ioc)
+
+    # Pass the IOCs with tagged events data to the template
+    return render_template('index.html', iocs=iocs_with_tagged_events)
