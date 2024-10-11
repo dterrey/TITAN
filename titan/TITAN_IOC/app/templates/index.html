@@ -213,6 +213,7 @@
                         <th>Type</th>
                         <th>Timestamp</th>
                         <th>Tag</th>
+                        <th>Total Tagged Events</th> <!-- New column for total tagged events -->
                     </tr>
                 </thead>
                 <tbody>
@@ -242,6 +243,7 @@
                         <td>{{ ioc.type }}</td>
                         <td>{{ ioc.timestamp }}</td>
                         <td>{{ ioc.tag }}</td>
+                        <td>{{ ioc.total_tagged_events }}</td> <!-- Display total tagged events here -->
                     </tr>
                     {% endfor %}
                 </tbody>
