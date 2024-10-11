@@ -683,20 +683,49 @@ def load_iocs_from_db():
 # Search IOCs in Timesketch
 # ---------------------------
 
-def search_for_iocs_in_timesketch(sketch):
-    iocs = load_iocs_from_db()
+# Function to handle user input and selection of IOC database
+def choose_ioc_database():
+    """
+    Prompts the user to choose between User IOCs (UserDB) or Codex IOCs (CodexDB).
+    Returns the appropriate IOC model and message based on user selection.
+    """
+    console.print("Please choose the IOC database to search in Timesketch:", style="bold blue")
+    console.print("1 - User IOCs (UserDB)", style="bold green")
+    console.print("2 - Codex IOCs (CodexDB)", style="bold green")
 
-    query_parts = []
-    for key, ioc_list in iocs.items():
-        if ioc_list:
-            query_parts.append(" OR ".join([f"indicator:{ioc}" for ioc in ioc_list]))  # Use the correct field
+    while True:
+        choice = input("Enter 1 or 2: ").strip()
+        if choice == '1':
+            return IOC, "User IOCs (UserDB)"
+        elif choice == '2':
+            return CodexIOC, "Codex IOCs (CodexDB)"
+        else:
+            console.print("Invalid choice. Please enter 1 or 2.", style="bold red")
 
-    combined_query = " OR ".join(query_parts)
-    if not combined_query:
-        console.print("No IOCs found in the database to search in Timesketch.", style="bold yellow")
+
+# Main search function for IOCs in Timesketch
+def search_for_iocs_in_timesketch():
+    # Ask user to choose the IOC database
+    ioc_model, ioc_database = choose_ioc_database()
+    
+    # Load IOCs from the chosen IOC table
+    iocs = ioc_model.query.all()
+
+    if not iocs:
+        console.print(f"No IOCs found in {ioc_database}.", style="bold yellow")
         return pd.DataFrame()
 
-    console.print(f"Constructed Timesketch query: {combined_query}", style="bold blue")
+    query_parts = []
+    for ioc in iocs:
+        query_parts.append(f"indicator:{ioc.indicator}")  # Assuming 'indicator' is the relevant field
+
+    combined_query = " OR ".join(query_parts)
+
+    if not combined_query:
+        console.print(f"No IOCs found to search in Timesketch from {ioc_database}.", style="bold yellow")
+        return pd.DataFrame()
+
+    console.print(f"Constructed Timesketch query for {ioc_database}: {combined_query}", style="bold blue")
 
     # Execute Timesketch query
     search_obj = search.Search(sketch=sketch)
@@ -705,7 +734,7 @@ def search_for_iocs_in_timesketch(sketch):
     events_df = pd.DataFrame(search_results)
 
     if events_df.empty:
-        console.print("No events found matching IOCs.", style="bold yellow")
+        console.print(f"No events found matching IOCs from {ioc_database}.", style="bold yellow")
         return events_df
 
     # Display the first 5 events
