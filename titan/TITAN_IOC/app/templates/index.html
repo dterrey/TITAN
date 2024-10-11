@@ -50,13 +50,13 @@
             margin-bottom: 20px;
             font-weight: normal;
         }
-        
+
         /* Scrollable Table Wrapper */
         .table-container {
-            max-height: 400px; /* Adjust this value as needed */
+            max-height: 400px;
             overflow-y: auto;
         }
-        
+
         table {
             width: 100%;
             margin-bottom: 20px;
@@ -184,6 +184,16 @@
         .styled-btn:hover {
             background-color: #066bbd;
         }
+
+        /* Flash Message Styling */
+        .flashes {
+            background-color: #323232;
+            color: #ffffff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -211,7 +221,6 @@
                         <td><input type="checkbox" class="select-ioc" value="{{ ioc.id }}"></td>
                         <td>{{ ioc.id }}</td>
                         <td>
-                            <!-- Display the correct indicator for Codex IOCs -->
                             {% if ioc.type == 'Process Path' %}
                                 {{ ioc.indicator }}
                             {% elif ioc.type == 'File Path' %}
@@ -246,7 +255,7 @@
             <button id="change-tag-btn">Add/Change Tag</button>
             <button id="remove-tag-btn">Remove Tag</button>
             <form action="/parse_codex" method="POST" style="display: inline;">
-                <button type="submit">Parse Codex Files</button>  <!-- New button to parse Codex files -->
+                <button type="submit">Parse Codex Files</button>
             </form>
             <form action="/switch_iocs" method="POST" style="display: inline;">
                 <button type="submit">{{ "Switch to User IOCs" if session.current_ioc_table == 'codex' else "Switch to Codex IOCs" }}</button>
@@ -262,7 +271,7 @@
                 <form id="add-ioc-form" action="/add_iocs" method="POST">
                     <textarea name="ioc_data" placeholder="Enter IOCs (IP, Hash, Filename, URL, etc.) - one per line or comma-separated" required></textarea>
                     <input type="text" name="tag" placeholder="Optional: Tag to apply to all IOCs">
-                    <div class="button-container">
+                    <div class="button-container" style="text-align: right;">
                         <button id="ok-add-ioc-btn" class="styled-btn" type="submit">OK</button>
                         <button id="cancel-add-ioc-btn" class="styled-btn" type="button">Cancel</button>
                     </div>
@@ -275,10 +284,15 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Remove IOC Status</h2>
+
+                <!-- OK button at the top -->
+                <div class="button-container" style="text-align: right;">
+                    <button id="ok-remove-ioc-btn" class="styled-btn">OK</button>
+                </div>
+
                 <div id="remove-ioc-status-container">
                     <p>Status: <span id="remove-ioc-status"></span></p>
                 </div>
-                <button id="ok-remove-ioc-btn" class="styled-btn">OK</button>
             </div>
         </div>
 
@@ -287,10 +301,15 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Remove Tag Status</h2>
+
+                <!-- OK button at the top -->
+                <div class="button-container" style="text-align: right;">
+                    <button id="ok-remove-tag-btn" class="styled-btn">OK</button>
+                </div>
+
                 <div id="remove-tag-status-container">
                     <p>Status: <span id="remove-tag-status"></span></p>
                 </div>
-                <button id="ok-remove-tag-btn" class="styled-btn">OK</button>
             </div>
         </div>
 
@@ -308,11 +327,19 @@
         </div>
     </div>
 
+
     <script>
+        // Auto-hide flash messages after 5 seconds
+        window.setTimeout(function() {
+            const flashes = document.querySelector('.flashes');
+            if (flashes) {
+                flashes.style.display = 'none';
+            }
+        }, 5000);
+
         // Get modals and buttons
         var addIocModal = document.getElementById("add-ioc-modal");
         var huntStatusModal = document.getElementById("hunt-status-modal");
-        var goHuntBtn = document.getElementById("go-hunt-btn");
         var addIocBtn = document.getElementById("add-ioc-btn");
         var spanCloseBtns = document.getElementsByClassName("close");
 
@@ -338,22 +365,14 @@
         // Status containers for Remove IOC and Tag
         var removeIocStatusContainer = document.getElementById("remove-ioc-status");
         var removeTagStatusContainer = document.getElementById("remove-tag-status");
-        
+
         // Get selected IOCs
-	function getSelectedIocs() {
-            var checkboxes = document.querySelectorAll(".select-ioc:checked"); // Select all checked checkboxes
-            var selectedIocs = Array.from(checkboxes).map(cb => cb.value);     // Get the values (IOC IDs) of the checked boxes
-            console.log("Selected IOCs: ", selectedIocs);  // Log the selected IOCs for debugging
+        function getSelectedIocs() {
+            var checkboxes = document.querySelectorAll(".select-ioc:checked");
+            var selectedIocs = Array.from(checkboxes).map(cb => cb.value);
+            console.log("Selected IOCs: ", selectedIocs);
             return selectedIocs;
         }
-
-
-        // Get selected IOCs
-        //function getSelectedIocs() {
-        //    var checkboxes = document.querySelectorAll(".select-ioc:checked");
-        //    var selectedIocs = Array.from(checkboxes).map(cb => cb.value);
-        //    return selectedIocs;
-        //}
 
         // Handle Remove IOC
         removeIocBtn.onclick = function() {
@@ -363,7 +382,6 @@
                 return;
             }
 
-            // Make AJAX request to remove IOCs
             fetch('/delete_iocs', {
                 method: 'POST',
                 headers: {
@@ -395,7 +413,6 @@
                 return;
             }
 
-            // Make AJAX request to remove tags
             fetch('/remove_tag', {
                 method: 'POST',
                 headers: {
@@ -422,7 +439,7 @@
         // Handle OK button for Remove IOC Status
         var okRemoveIocBtn = document.getElementById('ok-remove-ioc-btn');
         okRemoveIocBtn.onclick = function() {
-            location.reload();  // Refresh the page
+            location.reload();
         };
 
         // Handle OK button for Remove Tag Status
@@ -450,34 +467,6 @@
             var checkboxes = document.querySelectorAll(".select-ioc");
             checkboxes.forEach(cb => cb.checked = this.checked);
         });
-
-        // Function to switch between User and Codex IOCs
-        function switchIocTable() {
-            const switchButton = document.getElementById("switch-ioc-btn");
-            fetch('/switch_iocs', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.status === 'codex') {
-                      switchButton.textContent = 'Switch to User IOCs';
-                      document.getElementById('ioc-type').textContent = 'CODEX';
-                  } else {
-                      switchButton.textContent = 'Switch to Codex IOCs';
-                      document.getElementById('ioc-type').textContent = 'USER';
-                  }
-                  // Replace the IOC table with the updated data
-                  document.querySelector('tbody').innerHTML = data.table_html;
-              })
-              .catch(error => console.error('Error:', error));
-        }
-
-        function huntStatus() {
-            document.getElementById('hunt-status-container').style.display = 'block';
-            document.getElementById('hunt-status-results').innerHTML = '';
-        }
     </script>
 </body>
 </html>
