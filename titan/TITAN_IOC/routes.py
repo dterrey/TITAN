@@ -86,7 +86,7 @@ def go_hunt():
     })
 
 
-# Route to remove IOCs and their tags
+# Route to remove IOCs and their tags, and VACUUM the database to shrink it
 @app.route('/delete_iocs', methods=['POST'])
 def delete_iocs():
     data = request.json  # Expecting JSON data from the front-end
@@ -102,36 +102,66 @@ def delete_iocs():
         ioc_model = IOC  # Default to User IOC model
         print("Using IOC model")
 
-    for ioc_id in selected_iocs:
-        ioc = ioc_model.query.get(ioc_id)
-        print(f"Attempting to delete IOC with ID: {ioc_id}, IOC: {ioc}")
-        if ioc:
-            try:
-                # Check if the IOC has the 'tag' attribute and if the tag exists
-                if hasattr(ioc, 'tag') and ioc.tag:
-                    result = remove_ioc_or_tag(ioc.indicator, ioc.tag, remove_ioc=True)
-                    if "Removed IOC and tag" not in result:
-                        failed_removals.append(ioc.indicator)
-                        continue  # Skip to the next IOC if removal from Timesketch failed
+    try:
+        for ioc_id in selected_iocs:
+            ioc = ioc_model.query.get(ioc_id)  # Fetch the IOC by ID
+            print(f"Attempting to delete IOC with ID: {ioc_id}, IOC: {ioc}")
+            
+            if ioc:
+                try:
+                    # Check if the IOC has the 'tag' attribute and if the tag exists
+                    if hasattr(ioc, 'tag') and ioc.tag:
+                        result = remove_ioc_or_tag(ioc.indicator, ioc.tag, remove_ioc=True)
+                        if "Removed IOC and tag" not in result:
+                            failed_removals.append(ioc.indicator)
+                            continue  # Skip to the next IOC if removal from Timesketch failed
 
-                # Remove the IOC from the database regardless of whether it had a tag or not
-                db.session.delete(ioc)
-                db.session.commit()  # Commit deletion of each IOC
-                successful_removals.append(ioc.indicator)
-                print(f"Successfully removed IOC: {ioc.indicator}")
-            except Exception as e:
-                # Log the full error if IOC removal fails
-                db.session.rollback()  # Rollback in case of failure to ensure transaction integrity
-                failed_removals.append(ioc.indicator)
-                print(f"Error removing IOC {ioc.indicator}: {str(e)}")  # Log the exact error for diagnosis
-        else:
-            print(f"IOC with ID {ioc_id} not found in database.")
+                    # Mark the IOC for deletion in the database
+                    db.session.delete(ioc)
+                    db.session.flush()  # Ensure the deletion is applied to the session
+                    successful_removals.append(ioc.indicator)
+                    print(f"Successfully marked IOC for removal: {ioc.indicator}")
+
+                except Exception as e:
+                    # Log the full error if IOC removal fails
+                    print(f"Error removing IOC {ioc.indicator}: {str(e)}")
+                    failed_removals.append(ioc.indicator)
+                    continue  # Skip to the next IOC
+
+            else:
+                print(f"IOC with ID {ioc_id} not found in database.")
+                failed_removals.append(f"IOC with ID {ioc_id} not found")
+
+        # Commit once after all deletions
+        db.session.commit()
+        print("Database commit successful.")
+
+        # Run VACUUM to shrink the database after deletions
+        # Use raw SQL for VACUUM
+        connection = db.engine.raw_connection()
+        try:
+            cursor = connection.cursor()
+            cursor.execute("VACUUM;")
+            connection.commit()
+            print("Database vacuumed successfully.")
+        except Exception as e:
+            print(f"VACUUM failed: {str(e)}")
+        finally:
+            cursor.close()
+            connection.close()
+
+    except Exception as e:
+        db.session.rollback()  # Rollback all changes if any failure occurs
+        print(f"Transaction failed, rolled back. Error: {str(e)}")
+        failed_removals.extend([f"Error deleting IOC {ioc_id}" for ioc_id in selected_iocs])
 
     # After all removals, return the result to the front-end
     return jsonify({
         'success': successful_removals,
         'failed': failed_removals
     })
+
+
     
 @app.route('/change_tag', methods=['POST'])
 def change_tag():
