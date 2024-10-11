@@ -338,13 +338,22 @@
         // Status containers for Remove IOC and Tag
         var removeIocStatusContainer = document.getElementById("remove-ioc-status");
         var removeTagStatusContainer = document.getElementById("remove-tag-status");
-
+        
         // Get selected IOCs
-        function getSelectedIocs() {
-            var checkboxes = document.querySelectorAll(".select-ioc:checked");
-            var selectedIocs = Array.from(checkboxes).map(cb => cb.value);
+	function getSelectedIocs() {
+            var checkboxes = document.querySelectorAll(".select-ioc:checked"); // Select all checked checkboxes
+            var selectedIocs = Array.from(checkboxes).map(cb => cb.value);     // Get the values (IOC IDs) of the checked boxes
+            console.log("Selected IOCs: ", selectedIocs);  // Log the selected IOCs for debugging
             return selectedIocs;
         }
+
+
+        // Get selected IOCs
+        //function getSelectedIocs() {
+        //    var checkboxes = document.querySelectorAll(".select-ioc:checked");
+        //    var selectedIocs = Array.from(checkboxes).map(cb => cb.value);
+        //    return selectedIocs;
+        //}
 
         // Handle Remove IOC
         removeIocBtn.onclick = function() {
