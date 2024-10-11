@@ -1,3 +1,5 @@
+#timesketch_client.py
+
 import pandas as pd
 from timesketch_api_client import client, search
 from flask import current_app
@@ -61,13 +63,24 @@ def search_and_tag_iocs_in_timesketch(ioc_indicator, tag):
         if events_to_tag:
             sketch.tag_events(events_to_tag, [tag])
             print(f"Tagged {len(events_to_tag)} events with tag '{tag}' for IOC '{ioc_indicator}'")
-            return f"Tagged {len(events_to_tag)} events"
         else:
             print(f"No new tags were applied for IOC '{ioc_indicator}'; all relevant events are already tagged.")
-            return "No new tags applied"
+
+        # **This part ensures that we fetch the total number of tagged events after tagging**
+        total_tagged_events = fetch_total_tagged_events(tag)
+        print(f"Total number of events tagged with '{tag}': {total_tagged_events}")
+
+        return {
+            "tagged_count": len(events_to_tag),
+            "total_tagged_events": total_tagged_events
+        }
+
     else:
         print(f"No events found for IOC '{ioc_indicator}'.")
-        return "No events found"
+        return {
+            "tagged_count": 0,
+            "total_tagged_events": 0
+        }
 
 def remove_ioc_or_tag(ioc, tag_to_remove, remove_ioc=False):
     ts_client, sketch = connect_timesketch()
@@ -129,3 +142,25 @@ def remove_ioc_or_tag(ioc, tag_to_remove, remove_ioc=False):
         print(f"An unexpected error occurred while removing tags: {e}")
         return f"Failed to remove tag: {tag_to_remove}"
 
+def fetch_total_tagged_events(tag):
+    """Fetch the total number of events tagged with a specific tag in Timesketch."""
+    ts_client, sketch = connect_timesketch()
+
+    if not sketch:
+        print("Failed to connect to Timesketch. Exiting.")
+        return 0
+
+    # Query Timesketch for events with the specific tag
+    query = f'tag:"{tag}"'  # Use the tag instead of the IOC indicator
+    search_obj = search.Search(sketch=sketch)
+    search_obj.query_string = query
+
+    try:
+        search_results = search_obj.to_dict()  # Fetch results as a dictionary
+        print(f"Raw search results for tag '{tag}': {search_results}")  # Debug: Print raw response
+        total_events = len(search_results.get('objects', []))  # Count the events found
+        print(f"Found {total_events} events tagged with '{tag}'.")
+        return total_events
+    except Exception as e:
+        print(f"Error fetching events for tag '{tag}': {e}")
+        return 0
