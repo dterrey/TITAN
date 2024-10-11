@@ -97,11 +97,14 @@ def delete_iocs():
     # Check which IOC table to use (User IOCs or Codex IOCs)
     if session.get('current_ioc_table') == 'codex':
         ioc_model = CodexIOC  # Use CodexIOC model
+        print("Using CodexIOC model")
     else:
         ioc_model = IOC  # Default to User IOC model
+        print("Using IOC model")
 
     for ioc_id in selected_iocs:
         ioc = ioc_model.query.get(ioc_id)
+        print(f"Attempting to delete IOC with ID: {ioc_id}, IOC: {ioc}")
         if ioc:
             try:
                 # Check if the IOC has the 'tag' attribute and if the tag exists
@@ -115,11 +118,14 @@ def delete_iocs():
                 db.session.delete(ioc)
                 db.session.commit()  # Commit deletion of each IOC
                 successful_removals.append(ioc.indicator)
+                print(f"Successfully removed IOC: {ioc.indicator}")
             except Exception as e:
                 # Log the full error if IOC removal fails
                 db.session.rollback()  # Rollback in case of failure to ensure transaction integrity
                 failed_removals.append(ioc.indicator)
                 print(f"Error removing IOC {ioc.indicator}: {str(e)}")  # Log the exact error for diagnosis
+        else:
+            print(f"IOC with ID {ioc_id} not found in database.")
 
     # After all removals, return the result to the front-end
     return jsonify({
