@@ -213,7 +213,7 @@
                         <th>Type</th>
                         <th>Timestamp</th>
                         <th>Tag</th>
-                        <th>Total Tagged Events</th> <!-- New column for total tagged events -->
+                        <th>Total Tagged Events</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -243,7 +243,7 @@
                         <td>{{ ioc.type }}</td>
                         <td>{{ ioc.timestamp }}</td>
                         <td>{{ ioc.tag }}</td>
-                        <td>{{ ioc.total_tagged_events }}</td> <!-- Display total tagged events here -->
+                        <td>{{ ioc.total_tagged_events }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -281,17 +281,30 @@
             </div>
         </div>
 
+        <!-- Modal for Add/Change Tag -->
+        <div id="add-change-tag-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add/Change Tag</h2>
+                <form id="add-change-tag-form" action="/change_tag" method="POST">
+                    <textarea name="new_tag" placeholder="Enter new tag" required></textarea>
+                    <input type="hidden" name="selected_iocs" id="selected-iocs-field">
+                    <div class="button-container" style="text-align: right;">
+                        <button class="styled-btn" type="submit">OK</button>
+                        <button id="cancel-change-tag-btn" class="styled-btn" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Remove IOC Status Modal -->
         <div id="remove-ioc-status-modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Remove IOC Status</h2>
-
-                <!-- OK button at the top -->
                 <div class="button-container" style="text-align: right;">
                     <button id="ok-remove-ioc-btn" class="styled-btn">OK</button>
                 </div>
-
                 <div id="remove-ioc-status-container">
                     <p>Status: <span id="remove-ioc-status"></span></p>
                 </div>
@@ -303,12 +316,9 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Remove Tag Status</h2>
-
-                <!-- OK button at the top -->
                 <div class="button-container" style="text-align: right;">
                     <button id="ok-remove-tag-btn" class="styled-btn">OK</button>
                 </div>
-
                 <div id="remove-tag-status-container">
                     <p>Status: <span id="remove-tag-status"></span></p>
                 </div>
@@ -329,7 +339,6 @@
         </div>
     </div>
 
-
     <script>
         // Auto-hide flash messages after 5 seconds
         window.setTimeout(function() {
@@ -341,6 +350,7 @@
 
         // Get modals and buttons
         var addIocModal = document.getElementById("add-ioc-modal");
+        var changeTagModal = document.getElementById("add-change-tag-modal");
         var huntStatusModal = document.getElementById("hunt-status-modal");
         var addIocBtn = document.getElementById("add-ioc-btn");
         var spanCloseBtns = document.getElementsByClassName("close");
@@ -350,10 +360,23 @@
             addIocModal.style.display = "block";
         }
 
+        // Show Add/Change Tag modal
+        var changeTagBtn = document.getElementById("change-tag-btn");
+        changeTagBtn.onclick = function() {
+            changeTagModal.style.display = "block";
+            document.getElementById("selected-iocs-field").value = getSelectedIocs().join(",");
+        }
+
         // Cancel button for Add IOCs modal
         var cancelAddIocBtn = document.getElementById('cancel-add-ioc-btn');
         cancelAddIocBtn.onclick = function() {
             addIocModal.style.display = 'none';
+        };
+
+        // Cancel button for Change Tag modal
+        var cancelChangeTagBtn = document.getElementById('cancel-change-tag-btn');
+        cancelChangeTagBtn.onclick = function() {
+            changeTagModal.style.display = 'none';
         };
 
         // Remove IOC and Remove Tag buttons
