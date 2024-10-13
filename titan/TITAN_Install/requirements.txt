@@ -1,0 +1,54 @@
+# Machine Learning and NLP
+torch
+transformers
+spacy
+sumy
+nltk
+scikit-learn
+
+# Data Processing and Analysis
+pandas
+openpyxl
+PyPDF2
+python-docx
+numpy
+
+# Flask and Extensions
+flask
+flask_sqlalchemy
+flask_bcrypt
+flask_login
+flask_socketio
+flask_migrate
+flask_cors
+
+# Timesketch API and DFIR tools
+timesketch-api-client
+requests
+yaml
+rich
+
+# Database and Authentication
+bcrypt
+SQLAlchemy
+sqlite3
+
+# SFTP and Network Libraries
+paramiko
+
+# Other Utilities
+atexit
+readline
+dotenv
+logging
+PyYAML
+
+# Text-based Tools
+docx
+openpyxl
+
+# For parsing logs and Regex operations
+regex
+
+# Additional Libraries for async, redis, etc.
+redis
