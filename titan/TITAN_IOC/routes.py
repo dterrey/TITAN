@@ -20,10 +20,11 @@ def index():
         if not iocs:
             flash("No User IOCs found in the database.")
 
-    # Fetch the total tagged events for each IOC
+    # Fetch the total tagged events for each IOC if it has a tag field
     for ioc in iocs:
-        ioc.total_tagged_events = fetch_total_tagged_events(ioc.tag)
-        print(f"IOC: {ioc.indicator}, Total tagged events: {ioc.total_tagged_events}")  # Debug
+        if hasattr(ioc, 'tag'):  # Ensure the IOC has a tag field before accessing it
+            ioc.total_tagged_events = fetch_total_tagged_events(ioc.tag)
+            print(f"IOC: {ioc.indicator}, Total tagged events: {ioc.total_tagged_events}")  # Debug
 
     return render_template('index.html', iocs=iocs)
 
@@ -168,26 +169,41 @@ def delete_iocs():
         'failed': failed_removals
     })
 
-
     
 @app.route('/change_tag', methods=['POST'])
 def change_tag():
-    data = request.json  # Expecting JSON data from front-end
-    selected_iocs = data.get('selected_iocs', [])
+    data = request.form  # Fetch form data from the front-end
+    selected_iocs = data.get('selected_iocs', '').split(',')
     new_tag = data.get('new_tag', '')
+
+    if not new_tag:
+        return jsonify({'error': 'No new tag provided'}), 400
 
     for ioc_id in selected_iocs:
         ioc = IOC.query.get(ioc_id)
         if ioc:
+            old_tag = ioc.tag  # Save the old tag
+
+            # Remove the old tag from Timesketch (if it exists)
+            if old_tag:
+                remove_ioc_or_tag(ioc.indicator, old_tag, remove_ioc=False)
+
+            # Update the IOC with the new tag
             ioc.tag = new_tag
             db.session.commit()
-            # Trigger tagging in Timesketch here if necessary
+
+            # Apply the new tag to Timesketch
             search_and_tag_iocs_in_timesketch(ioc.indicator, new_tag)
 
-    flash(f"Tag '{new_tag}' applied to selected IOCs.")
-    return jsonify({'message': f"Tag '{new_tag}' applied"})  # JSON response
+            # Update the Total Tagged Events field
+            total_tagged_events = fetch_total_tagged_events(new_tag)
+            ioc.total_tagged_events = total_tagged_events
+            db.session.commit()
 
-# Route to remove tags from IOCs but keep the IOC in the table
+    flash(f"Tag '{new_tag}' applied to selected IOCs.")
+    return redirect('/')
+
+
 @app.route('/remove_tag', methods=['POST'])
 def remove_tag():
     data = request.json  # Expecting JSON data from front-end
@@ -242,7 +258,7 @@ def parse_codex_files():
     print("Codex IOC parsing started")  # This line should appear in your console logs when the route is hit
     try:
         # Run the codexparse.py script
-        result = subprocess.run(['python3', '/home/triagex/Downloads/TITAN/TITAN_IOC/codexparse.py'], capture_output=True, text=True)
+        result = subprocess.run(['python3', '/home/titan/Downloads/TITAN/TITAN_IOC/codexparse.py'], capture_output=True, text=True)
 
         # Capture the output and flash it for user feedback
         if result.returncode == 0:
