@@ -9,15 +9,15 @@ echo
 # Update and upgrade system packages
 sudo apt update && sudo apt upgrade -y
 
-# Install necessary packages
-sudo apt install -y curl gnupg lsb-release ca-certificates apt-transport-https unzip unrar docker.io python3-pip expect docker-compose docker-compose-plugin cargo
-
 # Install Docker (for Timesketch)
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 sudo sh -c "echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' > /etc/apt/sources.list.d/docker.list"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+
+# Install necessary packages
+sudo apt install -y curl gnupg lsb-release ca-certificates apt-transport-https unzip unrar docker.io python3-pip expect docker-compose docker-compose-plugin cargo -y
 # Export variables for expect scripts
 export BASE_DIR
 export USERNAME
