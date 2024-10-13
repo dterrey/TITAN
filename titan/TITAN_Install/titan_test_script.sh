@@ -30,6 +30,11 @@ DEPLOY_TIMESKETCH_EXPECT="$BASE_DIR/titan/TITAN_Install/deploy_timesketch_expect
 NODE_RED_INSTALL="$BASE_DIR/titan/TITAN_Install/node_red_install.sh"
 FLASK_DIR="$BASE_DIR/titan/TITAN_Admin"
 
+# CONSTANTS
+# Setting default user creds
+USER1_NAME=$USERNAME
+USER1_PASSWORD=$PASSWORD
+
 # Create or update config.json
 cat <<EOT > $CONFIG_FILE
 {
@@ -155,6 +160,9 @@ sudo mkdir /opt/timesketch
 sudo mv deploy_timesketch.sh /opt/timesketch
 cd /opt/timesketch
 sudo ./deploy_timesketch.sh
+
+# Increase the CSRF token time limit
+sudo sh -c "echo '\nWTF_CSRF_TIME_LIMIT = 3600' >> /opt/timesketch/etc/timesketch/timesketch.conf"
 
 # Install required Python packages
 pip3 install timesketch-api-client flask-socketio flask flask-login flask-sqlalchemy flask-bcrypt pandas paramiko plotly dash dash-bootstrap-components scikit-learn spacy PyPDF2 python-docx openpyxl gensim IPython tabulate rich yara-python plaso fpdf
