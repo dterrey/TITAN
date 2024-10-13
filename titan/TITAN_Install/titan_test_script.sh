@@ -6,8 +6,10 @@ read -p "Enter the username: " USERNAME
 read -sp "Enter the password: " PASSWORD
 echo
 
+# Update and upgrade system packages
+sudo apt update && sudo apt upgrade -y
+
 # Install necessary packages
-sudo apt update
 sudo apt install -y curl gnupg lsb-release ca-certificates apt-transport-https unzip unrar docker.io python3-pip expect docker-compose docker-compose-plugin cargo
 
 # Install Docker (for Timesketch)
@@ -29,11 +31,6 @@ BASE_HTML_FILE="$BASE_DIR/titan/TITAN_Admin/templates/base.html"
 DEPLOY_TIMESKETCH_EXPECT="$BASE_DIR/titan/TITAN_Install/deploy_timesketch_expect.sh"
 NODE_RED_INSTALL="$BASE_DIR/titan/TITAN_Install/node_red_install.sh"
 FLASK_DIR="$BASE_DIR/titan/TITAN_Admin"
-
-# CONSTANTS
-# Setting default user creds
-USER1_NAME=$USERNAME
-USER1_PASSWORD=$PASSWORD
 
 # Create or update config.json
 cat <<EOT > $CONFIG_FILE
@@ -72,7 +69,7 @@ update_credentials_in_flask() {
 update_credentials_in_flask "$USERNAME" "$PASSWORD" "$FLASK_APP_FILE"
 
 # Deploy Timesketch via expect
-sudo chmod 777 -R /opt/
+sudo chmod 775 -R /opt/
 
 cat << EOF > $DEPLOY_TIMESKETCH_EXPECT
 #!/usr/bin/expect -f
@@ -172,7 +169,7 @@ sudo systemctl enable nodered
 sudo systemctl start nodered
 
 # Download and install Node-RED flow
-sudo chmod 777 $BASE_DIR/.node-red/
+sudo chmod 775 $BASE_DIR/.node-red/
 sudo npm install node-red-contrib-fs node-red-contrib-fs-ops node-red-contrib-slack node-red-dashboard
 
 # Setup systemd service for Flask UI
@@ -186,7 +183,7 @@ PYTHON_PATH="/usr/bin/python3"
 sudo bash -c "cat > $SERVICE_FILE <<EOF
 [Unit]
 Description=TITAN UI
-After=network.target
+After=network-online.target
 
 [Service]
 ExecStart=$PYTHON_PATH $APP_PATH
