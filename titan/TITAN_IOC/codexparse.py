@@ -3,9 +3,9 @@ import json
 import os
 
 # Define paths
-codex_db_path = '/home/triagex/Downloads/TITAN/TITAN_IOC/instance/codex_db.db'
-codex_folder_path = '/home/triagex/Downloads/TITAN/codex/'
-parsed_output_path = '/home/triagex/Downloads/TITAN/codex/parsed_codex_output.json'
+codex_db_path = '/home/titan/Downloads/TITAN/TITAN_IOC/instance/codex_db.db'
+codex_folder_path = '/home/titan/Downloads/TITAN/codex/'
+parsed_output_path = '/home/titan/Downloads/TITAN/codex/parsed_codex_output.json'
 
 # Recreate the codex_ioc table
 def recreate_table():
