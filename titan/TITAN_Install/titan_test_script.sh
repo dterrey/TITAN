@@ -144,6 +144,10 @@ update_nodered_flow_paths() {
 # Call the function to update the Node-RED flow file paths
 update_nodered_flow_paths "$JSON_FILE" "$BASE_DIR"
 
+# Start Docker and enable it to run on boot
+sudo systemctl start docker
+sudo systemctl enable docker
+
 # Install Timesketch
 sudo curl -s -O https://raw.githubusercontent.com/google/timesketch/master/contrib/deploy_timesketch.sh
 sudo chmod 755 deploy_timesketch.sh
@@ -155,21 +159,13 @@ sudo ./deploy_timesketch.sh
 # Install required Python packages
 pip3 install timesketch-api-client flask-socketio flask flask-login flask-sqlalchemy flask-bcrypt pandas paramiko plotly dash dash-bootstrap-components scikit-learn spacy PyPDF2 python-docx openpyxl gensim IPython tabulate rich yara-python plaso fpdf
 
-# Download and install Node-RED flow
-sudo chmod 777 $BASE_DIR/.node-red/
-sudo npm install node-red-contrib-fs node-red-contrib-fs-ops node-red-contrib-slack node-red-dashboard
-
-# Start Docker and enable it to run on boot
-sudo systemctl start docker
-sudo systemctl enable docker
-
-# Install Portainer for managing Docker containers
-sudo docker pull portainer/portainer-ce:latest
-sudo docker run -d -p 9000:9000 --restart always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce:latest
-
 # Ensure Node-RED starts on boot
 sudo systemctl enable nodered
 sudo systemctl start nodered
+
+# Download and install Node-RED flow
+sudo chmod 777 $BASE_DIR/.node-red/
+sudo npm install node-red-contrib-fs node-red-contrib-fs-ops node-red-contrib-slack node-red-dashboard
 
 # Setup systemd service for Flask UI
 SERVICE_FILE="/etc/systemd/system/flaskui.service"
