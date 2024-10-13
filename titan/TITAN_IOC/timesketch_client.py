@@ -5,7 +5,7 @@ from timesketch_api_client import client, search
 from flask import current_app
 
 def connect_timesketch():
-    ts_client = client.TimesketchApi('http://localhost', username='triagex', password='admin')
+    ts_client = client.TimesketchApi('http://localhost', username='titan', password='admin')
     sketch_id = 4  # Update this to your sketch ID
     
     try:
