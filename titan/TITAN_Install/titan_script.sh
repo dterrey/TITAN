@@ -340,39 +340,25 @@ source ~/.bashrc
 
 sudo -u $USERNAME pip3 install --upgrade pip
 
-pip install matplotlib
-pip install Flask
-pip install Flask-SQLAlchemy
-pip install Flask-Login
-pip install Flask-Bcrypt
-pip install pandas
-pip install timesketch-api-client
-pip install paramiko
-pip install plotly
-pip install dash dash-bootstrap-components
-sudo apt install ssh -y
-pip install flask flask-login flask-sqlalchemy flask-bcrypt
-sudo apt install python3-pip -y
-pip install flask paramiko
-pip install flask-socketio
-pip install scikit-learn
-pip install pandas spacy timesketch-api-client PyPDF2 python-docx openpyxl gensim IPython tabulate
-python3 -m spacy download en_core_web_sm
-pip install os re json pandas spacy requests timesketch-api-client ipython PyPDF2 python-docx openpyxl sumy nltk rich scikit-learn logging readline
-pip install sumy
-pip install yara-python pandas requests gitpython
-pip install plaso
-pip install fpdf
+pip install -r requirements.txt
 
 python -c "import nltk; nltk.download('punkt')"
 
+# Install system packages and dependencies
+sudo apt install ssh -y
+sudo apt install python3-pip -y
+
+# Install the spaCy model for NLP
+python3 -m spacy download en_core_web_sm
+
+# Install Python Evtx library for event log processing
+pip install python-evtx
+pip3 install python-evtx
 
 cd /opt/
 wget https://github.com/wagga40/Zircolite/archive/refs/tags/2.20.0.zip
 unzip 2.20.0
 rm 2.20.0.zip
-pip install python-evtx
-pip3 install python-evtx
 
 # Setup UI as a service
 sudo mv $FLASK_DIR /opt/
