@@ -443,6 +443,9 @@ pip3 install -r requirements.full.txt
 
 sudo apt-get install sleuthkit
 
+python -c "import nltk; nltk.download('punkt')"
+
+
 echo -e "\n******************************************************************************************"
 echo -e "To Access Node-Red: localhost:1880"
 echo -e "To Access Timesketch: Local IP or localhost"
