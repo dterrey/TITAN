@@ -124,6 +124,26 @@ EOF
 
 chmod +x $NODE_RED_INSTALL
 
+
+# Function to update paths in titan_NR_Flow.json
+update_nodered_flow_paths() {
+    local json_file="$1"
+    local base_dir="$2"
+
+    echo "Updating folder paths in Node-RED flow file ($json_file)..."
+
+    # Replace all instances of "/home/titan" with the new base directory
+    sed -i "s|/home/titan|$base_dir|g" "$json_file"
+
+    # Optionally replace other paths like /opt/ if needed
+    sed -i "s|/opt/Zircolite-2.20.0|$base_dir/opt/Zircolite-2.20.0|g" "$json_file"
+
+    echo "Folder paths updated successfully in $json_file."
+}
+
+# Call the function to update the Node-RED flow file paths
+update_nodered_flow_paths "$JSON_FILE" "$BASE_DIR"
+
 # Install Timesketch
 sudo curl -s -O https://raw.githubusercontent.com/google/timesketch/master/contrib/deploy_timesketch.sh
 sudo chmod 755 deploy_timesketch.sh
