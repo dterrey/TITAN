@@ -344,7 +344,7 @@ python -c "import nltk; nltk.download('punkt')"
 sudo apt install ssh -y
 sudo apt install python3 python3-pip -y
 
-pip install torch transformers spacy sumy nltk scikit-learn pandas openpyxl PyPDF2 python-docx numpy flask flask_sqlalchemy flask_bcrypt flask_login flask_socketio flask_migrate flask_cors timesketch-api-client requests rich bcrypt SQLAlchemy paramiko atexit readline dotenv logging PyYAML docx openpyxl regex redis
+pip install torch transformers spacy sumy nltk scikit-learn pandas openpyxl PyPDF2 python-docx numpy flask flask_sqlalchemy flask_bcrypt flask_login flask_socketio flask_migrate flask_cors IPython timesketch-api-client requests rich bcrypt SQLAlchemy paramiko PyYAML docx openpyxl regex redis
 
 # Install the spaCy model for NLP
 python3 -m spacy download en_core_web_sm
