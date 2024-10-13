@@ -24,7 +24,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Define the full path to your titan.py script
-TITAN_SCRIPT_PATH = "/home/triagex/Downloads/TITAN/titan.py"
+TITAN_SCRIPT_PATH = "/home/titan/Downloads/TITAN/titan.py"
 
 # Keep a global process reference to the running titan.py process
 process = None
