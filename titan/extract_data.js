@@ -3,10 +3,10 @@ const vm = require('vm');
 const path = require('path');  // To handle file paths
 
 // Define the path to the data.js file
-const dataJsPath = '/home/triagex/Downloads/TITAN/data.js';  // Replace with the actual path to data.js
+const dataJsPath = '/home/titan/Downloads/TITAN/data.js';  // Replace with the actual path to data.js
 
 // Define the output directory where JSON files will be saved
-const outputDirectory = '/home/triagex/Downloads/TITAN/zircolite';  // Replace with your desired path
+const outputDirectory = '/home/titan/Downloads/TITAN/zircolite';  // Replace with your desired path
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputDirectory)){
