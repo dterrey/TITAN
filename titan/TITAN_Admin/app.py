@@ -237,7 +237,7 @@ def progress():
     return render_template('progress.html')
 
 # Define the path to the TITAN_IOC app.py
-TITAN_IOC_PATH = '/home/triagex/Downloads/TITAN/TITAN_IOC/app.py'
+TITAN_IOC_PATH = '/home/titan/Downloads/TITAN/TITAN_IOC/app.py'
 
 # Start TITAN_IOC in the background
 def start_titan_ioc():
@@ -249,7 +249,7 @@ def start_titan_ioc():
         print(f"Error launching TITAN IOC: {str(e)}")
 
 # Define the path to the TITAN Console app.py
-TITAN_SCRIPT_PATH = '/home/triagex/Downloads/TITAN/TITAN_Admin/TITAN_CONSOLE/app.py'
+TITAN_SCRIPT_PATH = '/home/titan/Downloads/TITAN/TITAN_Admin/TITAN_CONSOLE/app.py'
 
 # Start TITAN Console in the background
 def start_titan_console():
