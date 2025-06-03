@@ -1,3 +1,15 @@
+#### LATEST NEWS ####
+I have been actively working on updating TITAN to the new TITANv2 (Docker Edition)
+The whole platform will run in Docker Containers - currently up to 17 containers and growing.
+You will soon be able to scale the titan processor container to the number of artifacts and hosts required to analyse which means its 100% scalable.
+### This is NEVER SEEN BEFORE in the market ###
+
+This is a fully AI Automated and AI Augmented DFIR Platform running custom AI. This isnt a normal AI Assistant, this is an AI Lab.
+
+I will release it soon but as of now, its still a work in progress. 
+
+
+
 # TITAN-X Platform: Threat Investigation and Analysis Network
 Overview
 
