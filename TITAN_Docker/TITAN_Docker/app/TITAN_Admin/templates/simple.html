@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Simple Live Display</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: Arial, sans-serif;
+        }
+        .message-container {
+            max-height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #00FF00;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: black;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00FF00;
+            color: black;
+        }
+        hr {
+            border: 1px solid #00FF00;
+        }
+        h1 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        var ws;
+        var wsUri = "ws:";
+        var loc = window.location;
+        console.log(loc);
+        if (loc.protocol === "https:") { wsUri = "wss:"; }
+        wsUri += "//" + loc.host + loc.pathname.replace("progress", "ws/progress");
+
+        function wsConnect() {
+            console.log("connect", wsUri);
+            ws = new WebSocket(wsUri);
+            ws.onmessage = function (msg) {
+                var data = msg.data;
+                addMessage(data);
+            }
+            ws.onopen = function () {
+                document.getElementById('status').innerHTML = "connected";
+                console.log("connected");
+            }
+            ws.onclose = function () {
+                document.getElementById('status').innerHTML = "not connected";
+                setTimeout(wsConnect, 3000);
+            }
+        }
+
+        function addMessage(data) {
+            var messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push(data);
+            localStorage.setItem('messages', JSON.stringify(messages));
+            displayMessages();
+        }
+
+        function displayMessages() {
+            var messages = JSON.parse(localStorage.getItem('messages')) || [];
+            var messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            messages.forEach(function (message) {
+                var p = document.createElement('p');
+                p.textContent = message;
+                messagesDiv.appendChild(p);
+            });
+        }
+
+        function clearMessages() {
+            localStorage.removeItem('messages');
+            displayMessages();
+        }
+
+        window.onload = function () {
+            wsConnect();
+            displayMessages();
+        }
+    </script>
+</head>
+
+<body onunload="ws.disconnect();">
+    <h1>Simple Live Display</h1>
+    <div id="messages" class="message-container"></div>
+    <button type="button" onclick="clearMessages();">Clear Messages</button>
+    <button type="button" onclick="window.location.href='http://192.168.46.151:5000/home';">Home</button>
+    <hr />
+    <div id="status">unknown</div>
+</body>
+
+</html>

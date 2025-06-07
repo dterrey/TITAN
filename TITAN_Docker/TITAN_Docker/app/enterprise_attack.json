@@ -1,0 +1,107 @@
+# auto_investigation.py
+
+import time
+import json
+import pandas as pd
+import spacy
+import logging
+from datetime import datetime, timedelta
+from rich.console import Console
+from adam import (
+    connect_timesketch,
+    load_iocs,
+    update_iocs,
+    interpret_question,
+    search_timesketch_and_tag_iocs,
+    generate_nlg_summary,
+    get_scan_results,
+    generate_event_summary,
+    display_events_line_by_line
+)
+
+# Initialize spaCy model
+nlp = spacy.load("en_core_web_sm")
+
+# Initialize console for styled text output
+console = Console()
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Connect to Timesketch
+ts_client, sketch = connect_timesketch()
+
+# Function to perform real-time decision making and self-adapting responses
+def auto_investigate(start_date, end_date):
+    # Query Timesketch for events within the specified timeframe
+    query = f'datetime >= "{start_date}" AND datetime <= "{end_date}"'
+    console.print(f"Executing query: {query}", style="bold blue")
+    events_df = search_timesketch_and_tag_iocs(query, action="timesketch_tag")
+
+    if events_df.empty:
+        console.print("No events found in the specified timeframe.", style="bold yellow")
+        return
+
+    # Generate initial summary
+    generate_event_summary(events_df)
+
+    # Perform initial analysis
+    malicious_events = events_df[events_df['tag'].apply(lambda tags: 'Suspicious_Activity' in tags or 'IOC_Match' in tags)]
+
+    if not malicious_events.empty:
+        console.print("Malicious activities detected. Initiating auto-investigation...", style="bold red")
+        # Generate NLG summary
+        generate_nlg_summary(malicious_events, {"title": "Malicious Activity Summary", "content": ["Detected suspicious activities in the specified timeframe."], "detailed_analysis": [], "suggestions": []})
+        
+        # Pivot and narrow down more events based on malicious activities
+        pivot_events(malicious_events)
+    else:
+        console.print("No malicious activities detected.", style="bold green")
+
+def pivot_events(malicious_events):
+    # Example pivot: Extract unique users and IPs involved in malicious events
+    users = malicious_events['username'].dropna().unique().tolist()
+    ips = malicious_events['source_ip'].dropna().unique().tolist()
+
+    # Query for additional events related to these users and IPs
+    for user in users:
+        query = f'username:"{user}"'
+        console.print(f"Pivoting on user: {user} with query: {query}", style="bold blue")
+        user_events = search_timesketch_and_tag_iocs(query, action="timesketch_tag")
+        if not user_events.empty:
+            generate_event_summary(user_events)
+            generate_nlg_summary(user_events, {"title": f"Events Related to User: {user}", "content": [f"Further events related to user {user} detected."], "detailed_analysis": [], "suggestions": []})
+
+    for ip in ips:
+        query = f'source_ip:"{ip}"'
+        console.print(f"Pivoting on IP: {ip} with query: {query}", style="bold blue")
+        ip_events = search_timesketch_and_tag_iocs(query, action="timesketch_tag")
+        if not ip_events.empty:
+            generate_event_summary(ip_events)
+            generate_nlg_summary(ip_events, {"title": f"Events Related to IP: {ip}", "content": [f"Further events related to IP {ip} detected."], "detailed_analysis": [], "suggestions": []})
+
+    # Add more pivoting logic as needed (e.g., file hashes, domains)
+
+def main():
+    console.print("Starting Auto-Investigation Module...", style="bold magenta")
+
+    # Define the timeframe for investigation
+    # For example, last 24 hours
+    end_date = datetime.utcnow()
+    start_date = end_date - timedelta(days=1)
+    start_date_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+    end_date_str = end_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    console.print(f"Investigating events from {start_date_str} to {end_date_str}", style="bold blue")
+
+    # Start the auto-investigation
+    auto_investigate(start_date_str, end_date_str)
+
+    # Implement a loop for continuous monitoring if needed
+    # while True:
+    #     auto_investigate(start_date_str, end_date_str)
+    #     time.sleep(3600)  # Wait for 1 hour before next check
+
+if __name__ == "__main__":
+    main()
+

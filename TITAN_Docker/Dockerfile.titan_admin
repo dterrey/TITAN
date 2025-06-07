@@ -1,0 +1,41 @@
+FROM python:3.10-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    netcat-openbsd \
+    libpq-dev \
+    gcc \
+    docker.io \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# Optionally install Docker Compose CLI support (modern `docker compose`)
+# Install Docker Compose CLI plugin (v2)
+RUN mkdir -p /usr/local/lib/docker/cli-plugins && \
+    curl -L https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-linux-x86_64 \
+    -o /usr/local/lib/docker/cli-plugins/docker-compose && \
+    chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+# Copy your TITAN_Admin source code
+COPY ./app/TITAN_Admin /app
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Expose Flask port
+EXPOSE 5111
+
+# Run the Flask app
+CMD ["python", "app.py"]
+

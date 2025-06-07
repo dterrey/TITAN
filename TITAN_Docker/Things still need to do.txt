@@ -1,0 +1,7 @@
+Things still need to do.
+
+1. change the TITAN Upload page to use titan_processor and that it watches that folder and when a file or artifact is uploaded.
+
+2. Add the TITAN containers flow so when I upload 5 examples, it round robins across 5 containers and each one processers from the one folder.
+
+3. Make sure it all works bit by bit.

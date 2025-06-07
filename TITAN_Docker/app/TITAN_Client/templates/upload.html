@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <div class="centered-title">
+    {% include "title.html" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h1>Upload File</h1>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="alert alert-info" role="alert">
+        {{ messages[0] }}
+      </div>
+    {% endif %}
+  {% endwith %}
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="file">Choose file</label>
+      <input type="file" class="form-control-file" id="file" name="file" required>
+    </div>
+    <div class="form-group">
+      <label for="destination">Destination</label>
+      <select class="form-control" id="destination" name="destination" required>
+        <option value="" disabled selected>Select destination</option>
+        <option value="Triage">Triage</option>
+        <option value="Malware">Malware</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+{% endblock %}

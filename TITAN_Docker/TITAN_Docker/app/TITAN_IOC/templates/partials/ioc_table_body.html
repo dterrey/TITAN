@@ -1,0 +1,10 @@
+{% for ioc in iocs %}
+<tr>
+    <td><input type="checkbox" class="select-ioc" value="{{ ioc.id }}"></td>
+    <td>{{ ioc.id }}</td>
+    <td>{{ ioc.indicator if current_ioc_table == 'user' else ioc.hash }}</td> <!-- Adjust for user or codex -->
+    <td>{{ ioc.type if current_ioc_table == 'user' else ioc.filename }}</td>
+    <td>{{ ioc.timestamp }}</td>
+    <td>{{ ioc.tag if current_ioc_table == 'user' }}</td>
+</tr>
+{% endfor %}

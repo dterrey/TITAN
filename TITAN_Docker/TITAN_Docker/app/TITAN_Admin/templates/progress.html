@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <div class="centered-title">
+    {% include "title.html" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h1 class="mt-5">Live Progress</h1>
+  <div id="messages" class="message-container"></div>
+  <button type="button" class="btn btn-secondary" onclick="clearMessages();">Clear Messages</button>
+  <button type="button" class="btn btn-secondary" onclick="window.location.href='http://192.168.46.151:5000/home';">Home</button>
+  <hr />
+  <div id="status">unknown</div>
+
+  <script type="text/javascript">
+      var ws;
+      var wsUri = "ws://localhost:1880/ws/progress";
+      
+      function wsConnect() {
+          console.log("connect", wsUri);
+          ws = new WebSocket(wsUri);
+          ws.onmessage = function (msg) {
+              var data = msg.data;
+              addMessage(data);
+          }
+          ws.onopen = function () {
+              document.getElementById('status').innerHTML = "connected";
+              console.log("connected");
+          }
+          ws.onclose = function () {
+              document.getElementById('status').innerHTML = "not connected";
+              setTimeout(wsConnect, 3000);
+          }
+      }
+
+      function addMessage(data) {
+          var messages = JSON.parse(localStorage.getItem('messages')) || [];
+          messages.push(data);
+          localStorage.setItem('messages', JSON.stringify(messages));
+          displayMessages();
+      }
+
+      function displayMessages() {
+          var messages = JSON.parse(localStorage.getItem('messages')) || [];
+          var messagesDiv = document.getElementById('messages');
+          messagesDiv.innerHTML = '';
+          messages.forEach(function (message) {
+              var p = document.createElement('p');
+              p.textContent = message;
+              messagesDiv.appendChild(p);
+          });
+      }
+
+      function clearMessages() {
+          localStorage.removeItem('messages');
+          displayMessages();
+      }
+
+      window.onload = function () {
+          wsConnect();
+          displayMessages();
+      }
+  </script>
+{% endblock %}

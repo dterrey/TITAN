@@ -1,0 +1,33 @@
+{
+    "type": "bundle",
+    "id": "bundle--f516ba2d-ce51-4bfb-add6-2c9d462e143e",
+    "spec_version": "2.0",
+    "objects": [
+        {
+            "type": "relationship",
+            "id": "relationship--2f11e661-a5a0-4420-b97e-b080fc4fa441",
+            "created": "2020-12-29T16:20:58.969Z",
+            "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+            "revoked": false,
+            "external_references": [
+                {
+                    "source_name": "Nicolas Falliere, Liam O Murchu, Eric Chien February 2011",
+                    "description": "Nicolas Falliere, Liam O Murchu, Eric Chien 2011, February W32.Stuxnet Dossier (Version 1.4) Retrieved. 2017/09/22 ",
+                    "url": "https://www.wired.com/images_blogs/threatlevel/2011/02/Symantec-Stuxnet-Update-Feb-2011.pdf"
+                }
+            ],
+            "object_marking_refs": [
+                "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+            ],
+            "modified": "2023-03-17T17:58:03.256Z",
+            "description": "[Stuxnet](https://attack.mitre.org/software/S0603) can create registry keys to load driver files.(Citation: Nicolas Falliere, Liam O Murchu, Eric Chien February 2011)",
+            "relationship_type": "uses",
+            "source_ref": "malware--088f1d6e-0783-47c6-9923-9c79b2af43d4",
+            "target_ref": "attack-pattern--57340c81-c025-4189-8fa0-fc7ede51bae4",
+            "x_mitre_deprecated": false,
+            "x_mitre_version": "1.0",
+            "x_mitre_attack_spec_version": "3.1.0",
+            "x_mitre_modified_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5"
+        }
+    ]
+}

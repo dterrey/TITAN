@@ -1,0 +1,114 @@
+Yes, you can copy the analyzer file into the Docker container using the docker cp command. Here's how you can do it:
+Step 1: Create the Analyzer File on Your Host Machine
+
+Create the attack_analyzer.py file on your host machine with the following content:
+
+python
+
+import logging
+from timesketch.lib.analyzers import interface
+from timesketch.lib.analyzers import manager
+from attackcti import attack_client
+
+logger = logging.getLogger('timesketch.analyzers.attack_analyzer')
+
+class MitreAttackAnalyzer(interface.BaseAnalyzer):
+    NAME = 'mitre_attack_analyzer'
+    DISPLAY_NAME = 'MITRE ATT&CK Analyzer'
+    DESCRIPTION = 'Tags events based on MITRE ATT&CK techniques, tools, and procedures.'
+
+    def __init__(self, index_name, sketch_id, timeline_id=None):
+        """Initialize the analyzer."""
+        super().__init__(index_name, sketch_id, timeline_id)
+        self.client = attack_client()
+        self.attack_mapping = self._create_attack_mapping()
+
+    def _create_attack_mapping(self):
+        """Create a mapping of MITRE ATT&CK techniques, tools, and procedures."""
+        mapping = {}
+        
+        techniques = self.client.get_techniques(stix_format=False)
+        tools = self.client.get_tools(stix_format=False)
+        procedures = self.client.get_malwares(stix_format=False)
+        
+        for technique in techniques:
+            mapping[technique['technique_id']] = technique['technique']
+        
+        for tool in tools:
+            mapping[tool['tool_id']] = tool['tool']
+        
+        for procedure in procedures:
+            mapping[procedure['malware_id']] = procedure['malware']
+        
+        return mapping
+
+    def run(self):
+        """Entry point for the analyzer."""
+        events = self.event_stream(query_string='*')
+        for event in events:
+            self._analyze_event(event)
+            event.commit()
+
+    def _analyze_event(self, event):
+        """Analyze and tag a single event."""
+        for attack_id, attack_name in self.attack_mapping.items():
+            if attack_id in event.source.get('message', ''):
+                event.add_tags([attack_name])
+                event.add_attributes({'mitre_attack_id': attack_id})
+                logger.info(f'Tagged event with MITRE ATT&CK ID {attack_id} ({attack_name})')
+                
+manager.AnalysisManager.register_analyzer(MitreAttackAnalyzer)
+
+Install Portainer for easy access.
+
+Step 2: Copy the Analyzer File into the Docker Container
+
+    Find the container ID or name:
+
+    bash
+
+docker ps
+
+This command lists all running containers. Find the container ID or name for the Timesketch container.
+
+Copy the analyzer file into the container:
+
+bash
+
+    docker cp attack_analyzer.py <container_id_or_name>:/usr/local/lib/python3.10/dist-packages/timesketch/lib/analyzers/attack_analyzer.py
+
+Step 3: Install attackcti Library Inside the Container
+
+    Access the container:
+
+    bash
+
+docker exec -it <container_id_or_name> /bin/bash
+
+Install attackcti:
+
+bash
+
+    pip install attackcti
+
+Step 4: Register the Analyzer
+
+/bin/bash -c "echo 'from timesketch.lib.analyzers.attack_analyzer import MitreAttackAnalyzer' >> /usr/local/lib/python3.10/dist-packages/timesketch/lib/analyzers/__init__.py"
+
+Step 5: Restart the Timesketch Container
+
+Exit the container and restart it to ensure the new analyzer is loaded:
+
+bash
+
+docker restart <container_id_or_name>
+
+Step 6: Run the Analyzer from Timesketch
+
+After restarting, you should be able to see the new MITRE ATT&CK Analyzer in the Timesketch web interface or through the API. Follow these steps:
+
+    Navigate to the Timesketch web interface.
+    Go to the specific sketch and timeline you want to analyze.
+    Select the MITRE ATT&CK Analyzer from the list of available analyzers.
+    Execute the analyzer.
+

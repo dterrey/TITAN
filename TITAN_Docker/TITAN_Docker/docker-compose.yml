@@ -1,0 +1,143 @@
+services:
+  titan_master:
+    build: .
+    container_name: titan_master
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5002:5000"      # TITAN UI (Host port changed to 5001 to avoid conflict with host Timesketch)
+      - "11434:11434"    # Ollama API
+      - "22:22"          # SFTP
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    depends_on:
+      - nodered
+      # Add other dependencies if needed, but not the host-installed Timesketch
+    networks:
+      - titan-net
+    restart: always
+
+  titan:
+    build: .
+    volumes:
+      - ../:/mnt/TITAN
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    networks:
+      - titan-net
+    restart: always
+    deploy:
+      replicas: 1
+
+  titan_admin:
+    build: .
+    container_name: titan_admin
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_Admin
+    command: python app.py
+    volumes:
+      - /cases:/cases
+      - ../:/mnt/TITAN
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../docker-compose.yml:/mnt/TITAN/docker-compose.yml # Mounting the compose file itself can be risky if modified by container
+    ports:
+      - "5111:5111"  # Admin UI
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    networks:
+      - titan-net
+    restart: always
+
+  titan_client:
+    build: .
+    container_name: titan_client
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_Client
+    command: python app.py
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5001:5001"  # Client UI
+    networks:
+      - titan-net
+    restart: always
+
+  titan_ioc:
+    build: .
+    container_name: titan_ioc
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_IOC
+    command: python app.py
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5112:5112"  # IOC Analysis
+    networks:
+      - titan-net
+    restart: always
+
+  titan_console:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: titan_console
+    command: python3 /mnt/TITAN/TITAN_Docker/app/TITAN_Admin/TITAN_CONSOLE/app.py
+    ports:
+      - "5232:5232"
+    volumes:
+      - ../:/mnt/TITAN
+    networks:
+      - titan-net
+    restart: always
+
+  # Timesketch service is REMOVED as it will be installed on the host
+
+  nodered:
+    build:
+      context: .
+      dockerfile: Dockerfile.nodered
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - /cases:/cases
+      - nodered_data:/data # Added for Node-RED data persistence
+      - /var/run/docker.sock:/var/run/docker.sock  # <-- Ensure this line is present
+
+    networks:
+      - titan-net
+    environment:
+      - TZ=UTC
+    restart: always
+
+  titan_processor:
+    build:
+      context: .
+      dockerfile: Dockerfile.titan_processor
+    container_name: titan_processor
+    volumes:
+      - /cases:/cases
+      - ../:/mnt/TITAN
+    networks:
+      - titan-net
+    restart: always
+    deploy:
+#      replicas: 3 # Default number of replicas
+    cap_add:
+      - SYS_ADMIN  # Grants many administrator privileges, including mount
+    devices:
+      - "/dev/fuse:/dev/fuse:rwm"
+      - "/dev/loop-control:/dev/loop-control:rwm" #For mounting images
+    security_opt:
+      - "apparmor:unconfined"
+networks:
+  titan-net:
+    driver: bridge
+
+volumes:
+  # timesketch_data: # Removed
+  nodered_data:
+  # Define any other named volumes your Titan services might use if they are not host mounts

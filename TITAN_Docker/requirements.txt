@@ -1,0 +1,40 @@
+# Core TITAN deps
+torch
+pandas
+spacy
+requests
+nltk
+PyPDF2
+python-docx
+openpyxl
+transformers
+scikit-learn
+rich
+sumy
+pyyaml
+timesketch-api-client
+codex
+docx
+console
+timesketch_api_client
+modules
+timesketch_import_client
+ipython
+dotenv
+
+# Flask + Web UI
+flask
+flask_sqlalchemy
+flask_bcrypt
+flask_login
+flask_socketio
+flask_migrate
+flask_cors
+
+# Extra functionality
+bcrypt
+SQLAlchemy
+paramiko
+python-evtx
+redis
+

@@ -1,0 +1,23 @@
+FROM nodered/node-red:latest
+
+USER root
+
+# Install additional Node-RED nodes
+RUN npm install --prefix /data \
+    node-red-dashboard \
+    node-red-contrib-fs-ops \
+    node-red-contrib-watchdirectory \
+    node-red-contrib-simple-message-queue \
+    node-red-contrib-slack \
+    @flowfuse/node-red-dashboard \
+    node-red-contrib-slack-files
+
+# Copy your flow.json and make sure it's owned by node-red
+COPY ./app/TITAN_Install/titan_NR_Flow.json /data/flows.json
+RUN chown node-red:node-red /data/flows.json
+
+USER node-red
+
+# Start Node-RED with the baked-in flow
+CMD ["npm", "start", "--", "--userDir", "/data"]
+

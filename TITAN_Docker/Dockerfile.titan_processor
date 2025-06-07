@@ -1,0 +1,35 @@
+FROM python:3.10-slim
+
+# Install required system packages
+RUN apt-get update && apt-get install -y \
+    curl wget unzip p7zip-full \
+    sleuthkit libtsk-dev fuse \
+    mount python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Plaso via pip
+RUN pip install --no-cache-dir plaso
+
+# Create all required /cases folders inside container (for NodeRED/DFIR workflow)
+RUN mkdir -p \
+    /cases/processor \
+    /cases/processor/hashes \
+    /cases/processor/logfile \
+    /cases/plaso \
+    /cases/zircolite \
+    /cases/logfile \
+    /cases/malware \
+    /cases/malware/hashes \
+    /cases/malware/logfile
+
+# Copy your processing script
+COPY ./processor /processor
+WORKDIR /processor
+
+# Optional: install any custom Python deps if needed
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+
+# Start the processor
+CMD ["python", "processor.py"]
+

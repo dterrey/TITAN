@@ -1,0 +1,109 @@
+FROM python:3.10-slim
+
+# Install required system packages, including build essentials and specific dev libraries
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Build essentials
+    build-essential \
+    pkg-config \
+    # For Plaso (pytsk3 and other dependencies)
+    libsqlite3-dev \
+    libssl-dev \
+    zlib1g-dev \
+    # For xmount and EWF support (as previously discussed)
+    curl \
+    wget \
+    unzip \
+    p7zip-full \
+    sleuthkit \
+    libtsk-dev \
+    fuse3 \
+    libfuse3-dev \
+    xmount \
+    ewf-tools \
+    util-linux \
+    mount \
+    # Python
+    python3-dev \
+    python3-pip \
+    # General cleanup
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip to avoid potential issues with older versions
+RUN pip install --no-cache-dir --upgrade pip
+
+# Create directories for tools
+RUN mkdir -p /opt/chainsaw /opt/hayabusa /opt/capa /opt/zircolite /chainsaw_temp
+
+# Install Chainsaw
+RUN cd /opt && \
+    wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.12.2/chainsaw_all_platforms+rules.zip && \
+    unzip chainsaw_all_platforms+rules.zip -d /opt && \
+    # Move only the necessary Linux executable and rules to /opt/chainsaw
+    mv chainsaw/chainsaw_x86_64-unknown-linux-gnu /opt/chainsaw/chainsaw && \
+#    mv chainsaw/rules /opt/chainsaw/rules && \
+#    rm -rf chainsaw_temp chainsaw_all_platforms+rules.zip && \
+    chmod +x /opt/chainsaw/chainsaw
+
+# Install Hayabusa
+RUN cd /opt/hayabusa && \
+    wget https://github.com/Yamato-Security/hayabusa/releases/download/v3.3.0/hayabusa-3.3.0-all-platforms.zip && \
+    unzip hayabusa-3.3.0-all-platforms.zip && \
+    mv hayabusa-3.3.0-lin-x64-musl /opt/hayabusa/hayabusa && \
+    # Clean up unnecessary files for other platforms to save space
+#    find . -mindepth 1 -maxdepth 1 ! -name 'hayabusa' ! -name 'rules' -exec rm -rf {} + && \
+#    rm hayabusa-3.3.0-all-platforms.zip && \
+    chmod +x /opt/hayabusa/hayabusa
+
+# Install Capa
+RUN cd /opt/capa && \
+    wget https://github.com/mandiant/capa/releases/download/v9.1.0/capa-v9.1.0-linux.zip && \
+    unzip capa-v9.1.0-linux.zip && \
+    # Assuming 'capa' is the executable name inside, adjust if it's different
+    # If capa-v7.0.1-linux is the executable, rename or use that path
+    # For example, if it's just 'capa':
+    # mv capa-v7.0.1-linux capa 
+    chmod +x capa* # Make sure the correct executable is made executable
+
+# Install Zircolite
+RUN cd /opt && \
+    wget https://github.com/wagga40/Zircolite/archive/refs/tags/2.40.0.zip && \
+    unzip 2.40.0.zip && \
+    mv Zircolite-2.40.0 zircolite && \
+    mv zircolite/Zircolite-2.40.0/* /opt/zircolite/
+    # Zircolite is a Python script, ensure its dependencies are met if any
+    # (often requires sigma-rules which can be large, or might be bundled)
+    # If Zircolite has a requirements.txt, you might need:
+    # RUN pip install --no-cache-dir -r /opt/Zircolite/requirements.txt
+
+# Install Plaso via pip
+RUN pip install --no-cache-dir plaso
+RUN pip install --no-cache-dir timesketch-api-client 
+RUN pip install --no-cache-dir timesketch-import-client
+
+RUN pip install flask
+
+# Create all required /cases folders inside container (for NodeRED/DFIR workflow)
+RUN mkdir -p \
+    /cases/processor \
+    /cases/processor/hashes \
+    /cases/processor/logfile \
+    /cases/plaso \
+    /cases/zircolite \
+    /cases/logfile \
+    /cases/malware \
+    /cases/malware/hashes \
+    /cases/malware/logfile
+
+# Copy your processing script
+COPY ./processor /processor
+COPY ./app ./
+WORKDIR /processor
+
+# Optional: install any custom Python deps if needed
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+
+# Start the processor
+CMD ["python", "processor.py"]
+

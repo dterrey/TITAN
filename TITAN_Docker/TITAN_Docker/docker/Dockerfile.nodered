@@ -1,0 +1,23 @@
+FROM nodered/node-red:latest
+
+USER root
+
+# Copy flow to temp directory inside the container
+COPY ./app/TITAN_Install/titan_NR_Flow.json /opt/titan/flows/titan_NR_Flow.json
+
+COPY ./docker/start-nodered.sh /usr/local/bin/start-nodered.sh
+RUN chmod +x /usr/local/bin/start-nodered.sh
+
+# Install Node-RED contrib nodes into /data
+RUN npm install --prefix /data \
+    node-red-dashboard \
+    node-red-contrib-fs-ops \
+    node-red-contrib-watchdirectory \
+    node-red-contrib-simple-message-queue \
+    node-red-contrib-slack \
+    @flowfuse/node-red-dashboard \
+    node-red-contrib-slack-files
+
+USER node-red
+CMD ["/usr/local/bin/start-nodered.sh"]
+

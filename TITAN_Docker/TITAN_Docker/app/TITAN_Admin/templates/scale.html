@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <div class="centered-title">
+    {% include "title.html" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h1>Scale TITAN Worker Containers</h1>
+
+  {% if message %}
+    <div class="alert alert-info">{{ message }}</div>
+  {% endif %}
+
+  <form method="POST">
+    <div class="form-group">
+      <label for="replicas"><strong>Number of TITAN Worker Containers</strong></label>
+      <input type="number" class="form-control" id="replicas" name="replicas" min="1" required>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Scale Workers</button>
+  </form>
+{% endblock %}
+

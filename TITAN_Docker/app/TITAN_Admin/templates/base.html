@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?v=1.0.0">
+    <title>TITAN</title>
+      <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/titan_favicon.ico') }}" type="image/x-icon">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        background: url('/static/images/background.png') no-repeat center center fixed;
+        background-size: cover; /* Maintain aspect ratio and cover the screen */
+        color: #00FF00;
+        overflow: scroll;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8); /* Adjust opacity as needed */
+        z-index: -1;
+      }
+      .ascii-title {
+        font-family: monospace;
+        white-space: pre;
+        color: #00FF00;
+        margin-bottom: 0;
+      }
+      .centered-title {
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.2;
+        color: #00FF00;
+        margin-bottom: 5px;
+      }
+      .form-control, .form-control-file, .form-control:focus, .form-check-input:checked {
+        background-color: transparent;
+        color: #00FF00;
+        border: 1px solid #00FF00;
+      }
+      .form-control::placeholder {
+        color: #00FF00;
+      }
+      .btn-primary {
+        background-color: transparent;
+        border: 1px solid #00FF00;
+        color: #00FF00;
+      }
+      .btn-primary:hover {
+        background-color: #00FF00;
+        color: black;
+      }
+      .btn-secondary {
+        background-color: transparent;
+        border: 1px solid #00FF00;
+        color: #00FF00;
+      }
+      .btn-secondary:hover {
+        background-color: #00FF00;
+        color: black;
+      }
+      .btn-danger {
+        background-color: red;
+        color: white;
+        border: none;
+      }
+      .btn-danger:hover {
+        background-color: darkred;
+        color: white;
+      }
+      .alert-info {
+        background-color: transparent;
+        border: 1px solid #00FF00;
+        color: #00FF00;
+      }
+      .list-group-item {
+        background-color: transparent;
+        border: 1px solid #00FF00;
+        color: #00FF00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .list-group-item span {
+        flex-grow: 1;
+      }
+      .list-group-item:hover {
+        background-color: #00FF00;
+        color: black;
+      }
+      .list-group-item a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .list-group-item:hover a {
+        color: black;
+      }
+      a {
+        color: #00FF00;
+      }
+      a:hover {
+        background-color: #00FF00;
+        color: black;
+      }
+      .navbar a {
+        color: #00FF00;
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+        border-right: 1px solid #00FF00;
+      }
+      .navbar a:last-child {
+        border-right: none;
+      }
+      .navbar a:hover {
+        background-color: #00FF00;
+        color: black;
+      }
+      .navbar {
+        display: flex;
+        justify-content: center;
+        background-color: transparent;
+        padding: 10px;
+        border-bottom: 1px solid #00FF00;
+        margin-top: 0;
+      }
+      .message-container {
+        max-height: 400px;
+        overflow-y: scroll;
+        border: 1px solid #00FF00;
+        padding: 10px;
+        margin-top: 20px;
+        display: none;
+      }
+      .status {
+        border: 1px solid #00FF00;
+        padding: 10px;
+        margin-top: 20px;
+        display: none;
+      }
+      .delete-button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="centered-title">
+      {% block title %}{% endblock %}
+    </div>
+    <div class="navbar">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('upload_file') }}">Upload</a>
+      <a href="{{ url_for('browse_files') }}">Browse</a>
+      <a href="{{ url_for('scale_containers') }}">Scale</a>
+      <a href="http://{{ request.host.split(':')[0] }}:1880/progress" target="_blank">Progress</a>
+      <a href="{{ url_for('action_log') }}">Action Log</a>
+      <a href="http://{{ request.host.split(':')[0] }}" target="_blank">Timesketch</a>
+      <a href="http://{{ request.host.split(':')[0] }}:1880" target="_blank">Node-RED</a>
+      <a href="{{ url_for('mitre_dashboard') }}" target="_blank">Mitre Dashboard</a>
+      <a href="{{ url_for('terminal') }}" target="_blank">Run Titan-X AI</a>
+      <a href="http://{{ request.host.split(':')[0] }}:5112" target="_blank">TITAN IOC</a>
+      <a href="{{ url_for('logout') }}" id="logout-button">Logout</a>
+    </div>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js?v=1.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js?v=1.0.0"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js?v=1.0.0"></script>
+    <script>
+      var interacting = false;
+
+      function setInteracting(value) {
+        interacting = value;
+      }
+
+      document.querySelector('#logout-button').addEventListener('click', function () {
+        setInteracting(true);
+      });
+
+      window.addEventListener('load', function() {
+        setInteracting(false);
+      });
+    </script>
+  </body>
+</html>

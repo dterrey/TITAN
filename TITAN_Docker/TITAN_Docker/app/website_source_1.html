@@ -1,0 +1,1991 @@
+<html lang="en-US"><head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=6">
+
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://www.armis.com/xmlrpc.php">
+
+	<link rel="dns-prefetch" href="//use.typekit.net">
+	<link rel="dns-prefetch" href="//p.typekit.net">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<link rel="alternate" hreflang="en" href="https://www.armis.com/blog/breaking-down-medusa-ransomware/">
+<link rel="alternate" hreflang="x-default" href="https://www.armis.com/blog/breaking-down-medusa-ransomware/">
+<!-- This site is tracked with the HandL UTM Grabber v3 (3.0.61) - https://www.utmgrabber.com/ --> 
+<script type="text/javascript" async="" src="//munchkin.marketo.net/164/munchkin.js"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://js.adsrvr.org/conversionEvents-v1.min.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=AW-855120611&amp;l=dataLayer&amp;cx=c&amp;gtm=45He53h1v76795365za200&amp;tag_exp=102482433~102587591~102717422~102788824~102813109~102814060~102825837~102879719"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-TCL8V4XTKW&amp;l=dataLayer&amp;cx=c&amp;gtm=45He53h1v76795365za200&amp;tag_exp=102482433~102587591~102717422~102788824~102813109~102814060~102825837~102879719"></script><script type="text/javascript" async="" src="https://app.usercentrics.eu/browser-ui/latest/loader.js" data-avoid-prefetch-services=""></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-T2N5DFW"></script><script type="text/javascript">
+// create dataLayer
+    window.dataLayer = window.dataLayer || [];
+        function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    // set „denied" as default for both ad and analytics storage, as well as ad_user_data and ad_personalization,
+    gtag("consent", "default", {
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        wait_for_update: 2000 // milliseconds to wait for update
+    });
+
+    // Enable ads data redaction by default [optional]
+    gtag("set", "ads_data_redaction", true);
+</script>
+
+<script type="text/javascript">
+    // Google Tag Manager
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-T2N5DFW');
+</script>
+
+<script type="text/javascript">
+		(function() {
+  		var didInit = false;
+  		function initMunchkin() {
+			if(didInit === false) {
+				didInit = true;
+				Munchkin.init('645-PDC-047');
+			}
+		}
+			var s = document.createElement('script');
+			s.type = 'text/javascript';
+  	s.async = true;
+	s.src = '//munchkin.marketo.net/munchkin.js';
+  	s.onreadystatechange = function() {
+		if (this.readyState == 'complete' || this.readyState == 'loaded') {
+			initMunchkin();
+		}
+  	};
+  	s.onload = initMunchkin;
+  	document.getElementsByTagName('head')[0].appendChild(s);
+	})();
+    </script>
+	<!-- This site is optimized with the Yoast SEO Premium plugin v23.1 (Yoast SEO v23.1) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Breaking Down Medusa Ransomware | Armis</title>
+	<meta name="description" content="Get insights from Armis Labs on Medusa ransomware, incorporating insights from multiple threat intelligence sources, including FBI, CISA, and MS-ISAC advisories.">
+	<link rel="canonical" href="https://www.armis.com/blog/breaking-down-medusa-ransomware/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Breaking Down Medusa Ransomware">
+	<meta property="og:description" content="Get insights from Armis Labs on Medusa ransomware, incorporating insights from multiple threat intelligence sources, including FBI, CISA, and MS-ISAC advisories.">
+	<meta property="og:url" content="https://www.armis.com/blog/breaking-down-medusa-ransomware/">
+	<meta property="og:site_name" content="Armis">
+	<meta property="article:publisher" content="https://www.facebook.com/ArmisInc/">
+	<meta property="article:modified_time" content="2025-03-18T14:05:13+00:00">
+	<meta property="og:image" content="https://res.cloudinary.com/armis/images/f_auto,q_auto/v1742215398/blog-breaking-down-medusa-ransomware-social/blog-breaking-down-medusa-ransomware-social.jpg?_i=AA">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="1200">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@ArmisSecurity">
+	<meta name="twitter:label1" content="Est. reading time">
+	<meta name="twitter:data1" content="1 minute">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/","url":"https://www.armis.com/blog/breaking-down-medusa-ransomware/","name":"Breaking Down Medusa Ransomware | Armis","isPartOf":{"@id":"https://www.armis.com/#website"},"primaryImageOfPage":{"@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/#primaryimage"},"image":{"@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/#primaryimage"},"thumbnailUrl":"https://res.cloudinary.com/armis/images/f_auto,q_auto/v1741987026/hacker-in-hoodie-on-computer-2477533867-thumbnail/hacker-in-hoodie-on-computer-2477533867-thumbnail.jpg?_i=AA","datePublished":"2025-03-14T21:42:23+00:00","dateModified":"2025-03-18T14:05:13+00:00","description":"Get insights from Armis Labs on Medusa ransomware, incorporating insights from multiple threat intelligence sources, including FBI, CISA, and MS-ISAC advisories.","breadcrumb":{"@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.armis.com/blog/breaking-down-medusa-ransomware/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/#primaryimage","url":"https://res.cloudinary.com/armis/images/f_auto,q_auto/v1741987026/hacker-in-hoodie-on-computer-2477533867-thumbnail/hacker-in-hoodie-on-computer-2477533867-thumbnail.jpg?_i=AA","contentUrl":"https://res.cloudinary.com/armis/images/f_auto,q_auto/v1741987026/hacker-in-hoodie-on-computer-2477533867-thumbnail/hacker-in-hoodie-on-computer-2477533867-thumbnail.jpg?_i=AA","width":359,"height":160,"caption":"back of hacker in a hoodie sitting at a computer"},{"@type":"BreadcrumbList","@id":"https://www.armis.com/blog/breaking-down-medusa-ransomware/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.armis.com/"},{"@type":"ListItem","position":2,"name":"Breaking Down Medusa Ransomware"}]},{"@type":"WebSite","@id":"https://www.armis.com/#website","url":"https://www.armis.com/","name":"Armis","description":"","publisher":{"@id":"https://www.armis.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.armis.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.armis.com/#organization","name":"Armis","url":"https://www.armis.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.armis.com/#/schema/logo/image/","url":"https://www.armis.com/wp-content/uploads/2023/08/logo-dark.svg","contentUrl":"https://www.armis.com/wp-content/uploads/2023/08/logo-dark.svg","caption":"Armis"},"image":{"@id":"https://www.armis.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/ArmisInc/","https://x.com/ArmisSecurity","https://www.linkedin.com/company/armis-security","https://www.youtube.com/channel/UCOA7EJ3QIE9b7J3WDTO2iFw"]}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel="dns-prefetch" href="//res.cloudinary.com">
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="alternate" type="application/rss+xml" title="Armis » Feed" href="https://www.armis.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Armis » Comments Feed" href="https://www.armis.com/comments/feed/">
+<link rel="shortcut icon" href="https://www.armis.com/wp-content/themes/armis/resources/images/favicon.ico?ver=1738678230">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.armis.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="https://www.armis.com/wp-includes/css/dist/block-library/style.min.css?ver=6.7.1" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="wpml-blocks-css" href="https://www.armis.com/wp-content/plugins/sitepress-multilingual-cms/dist/css/blocks/styles.css?ver=4.6.12" type="text/css" media="all">
+<link rel="stylesheet" id="theme-css-bundle-css" href="https://www.armis.com/wp-content/themes/armis/dist/index.a9be1f8b.css?ver=6.7.1" type="text/css" media="all">
+<link rel="stylesheet" id="theme-styles-css" href="https://www.armis.com/wp-content/themes/armis/style.css?ver=1738678294" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var CLDLB = {"image_delivery":"on","image_optimization":"on","image_format":"auto","image_quality":"auto","image_freeform":"","svg_support":"on","image_preview":"https:\/\/res.cloudinary.com\/demo\/image\/upload\/w_600\/sample.jpg","video_delivery":"on","video_player":"wp","video_controls":"on","video_loop":"off","video_autoplay_mode":"off","video_optimization":"on","video_format":"auto","video_quality":"auto","video_freeform":"","video_preview":"","use_lazy_load":"on","lazy_threshold":"100px","lazy_custom_color":"rgba(153,153,153,0.5)","lazy_animate":"on","lazy_placeholder":"blur","dpr":"2X","lazyload_preview":"https:\/\/res.cloudinary.com\/demo\/image\/upload\/w_600\/sample.jpg","enable_breakpoints":"on","pixel_step":200,"breakpoints":"","max_width":2048,"min_width":200,"breakpoints_preview":"https:\/\/res.cloudinary.com\/demo\/image\/upload\/w_600\/sample.jpg","overlay":"off","crop_sizes":"","adaptive_streaming":"off","adaptive_streaming_mode":"mpd","placeholder":"e_blur:2000,q_1,f_auto","base_url":"https:\/\/res.cloudinary.com\/armis"};!function(){"use strict";function t(t,e){(null==e||e>t.length)&&(e=t.length);for(var i=0,r=new Array(e);i<e;i++)r[i]=t[i];return r}function e(e){return function(e){if(Array.isArray(e))return t(e)}(e)||function(t){if("undefined"!=typeof Symbol&&null!=t[Symbol.iterator]||null!=t["@@iterator"])return Array.from(t)}(e)||function(e,i){if(e){if("string"==typeof e)return t(e,i);var r=Object.prototype.toString.call(e).slice(8,-1);return"Object"===r&&e.constructor&&(r=e.constructor.name),"Map"===r||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?t(e,i):void 0}}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}var i={deviceDensity:window.devicePixelRatio?window.devicePixelRatio:"auto",density:null,config:CLDLB||{},lazyThreshold:0,enabled:!1,sizeBands:[],iObserver:null,pObserver:null,rObserver:null,aboveFold:!0,minPlaceholderThreshold:500,bind:function(t){var e=this;t.CLDbound=!0,this.enabled||this._init();var i=t.dataset.size.split(" ");t.originalWidth=i[0],t.originalHeight=i[1],this.pObserver?(this.aboveFold&&this.inInitialView(t)?this.buildImage(t):(this.pObserver.observe(t),this.iObserver.observe(t)),t.addEventListener("error",(function(i){t.srcset="",t.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="rgba(0,0,0,0.1)"/><text x="50%" y="50%" fill="red" text-anchor="middle" dominant-baseline="middle">%26%23x26A0%3B︎</text></svg>',e.rObserver.unobserve(t)}))):this.setupFallback(t)},buildImage:function(t){t.dataset.srcset?(t.cld_loaded=!0,t.srcset=t.dataset.srcset):(t.src=this.getSizeURL(t),t.dataset.responsive&&this.rObserver.observe(t))},inInitialView:function(t){var e=t.getBoundingClientRect();return this.aboveFold=e.top<window.innerHeight+this.lazyThreshold,this.aboveFold},setupFallback:function(t){var e=this,i=[];this.sizeBands.forEach((function(r){if(r<=t.originalWidth){var n=e.getSizeURL(t,r,!0)+" ".concat(r,"w");-1===i.indexOf(n)&&i.push(n)}})),t.srcset=i.join(","),t.sizes="(max-width: ".concat(t.originalWidth,"px) 100vw, ").concat(t.originalWidth,"px")},_init:function(){this.enabled=!0,this._calcThreshold(),this._getDensity();for(var t=parseInt(this.config.max_width),e=parseInt(this.config.min_width),i=parseInt(this.config.pixel_step);t-i>=e;)t-=i,this.sizeBands.push(t);"undefined"!=typeof IntersectionObserver&&this._setupObservers(),this.enabled=!0},_setupObservers:function(){var t=this,e={rootMargin:this.lazyThreshold+"px 0px "+this.lazyThreshold+"px 0px"},i=this.minPlaceholderThreshold<2*this.lazyThreshold?2*this.lazyThreshold:this.minPlaceholderThreshold,r={rootMargin:i+"px 0px "+i+"px 0px"};this.rObserver=new ResizeObserver((function(e,i){e.forEach((function(e){e.target.cld_loaded&&e.contentRect.width>=e.target.cld_loaded&&(e.target.src=t.getSizeURL(e.target))}))})),this.iObserver=new IntersectionObserver((function(e,i){e.forEach((function(e){e.isIntersecting&&(t.buildImage(e.target),i.unobserve(e.target),t.pObserver.unobserve(e.target))}))}),e),this.pObserver=new IntersectionObserver((function(e,i){e.forEach((function(e){e.isIntersecting&&(e.target.src=t.getPlaceholderURL(e.target),i.unobserve(e.target))}))}),r)},_calcThreshold:function(){var t=this.config.lazy_threshold.replace(/[^0-9]/g,""),e=0;switch(this.config.lazy_threshold.replace(/[0-9]/g,"").toLowerCase()){case"em":e=parseFloat(getComputedStyle(document.body).fontSize)*t;break;case"rem":e=parseFloat(getComputedStyle(document.documentElement).fontSize)*t;break;case"vh":e=window.innerHeight/t*100;break;default:e=t}this.lazyThreshold=parseInt(e,10)},_getDensity:function(){var t=this.config.dpr?this.config.dpr.replace("X",""):"off";if("off"===t)return this.density=1,1;var e=this.deviceDensity;"max"!==t&&"auto"!==e&&(t=parseFloat(t),e=e>Math.ceil(t)?t:e),this.density=e},scaleWidth:function(t,e,i){var r=parseInt(this.config.max_width),n=Math.round(r/i);if(!e){e=t.width;for(var a=Math.round(e/i);-1===this.sizeBands.indexOf(e)&&a<n&&e<r;)e++,a=Math.round(e/i)}return e>r&&(e=r),t.originalWidth<e&&(e=t.originalWidth),e},scaleSize:function(t,e,i){var r=t.dataset.crop?parseFloat(t.dataset.crop):(t.originalWidth/t.originalHeight).toFixed(2),n=this.scaleWidth(t,e,r),a=Math.round(n/r),s=[];return t.dataset.transformationCrop?s.push(t.dataset.transformationCrop):t.dataset.crop||(s.push(t.dataset.crop?"c_fill":"c_scale"),t.dataset.crop&&s.push("g_auto")),s.push("w_"+n),s.push("h_"+a),i&&1!==this.density&&s.push("dpr_"+this.density),t.cld_loaded=n,{transformation:s.join(","),nameExtension:n+"x"+a}},getDeliveryMethod:function(t){return t.dataset.seo&&"upload"===t.dataset.delivery?"images":"image/"+t.dataset.delivery},getSizeURL:function(t,e){var i=this.scaleSize(t,e,!0);return[this.config.base_url,this.getDeliveryMethod(t),"upload"===t.dataset.delivery?i.transformation:"",t.dataset.transformations,"v"+t.dataset.version,t.dataset.publicId+"?_i=AA"].filter(this.empty).join("/")},getPlaceholderURL:function(t){t.cld_placehold=!0;var e=this.scaleSize(t,null,!1);return[this.config.base_url,this.getDeliveryMethod(t),e.transformation,this.config.placeholder,t.dataset.publicId].filter(this.empty).join("/")},empty:function(t){return void 0!==t&&0!==t.length}};window.CLDBind=function(t){t.CLDbound||i.bind(t)},window.initFallback=function(){e(document.querySelectorAll('img[data-cloudinary="lazy"]')).forEach((function(t){CLDBind(t)}))},window.addEventListener("load",(function(){initFallback()})),document.querySelector('script[src*="?cloudinary_lazy_load_loader"]')&&initFallback()}();
+/* ]]> */
+</script>
+<script type="text/javascript" id="wpml-cookie-js-extra">
+/* <![CDATA[ */
+var wpml_cookies = {"wp-wpml_current_language":{"value":"en","expires":1,"path":"\/"}};
+var wpml_cookies = {"wp-wpml_current_language":{"value":"en","expires":1,"path":"\/"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.armis.com/wp-content/plugins/sitepress-multilingual-cms/res/js/cookies/language-cookie.js?ver=4.6.12" id="wpml-cookie-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" src="https://www.armis.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.armis.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.armis.com/wp-content/plugins/handl-utm-grabber-v3/js/js.cookie.js?ver=6.7.1" id="js.cookie-js"></script>
+<script type="text/javascript" id="handl-utm-grabber-js-extra">
+/* <![CDATA[ */
+var handl_utm = [];
+var handl_utm_all_params = ["utm_source","utm_medium","utm_term","utm_content","utm_campaign","first_utm_source","first_utm_medium","first_utm_term","first_utm_content","first_utm_campaign","fbclid","msclkid","gclid","handl_original_ref","handl_landing_page","handl_landing_page_base","handl_ip","handl_ref","handl_url","handl_ref_domain","handl_url_base","gaclientid","organic_source","organic_source_str","user_agent","traffic_source","first_traffic_source","handlID"];
+var handl_utm_cookie_duration = ["30","1"];
+var handl_utm_append_params = ["utm_source","utm_medium","utm_term","utm_content","utm_campaign","gclid"];
+var handl_utm_first_touch_params = ["utm_source","utm_medium","utm_term","utm_content","utm_campaign"];
+var handl_utm_custom_params = [];
+var handl_utm_predefined = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.armis.com/wp-content/plugins/handl-utm-grabber-v3/js/handl-utm-grabber.js?ver=6.7.1" id="handl-utm-grabber-js"></script>
+<link rel="https://api.w.org/" href="https://www.armis.com/wp-json/"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.armis.com/xmlrpc.php?rsd">
+<link rel="shortlink" href="https://www.armis.com/?p=2558503">
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.armis.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.armis.com%2Fblog%2Fbreaking-down-medusa-ransomware%2F">
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.armis.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.armis.com%2Fblog%2Fbreaking-down-medusa-ransomware%2F&amp;format=xml">
+<meta name="generator" content="WPML ver:4.6.12 stt:1,4,3,27,28,2;">
+<style>.handl-hidden{display: none}</style><style>[class^="fieldset-handl_"]{display: none}</style>		<style type="text/css" id="wp-custom-css">
+			.sub-menu h6 {
+	color: #767676;
+}
+
+.page-id-42 .card__image {
+	display: none;
+}
+.page-id-26131 .card__image {
+	display: none;
+}
+
+.page-id-46518 .btn--secondary {
+	border: #7d16ec solid 1px;
+}
+
+.nav {
+	font-size: 1.5rem;
+}
+
+.resource__content h5 {
+	font-weight: 400;
+}
+
+.card__content p {
+	font-weight: 400;
+}
+
+.leader__title p {
+	font-weight: 400;
+}
+
+.list-jobs .list__title h6 {
+	font-weight: 400;
+}
+
+.section-banner .section__content h2 {
+	font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.p_citation {
+	font-size: 80%;
+}
+
+.richtext-entry li {
+	padding-bottom: 8px;
+}
+
+.marquee .marquee__img {
+	margin-left: 25px;
+	margin-right: 25px;
+}
+.marquee .marquee__img > img {
+	max-height: 100px;
+	max-height: 100px;
+	width: auto;
+	height: auto;
+}
+
+.sub-menu .sub__nav {
+    width: 100%;
+}
+.sub-menu .sub__col li a {
+	display: block;
+}
+.sub-menu .sub__nav .sub__nav-desc  {
+	color: #818181;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.footer .footer__entry {
+	width: 100%;
+}
+
+.header__nav .menu-item-has-children:nth-child(3) .sub__nav h6 {
+	height: 65px;
+}
+
+
+.postid-1020678 .section-content-video .section__button {
+	display: none;
+}
+
+.section-tabs .tab__entry {
+	max-width: none;
+}
+
+.lang-switcher {
+	//display: none;
+}
+
+.globe h2 {
+	font-size: 42px;
+}
+.globe p {
+	font-size: 20px;
+	max-width: 850px;
+}
+
+@media (max-width: 1400px) {
+.globe .js-globe hyper-globe {
+    max-height: 100vh;
+    margin-top: 5%;
+}
+}
+
+@media(max-width:1400px) {
+  .globe .blur {
+    padding-top: 5%
+  }
+}
+
+.logo img {
+	width: 127px;
+}
+
+.page-id-1254757 h1 {
+	padding: 10px;
+	background-color: #8017f0;
+}
+.page-id-1254757 h6 {
+	font-weight: normal;
+}
+.page-id-1254757 .section-banner-image .section__wrapper p {
+	font-size: 1.8rem;
+}
+.page-id-1254757 .section-cards ~ .section-cards ~ .section-cards .cards-features .cards__item {
+	width: 50%;
+}
+
+/* Anatomy of Cybersecurity */
+.page-id-2539624 .hero-video {
+	background-color: rgba(0, 0, 0, 1) !important;
+}
+@media(max-width:800px) {
+  .mobile-hide {
+    display: none;
+  }
+}
+
+.page-id-2539624 ul {
+	list-style-position: inside;
+}
+.page-id-2539624 .hero-video__content ul li {
+	text-indent: -1em;
+  padding-left: 1em;
+}
+.page-id-2539624 .form-download .mktoHtmlText a {
+	color: #8017f0 !important;
+}
+
+/* Hide taxonomies from cards */
+.page-id-2393107 .card-article > ul {
+	display: none;
+}
+
+.card-article > ul {
+	display: none;
+}
+
+.section__content ol li {
+	text-indent: -1em;
+  padding-left: 1em;
+}
+
+/* Leadership team */
+/*.cards-leaders .cards__item {
+	width: 20%;
+}*/
+
+/* Investor relations logos */
+.page-id-2541256 .section-columns .section__media {
+	display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-id-2541256 .section-columns .section__media img {
+	width: 200px;
+}
+
+/* RSAC page */
+.executive-meeting-scheduler__profile--name {
+	font-size: 1.4rem;
+}
+.executive-meeting-scheduler__profile--title {
+	font-size: 1.2rem;
+}
+.executive-meeting-scheduler__profiles-row {
+	max-width: 100%;
+	display:inline-flex;
+}
+.executive-meeting-scheduler__profile {
+	flex-basis: 0;
+}
+.executive-meeting-scheduler__profile--avatar img {
+	width: 100px;
+	height: 100px;
+}
+.bookmark-bar__bookmark {
+	font-weight: 700;
+}
+
+/* CTA buttons */
+a.link-more-blue {
+	color: #2abaff;
+	font-weight: bold;
+}
+
+/* Mobile hero text */
+.slider-intro p {
+  
+}
+
+/* Graphic element */
+@media(max-width:1600px) {
+.graphic-element {
+	
+}
+}
+
+/* VIPR */
+.page-id-2544920 .slider-intro h1 {
+	color: #ffffff;
+}
+
+/* CWF */
+.page-template-cyberwarfare .content__statistic .heading {
+	font-size: 26px;
+}
+
+.page-template-cyberwarfare .content__statistic .statistic {
+	font-size: 60px;
+}
+
+.page-template-cyberwarfare .cw-content-sidebar .content {
+	font-size: 20px;
+}
+
+.page-template-cyberwarfare .button-wrapper a {
+  padding: 18px 12px;
+  gap: 10px;
+  background: #2adcea;
+  box-shadow: 0 0 11px #40434747;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  border-radius: 0;
+  transition: .3s ease-in-out all;
+}
+
+ol {
+	list-style-position: inside;
+	margin-top: 10px;
+}
+ol li {
+  list-style-position: inside;
+  text-indent: -1.1em;
+  padding-left: 1.1em;
+}
+.threat-alerts__header--callout-title {
+	padding: 10px;
+}
+
+.card__content h6 a {
+	color: #8017f0;
+}
+
+.article-single .article__content p + h3 {
+	margin-top: 2rem;
+}
+
+.page-id-2554235 .prediction__thumbnail img {
+	object-fit: contain !important;
+	object-position: center !important;
+}
+
+.page-id-2554235 .prediction__thumbnail {
+	background-image: none;
+	background-color: #000;
+}
+
+.page-template-predictions-2025 .prediction-row .predictions .prediction__thumbnail {
+	background-image: none !important;
+}
+
+.mobile-display{
+	display:none;
+}
+.desktop-display{
+	display:block;
+}
+@media (max-width:750px){
+.desktop-display {display:none}
+.mobile-display {display:block}
+}
+
+.section-quote .section__content blockquote {
+	font-size: 2.2rem;
+}
+
+.playbook-title-margin-top {
+     @media (min-width: 1023px) {margin-top: 10%;}
+}
+
+.postid-2556438 .section-download {
+	padding-bottom: 0px;
+}
+
+.postid-2556706 .section-download {
+	padding-bottom: 0px;
+}
+
+.postid-2556439 .section-download {
+	padding-bottom: 0px;
+}
+
+.postid-2556705 .section-download {
+	padding-bottom: 0px;
+}
+
+/* Remove these to unhide sections on the RSAC 2025 page */
+.page-id-2558051 #breached {
+	display: none;
+}
+.page-id-2558051 #suite {
+	display: none;
+}
+/* Remove these to unhide sections on the RSAC 2025 page */		</style>
+		
+	<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Armis Security",
+  "alternateName": "Armis Security Ltd.",
+  "url": "https://armis.com",
+  "logo": "https://www.armis.com/wp-content/themes/armis/resources/images/svg/logo-dark.svg",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "888-452-4011",
+    "contactType": "customer service",
+    "areaServed": "US",
+    "availableLanguage": "en"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/armis-security",
+    "https://twitter.com/ArmisSecurity"
+  ]
+}</script>
+	<script type="text/javascript" async="" src="//munchkin.marketo.net/munchkin.js"></script><script async="" src="https://analytics.ahrefs.com/analytics.js" data-key="WTA7JJBYfVvcEaxDlPZUTg"></script><script type="module" src="https://app.usercentrics.eu/browser-ui/3.63.0/index.module.js"></script><script src="https://info.armis.com/index.php/form/getForm?munchkinId=645-PDC-047&amp;form=1035&amp;url=https%3A%2F%2Fwww.armis.com%2Fblog%2Fbreaking-down-medusa-ransomware%2F&amp;callback=jQuery3710756834475845325_1742357404184&amp;_=1742357404185"></script></head>
+<body class="app_blogs-template-default single single-app_blogs postid-2558503 wp-embed-responsive">
+	
+	
+	<div class="wrapper">
+		<div class="wrapper__overlay js-overlay"></div><!-- /.wrapper__overlay -->
+
+		<div class="wrapper__overlay-alt js-overlay-alt"></div><!-- /.wrapper__overlay-alt -->
+
+		<div class="wrapper__inner">
+			<header class="header header-new has-bar">
+								<div class="header__bar js-bar">
+					<div class="shell">
+						<div class="header__content">
+							<p>Armis Acquires OTORIO</p>
+<a href="https://www.armis.com/newsroom/press/armis-acquires-otorio-to-expand-its-leadership-in-operational-technology-and-cyber-physical-security/" target="" rel="noopener">Read More</a>						</div><!-- /.header__content -->
+						<div class="header__exit js-exit">
+							<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/exit-icon.svg" alt="">
+						</div><!-- /.header__exit -->
+					</div><!-- /.shell -->
+				</div><!-- /.header__bar -->
+						<div class="shell header__shell">
+				<div class="header__logo">
+					<a href="https://www.armis.com/" class="logo">
+						<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/logo-dark.svg" alt="">
+
+						<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/logo-white.svg" alt="">
+					</a>
+				</div><!-- /.header__logo -->
+
+				<div class="header__container js-nav">
+
+					<div class="header__top" data-menu="">
+						<div class="header__top--submenu-header">
+							<a href="#" class="js-header__top--back header__top--back">
+								<svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.14587 1.05725L2.20307 7.99997L9.14587 14.9428" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+								<span>Back</span>
+							</a>
+							<span class="header__top--divider">/</span>
+							<div class="header__top--submenu-title"></div>
+							
+							<div class="header__top--close">
+								<a href="#" class="js-toggle">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.05713 1.05725L7.99994 7.99997L1.05713 14.9428" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+<path d="M14.9429 14.9428L8.00007 8.00009L14.9429 1.05728" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+								</a>
+							</div>
+
+						</div>
+
+						<div class="header__top--search">
+							<a href="#" class="js-search">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</a>
+
+							<div class="header__form">
+								<a class="search-form-close">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.05713 1.05725L7.99994 7.99997L1.05713 14.9428" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+<path d="M14.9429 14.9428L8.00007 8.00009L14.9429 1.05728" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+								</a>
+								<form action="https://www.armis.com/" class="search-form" method="get" role="search">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+
+		<input type="text" title="Search for:" name="s" value="" id="s" placeholder="Search …" class="search__field">
+	</label>
+
+	<button type="submit" class="search__button">
+		GO	</button>
+</form>
+							</div>
+						</div>
+
+						<div class="header__top--demo">
+							<a href="https://www.armis.com/demo">Request a demo</a>
+						</div>
+						<div class="header__top--close">
+							<a href="#" class="js-toggle">
+								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.05713 1.05725L7.99994 7.99997L1.05713 14.9428" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+<path d="M14.9429 14.9428L8.00007 8.00009L14.9429 1.05728" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+							</a>
+						</div>
+					</div>
+
+					<div class="header__nav-alt">
+						<nav class="nav-alt"><ul id="menu-black-bar" class="menu"><li id="menu-item-2541719" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2541719"><a href="https://www.armis.com/cyberwarfare/">The State of Cyberwarfare</a></li>
+<li id="menu-item-89418" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89418"><a href="https://support.armis.com/s/">Support</a></li>
+<li id="menu-item-89419" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89419"><a href="https://www.armis.com/armis-university/">Armis University</a></li>
+</ul></nav>						<div class="lang-switcher">
+							<form id="lang-switcher" method="get"><select name="lang" id="lang-select"><option value="https://www.armis.com/blog/breaking-down-medusa-ransomware/" selected="selected">EN</option></select></form><script type="text/javascript">
+			document.getElementById("lang-select").addEventListener("change", function() {
+				window.location.href = this.value;
+			});
+		</script>						</div><!-- /.lang-switcher -->
+					</div><!-- /.header__nav-alt -->
+
+					<div class="header__wrapper">
+						<div class="header__nav">
+							<nav class="nav">
+	<ul>
+						<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Platform">
+						Platform					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>Armis Platform</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/platform/armis-centrix/" target="">
+																		Armis Centrix™																	</a>
+
+																																			<ul class="ul-lastchild">
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-asset-management-and-security/" target="">
+																						Armis Centrix™ for Asset Management and Security																					</a>
+																				</li>
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-ot-iot-security/" target="">
+																						Armis Centrix™ for OT/ IoT Security																					</a>
+																				</li>
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-ot-iot-security-on-prem/" target="">
+																						Armis Centrix™ for OT/IoT Security (On-Prem)																					</a>
+																				</li>
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-medical-device-security/" target="">
+																						Armis Centrix™ for Medical Device Security																					</a>
+																				</li>
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-vipr-pro-prioritization-and-remediation/" target="">
+																						Armis Centrix™ for Vulnerability Prioritization and Remediation																					</a>
+																				</li>
+																																							<li>
+																					<a href="https://www.armis.com/platform/armis-centrix-for-early-warning/" target="">
+																						Armis Centrix™ for Early Warning																					</a>
+																				</li>
+																																					</ul>
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/armis-labs/" target="">
+																		Armis Labs																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Extensions</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/platform/armis-asset-intelligence-engine/" target="">
+																		Armis Asset Intelligence Engine																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/platform/telemetry-intelligence/" target="">
+																		Telemetry Intelligence																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/platform/integrations/" target="">
+																		Data Sources																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/integrations-adapters/" target="">
+																		Integrations and Adapters																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/platform/armis-centrix-smart-active-querying/" target="">
+																		Armis Centrix™ Smart Active Querying																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																																		<div class="sub__col sub__col--link">
+											<h6>Cybersecurity Insights from Experts and Billions of Assets</h6>
+
+											<a href="https://www.armis.com/armis-labs/" class="sub__col--cta">
+												<span class="promo-icon">
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.203125" width="24" height="24" rx="12" fill="#2ABAFF"></rect>
+<path d="M12.6465 18.056L18.7026 12L12.6465 5.94393" stroke="black" stroke-width="2" stroke-linecap="round"></path>
+<path d="M6.14844 11C5.59615 11 5.14844 11.4477 5.14844 12C5.14844 12.5523 5.59615 13 6.14844 13V11ZM19.1455 11L6.14844 11V13L19.1455 13V11Z" fill="black"></path>
+</svg>
+												</span>
+												Armis Labs											</a>
+
+											<a href="https://www.armis.com/armis-labs/" class="sub__image image-fit" target="">
+												<img width="300" height="200" src="https://www.armis.com/wp-content/uploads/2024/09/Web_Navigation_Platform_ArmisLabs-300x200.jpg" class="attachment-medium size-medium" alt="armis labs" decoding="async" fetchpriority="high" srcset="https://www.armis.com/wp-content/uploads/2024/09/Web_Navigation_Platform_ArmisLabs-300x200.jpg 300w, https://www.armis.com/wp-content/uploads/2024/09/Web_Navigation_Platform_ArmisLabs-1024x683.jpg 1024w, https://www.armis.com/wp-content/uploads/2024/09/Web_Navigation_Platform_ArmisLabs-768x512.jpg 768w, https://www.armis.com/wp-content/uploads/2024/09/Web_Navigation_Platform_ArmisLabs.jpg 1500w" sizes="(max-width: 300px) 100vw, 300px">											</a>
+										</div><!-- /.sub__col -->
+																								</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+								<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Industries">
+						Industries					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>Industries</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/manufacturing/" target="">
+																		Manufacturing																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/information-technology/" target="">
+																		Information Technology																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/telecommunications-and-media/" target="">
+																		Telecommunications and Media																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/retail/" target="">
+																		Retail																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/hospitality/" target="">
+																		Hospitality																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/transportation-and-logistics/" target="">
+																		Transportation and Logistics																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/automotive/" target="">
+																		Automotive																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/energy-utilities/" target="">
+																		Energy and Utilities																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/health-and-medical/" target="">
+																		Health and Medical																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/financial-services/" target="">
+																		Financial Services																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Public Sector</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/government/" target="">
+																		Government																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/defense/" target="">
+																		Defense																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armisfederal.com/" target="">
+																		Federal Government																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/state-and-local-government/" target="">
+																		State and Local Government																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/higher-education/" target="">
+																		Higher Education																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cybersecurity/k-12-school-districts/" target="">
+																		K-12 School Districts																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																																		<div class="sub__col sub__col--link">
+											<h6>Securing the Automotive Manufacturing Process with Armis Centrix™</h6>
+
+											<a href="https://www.armis.com/cybersecurity/automotive/" class="sub__col--cta">
+												<span class="promo-icon">
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.203125" width="24" height="24" rx="12" fill="#2ABAFF"></rect>
+<path d="M12.6465 18.056L18.7026 12L12.6465 5.94393" stroke="black" stroke-width="2" stroke-linecap="round"></path>
+<path d="M6.14844 11C5.59615 11 5.14844 11.4477 5.14844 12C5.14844 12.5523 5.59615 13 6.14844 13V11ZM19.1455 11L6.14844 11V13L19.1455 13V11Z" fill="black"></path>
+</svg>
+												</span>
+												Securing the Automotive Manufacturing Process with Armis Centrix™ 											</a>
+
+											<a href="https://www.armis.com/cybersecurity/automotive/" class="sub__image image-fit" target="">
+												<img width="300" height="169" src="https://res.cloudinary.com/armis/images/c_scale,w_300,h_169/f_auto,q_auto/v1705500561/images/auto-manufacturing-assembly-line/auto-manufacturing-assembly-line.jpg?_i=AA" class="attachment-medium size-medium wp-image-2539718" alt="auto manufacturing assembly line" decoding="async" data-public-id="images/auto-manufacturing-assembly-line/auto-manufacturing-assembly-line.jpg" data-format="jpg" data-transformations="f_auto,q_auto" data-version="1705500561" data-seo="1" data-responsive="1" data-size="300 169" data-delivery="upload" onload=";window.CLDBind?CLDBind(this):null;" data-cloudinary="lazy">											</a>
+										</div><!-- /.sub__col -->
+																								</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+								<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Solutions">
+						Solutions					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>Asset Management and Security</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/solutions/full-asset-inventory-and-cmdb-enrichment/" target="">
+																		Asset Inventory and CMDB Enrichment																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/attack-surface-management-and-security-posture/" target="">
+																		Attack Surface Management (ASM)																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/threat-detection-and-response/" target="">
+																		Threat Detection and Response																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/it-and-security-hygiene-and-gap-analysis/" target="">
+																		Asset Hygiene and Gap Analysis																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/network-security-segmentation-and-enforcement/" target="">
+																		Network Segmentation																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/internal-and-external-compliance-reporting/" target="">
+																		Compliance Reporting																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>OT/ IoT <br>Security</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/solutions/deep-ot-visibility/" target="">
+																		Deep OT Visibility																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/bridge-the-it-ot-gap/" target="">
+																		Bridge the IT/ OT Gap																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/monitor-and-protect-ot-networks/" target="">
+																		OT Security																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/attack-path-mapping/" target="">
+																		Attack Path Mapping																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/secure-remote-access/" target="">
+																		Armis Centrix™ OT/ IoT Secure Remote Access (SRA)																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/ot-iot-environment-hygiene/" target="">
+																		OT/ IoT Hygiene and Gap Analysis																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/ot-iot-vulnerability-and-risk-management/" target="">
+																		OT Vulnerability and Risk Management																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/process-integrity/" target="">
+																		Process Integrity																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/ot-iot-lifecycle-management/" target="">
+																		Lifecycle Management																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/intelligent-ot-iot-network-segmentation/" target="">
+																		OT/IoT Network Segmentation																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Medical Device Security</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/solutions/visibility-and-security-across-the-entire-medical-fleet/" target="">
+																		Medical Fleet Visibility																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/iomt-it-convergence-management/" target="">
+																		Bridging the IoMT/IT Gap																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/asset-behavior-monitoring-and-compliance/" target="">
+																		Medical Device Security																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/understand-medical-device-utilization/" target="">
+																		Medical Device Utilization																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/vulnerability-and-threat-monitoring/" target="">
+																		IoMT Vulnerability and Risk Management																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/fda-recall-and-security-advisories-management/" target="">
+																		FDA Recall and Security Advisories Management																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/automated-network-segmentation-and-enforcement/" target="">
+																		IT/IoMT Segmentation																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Vulnerability Prioritization and Remediation</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/solutions/unify-vulnerabilities-and-security-findings/" target="">
+																		Unify Vulnerabilities and Security Findings																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/enrich-with-threat-and-business-context/" target="">
+																		Enrich With Threat and Business Context																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/prioritize-vulnerabilities-and-security-findings/" target="">
+																		Prioritize Vulnerabilities and Security Findings																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/assign-ownership-and-remediate/" target="">
+																		Assign Ownership and Remediate																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/monitor-track-progress-and-report/" target="">
+																		Monitor, Track Progress and Report																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Compliance Frameworks</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/solutions/cis-critical-security-controls/" target="">
+																		CIS Critical Security Controls																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/cyber-assessment-framework-caf/" target="">
+																		Cyber Assessment Framework (CAF)																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/dora/" target="">
+																		DORA																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/mitre-attck-for-ics/" target="">
+																		MITRE ATT&amp;CK for ICS																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/nis2/" target="">
+																		NIS2																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/nist/" target="">
+																		NIST																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/soci/" target="">
+																		SOCI																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/solutions/zero-trust/" target="">
+																		Zero Trust																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																																																							</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+								<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Resources">
+						Resources					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>Resources</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/resources/" target="">
+																		Resource Center																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/resources/case-studies/" target="">
+																		Case Studies																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/faq/" target="">
+																		FAQ																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/cem-playbook/" target="">
+																		Cyber Exposure Management Playbook																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Armis</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/blog/" target="">
+																		Blog																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/podcasts/" target="">
+																		Podcasts																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/armis-labs/" target="">
+																		Armis Labs Research																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/armis-university/" target="">
+																		Armis University																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																																		<div class="sub__col sub__col--link">
+											<h6>The Invisible Front Line: AI-powered Cyber Threats Illuminate the Dark Side</h6>
+
+											<a href="https://www.armis.com/cyberwarfare/" class="sub__col--cta">
+												<span class="promo-icon">
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.203125" width="24" height="24" rx="12" fill="#2ABAFF"></rect>
+<path d="M12.6465 18.056L18.7026 12L12.6465 5.94393" stroke="black" stroke-width="2" stroke-linecap="round"></path>
+<path d="M6.14844 11C5.59615 11 5.14844 11.4477 5.14844 12C5.14844 12.5523 5.59615 13 6.14844 13V11ZM19.1455 11L6.14844 11V13L19.1455 13V11Z" fill="black"></path>
+</svg>
+												</span>
+												The Invisible Front Line: AI-powered Cyber Threats Illuminate the Dark Side 											</a>
+
+											<a href="https://www.armis.com/cyberwarfare/" class="sub__image image-fit" target="">
+												<img width="300" height="264" src="https://www.armis.com/wp-content/uploads/2024/04/cyberwarfare-report-2024-featured-300x264.jpg" class="attachment-medium size-medium" alt="The State of Cyberwarfare 2024" decoding="async" srcset="https://www.armis.com/wp-content/uploads/2024/04/cyberwarfare-report-2024-featured-300x264.jpg 300w, https://www.armis.com/wp-content/uploads/2024/04/cyberwarfare-report-2024-featured.jpg 345w" sizes="(max-width: 300px) 100vw, 300px">											</a>
+										</div><!-- /.sub__col -->
+																								</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+								<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Partners">
+						Partners					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>Partners</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/partner-programs/" target="">
+																		Partner Programs																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/technology-partners/" target="">
+																		Technology Partners																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/service-providers/" target="">
+																		Service Providers																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Partner Portal</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://partnerportal.armis.com/English/" target="">
+																		Partner Portal Access																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																															</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+								<li class="menu-item-has-children">
+					<!-- <div class="nav-mobile__icon">
+											</div> -->
+					<a href="#" target="" data-title="Company">
+						Company					</a>
+					<div class="sub-menu" style="top: 142px;">
+						<div class="sub__cols">
+							<div class="shell">
+								<div class="sub__col">
+									<div class="sub__navs">
+																						<div class="sub__nav">
+													<h6>About Us</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/about/about-armis/" target="">
+																		Company Overview																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/about/newsroom/" target="">
+																		Newsroom																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/about/analyst-relations/" target="">
+																		Analyst Relations																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/about/investor-relations/" target="">
+																		Investor Relations																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/awards/" target="">
+																		Awards																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/about/our-leadership/" target="">
+																		Our Leadership																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																								<div class="sub__nav">
+													<h6>Connect With Us</h6>
+													
+																											<ul>
+																															<li>
+																	<a href="https://www.armis.com/armis-careers/" target="">
+																		Careers																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/events/" target="">
+																		Events																	</a>
+
+																																	</li>
+																															<li>
+																	<a href="https://www.armis.com/about/contact-us/" target="">
+																		Contact Us																	</a>
+
+																																	</li>
+																													</ul>
+																									</div>
+																					</div><!-- /.sub__navs -->
+								</div><!-- /.sub__col -->
+
+																															</div><!-- /.shell -->
+						</div><!-- /.sub__cols -->
+											</div><!-- /.sub-menu -->
+				</li>
+					</ul>
+</nav><!-- /.nav -->
+
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var headers = document.querySelectorAll('.sub__nav h6');
+        headers.forEach(function(header) {
+            if (header.textContent.includes('OT/ IoT Security')) {
+                header.innerHTML = header.innerHTML.replace(/Security/, '<br>Security');
+            }
+        });
+    });
+</script>
+						</div><!-- /.header__nav -->
+
+						<div class="header__nav-secondary">
+							<nav class="nav-alt"><ul id="menu-black-bar-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2541719"><a href="https://www.armis.com/cyberwarfare/">The State of Cyberwarfare</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89418"><a href="https://support.armis.com/s/">Support</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89419"><a href="https://www.armis.com/armis-university/">Armis University</a></li>
+</ul></nav>							
+							
+		<div class="language-switcher-mobile-wrapper">
+			<div class="language-switcher-mobile">
+				<div class="language-wrapper">
+					<div class="selected-language">
+						<span class="arrow"></span>
+						<span class="code">EN</span>
+						<span class="divider">|</span>
+						<span class="native-name">English</span>
+					</div>
+					<div class="language-options">
+											</div>
+				</div>
+			</div>
+		</div>
+	
+							<div class="header__nav--logo-mobile">
+								<svg width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.3611 0.39285C17.5765 0.13095 17.7919 0 18.1508 0C18.5098 0 18.6533 0.0654754 18.9405 0.39285L27.4477 11.851H23.7074C22.7741 11.851 22.128 12.1784 21.6255 12.8332L13.6998 23.5057H0.203125L17.3611 0.39285ZM35.2302 31.7491H33.6939C33.3637 31.7491 33.0909 31.5069 33.0909 31.2057V19.3481C33.0909 19.0469 33.3565 18.7981 33.6867 18.7981H39.5448C40.2269 18.7981 40.9017 18.9029 41.5406 19.119C42.1078 19.3415 42.6247 19.6493 43.077 20.0421C43.2923 20.2386 43.4933 20.4612 43.6585 20.6969C43.8308 20.9392 43.9743 21.1945 44.0892 21.4564C44.3261 22.0326 44.441 22.6481 44.441 23.2635C44.441 24.2653 44.1754 25.1231 43.6441 25.8302C43.2349 26.3933 42.6821 26.8581 42.036 27.1789C41.9068 27.2379 41.8063 27.3426 41.7632 27.4736C41.7273 27.6046 41.7632 27.7421 41.8565 27.8337C42.3375 28.423 42.7898 28.9795 43.2205 29.5099C43.6513 30.0337 44.1036 30.5902 44.5702 31.1861C44.6707 31.2973 44.6994 31.4414 44.6564 31.5724C44.6133 31.6968 44.4769 31.7819 44.3333 31.7688H42.3734C42.1939 31.7688 42.0145 31.7229 41.8493 31.6444C41.6842 31.5724 41.5406 31.4742 41.4258 31.3432C41.2032 31.0747 40.9878 30.8063 40.7725 30.5379L40.1192 29.7325L38.8413 28.0891C38.7264 27.9515 38.5829 27.8468 38.4106 27.7683C38.2454 27.6896 38.0731 27.6504 37.8865 27.6438H36.3932C36.063 27.6438 35.7974 27.8795 35.7902 28.1807V28.1938V31.2188C35.7902 31.3628 35.7328 31.5003 35.6251 31.6051C35.5174 31.7099 35.3666 31.7623 35.2087 31.7623L35.2302 31.7491ZM36.4148 25.4308H39.5592C39.8177 25.4308 40.0761 25.3784 40.313 25.2867C40.5786 25.2016 40.8299 25.0641 41.0309 24.8808C41.2391 24.6843 41.4114 24.4552 41.5335 24.2064C41.677 23.9052 41.7416 23.5778 41.7273 23.2505C41.7273 23.0212 41.6986 22.7987 41.6483 22.5761C41.6268 22.4451 41.5837 22.3207 41.5335 22.1963C41.4832 22.0719 41.4258 21.954 41.3612 21.8362C41.196 21.5939 40.9735 21.3844 40.7007 21.2338C40.3489 21.057 39.9541 20.9719 39.5592 20.985H36.4148C36.0845 20.985 35.8189 21.2207 35.8117 21.5219V21.535V24.8808C35.8117 25.182 36.0702 25.4242 36.4004 25.4308H36.4148ZM74.521 28.508L73.7098 29.608L73.7242 29.6211C73.638 29.7389 73.6021 29.883 73.6237 30.027C73.6452 30.1646 73.7385 30.2889 73.8749 30.361C74.0185 30.4526 74.1549 30.5377 74.2841 30.6163C74.4134 30.6949 74.5426 30.7669 74.6718 30.8389C74.8728 30.9568 75.0882 31.0615 75.3108 31.1663C75.5333 31.2711 75.763 31.3628 75.9928 31.4413C76.4881 31.6312 77.005 31.7687 77.5291 31.8538C78.1752 31.9651 78.8429 32.011 79.5033 31.9978C80.2428 31.9978 80.975 31.9193 81.6929 31.7491C82.3103 31.605 82.8919 31.3496 83.4016 31.0027C83.8754 30.6818 84.2559 30.2628 84.5071 29.7783C84.7728 29.2217 84.9092 28.6259 84.8948 28.0235C84.902 27.5128 84.8087 27.0086 84.6005 26.5372C84.4354 26.1509 84.1841 25.8039 83.861 25.5092C83.7821 25.4307 83.7031 25.3652 83.6169 25.2997C83.5308 25.2343 83.4375 25.1753 83.337 25.1164C83.1718 25.0116 82.9995 24.92 82.8201 24.8348C82.619 24.7431 82.4467 24.6646 82.2888 24.6057L81.9658 24.5009C81.8831 24.4774 81.8042 24.4572 81.729 24.438L81.6427 24.4158C81.4489 24.3569 81.2622 24.3045 81.0612 24.2652C80.9991 24.2531 80.7943 24.214 80.5358 24.1647C79.9576 24.0545 79.1104 23.8929 78.9864 23.8658C78.9283 23.8531 78.8687 23.8411 78.8081 23.8288L78.8079 23.8288L78.8078 23.8288C78.6813 23.8032 78.5503 23.7768 78.4193 23.7414C78.3106 23.712 78.2041 23.6847 78.1011 23.6583L78.1008 23.6582L78.0985 23.6576C78.0189 23.6372 77.9413 23.6173 77.8665 23.5974C77.687 23.5516 77.5147 23.4992 77.3496 23.4402C77.0553 23.3355 76.7825 23.1849 76.5527 22.995C76.3517 22.8248 76.244 22.5891 76.244 22.3402C76.2368 22.0914 76.3302 21.8557 76.4953 21.6658C76.5886 21.5742 76.6891 21.4891 76.7968 21.417C76.9117 21.345 77.0337 21.2795 77.1558 21.2206C77.4286 21.0962 77.7157 21.0111 78.0101 20.9522C78.0948 20.9367 78.1771 20.9281 78.2583 20.9196C78.3147 20.9137 78.3706 20.9078 78.4265 20.8998C78.5629 20.8802 78.6921 20.8802 78.807 20.8802C79.4818 20.8736 80.1423 20.9849 80.7668 21.2141C81.2694 21.3909 81.7504 21.62 82.2027 21.8885C82.3319 21.967 82.497 21.9997 82.6549 21.9736C82.8129 21.9474 82.9565 21.8688 83.0498 21.7444L83.8682 20.6837C83.9687 20.5724 84.0118 20.4218 83.9831 20.2778C83.9544 20.1337 83.8826 20.0159 83.7318 19.9242C83.623 19.858 83.3461 19.7067 83.1518 19.6005L83.1517 19.6005L83.0555 19.5479C83.0236 19.5304 82.9971 19.5158 82.978 19.5051C82.7985 19.4135 82.6119 19.3218 82.418 19.2302C82.1165 19.0992 81.5494 18.9159 81.1832 18.8242C80.9607 18.7718 80.7381 18.726 80.5156 18.6933C79.9843 18.6213 79.4531 18.5885 78.9218 18.5885C78.2901 18.5885 77.6655 18.6474 77.0553 18.7653C76.445 18.8832 75.8564 19.0861 75.3108 19.3677C74.7939 19.6688 74.3559 20.0748 74.0329 20.5528C73.6955 21.07 73.5303 21.6986 73.5303 22.445C73.5232 22.9033 73.6165 23.3682 73.8031 23.7938C73.9754 24.167 74.2339 24.5009 74.5569 24.7825C74.8656 25.0574 75.2174 25.2932 75.6051 25.47C76.2081 25.745 77.2132 26.033 77.9455 26.1836C78.0153 26.1964 78.0852 26.2101 78.1542 26.2237C78.2625 26.245 78.3687 26.2658 78.4695 26.2818L78.9362 26.3604C79.1587 26.3932 79.3741 26.4259 79.5679 26.4652L79.6567 26.4831L79.6569 26.4832L79.657 26.4832C79.8229 26.5166 79.9923 26.5507 80.1566 26.5896C80.2176 26.6049 80.2773 26.6197 80.3354 26.6341C80.4759 26.6688 80.607 26.7012 80.7238 26.7336C80.8817 26.7729 81.0396 26.8318 81.1904 26.8908C81.4489 27.0021 81.6858 27.1527 81.8868 27.336C82.0663 27.5259 82.1596 27.7616 82.1596 28.0104C82.1596 28.2199 82.1021 28.4295 81.9873 28.6127C81.8581 28.8288 81.6786 29.0187 81.4632 29.1628C81.2048 29.3395 80.9176 29.4705 80.6089 29.5556C80.2284 29.6669 79.8336 29.7193 79.4387 29.7128C78.6131 29.7193 77.7947 29.549 77.0481 29.2151C76.4594 28.9598 75.8923 28.6782 75.3395 28.364C75.2102 28.2854 75.0523 28.2526 74.8944 28.2788C74.7364 28.2985 74.6 28.3836 74.521 28.508ZM87.5223 30.2626C87.5223 30.1054 87.5438 29.9549 87.5869 29.8042C87.63 29.6602 87.6874 29.5227 87.7736 29.3983C87.8525 29.2739 87.9459 29.156 88.0607 29.0513C88.1684 28.9465 88.2976 28.8549 88.4341 28.7828C88.5704 28.7043 88.7212 28.6519 88.872 28.6126C89.0299 28.5733 89.195 28.5537 89.3602 28.5537C89.5253 28.5537 89.6904 28.5733 89.8555 28.6126C90.1642 28.6911 90.4514 28.8417 90.6739 29.0513C90.7888 29.156 90.8821 29.2739 90.9611 29.3983C91.0401 29.5292 91.1047 29.6668 91.1477 29.8042C91.1908 29.9549 91.2123 30.1054 91.2123 30.2626C91.2123 30.4917 91.1621 30.7209 91.0688 30.9304C90.8821 31.3429 90.5303 31.6703 90.0852 31.8471C89.8555 31.9387 89.6114 31.9846 89.3602 31.9846C89.195 31.9846 89.0299 31.9649 88.872 31.9191C88.7212 31.8798 88.5704 31.8209 88.4341 31.7488C88.2976 31.6768 88.1684 31.5852 88.0607 31.4804C87.9459 31.3757 87.8525 31.2578 87.7736 31.1334C87.6874 31.009 87.63 30.865 87.5869 30.7275C87.5438 30.5769 87.5151 30.4262 87.5151 30.2691L87.5223 30.2626ZM87.9746 30.2626C87.9746 30.4394 88.0105 30.6227 88.0823 30.7863C88.1469 30.9435 88.2474 31.0876 88.3766 31.212C88.4987 31.3298 88.6494 31.428 88.8145 31.5001C88.9868 31.5721 89.1663 31.6048 89.353 31.6048C89.5396 31.6048 89.7335 31.5721 89.9058 31.5001C90.2504 31.3625 90.516 31.1072 90.6452 30.7863C90.7888 30.4524 90.7888 30.0793 90.6452 29.7388C90.5806 29.5816 90.4729 29.4376 90.3509 29.3132C90.2216 29.1953 90.0709 29.0971 89.9058 29.0316C89.7335 28.9596 89.5468 28.9269 89.353 28.9269C89.1663 28.9269 88.9797 28.9596 88.8145 29.0316C88.6494 29.0971 88.4987 29.1953 88.3766 29.3132C88.2546 29.4376 88.1541 29.5816 88.0823 29.7388C88.0105 29.9025 87.9746 30.0793 87.9746 30.2626ZM88.714 29.3917H89.4966C89.5827 29.3917 89.6689 29.4049 89.7478 29.431C89.8196 29.4572 89.8842 29.4965 89.9417 29.5424C89.9991 29.5882 90.0422 29.6471 90.0709 29.7126C90.0996 29.7846 90.114 29.8567 90.114 29.9352C90.114 29.9941 90.1068 30.0596 90.0781 30.112C90.0565 30.1578 90.0278 30.2036 89.9919 30.243C89.9632 30.2757 89.9273 30.3084 89.8842 30.328C89.8487 30.3475 89.8132 30.3605 89.7777 30.3735L89.7765 30.3739V30.387L89.7981 30.4197C89.7981 30.4197 89.8196 30.4524 89.8268 30.4721L90.1714 31.1006H89.6832L89.3673 30.4721H89.1161V31.1006H88.6781L88.7069 29.3852L88.714 29.3917ZM89.4032 30.1906C89.475 30.1906 89.554 30.1709 89.6042 30.1185C89.6545 30.0661 89.6832 30.0007 89.6832 29.9287C89.6832 29.8567 89.6617 29.7912 89.6114 29.7388C89.5612 29.693 89.4894 29.6668 89.4176 29.6733H89.1663V30.184H89.4104L89.4032 30.1906ZM21.0299 29.8569C21.1734 29.7653 21.3457 29.7129 21.5252 29.7129H21.5324H27.0388C27.2182 29.7194 27.3905 29.7653 27.5341 29.8569C27.6849 29.942 27.8069 30.0599 27.8931 30.1974L28.4746 31.2581C28.654 31.592 29.0274 31.7557 29.3289 31.7557H31.1021C31.4323 31.7557 31.54 31.52 31.4036 31.2777L24.6697 19.0142C24.5907 18.8702 24.4256 18.7981 24.282 18.7981C24.1384 18.7981 23.9733 18.8702 23.8943 19.0142L17.1603 31.2777C17.0239 31.52 17.1316 31.7557 17.4619 31.7557H19.2351C19.5366 31.7557 19.9099 31.592 20.0894 31.2581L20.6709 30.1974C20.7571 30.0534 20.8791 29.942 21.0299 29.8569ZM22.5088 27.0611L24.0235 24.1409H24.0379C24.1025 24.0034 24.1887 23.9314 24.2892 23.9314C24.3897 23.9314 24.4758 23.9969 24.5404 24.1409L26.0552 27.0611C26.1198 27.1724 26.1198 27.2968 26.0624 27.4082C25.9906 27.5129 25.8542 27.5718 25.7178 27.5587H22.8462C22.7098 27.5718 22.5734 27.5129 22.5016 27.4082C22.437 27.2968 22.4441 27.1659 22.5088 27.0611ZM62.4818 19.0794V31.2054C62.4818 31.3495 62.4244 31.4869 62.3095 31.5917C62.209 31.6965 62.0582 31.7554 61.9003 31.7554H60.364C60.206 31.7554 60.0481 31.6965 59.9404 31.5917C59.8255 31.4935 59.7609 31.3495 59.7609 31.2054V25.7578C59.7609 25.6007 59.725 25.5091 59.6604 25.4829C59.5958 25.4567 59.4953 25.4829 59.3948 25.6335L55.7335 29.6471C55.6473 29.765 55.5037 29.8304 55.353 29.8304C55.2022 29.8304 55.0586 29.7584 54.9725 29.6471L51.2824 25.6204C51.1819 25.5025 51.0886 25.4567 51.0168 25.4763C50.945 25.4959 50.8948 25.5876 50.8948 25.7448V31.1923C50.8948 31.3363 50.8373 31.4739 50.7225 31.5786C50.6148 31.6899 50.4568 31.7488 50.2917 31.7423H48.7769C48.4467 31.7423 48.1811 31.4935 48.1739 31.1923V19.0794C48.1667 19.0139 48.1883 18.9484 48.2313 18.9026C48.2744 18.8502 48.339 18.8175 48.4108 18.8109C48.5616 18.7913 48.7051 18.8437 48.7985 18.955L54.9222 25.8757C55.0227 25.9739 55.1663 26.0329 55.3099 26.0329C55.4535 26.0329 55.5971 25.9739 55.6976 25.8757L61.8429 18.9746C61.929 18.8633 62.0798 18.8044 62.2305 18.8306C62.3669 18.8437 62.4674 18.955 62.4603 19.0794H62.4818ZM67.4854 31.7488H69.0217C69.1796 31.7488 69.3376 31.6899 69.4453 31.5851C69.5601 31.4804 69.6247 31.3429 69.6247 31.1988V19.3609C69.6247 19.2103 69.5601 19.0728 69.4453 18.968C69.3304 18.8633 69.1796 18.8109 69.0217 18.8109H67.4854C67.3274 18.8043 67.1767 18.8633 67.069 18.968C66.9541 19.0728 66.9039 19.2168 66.9039 19.3609V31.1988C66.8967 31.3429 66.9613 31.4804 67.069 31.5851C67.1767 31.6964 67.3274 31.7488 67.4854 31.7488Z" fill="white"></path>
+</svg>
+							</div>
+						</div><!-- /.header__nav-alt -->
+
+
+						<div class="header__actions">
+							<div class="header__search">
+								<a href="#" class="js-search">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</a>
+
+								<div class="header__form">
+									<form action="https://www.armis.com/" class="search-form" method="get" role="search">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+
+		<input type="text" title="Search for:" name="s" value="" id="s" placeholder="Search …" class="search__field">
+	</label>
+
+	<button type="submit" class="search__btn">
+		Search	</button>
+</form>
+								</div><!-- /.header__form -->
+							</div><!-- /.header__search -->
+															<div class="header__button">
+									<a href="https://www.armis.com/demo/" class="btn btn--purple" target="" rel="noopener">Request a Demo</a>								</div><!-- /.header__button -->
+													</div><!-- /.header__actions -->
+					</div><!-- /.header__wrapper -->
+				</div><!-- /.header__container -->
+
+				<div class="header__toggle">
+					<div class="menu-toggle js-toggle">
+						<span></span>
+
+						<span></span>
+
+						<span></span>
+					</div><!-- /.menu-toggle js-toggle -->
+				</div><!-- /.header__toggle -->
+			</div><!-- /.shell -->
+		</header><!-- /.header -->
+
+		<div class="main">
+<nav class="breadcrumbs">
+	<div class="shell">
+		<ul><li><a href="https://www.armis.com/" target="_self">Home</a></li><li>Blogs</li><li>Breaking Down Medusa Ransomware</li></ul>	</div><!-- /.shell -->
+</nav><!-- /.breadcrumbs -->
+
+<div class="article-single">
+	<div class="article__head">
+		<div class="shell">
+			<div class="article__wrapper">
+				<div class="article__title">
+					<h6>
+						Mar 14, 2025					</h6>
+
+					<h1>Breaking Down Medusa Ransomware</h1>
+				</div><!-- /.article__title -->
+
+									<div class="article__author">
+						<div class="card-author">
+							<div class="card__image image-fit">
+								<img width="400" height="400" src="https://res.cloudinary.com/armis/images/c_scale,w_248,h_248/f_auto,q_auto/v1733758808/Michael-Freeman-author/Michael-Freeman-author.jpg?_i=AA" class="attachment-small size-small wp-image-2555145" alt="Michael Freeman - blog author" decoding="async" data-public-id="Michael-Freeman-author/Michael-Freeman-author.jpg" data-format="jpg" data-transformations="f_auto,q_auto" data-version="1733758808" data-seo="1" data-responsive="1" data-size="400 400" data-delivery="upload" onload=";window.CLDBind?CLDBind(this):null;" data-cloudinary="lazy">							</div><!-- /.card__image -->
+							<div class="card__content">
+								<h6>
+																			<a href="https://www.armis.com/author/michael-freeman/">
+									
+										By Michael Freeman																			</a>
+																	</h6>
+
+								<p>Head of Threat Intelligence</p>
+							</div><!-- /.card__content -->
+						</div><!-- /.card-author -->
+					</div><!-- /.article__author -->
+							</div><!-- /.article__wrapper -->
+							<div class="article__image image-fit">
+					<img width="359" height="160" src="https://res.cloudinary.com/armis/images/c_scale,w_359,h_160/f_auto,q_auto/v1741987026/hacker-in-hoodie-on-computer-2477533867-thumbnail/hacker-in-hoodie-on-computer-2477533867-thumbnail.jpg?_i=AA" class="attachment-full size-full wp-image-2558510" alt="back of hacker in a hoodie sitting at a computer" decoding="async" data-public-id="hacker-in-hoodie-on-computer-2477533867-thumbnail/hacker-in-hoodie-on-computer-2477533867-thumbnail.jpg" data-format="jpg" data-transformations="f_auto,q_auto" data-version="1741987026" data-seo="1" data-responsive="1" data-size="359 160" data-delivery="upload" onload=";window.CLDBind?CLDBind(this):null;" data-cloudinary="lazy">				</div><!-- /.article__image -->
+					</div><!-- /.shell -->
+	</div><!-- /.article__head -->
+
+	<div class="article__body">
+		<div class="shell">
+			<div class="article__wrapper">
+				<div class="article__content richtext-entry">
+					<style>
+table.blog-table {
+  @media (max-width: 1000px) {display: block; overflow-x: auto; white-space: nowrap;}
+}
+table.blog-table td, table.blog-table th {
+  border: 1px solid #CCCCCC;  
+  padding: 10px 10px;
+  text-align: center;
+}
+table.blog-table thead {
+  background: #F9FAFB;
+}
+table.blog-table thead th {
+}
+</style>
+<p>Ransomware attacks continue to evolve, posing significant threats to organizations of all sizes. Among these threats, Medusa ransomware has emerged as a particularly dangerous adversary, targeting businesses with increasingly sophisticated techniques.</p>
+<p>This report provides insights from Armis Labs on Medusa ransomware, incorporating insights from multiple threat intelligence sources, including FBI, CISA, and MS-ISAC advisories. It details Medusa’s tactics, techniques, and procedures (TTPs), indicators of compromise (IOCs), and mitigation strategies to assist organizations in defending against this evolving ransomware threat.</p>
+<h2>Overview of Medusa Ransomware</h2>
+<p>Medusa ransomware was first identified in June 2021, operating as a Ransomware-as-a-Service (RaaS) model. Initially a closed-group operation, Medusa has since expanded into an affiliate-based ecosystem. Medusa is distinct from the older MedusaLocker variant and the unrelated Medusa mobile malware.</p>
+<p><strong>&nbsp;Key Facts:</strong></p>
+<ul>
+<li>Tracked by Symantec as “Spearwing”</li>
+<li>Over 300 confirmed victims since inception</li>
+<li>42% surge in attacks between 2023 and 2024</li>
+<li>More than 40 incidents reported in early 2025</li>
+<li>Targeted industries: Healthcare, manufacturing, education, technology, government, legal, and insurance</li>
+<li>Ransom demands range from $100,000 to $15 million</li>
+<li>Extortion tactics: Double extortion (data encryption and leaks), with a newly observed triple extortion involving an additional ransom post-payment</li>
+</ul>
+<h2>Potential Impact</h2>
+<p>The impact of Medusa ransomware can be devastating, causing operational disruptions, financial losses, and reputational damage for affected organizations. Its increasingly sophisticated attack vectors and adaptability make it a significant threat to any business relying on digital infrastructure. Customers should prioritize understanding and mitigating this threat to safeguard sensitive data, maintain business continuity, and avoid the costly consequences of a successful ransomware attack.</p>
+<h2>Mitigation At-a-Glance</h2>
+<p>As the CISA advisory explains, to defend against Medusa ransomware attacks, organizations are advised to take the following measures:</p>
+<ul>
+<li>Mitigate known security vulnerabilities to ensure operating systems, software, and firmware are patched within a reasonable timeframe,</li>
+<li>Segment networks to limit lateral movement between infected devices and other devices within the organization, and</li>
+<li>Filter network traffic by blocking access from unknown or untrusted origins to remote services on internal systems.</li>
+</ul>
+<p>See detailed mitigation strategies below.</p>
+<h2>Technical Breakdown: Tactics, Techniques, and Procedures (TTPs)</h2>
+<p>Medusa’s attack lifecycle aligns with the MITRE ATT&amp;CK framework and consists of multiple sophisticated techniques.&nbsp; These techniques include initial access via phishing campaigns, exploitation of vulnerabilities in unpatched systems, and the use of advanced malware to maintain persistence and evade detection.</p>
+<ol>
+<li><strong>Initial Access (TA0001)</strong></li>
+</ol>
+<p><strong>Exploitation of Public-Facing Applications (T1190):</strong> Medusa exploits unpatched vulnerabilities in internet-facing systems, notably:</p>
+<ul>
+<li>Microsoft Exchange Server (ProxyShell, CVE-2021-34473).</li>
+<li>CVE-2024-1709 (ScreenConnect Authentication Bypass).</li>
+<li>CVE-2023-48788 (Fortinet EMS SQL Injection).</li>
+</ul>
+<p><strong>External Remote Services (T1133): </strong>Medusa operators use compromised RDP credentials, often sourced from Initial Access Brokers (IABs).</p>
+<p><strong>Phishing (T1566): </strong>While exploitation is preferred, Medusa affiliates also use spear-phishing emails to steal credentials or drop malware.</p>
+<ol start="2">
+<li><strong>Execution (TA0002)</strong></li>
+</ol>
+<p><strong>&nbsp;Command and Scripting Interpreter (T1059): </strong>Medusa leverages scripting languages like PowerShell and Python to execute malicious payloads and automate tasks:</p>
+<ul>
+<li>PowerShell execution: e.g., `invoke-ReflectivePEInjection` to run payloads in-memory and bypass detection.</li>
+<li>Batch scripts: e.g., `gaze.exe` used to issue `net stop` commands against security software.</li>
+<li>WMI (T1047): Used to delete shadow copies (`wmic shadowcopy delete`).</li>
+</ul>
+<ol start="3">
+<li><strong>Persistence (TA0003): </strong>Medusa employs sophisticated techniques across multiple attack stages, showcasing a versatile and persistent threat profile.</li>
+</ol>
+<p><strong>&nbsp;Boot or Logon Autostart Execution (T1547.001)</strong></p>
+<ul>
+<li>Registry modifications: `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`.</li>
+</ul>
+<p><strong>Scheduled Tasks (T1053)</strong></p>
+<ul>
+<li>Creates malicious scheduled tasks (e.g., `svhost`) to re-execute every 15 minutes.</li>
+</ul>
+<ol start="4">
+<li><strong>Privilege Escalation (TA0004): </strong>Medusa demonstrates a multi-faceted attack strategy, leveraging diverse techniques to maximize its impact and persistence.</li>
+</ol>
+<p><strong>&nbsp;Abuse Elevation Control Mechanism (T1548.002)</strong></p>
+<ul>
+<li>Bypasses User Account Control (UAC) using `cmstp.exe` to execute commands with elevated privileges.</li>
+</ul>
+<p><strong>&nbsp;Valid Accounts (T1078)</strong></p>
+<ul>
+<li>Brute-force attacks and LSASS dumping (Mimikatz) to gain domain admin access.</li>
+</ul>
+<ol start="5">
+<li><strong>Defense Evasion (TA0005): </strong>Medusa employs advanced tactics across the kill chain to evade detection and maintain persistence in compromised systems.</li>
+</ol>
+<p><strong>&nbsp;Bring Your Own Vulnerable Driver (BYOVD) (T1068)</strong></p>
+<ul>
+<li>Deploys signed vulnerable drivers (e.g., KillAV) to disable endpoint detection &amp; response (EDR) tools.</li>
+</ul>
+<p><strong>&nbsp;Impair Defenses (T1562.001)</strong></p>
+<ul>
+<li>Disables security software (e.g., Sophos, CrowdStrike, Microsoft Defender).</li>
+<li>Reboots systems into Safe Mode to evade security tools (`bcdedit /set safeboot minimal`).</li>
+</ul>
+<p><strong>File Deletion (T1070)</strong></p>
+<ul>
+<li>Deletes itself post-encryption (`-d argument`).</li>
+<li>Uses `cipher.exe` to overwrite deleted files.</li>
+</ul>
+<ol start="6">
+<li><strong>Credential Access (TA0006): </strong>Extracts credentials from web browsers and password managers to expand access.</li>
+</ol>
+<p><strong>Credential Dumping (T1003)</strong></p>
+<ul>
+<li>LSASS memory dumping using Mimikatz or Windows built-in tools.</li>
+</ul>
+<p><strong>&nbsp;Brute Force (T1110)</strong></p>
+<ul>
+<li>RDP brute-force attacks when vulnerabilities are unavailable.</li>
+</ul>
+<h2>Detailed Mitigation Strategies</h2>
+<p>Early identification and swift mitigation of threats like Medusa are imperative to prevent extensive damage and data loss. Its ability to deploy sophisticated evasion techniques and erase forensic evidence makes rapid response crucial for maintaining security and minimizing impact.</p>
+<p><strong>&nbsp;Detection &amp; Network Monitoring</strong></p>
+<ul>
+<li>Block known Medusa domains (see below)</li>
+<li>Detects unusual RDP access patterns and SMB enumeration.</li>
+<li>Use behavioral analytics to detect mass file encryption</li>
+</ul>
+<p><strong>&nbsp;Prevention &amp; Hardening</strong></p>
+<ul>
+<li>Patch CVEs (2024-1709, 2023-48788, 2021-34473)</li>
+<li>Enable MFA for RDP and VPNs</li>
+<li>Enable SRA to manage user access, activity and privileges, especially in OT environments</li>
+<li>Disable PowerShell for non-administrators</li>
+</ul>
+<p><strong>Response &amp; Recovery</strong></p>
+<ul>
+<li>Isolate infected systems immediately</li>
+<li>Restore from offline backups</li>
+<li>Report incidents to CISA/FBI</li>
+</ul>
+<h2>Indicators of Compromise (IOCs)</h2>
+<p>Medusa ransomware demonstrates a highly sophisticated approach to compromising systems through a combination of advanced tactics and evasive techniques. By leveraging methods such as Bring Your Own Vulnerable Driver (BYOVD) to disable endpoint detection and response tools, impairing defenses by deactivating security software, and rebooting systems into Safe Mode, it ensures minimal detection during its operations. Additionally, Medusa employs credential dumping, brute-force attacks, and efficient file deletion techniques to establish deeper access and eliminate forensic traces. These characteristics make Medusa not only a potent threat but also a challenging adversary for cybersecurity defenses.</p>
+<p><strong>File Paths and Names:</strong></p>
+<p style="padding-left: 40px;">csidl_windows\adminarsenal\pdqdeployrunner\service-1\exec\gaze.exe<br>
+svhost.exe (in AppData)<br>
+!!!READ_ME_MEDUSA!!!.txt</p>
+<p><strong>&nbsp;File Extensions:</strong></p>
+<p style="padding-left: 40px;">.medusa, .mylock</p>
+<p><strong>Domains &amp; URLs:</strong></p>
+<p style="padding-left: 40px;">medusakxxtp3uo7vusntvubnytaph4d3amxivbggl3hnhpk2nmus34yd[.]onion<br>
+go-sw6-02.adventos[.]de</p>
+<p><strong>Registry Keys:</strong></p>
+<p style="padding-left: 40px;">HKLM\Software\Microsoft\Windows\CurrentVersion\Run\MDSLK</p>
+<p>Medusa ransomware remains a highly active and evolving threat, leveraging advanced exploitation techniques, BYOVD attacks, and an aggressive multi-extortion model. Organizations must adopt a defense-in-depth strategy, continuously updating threat intelligence and refining their detection capabilities to mitigate the impact of Medusa.</p>
+<h2>Preempt Threat Actors with Armis Centrix<span style="font-size: 13.3333px;">™</span>&nbsp;for Early Warning</h2>
+<p>Through continuous monitoring and advanced threat intelligence capabilities, <a href="https://www.armis.com/platform/armis-centrix-for-actionable-threat-intelligence/">Armis Centrix™ for Early Warning</a> was able to track the activities of the Medusa threat actors across multiple attack campaigns. Proactive early warning intelligence plays a crucial role in helping customers harden their environments against emerging threats and ransomware attacks like Medusa.</p>
+<h2>CVEs Associated with Medusa</h2>
+<table class="blog-table">
+<thead>
+<tr style="background: #F9FAFB;">
+<th>CVE</th>
+<th>Added to Armis Early Warning List</th>
+<th>Added to CISA KEV</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CVE-2021-34473 (Microsoft Exchange Server ProxyShell)</td>
+<td>August 2021</td>
+<td>November 2021</td>
+</tr>
+<tr>
+<td>CVE-2024-1709 (ScreenConnect Authentication Bypass)</td>
+<td>February 2024</td>
+<td>February 2024</td>
+</tr>
+<tr>
+<td>CVE-2023-48788 (Fortinet EMS SQL Injection)</td>
+<td>March 2024</td>
+<td>March 2025</td>
+</tr>
+</tbody>
+</table>
+<p>Interested in learning more about <a href="https://www.armis.com/platform/armis-centrix-for-actionable-threat-intelligence/">Armis Centrix™ for Early Warning</a>? <a href="https://www.armis.com/demo/">Sign up for a demo today!</a></p>
+				</div><!-- /.article__content richtext-entry -->
+
+				<div class="article__aside">
+	<div class="article__fixed js-aside">
+		<div class="article__share">
+			<div class="card-share">
+				<h6>
+					Share this Article				</h6>
+
+				<ul>
+					<li>
+						<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.armis.com/blog/breaking-down-medusa-ransomware/" target="_blank">
+							<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/linkedin-2.svg" alt="">
+						</a>
+					</li>
+
+					<li>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.armis.com/blog/breaking-down-medusa-ransomware/ " target="_blank">
+							<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/facebook.svg" alt="">
+						</a>
+					</li>
+
+					<li>
+						<a href="https://twitter.com/intent/tweet?text=https://www.armis.com/blog/breaking-down-medusa-ransomware/" target="_blank">
+							<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/twitter.svg" alt="">
+						</a>
+					</li>
+
+					<li>
+						<a href="mailto:<br />
+<b>Notice</b>:  Undefined variable: mail_to in <b>/nas/content/live/armisinc/wp-content/themes/armis/fragments/parts/blog-single/aside.php</b> on line <b>29</b><br />
+?subject=<br />
+<b>Notice</b>:  Undefined variable: subject in <b>/nas/content/live/armisinc/wp-content/themes/armis/fragments/parts/blog-single/aside.php</b> on line <b>29</b><br />
+&amp;body=<br />
+<b>Notice</b>:  Undefined variable: body in <b>/nas/content/live/armisinc/wp-content/themes/armis/fragments/parts/blog-single/aside.php</b> on line <b>29</b><br />
+  https://www.armis.com/blog/breaking-down-medusa-ransomware/" title="Email to a friend/colleague" target="_blank">
+							<img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/direct.svg" alt="">
+						</a>
+					</li>
+				</ul>
+			</div><!-- /.card-share -->
+		</div><!-- /.article__share -->
+		<div class="article__callout">
+			<div class="callout">
+				<div class="callout__title">
+					<h5>
+						Get Updates					</h5>
+
+					<p>Sign up to receive the latest from Armis.</p>
+				</div><!-- /.callout__title -->
+
+				<div class="callout__form">
+					<p><script src="//info.armis.com/js/forms2/js/forms2.min.js" type="text/javascript"></script></p>
+<form id="mktoForm_1035"></form>
+<p><script type="text/javascript">MktoForms2.loadForm("//info.armis.com", "645-PDC-047", 1035);</script></p>
+				</div><!-- /.callout__form -->
+			</div><!-- /.callout -->
+		</div><!-- /.article__callout -->
+	</div><!-- /.article__fixed -->
+
+			</div><!-- /.article__aside -->
+		</div><!-- /.shell -->
+	</div><!-- /.article__body -->
+</div><!-- /.article__wrapper -->
+</div><!-- /.article-single -->
+			</div><!-- /.main -->
+
+			    <footer class="footer">
+        <div class="shell footer__shell">
+            <div class="footer__container">
+                <div class="footer__info">
+                    <a href="https://www.armis.com/" class="logo">
+                        <img src="https://www.armis.com/wp-content/themes/armis/resources/images/svg/logo.svg" alt="">
+                    </a>
+
+                    <p>Armis, The Cyber Exposure Management &amp; Security Company.</p>
+                        <ul class="list-socials">
+                                                            <li>
+                                    <a href="https://www.linkedin.com/company/armis-security" target="_blank">
+                                        <img src="https://www.armis.com/wp-content/uploads/2023/06/linkedin.svg" class="attachment-full size-full" alt="linkedin icon white" decoding="async">                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="https://twitter.com/ArmisSecurity" target="_blank">
+                                        <img src="https://www.armis.com/wp-content/uploads/2023/09/twitter-x-resized.svg" class="attachment-full size-full" alt="twitter X icon white" decoding="async">                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="https://www.youtube.com/channel/UCOA7EJ3QIE9b7J3WDTO2iFw" target="_blank">
+                                        <img src="https://www.armis.com/wp-content/uploads/2023/06/youtube.svg" class="attachment-full size-full" alt="youtube icon white" decoding="async">                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="https://www.facebook.com/ArmisInc/" target="_blank">
+                                        <img src="https://www.armis.com/wp-content/uploads/2023/06/facebook.svg" class="attachment-full size-full" alt="facebook icon white" decoding="async">                                    </a>
+                                </li>
+                                                    </ul><!-- /.list-socials -->
+                                    </div><!-- /.footer__info -->
+
+                <div class="footer__wrapper">
+                                            <ul>
+                                                            <li>
+                                                                    </li>
+                                                    </ul>
+                        <p>© 2025 Armis Inc. All Rights Reserved.</p>
+                </div><!-- /.footer__wrapper -->
+            </div><!-- /.footer__container -->
+
+            <div class="footer__navs">
+			<div class="footer__entry">
+
+			<div class="footer__nav">
+				<h6>
+					PLATFORM				</h6>
+				
+				<ul id="menu-platform" class="menu"><li id="menu-item-1021984" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1021984"><a href="https://www.armis.com/platform/armis-centrix/">Armis Centrix™</a></li>
+<li id="menu-item-1022163" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1022163"><a href="https://www.armis.com/platform/armis-asset-intelligence-engine/">Armis Asset Intelligence Engine</a></li>
+<li id="menu-item-1022164" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1022164"><a href="https://www.armis.com/platform/telemetry-intelligence/">Telemetry Intelligence</a></li>
+<li id="menu-item-1022165" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1022165"><a href="https://www.armis.com/platform/integrations/">Integrations</a></li>
+<li id="menu-item-2543480" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-2543480"><a href="https://www.armis.com/platform/armis-centrix-smart-active-querying/">Armis Centrix™ Smart Active Querying</a></li>
+</ul>			</div><!-- /.footer__nav -->
+			<div class="footer__nav">
+				<h6>
+									</h6>
+				
+							</div><!-- /.footer__nav -->
+
+		</div><!-- /.footer__entry -->
+			<div class="footer__entry">
+
+			<div class="footer__nav">
+				<h6>
+					SOLUTIONS				</h6>
+				
+				<ul id="menu-solutions" class="menu"><li id="menu-item-1021979" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1021979"><a href="https://www.armis.com/platform/armis-centrix-for-asset-management-and-security/">Armis Centrix™ for Asset Management and Security</a></li>
+<li id="menu-item-1088668" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1088668"><a href="https://www.armis.com/platform/armis-centrix-for-ot-iot-security/">Armis Centrix™ for OT/ IoT Security</a></li>
+<li id="menu-item-1021980" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-1021980"><a href="https://www.armis.com/platform/armis-centrix-for-medical-device-security/">Armis Centrix™ for Medical Device Security</a></li>
+<li id="menu-item-2550814" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2550814"><a href="https://www.armis.com/platform/armis-centrix-for-vipr-pro-prioritization-and-remediation/">Armis Centrix™ for Vulnerability Prioritization and Remediation</a></li>
+<li id="menu-item-2542874" class="menu-item menu-item-type-post_type menu-item-object-app_platform menu-item-2542874"><a href="https://www.armis.com/platform/armis-centrix-for-early-warning/">Armis Centrix™ for Early Warning</a></li>
+<li id="menu-item-2551550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2551550"><a href="https://www.armis.com/armis-labs/">Armis Labs</a></li>
+</ul>			</div><!-- /.footer__nav -->
+			<div class="footer__nav">
+				<h6>
+									</h6>
+				
+							</div><!-- /.footer__nav -->
+
+		</div><!-- /.footer__entry -->
+			<div class="footer__entry">
+
+			<div class="footer__nav">
+				<h6>
+					PARTNERS				</h6>
+				
+				<ul id="menu-partners" class="menu"><li id="menu-item-80627" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-80627"><a href="https://www.armis.com/partner-programs/">Partner Programs</a></li>
+<li id="menu-item-80641" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-80641"><a href="https://www.armis.com/technology-partners/">Technology Partners</a></li>
+<li id="menu-item-80693" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-80693"><a href="https://www.armis.com/service-providers/">Service Providers</a></li>
+<li id="menu-item-5222" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5222"><a href="https://partnerportal.armis.com/English/">Partner Portal Access</a></li>
+</ul>			</div><!-- /.footer__nav -->
+			<div class="footer__nav">
+				<h6>
+					RESOURCES				</h6>
+				
+				<ul id="menu-resources" class="menu"><li id="menu-item-1022111" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1022111"><a href="https://www.armis.com/resources/">Resource Center</a></li>
+<li id="menu-item-81373" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81373"><a href="https://www.armis.com/blog/">Blog</a></li>
+<li id="menu-item-81263" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81263"><a href="https://www.armis.com/armis-labs/">Armis Labs Research</a></li>
+</ul>			</div><!-- /.footer__nav -->
+
+		</div><!-- /.footer__entry -->
+			<div class="footer__entry">
+
+			<div class="footer__nav">
+				<h6>
+					COMPANY				</h6>
+				
+				<ul id="menu-about" class="menu"><li id="menu-item-5192" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5192"><a href="https://www.armis.com/about/about-armis/">Company Overview</a></li>
+<li id="menu-item-5193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5193"><a href="https://www.armis.com/about/newsroom/">Newsroom</a></li>
+<li id="menu-item-2541358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2541358"><a href="https://www.armis.com/about/analyst-relations/">Analyst Relations</a></li>
+<li id="menu-item-2541357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2541357"><a href="https://www.armis.com/about/investor-relations/">Investor Relations</a></li>
+<li id="menu-item-81123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81123"><a href="https://www.armis.com/events/">Events</a></li>
+<li id="menu-item-2017672" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2017672"><a href="https://www.armis.com/awards/">Awards</a></li>
+<li id="menu-item-81124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81124"><a href="https://www.armis.com/about/our-leadership/">Our Leadership</a></li>
+<li id="menu-item-5195" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5195"><a href="https://www.armis.com/armis-careers/">Careers</a></li>
+<li id="menu-item-194628" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-194628"><a href="https://www.armis.com/legal-compliance/">Legal and Compliance</a></li>
+<li id="menu-item-2556222" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2556222"><a href="https://trust.armis.com">Trust Center</a></li>
+<li id="menu-item-5194" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5194"><a href="https://www.armis.com/about/contact-us/">Contact Us</a></li>
+</ul>			</div><!-- /.footer__nav -->
+			<div class="footer__nav">
+				<h6>
+									</h6>
+				
+							</div><!-- /.footer__nav -->
+
+		</div><!-- /.footer__entry -->
+	</div><!-- /.footer__navs -->
+
+        </div><!-- /.shell -->
+    </footer><!-- /.footer -->			
+		</div><!-- /.wrapper__inner -->
+	</div><!-- /.wrapper -->
+	
+	<script type="text/javascript">
+	if (typeof MsCrmMkt !== 'undefined'){
+	    MsCrmMkt.MsCrmFormLoader.on("afterFormLoad", function(event) {
+			jQuery(event.formPlaceholder).find('input').each(function(id, field){
+			    var thiss = jQuery(field)			
+			    
+			    
+			    if ( typeof(thiss.attr('title')) != 'undefined' ){
+			        if (thiss.attr('title') != ''){
+			            //console.log('1',field,thiss.attr('title'))
+			            var param = thiss.attr('title').toLowerCase().replace(/\s+/g,'_')
+			            var cookie_value = ''
+					    if (param != '' && Cookies.get(param) && Cookies.get(param) != ''){
+					        cookie_value = Cookies.get(param)
+					    }
+                        
+                        if (cookie_value == ''){
+	                        var param = thiss.attr('placeholder').toLowerCase().replace(/\s+/g,'_')
+						    if (param != '' && Cookies.get(param) && Cookies.get(param) != ''){
+						        cookie_value = Cookies.get(param)
+						    }
+                        }
+                        
+                    	thiss.val(cookie_value)
+			        }else{
+			            //console.log('2',field,thiss.attr('title'))
+			        }
+				}else{
+			        //console.log('3',field,thiss.attr('title'))
+				}
+			})
+	//		handl_utm_all_params.forEach(function(param) {
+	//		    jQuery('input[title='+param+']').val(Cookies.get(param));
+	//		})
+		})
+	}
+	
+	</script><script type="text/javascript" src="https://www.armis.com/wp-content/themes/armis/dist/index.186835f6.js" id="theme-js-bundle-js"></script>
+<script async="async" type="text/javascript" src="https://www.armis.com/wp-includes/js/comment-reply.min.js?ver=6.7.1" id="comment-reply-js" data-wp-strategy="async"></script>
+    <script type="text/javascript">
+        // Function to read value of a cookie
+        function __readCookie(name) {
+            var cookiename = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(cookiename) == 0) return c.substring(cookiename.length, c.length);
+            }
+            return null;
+        }
+
+        function __marketoPrefill(form) {
+            window.currentMktoFrm = form.getFormElem()[0];
+            var _mkto_trk = __readCookie('_mkto_trk');
+
+            if (_mkto_trk) {
+                window.$currentMktoFrmSpinner = jQuery('<i class="fa fa-5x fa-cog fa-spin"/>')
+
+                window.currentMktoFrm.appendChild(window.$currentMktoFrmSpinner[0])
+
+                window.setTimeout(() => window.currentMktoFrm.classList.add('cookie-autofill-data-loading'), 100)
+
+                // remove loading class after 5 seconds in case the AJAX request takes too lon or fails
+                window.setTimeout(() => {
+                    window.currentMktoFrm.classList.remove('cookie-autofill-data-loading')
+                }, 5000)
+
+                jQuery.get(
+                    'https://www.armis.com/wp-admin/admin-ajax.php?action=marketo_prefill&_mkto_trk=' + encodeURIComponent(_mkto_trk),
+                    function (response) {
+                        if (response) {
+                            var data = JSON.parse(response);
+
+                            if (data.success && data.result && data.result.length) {
+                                var form = jQuery(window.currentMktoFrm);
+                                var result = data.result[0];
+
+                                form.find('#FirstName').val(result.firstName);
+                                form.find('#LastName').val(result.lastName);
+                                form.find('#Email').val(result.email);
+                                form.find('#Phone').val(result.phone);
+                                form.find('#Site').val(result.website);
+                                form.find('#Title').val(result.title);
+                                form.find('#Company').val(result.company);
+                            }
+                        }
+
+                        window.currentMktoFrm.classList.remove('cookie-autofill-data-loading')
+                    }
+                );
+            }
+        }
+
+        window.addEventListener('load', () => typeof window.MktoForms2 !== 'undefined' ? window.MktoForms2.whenReady(__marketoPrefill) : null)
+    </script>
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            if(document.querySelector('#Email')) {
+                document.querySelector('#Email').addEventListener('change', function(){
+                var emailField = document.querySelector('#Email');
+                var emailFieldVal = emailField.value;
+                var errorMessage = "";
+
+                if (document.querySelector('.mktoEmailError')){
+                    document.querySelector('.mktoEmailError').remove();
+                }
+
+                if (emailFieldVal.indexOf('gmail.com') != -1){
+                    errorMessage = 'google.com email can`t be used';
+                } else if (emailFieldVal.indexOf('yahoo.com') != -1){
+                    errorMessage = 'yahoo.com email can`t be used';
+                } else if (emailFieldVal.indexOf('aol.com') != -1){
+                    errorMessage = 'aol.com email can`t be used';
+                } else if (emailFieldVal.indexOf('mail.com') != -1){
+                    errorMessage = 'mail.com email can`t be used';
+                } else if (emailFieldVal.indexOf('mac.com') != -1){
+                    errorMessage = 'mac.com email can`t be used';
+                } else if (emailFieldVal.indexOf('icloud.com') != -1){
+                    errorMessage = 'icloud.com email can`t be used';
+                } else if (emailFieldVal.indexOf('outlook.com') != -1){
+                    errorMessage = 'outlook.com email can`t be used';
+                }
+
+                if (errorMessage!=""){
+
+                    mktoError = document.createElement('div');
+                    mktoErrorArrowWrap = document.createElement('div');
+                    mktoErrorArrow = document.createElement('div');
+                    mktoErrorMsg = document.createElement('div');
+                    mktoErrorDetail = document.createElement('div');
+
+                    mktoErrorDetail.classList.add('mktoErrorDetail');
+                    mktoErrorMsg.classList.add('mktoErrorMsg');
+                    mktoErrorArrow.classList.add('mktoErrorArrow');
+                    mktoErrorArrowWrap.classList.add('mktoErrorArrowWrap');
+                    mktoError.classList.add('mktoError', 'mktoEmailError');
+
+                    mktoErrorMsg.innerHTML = 'Must be valid email.';
+                    mktoErrorDetail.innerHTML = errorMessage;
+
+                    mktoErrorArrowWrap.appendChild(mktoErrorArrow);
+                    mktoErrorMsg.appendChild(mktoErrorDetail);
+                    mktoError.appendChild(mktoErrorArrowWrap);
+                    mktoError.appendChild(mktoErrorMsg);
+
+                    document.querySelector('#Email').parentNode.appendChild(mktoError);
+                    document.querySelector('.mktoButton').setAttribute('disabled', 'disabled');
+                } else {
+                    document.querySelector('.mktoButton').removeAttribute('disabled');
+                }
+            })
+            }
+           
+        })
+    </script>
+        <script id="greenhouse" src="https://www.armis.com/wp-content/themes/armis/resources/js/static/greenhouse-jobs.min.js" defer="" data-api-url="https://boards-api.greenhouse.io/v1/boards/armissecurity/jobs" data-container-selector=".section-jobs .list-jobs" type="text/javascript">
+    </script>
+    
+	
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'922a1daec8d4f0da',t:'MTc0MjM1NzM4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: medium; visibility: hidden;"></iframe><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;922a1daec8d4f0da&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2025.1.0&quot;,&quot;token&quot;:&quot;18de540e0ec74e7d88e4c669784bdfe7&quot;}" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" id="" charset="">var ahrefs_analytics_script=document.createElement("script");ahrefs_analytics_script.async=!0;ahrefs_analytics_script.src="https://analytics.ahrefs.com/analytics.js";ahrefs_analytics_script.setAttribute("data-key","WTA7JJBYfVvcEaxDlPZUTg");document.getElementsByTagName("head")[0].appendChild(ahrefs_analytics_script);</script><script type="text/javascript" id="" charset="">_linkedin_partner_id="57818";window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(_linkedin_partner_id);</script><script type="text/javascript" id="" charset="">(function(a){a||(window.lintrk=function(c,d){window.lintrk.q.push([c,d])},window.lintrk.q=[]);a=document.getElementsByTagName("script")[0];var b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src="https://snap.licdn.com/li.lms-analytics/insight.min.js";a.parentNode.insertBefore(b,a)})(window.lintrk);</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=57818&amp;fmt=gif">
+</noscript><script type="text/javascript" id="" charset="">var c076Data={cdmn:"analytics.o11.tech",lm:"e",tt:"tcs.dhj"};!function(a){a.aqet="pv";a.pubid="d6af433374f06299b97c5754ef1c4fe6";a.evid=self.crypto.randomUUID()}(c076Data);
+function _pxTagInject(a,d,b,e){var c,f=[],g=a.tt.slice(-1),h={cdmn:1,lm:1,tt:1},k={cid:1,cls:1,dmn:1,pubid:1,evid:1,aq_m:1};a.dmn=(a.dmn||(b.top[e]===b[e]?""+b[e]:d.referrer).split("/")[2]).split(":")[0];for(c in a)(k[c]||(g!="j"||a.aq_m)&&!h[c])&&f.push(c+"\x3d"+a[c]);b=d.createElement(g=="f"?"img":"script");b.id=b.title="pxscrpt";b.async=b.defer=!0;b.src="//"+a.cdmn+"/1/"+a.lm+"/"+a.tt+"?"+f.join("\x26");d.body.appendChild(b)}_pxTagInject(c076Data,document,window,"location");</script><iframe height="0" width="0" style="display: none; visibility: hidden;"></iframe><iframe id="c076frame" title="c076frame" style="display: none;" src="//analytics.o11.tech/a/ts_.htm?ver=1.1753.160&amp;cid=c076#cdmn=analytics.o11.tech&amp;lm=e&amp;tt=tcs.dhj&amp;aqet=pv&amp;pubid=d6af433374f06299b97c5754ef1c4fe6&amp;evid=6bea9b1e-fde1-412e-b245-5a6664d9ec2c&amp;dmn=www.armis.com&amp;cid=c076&amp;lbl=c076&amp;flbl=pxcel&amp;ll=e&amp;ver=1.1753.160&amp;ell=e&amp;cck=_autid&amp;pn=%2Fblog%2Fbreaking-down-medusa-ransomware%2F&amp;qs=na&amp;rdn=www.armis.com&amp;rpn=%2Fblog%2Fbreaking-down-medusa-ransomware%2F&amp;rqs=na&amp;cc=AU&amp;cont=OC&amp;rc=VIC&amp;ipaddr=58.178.171.44"></iframe><iframe style="display: none;" id="uc-cross-domain-bridge" src="https://app.usercentrics.eu/browser-sdk/4.41.0/cross-domain-bridge.html"></iframe><div style="display: none;" id="usercentrics-root" data-created-at="1742357404220"></div><iframe id="conversion_events_sdk_iframe" height="0" width="0" style="display:none;" src="https://insight.adsrvr.org/track/cei?advertiser_id=yw6apw2&amp;cookie_sync=0&amp;upv=3.0.0" title="TTD Conversion Events SDK"></iframe></body></html>

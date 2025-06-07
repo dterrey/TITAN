@@ -1,0 +1,148 @@
+version: '3.9'
+
+services:
+  titan_master:
+    build: .
+    container_name: titan_master
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5000:5000"     # TITAN UI
+      - "11434:11434"   # Ollama API
+      - "22:22"         # SFTP
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    depends_on:
+      - timesketch
+      - nodered
+    networks:
+      - titan-net
+    restart: always
+
+  titan:
+    build: .
+    volumes:
+      - ../:/mnt/TITAN
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    networks:
+      - titan-net
+    restart: always
+    deploy:
+      replicas: 1  # override with --scale titan=<N>
+
+  titan_admin:
+    build: .
+    container_name: titan_admin
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_Admin
+    command: python app.py
+    volumes:
+      - /cases:/cases
+      - ../:/mnt/TITAN
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../docker-compose.yml:/mnt/TITAN/docker-compose.yml
+    ports:
+      - "5111:5111"  # Admin UI
+    environment:
+      - BASE_DIR=/mnt/TITAN
+      - USERNAME=titan
+      - PASSWORD=admin
+    networks:
+      - titan-net
+    restart: always
+
+  titan_client:
+    build: .
+    container_name: titan_client
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_Client
+    command: python app.py
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5001:5001"  # Client UI
+    networks:
+      - titan-net
+    restart: always
+
+  titan_ioc:
+    build: .
+    container_name: titan_ioc
+    working_dir: /mnt/TITAN/TITAN_Docker/app/TITAN_IOC
+    command: python app.py
+    volumes:
+      - ../:/mnt/TITAN
+    ports:
+      - "5112:5112"  # IOC Analysis
+    networks:
+      - titan-net
+    restart: always
+    
+  titan_console:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: titan_console
+    command: python3 /mnt/TITAN/TITAN_Docker/app/TITAN_Admin/TITAN_CONSOLE/app.py
+    ports:
+      - "5232:5232"
+    volumes:
+      - ../:/mnt/TITAN
+    networks:
+      - titan-net
+    restart: always
+
+  timesketch:
+    build:
+      context: /opt/timesketch
+      dockerfile: docker/e2e/Dockerfile
+    image: timesketch/timesketch:latest
+    container_name: timesketch
+    ports:
+      - "5002:5000"  # Timesketch (if 5000 is already taken by titan_master)
+    environment:
+      - TIMESKETCH_USER=titan
+      - TIMESKETCH_PASSWORD=admin
+    volumes:
+      - timesketch_data:/data
+    networks:
+      - titan-net
+    restart: always
+
+  nodered:
+    build:
+      context: .
+      dockerfile: Dockerfile.nodered
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - /cases:/cases
+    networks:
+      - titan-net
+    environment:
+      - TZ=UTC
+    restart: always
+
+  titan_processor:
+    build:
+      context: .
+      dockerfile: Dockerfile.titan_processor
+    container_name: titan_processor
+    volumes:
+      - /cases:/cases
+    networks:
+      - titan-net
+    restart: always
+
+networks:
+  titan-net:
+    driver: bridge
+
+volumes:
+  timesketch_data:
+  nodered_data:
+  
