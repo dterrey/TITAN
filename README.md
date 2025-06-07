@@ -13,6 +13,17 @@ Its still a work in progress as the original TITAN worked on a VM whereas I want
 
 Thanks.
 
+#### Special Considrations ####
+This project was forked and improved on from - https://github.com/blueteam0ps/AllthingsTimesketch. 
+This project leverages the following open-source projects
+Timesketch
+Log2timeline/Plaso
+Node-RED
+Hayabusa
+
+#### AS THIS PROJECT WAS DEVELOPED UNDER THE APACHE LICENSE 2.0 ALONG WITH ALL OPEN-SOURCE PROJECTS, TITAN IS UNDER APACHE LICENSE 2.0 PROTECTION ####
+
+#### On that note, as TITAN is currently 20000 files which is a combination of custom script developed by David Terrey (Myself) with the assistance of TITAN AI. Writing documentation for this will take some time so feel free to contact me if you have any questions. ####
 
 License
 
