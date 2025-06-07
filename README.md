@@ -101,7 +101,7 @@ License
 This project is licensed under the Apache License 2.0. See the LICENSE file for more details.
 NOTICE
 
-This product, TITAN-X, includes software developed by [David Terrey], the creator of the platform. TITAN-X is designed to assist DFIR analysts and cybersecurity professionals in automating threat investigation, incident response, and forensic analysis.
+This product, TITAN, includes custom scripts developed by [David Terrey], the creator of the platform. TITAN-X is designed to assist DFIR analysts and cybersecurity professionals in automating threat investigation, incident response, and forensic analysis.
 
 Attribution: The following third-party libraries and tools are used in this project, each under their respective open-source licenses:
 
