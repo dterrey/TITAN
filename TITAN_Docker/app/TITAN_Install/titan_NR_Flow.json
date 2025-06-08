@@ -467,6 +467,209 @@
         ]
     },
     {
+        "id": "43cf8e1501d17432",
+        "type": "subflow",
+        "name": "v1.0 File Upload Process (2) (1)",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 1140,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "722015c459f5f55b",
+                        "port": 0
+                    },
+                    {
+                        "id": "27c2d691318c8efc",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "UPLOAD_DIR",
+                "type": "str",
+                "value": "."
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "json",
+                "value": "[]"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "outputLabels": [
+            "fileWritten"
+        ]
+    },
+    {
+        "id": "09e75dca4c9b5986",
+        "type": "subflow",
+        "name": "v1.0 File Upload Process (2) (2) (1)",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 1140,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "6fe62391a11cb8e3",
+                        "port": 0
+                    },
+                    {
+                        "id": "b48f23b52364791a",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "UPLOAD_DIR",
+                "type": "str",
+                "value": "."
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "json",
+                "value": "[]"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "outputLabels": [
+            "fileWritten"
+        ]
+    },
+    {
+        "id": "97de5fa403c72243",
+        "type": "subflow",
+        "name": "v1.0 File Upload Process (2) (3) (1)",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 1140,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "60352fcd2705bb82",
+                        "port": 0
+                    },
+                    {
+                        "id": "e0278cadfb4a60b1",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "UPLOAD_DIR",
+                "type": "str",
+                "value": "."
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "json",
+                "value": "[]"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "outputLabels": [
+            "fileWritten"
+        ]
+    },
+    {
+        "id": "5e0187cf50a5b026",
+        "type": "subflow",
+        "name": "v1.0 File Upload Process (2) (2) (2) (1)",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 1140,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "57afcc6c20c95675",
+                        "port": 0
+                    },
+                    {
+                        "id": "a772f09e2337fa16",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "UPLOAD_DIR",
+                "type": "str",
+                "value": "."
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "json",
+                "value": "[]"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "outputLabels": [
+            "fileWritten"
+        ]
+    },
+    {
+        "id": "9219543f935faca2",
+        "type": "subflow",
+        "name": "FIle Upload (1)",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 1140,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "04af89a71a442e97",
+                        "port": 0
+                    },
+                    {
+                        "id": "2c3e026f887814eb",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "UPLOAD_DIR",
+                "type": "str",
+                "value": "."
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "json",
+                "value": "[]"
+            }
+        ],
+        "outputLabels": [
+            "fileWritten"
+        ]
+    },
+    {
         "id": "1f05e4b7e53a7b3c",
         "type": "global-config",
         "name": "global-config",
@@ -4569,6 +4772,3114 @@
         ]
     },
     {
+        "id": "fd866162d859cd0b",
+        "type": "http in",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "cb67aa51f2edd6e0",
+                "602e70d8b2425032",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "783df379ee82c76e",
+        "type": "http response",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c6362083b3160bcf",
+        "type": "link in",
+        "z": "43cf8e1501d17432",
+        "name": "refreshFileDropdown",
+        "links": [
+            "4995d71815057f99",
+            "78826edb5c695986"
+        ],
+        "x": 75,
+        "y": 140,
+        "wires": [
+            [
+                "90bec91c25395e02"
+            ]
+        ]
+    },
+    {
+        "id": "0d541262f5cb1b8f",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "selectedFile",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb67aa51f2edd6e0",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "getFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & req.files[0].originalname",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.files[0].buffer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "58964a902a8031b6",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "65d1f2672899feb0",
+        "type": "file",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "722015c459f5f55b",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "594bfb277f1a5cce",
+        "type": "inject",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "90bec91c25395e02"
+            ]
+        ]
+    },
+    {
+        "id": "2c6c4ce058fcc439",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "getSelectedFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & $flowContext('selectedFile')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Delete File ?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "615cd005c9586a89"
+            ]
+        ]
+    },
+    {
+        "id": "27c2d691318c8efc",
+        "type": "file",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "78826edb5c695986"
+            ]
+        ]
+    },
+    {
+        "id": "c1c6a922160cc756",
+        "type": "switch",
+        "z": "43cf8e1501d17432",
+        "name": "OK ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "27c2d691318c8efc"
+            ]
+        ]
+    },
+    {
+        "id": "46bf02fbce54d48d",
+        "type": "catch",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "scope": null,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "d85ee564390ae5c3"
+            ]
+        ]
+    },
+    {
+        "id": "d85ee564390ae5c3",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "getError",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "4f5c8eacaa84d8e6",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "78826edb5c695986",
+        "type": "link out",
+        "z": "43cf8e1501d17432",
+        "name": "refreshAfterDelete",
+        "links": [
+            "c6362083b3160bcf"
+        ],
+        "x": 1135,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "4995d71815057f99",
+        "type": "link out",
+        "z": "43cf8e1501d17432",
+        "name": "refreshAfterUpload",
+        "links": [
+            "c6362083b3160bcf"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "602e70d8b2425032",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'File ' & req.files[0].originalname & ' uploaded.'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "783df379ee82c76e",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "90bec91c25395e02",
+        "type": "delay",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d2754fd098193891",
+        "type": "watch",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "90bec91c25395e02"
+            ]
+        ]
+    },
+    {
+        "id": "2d30d20509ded6f6",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "3753ee642c894aa3"
+            ]
+        ]
+    },
+    {
+        "id": "58964a902a8031b6",
+        "type": "switch",
+        "z": "43cf8e1501d17432",
+        "name": "extensionAllowed ?",
+        "property": "$env('EXTENSIONS')",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "$split(filename, '.')[-1]",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "65d1f2672899feb0",
+                "86e2229352b7adcf"
+            ],
+            [
+                "94c3eef8127264eb",
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "94c3eef8127264eb",
+        "type": "function",
+        "z": "43cf8e1501d17432",
+        "name": "Error",
+        "func": "node.error(`Error: only ${env.get('EXTENSIONS')} files are allowed.`, msg)\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "722015c459f5f55b",
+        "type": "change",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 340,
+        "wires": [
+            [
+                "4995d71815057f99"
+            ]
+        ]
+    },
+    {
+        "id": "57d2712d44614b1a",
+        "type": "watch",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 740,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86e2229352b7adcf",
+        "type": "debug",
+        "z": "43cf8e1501d17432",
+        "name": "debug 367",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "be5090d09a432cd7",
+        "type": "http in",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a2a018b0bd610477",
+        "type": "ui_button",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "group": "6f30b1b001a9b330",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "2c6c4ce058fcc439"
+            ]
+        ]
+    },
+    {
+        "id": "3753ee642c894aa3",
+        "type": "ui_dropdown",
+        "z": "43cf8e1501d17432",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "6f30b1b001a9b330",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "0d541262f5cb1b8f"
+            ]
+        ]
+    },
+    {
+        "id": "615cd005c9586a89",
+        "type": "ui_toast",
+        "z": "43cf8e1501d17432",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "c1c6a922160cc756"
+            ]
+        ]
+    },
+    {
+        "id": "4f5c8eacaa84d8e6",
+        "type": "ui_toast",
+        "z": "43cf8e1501d17432",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "998eaad752d3bc94",
+        "type": "ui_template",
+        "z": "43cf8e1501d17432",
+        "group": "6f30b1b001a9b330",
+        "name": "Upload",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "format": "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">\n    <input type=\"file\" name=\"file1\" id=\"file1\"><br>\n    <input type=\"button\" value=\"Upload File\" onclick=\"uploadFile()\">\n    <progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>\n    <p id=\"status\"></p>\n    <p id=\"loaded_n_total\"></p>\n</form>\n\n<script>\n    function _(el){\n    return document.getElementById(el);\n}\nfunction uploadFile(){\n    var file = _(\"file1\").files[0];\n    // alert(file.name+\" | \"+file.size+\" | \"+file.type);\n    var formdata = new FormData();\n    formdata.append(\"file1\", file);\n    var ajax = new XMLHttpRequest();\n    ajax.upload.addEventListener(\"progress\", progressHandler, false);\n    ajax.addEventListener(\"load\", completeHandler, false);\n    ajax.addEventListener(\"error\", errorHandler, false);\n    ajax.addEventListener(\"abort\", abortHandler, false);\n    ajax.open(\"POST\", \"/fileupload\");\n    ajax.send(formdata);\n}\nfunction progressHandler(event){\n    _(\"loaded_n_total\").innerHTML = \"Uploaded \"+event.loaded+\" bytes of \"+event.total;\n    var percent = (event.loaded / event.total) * 100;\n    _(\"progressBar\").value = Math.round(percent);\n    _(\"status\").innerHTML = Math.round(percent)+\"% uploaded... please wait\";\n}\nfunction completeHandler(event){\n    _(\"status\").innerHTML = event.target.responseText;\n    _(\"progressBar\").value = 0;\n}\nfunction errorHandler(event){\n    _(\"status\").innerHTML = \"Upload Failed\";\n}\nfunction abortHandler(event){\n    _(\"status\").innerHTML = \"Upload Aborted\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "86e2229352b7adcf"
+            ]
+        ]
+    },
+    {
+        "id": "a1f4e9bb5b48379f",
+        "type": "http in",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "268b3f2690a38ef3",
+                "724677f7baaadab6",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "afc6db86683b4e3b",
+        "type": "http response",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "59d865bc2973d107",
+        "type": "link in",
+        "z": "09e75dca4c9b5986",
+        "name": "refreshFileDropdown",
+        "links": [
+            "6cffc8e6a193e4ac",
+            "2d1809aa412e5ab0"
+        ],
+        "x": 75,
+        "y": 140,
+        "wires": [
+            [
+                "f8e851f2f7657a75"
+            ]
+        ]
+    },
+    {
+        "id": "ad5e9061bbdf0984",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "selectedFile",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "268b3f2690a38ef3",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "getFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & req.files[0].originalname",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.files[0].buffer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "11d54f3444c2b66b",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "dcd20ebe6fd74e7e",
+        "type": "file",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "6fe62391a11cb8e3",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "9dd0c8a54a29723f",
+        "type": "inject",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "f8e851f2f7657a75"
+            ]
+        ]
+    },
+    {
+        "id": "baa5f4e3462f6385",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "getSelectedFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & $flowContext('selectedFile')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Delete File ?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "550a3f77d5ef0532"
+            ]
+        ]
+    },
+    {
+        "id": "b48f23b52364791a",
+        "type": "file",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "2d1809aa412e5ab0"
+            ]
+        ]
+    },
+    {
+        "id": "b25bf8e0ffe6d99d",
+        "type": "switch",
+        "z": "09e75dca4c9b5986",
+        "name": "OK ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "b48f23b52364791a"
+            ]
+        ]
+    },
+    {
+        "id": "94f698bfadaff59f",
+        "type": "catch",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "scope": null,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "4477b1c4c934ae64"
+            ]
+        ]
+    },
+    {
+        "id": "4477b1c4c934ae64",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "getError",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "8384f276e0428a00",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "2d1809aa412e5ab0",
+        "type": "link out",
+        "z": "09e75dca4c9b5986",
+        "name": "refreshAfterDelete",
+        "links": [
+            "59d865bc2973d107"
+        ],
+        "x": 1135,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6cffc8e6a193e4ac",
+        "type": "link out",
+        "z": "09e75dca4c9b5986",
+        "name": "refreshAfterUpload",
+        "links": [
+            "59d865bc2973d107"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "724677f7baaadab6",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'File ' & req.files[0].originalname & ' uploaded.'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "afc6db86683b4e3b",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "f8e851f2f7657a75",
+        "type": "delay",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0eb95c0ceb359a5f",
+        "type": "watch",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "f8e851f2f7657a75"
+            ]
+        ]
+    },
+    {
+        "id": "6802075ac0050a7b",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "7b4ce7b0c0e8b4fc"
+            ]
+        ]
+    },
+    {
+        "id": "11d54f3444c2b66b",
+        "type": "switch",
+        "z": "09e75dca4c9b5986",
+        "name": "extensionAllowed ?",
+        "property": "$env('EXTENSIONS')",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "$split(filename, '.')[-1]",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "dcd20ebe6fd74e7e",
+                "3bc275ebd375390b"
+            ],
+            [
+                "526c97963b559dda",
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "526c97963b559dda",
+        "type": "function",
+        "z": "09e75dca4c9b5986",
+        "name": "Error",
+        "func": "node.error(`Error: only ${env.get('EXTENSIONS')} files are allowed.`, msg)\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6fe62391a11cb8e3",
+        "type": "change",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 340,
+        "wires": [
+            [
+                "6cffc8e6a193e4ac"
+            ]
+        ]
+    },
+    {
+        "id": "5727f96a1689d75d",
+        "type": "watch",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 740,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bc275ebd375390b",
+        "type": "debug",
+        "z": "09e75dca4c9b5986",
+        "name": "debug 367",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "636364c82a6a2f66",
+        "type": "http in",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41649e19e066d5bf",
+        "type": "ui_button",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "group": "6f30b1b001a9b330",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "baa5f4e3462f6385"
+            ]
+        ]
+    },
+    {
+        "id": "7b4ce7b0c0e8b4fc",
+        "type": "ui_dropdown",
+        "z": "09e75dca4c9b5986",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "6f30b1b001a9b330",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "ad5e9061bbdf0984"
+            ]
+        ]
+    },
+    {
+        "id": "550a3f77d5ef0532",
+        "type": "ui_toast",
+        "z": "09e75dca4c9b5986",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "b25bf8e0ffe6d99d"
+            ]
+        ]
+    },
+    {
+        "id": "8384f276e0428a00",
+        "type": "ui_toast",
+        "z": "09e75dca4c9b5986",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "7a62e7c68758cbea",
+        "type": "ui_template",
+        "z": "09e75dca4c9b5986",
+        "group": "6f30b1b001a9b330",
+        "name": "Upload",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "format": "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">\n    <input type=\"file\" name=\"file1\" id=\"file1\"><br>\n    <input type=\"button\" value=\"Upload File\" onclick=\"uploadFile()\">\n    <progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>\n    <p id=\"status\"></p>\n    <p id=\"loaded_n_total\"></p>\n</form>\n\n<script>\n    function _(el){\n    return document.getElementById(el);\n}\nfunction uploadFile(){\n    var file = _(\"file1\").files[0];\n    // alert(file.name+\" | \"+file.size+\" | \"+file.type);\n    var formdata = new FormData();\n    formdata.append(\"file1\", file);\n    var ajax = new XMLHttpRequest();\n    ajax.upload.addEventListener(\"progress\", progressHandler, false);\n    ajax.addEventListener(\"load\", completeHandler, false);\n    ajax.addEventListener(\"error\", errorHandler, false);\n    ajax.addEventListener(\"abort\", abortHandler, false);\n    ajax.open(\"POST\", \"/fileupload\");\n    ajax.send(formdata);\n}\nfunction progressHandler(event){\n    _(\"loaded_n_total\").innerHTML = \"Uploaded \"+event.loaded+\" bytes of \"+event.total;\n    var percent = (event.loaded / event.total) * 100;\n    _(\"progressBar\").value = Math.round(percent);\n    _(\"status\").innerHTML = Math.round(percent)+\"% uploaded... please wait\";\n}\nfunction completeHandler(event){\n    _(\"status\").innerHTML = event.target.responseText;\n    _(\"progressBar\").value = 0;\n}\nfunction errorHandler(event){\n    _(\"status\").innerHTML = \"Upload Failed\";\n}\nfunction abortHandler(event){\n    _(\"status\").innerHTML = \"Upload Aborted\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "3bc275ebd375390b"
+            ]
+        ]
+    },
+    {
+        "id": "dde5ef8679808e09",
+        "type": "http in",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "5d1ae416141e1908",
+                "02a5d8690887db33",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "00de39ac8798e85f",
+        "type": "http response",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6ed2b08869f8f873",
+        "type": "link in",
+        "z": "97de5fa403c72243",
+        "name": "refreshFileDropdown",
+        "links": [
+            "c92eb14470f81fdb",
+            "69012f713580e357"
+        ],
+        "x": 75,
+        "y": 140,
+        "wires": [
+            [
+                "2e567bf502fd2134"
+            ]
+        ]
+    },
+    {
+        "id": "c652eb621be77ec4",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "selectedFile",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d1ae416141e1908",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "getFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & req.files[0].originalname",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.files[0].buffer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "431fe37065e64b6d",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "74a852436f56f5f2",
+        "type": "file",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "60352fcd2705bb82",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "8aa561f15e4d3a37",
+        "type": "inject",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "2e567bf502fd2134"
+            ]
+        ]
+    },
+    {
+        "id": "6127e9b449a64761",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "getSelectedFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & $flowContext('selectedFile')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Delete File ?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "7c10d5fbc5fd2bc9"
+            ]
+        ]
+    },
+    {
+        "id": "e0278cadfb4a60b1",
+        "type": "file",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "69012f713580e357"
+            ]
+        ]
+    },
+    {
+        "id": "96b2c4358d84e394",
+        "type": "switch",
+        "z": "97de5fa403c72243",
+        "name": "OK ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "e0278cadfb4a60b1"
+            ]
+        ]
+    },
+    {
+        "id": "f919230a1494c166",
+        "type": "catch",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "scope": null,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "3696c9e9c101cdab"
+            ]
+        ]
+    },
+    {
+        "id": "3696c9e9c101cdab",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "getError",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "d7ff4649b49faaf0",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "69012f713580e357",
+        "type": "link out",
+        "z": "97de5fa403c72243",
+        "name": "refreshAfterDelete",
+        "links": [
+            "6ed2b08869f8f873"
+        ],
+        "x": 1135,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c92eb14470f81fdb",
+        "type": "link out",
+        "z": "97de5fa403c72243",
+        "name": "refreshAfterUpload",
+        "links": [
+            "6ed2b08869f8f873"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "02a5d8690887db33",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'File ' & req.files[0].originalname & ' uploaded.'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "00de39ac8798e85f",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "2e567bf502fd2134",
+        "type": "delay",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4bb39cce722b0923",
+        "type": "watch",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "2e567bf502fd2134"
+            ]
+        ]
+    },
+    {
+        "id": "388aa5a1252ad4b4",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "4406900f6123084c"
+            ]
+        ]
+    },
+    {
+        "id": "431fe37065e64b6d",
+        "type": "switch",
+        "z": "97de5fa403c72243",
+        "name": "extensionAllowed ?",
+        "property": "$env('EXTENSIONS')",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "$split(filename, '.')[-1]",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "74a852436f56f5f2",
+                "3606246b60ddfaa2"
+            ],
+            [
+                "c24459c18c8945f4",
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "c24459c18c8945f4",
+        "type": "function",
+        "z": "97de5fa403c72243",
+        "name": "Error",
+        "func": "node.error(`Error: only ${env.get('EXTENSIONS')} files are allowed.`, msg)\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "60352fcd2705bb82",
+        "type": "change",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 340,
+        "wires": [
+            [
+                "c92eb14470f81fdb"
+            ]
+        ]
+    },
+    {
+        "id": "3591803c1d763e28",
+        "type": "watch",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 740,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3606246b60ddfaa2",
+        "type": "debug",
+        "z": "97de5fa403c72243",
+        "name": "debug 367",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "8d908a980a13bae7",
+        "type": "http in",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4406900f6123084c",
+        "type": "ui_dropdown",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "6f30b1b001a9b330",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "c652eb621be77ec4"
+            ]
+        ]
+    },
+    {
+        "id": "e6eb880adaa5e84b",
+        "type": "ui_button",
+        "z": "97de5fa403c72243",
+        "name": "",
+        "group": "6f30b1b001a9b330",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "6127e9b449a64761"
+            ]
+        ]
+    },
+    {
+        "id": "7c10d5fbc5fd2bc9",
+        "type": "ui_toast",
+        "z": "97de5fa403c72243",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "96b2c4358d84e394"
+            ]
+        ]
+    },
+    {
+        "id": "d7ff4649b49faaf0",
+        "type": "ui_toast",
+        "z": "97de5fa403c72243",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5b1b633e7e51201c",
+        "type": "ui_template",
+        "z": "97de5fa403c72243",
+        "group": "6f30b1b001a9b330",
+        "name": "Upload",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "format": "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">\n    <input type=\"file\" name=\"file1\" id=\"file1\"><br>\n    <input type=\"button\" value=\"Upload File\" onclick=\"uploadFile()\">\n    <progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>\n    <p id=\"status\"></p>\n    <p id=\"loaded_n_total\"></p>\n</form>\n\n<script>\n    function _(el){\n    return document.getElementById(el);\n}\nfunction uploadFile(){\n    var file = _(\"file1\").files[0];\n    // alert(file.name+\" | \"+file.size+\" | \"+file.type);\n    var formdata = new FormData();\n    formdata.append(\"file1\", file);\n    var ajax = new XMLHttpRequest();\n    ajax.upload.addEventListener(\"progress\", progressHandler, false);\n    ajax.addEventListener(\"load\", completeHandler, false);\n    ajax.addEventListener(\"error\", errorHandler, false);\n    ajax.addEventListener(\"abort\", abortHandler, false);\n    ajax.open(\"POST\", \"/fileupload\");\n    ajax.send(formdata);\n}\nfunction progressHandler(event){\n    _(\"loaded_n_total\").innerHTML = \"Uploaded \"+event.loaded+\" bytes of \"+event.total;\n    var percent = (event.loaded / event.total) * 100;\n    _(\"progressBar\").value = Math.round(percent);\n    _(\"status\").innerHTML = Math.round(percent)+\"% uploaded... please wait\";\n}\nfunction completeHandler(event){\n    _(\"status\").innerHTML = event.target.responseText;\n    _(\"progressBar\").value = 0;\n}\nfunction errorHandler(event){\n    _(\"status\").innerHTML = \"Upload Failed\";\n}\nfunction abortHandler(event){\n    _(\"status\").innerHTML = \"Upload Aborted\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "3606246b60ddfaa2"
+            ]
+        ]
+    },
+    {
+        "id": "f513a005e9725d5e",
+        "type": "http in",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "426f38faa283db87",
+                "d1b7b234b9c55833",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "745ad3249f87328b",
+        "type": "http response",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b2d280f867ac3fe1",
+        "type": "link in",
+        "z": "5e0187cf50a5b026",
+        "name": "refreshFileDropdown",
+        "links": [
+            "fbd985c4e6d9985b",
+            "1cec4a41ad22ba3f"
+        ],
+        "x": 75,
+        "y": 140,
+        "wires": [
+            [
+                "03a8fd9d997371ee"
+            ]
+        ]
+    },
+    {
+        "id": "b9d956df4d7589ee",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "selectedFile",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "426f38faa283db87",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "getFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & req.files[0].originalname",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.files[0].buffer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "f78538050c2495d9",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "7560c4f58920389f",
+        "type": "file",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "57afcc6c20c95675",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "1a0e8f9acee405bb",
+        "type": "inject",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "03a8fd9d997371ee"
+            ]
+        ]
+    },
+    {
+        "id": "c83ff390b8cf99f2",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "getSelectedFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & $flowContext('selectedFile')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Delete File ?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "1b7e92a8d188416c"
+            ]
+        ]
+    },
+    {
+        "id": "a772f09e2337fa16",
+        "type": "file",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "1cec4a41ad22ba3f"
+            ]
+        ]
+    },
+    {
+        "id": "565ae84f15bf6bb0",
+        "type": "switch",
+        "z": "5e0187cf50a5b026",
+        "name": "OK ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "a772f09e2337fa16"
+            ]
+        ]
+    },
+    {
+        "id": "f771bcb2e86c103f",
+        "type": "catch",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "scope": null,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "07a8042902b649f2"
+            ]
+        ]
+    },
+    {
+        "id": "07a8042902b649f2",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "getError",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "e2ccd366f5147302",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "1cec4a41ad22ba3f",
+        "type": "link out",
+        "z": "5e0187cf50a5b026",
+        "name": "refreshAfterDelete",
+        "links": [
+            "b2d280f867ac3fe1"
+        ],
+        "x": 1135,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "fbd985c4e6d9985b",
+        "type": "link out",
+        "z": "5e0187cf50a5b026",
+        "name": "refreshAfterUpload",
+        "links": [
+            "b2d280f867ac3fe1"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d1b7b234b9c55833",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'File ' & req.files[0].originalname & ' uploaded.'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "745ad3249f87328b",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "03a8fd9d997371ee",
+        "type": "delay",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b26472a574b2aa72",
+        "type": "watch",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "03a8fd9d997371ee"
+            ]
+        ]
+    },
+    {
+        "id": "a7477a3bfd5f63a0",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "2f251a6e0730cd65"
+            ]
+        ]
+    },
+    {
+        "id": "f78538050c2495d9",
+        "type": "switch",
+        "z": "5e0187cf50a5b026",
+        "name": "extensionAllowed ?",
+        "property": "$env('EXTENSIONS')",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "$split(filename, '.')[-1]",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "7560c4f58920389f",
+                "a61be5436dfce3ab"
+            ],
+            [
+                "57bed82a57a116e3",
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "57bed82a57a116e3",
+        "type": "function",
+        "z": "5e0187cf50a5b026",
+        "name": "Error",
+        "func": "node.error(`Error: only ${env.get('EXTENSIONS')} files are allowed.`, msg)\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "57afcc6c20c95675",
+        "type": "change",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 340,
+        "wires": [
+            [
+                "fbd985c4e6d9985b"
+            ]
+        ]
+    },
+    {
+        "id": "97ba1c88e274389c",
+        "type": "watch",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 740,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a61be5436dfce3ab",
+        "type": "debug",
+        "z": "5e0187cf50a5b026",
+        "name": "debug 367",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "7744843ad8100d4e",
+        "type": "http in",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f251a6e0730cd65",
+        "type": "ui_dropdown",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "6f30b1b001a9b330",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "b9d956df4d7589ee"
+            ]
+        ]
+    },
+    {
+        "id": "240cbecff7653029",
+        "type": "ui_button",
+        "z": "5e0187cf50a5b026",
+        "name": "",
+        "group": "6f30b1b001a9b330",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "c83ff390b8cf99f2"
+            ]
+        ]
+    },
+    {
+        "id": "1b7e92a8d188416c",
+        "type": "ui_toast",
+        "z": "5e0187cf50a5b026",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "565ae84f15bf6bb0"
+            ]
+        ]
+    },
+    {
+        "id": "e2ccd366f5147302",
+        "type": "ui_toast",
+        "z": "5e0187cf50a5b026",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8bf4c438889ca578",
+        "type": "ui_template",
+        "z": "5e0187cf50a5b026",
+        "group": "6f30b1b001a9b330",
+        "name": "Upload",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "format": "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">\n    <input type=\"file\" name=\"file1\" id=\"file1\"><br>\n    <input type=\"button\" value=\"Upload File\" onclick=\"uploadFile()\">\n    <progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>\n    <p id=\"status\"></p>\n    <p id=\"loaded_n_total\"></p>\n</form>\n\n<script>\n    function _(el){\n    return document.getElementById(el);\n}\nfunction uploadFile(){\n    var file = _(\"file1\").files[0];\n    // alert(file.name+\" | \"+file.size+\" | \"+file.type);\n    var formdata = new FormData();\n    formdata.append(\"file1\", file);\n    var ajax = new XMLHttpRequest();\n    ajax.upload.addEventListener(\"progress\", progressHandler, false);\n    ajax.addEventListener(\"load\", completeHandler, false);\n    ajax.addEventListener(\"error\", errorHandler, false);\n    ajax.addEventListener(\"abort\", abortHandler, false);\n    ajax.open(\"POST\", \"/fileupload\");\n    ajax.send(formdata);\n}\nfunction progressHandler(event){\n    _(\"loaded_n_total\").innerHTML = \"Uploaded \"+event.loaded+\" bytes of \"+event.total;\n    var percent = (event.loaded / event.total) * 100;\n    _(\"progressBar\").value = Math.round(percent);\n    _(\"status\").innerHTML = Math.round(percent)+\"% uploaded... please wait\";\n}\nfunction completeHandler(event){\n    _(\"status\").innerHTML = event.target.responseText;\n    _(\"progressBar\").value = 0;\n}\nfunction errorHandler(event){\n    _(\"status\").innerHTML = \"Upload Failed\";\n}\nfunction abortHandler(event){\n    _(\"status\").innerHTML = \"Upload Aborted\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "a61be5436dfce3ab"
+            ]
+        ]
+    },
+    {
+        "id": "116bc073eebbcd58",
+        "type": "http in",
+        "z": "9219543f935faca2",
+        "name": "",
+        "url": "/fileupload",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "a3a0356257f43d58",
+                "b11e9c5dd627291b"
+            ]
+        ]
+    },
+    {
+        "id": "bf443b454c31f6f2",
+        "type": "http response",
+        "z": "9219543f935faca2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "eb676c9d1111c57c",
+        "type": "ui_template",
+        "z": "9219543f935faca2",
+        "group": "4178bf61.05d97",
+        "name": "Upload",
+        "order": 1,
+        "width": "6",
+        "height": "3",
+        "format": "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">\n    <input type=\"file\" name=\"file1\" id=\"file1\"><br>\n    <input type=\"button\" value=\"Upload File\" onclick=\"uploadFile()\">\n    <progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>\n    <p id=\"status\"></p>\n    <p id=\"loaded_n_total\"></p>\n</form>\n\n<script>\n    function _(el){\n    return document.getElementById(el);\n}\nfunction uploadFile(){\n    var file = _(\"file1\").files[0];\n    // alert(file.name+\" | \"+file.size+\" | \"+file.type);\n    var formdata = new FormData();\n    formdata.append(\"file1\", file);\n    var ajax = new XMLHttpRequest();\n    ajax.upload.addEventListener(\"progress\", progressHandler, false);\n    ajax.addEventListener(\"load\", completeHandler, false);\n    ajax.addEventListener(\"error\", errorHandler, false);\n    ajax.addEventListener(\"abort\", abortHandler, false);\n    ajax.open(\"POST\", \"/fileupload\");\n    ajax.send(formdata);\n}\nfunction progressHandler(event){\n    _(\"loaded_n_total\").innerHTML = \"Uploaded \"+event.loaded+\" bytes of \"+event.total;\n    var percent = (event.loaded / event.total) * 100;\n    _(\"progressBar\").value = Math.round(percent);\n    _(\"status\").innerHTML = Math.round(percent)+\"% uploaded... please wait\";\n}\nfunction completeHandler(event){\n    _(\"status\").innerHTML = event.target.responseText;\n    _(\"progressBar\").value = 0;\n}\nfunction errorHandler(event){\n    _(\"status\").innerHTML = \"Upload Failed\";\n}\nfunction abortHandler(event){\n    _(\"status\").innerHTML = \"Upload Aborted\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7fd36f08ef7c7b9e",
+        "type": "subflow:4f6b87ae.7d3bb",
+        "z": "9219543f935faca2",
+        "name": "",
+        "env": [
+            {
+                "name": "DIRECTORY",
+                "type": "env",
+                "value": "UPLOAD_DIR"
+            },
+            {
+                "name": "EXTENSIONS",
+                "type": "env",
+                "value": "EXTENSIONS"
+            }
+        ],
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "bc4b8876eb0e6b6e"
+            ]
+        ]
+    },
+    {
+        "id": "b9c31ef22fbd39e2",
+        "type": "ui_dropdown",
+        "z": "9219543f935faca2",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "4178bf61.05d97",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 750,
+        "y": 140,
+        "wires": [
+            [
+                "bd3f81aa4f3adbaf"
+            ]
+        ]
+    },
+    {
+        "id": "2aab0748f17afb21",
+        "type": "link in",
+        "z": "9219543f935faca2",
+        "name": "refreshFileDropdown",
+        "links": [
+            "18250047ce912449",
+            "965e95ab660c281a"
+        ],
+        "x": 75,
+        "y": 140,
+        "wires": [
+            [
+                "d16d9d61199da9dd"
+            ]
+        ]
+    },
+    {
+        "id": "1d3d674a11fa3a2c",
+        "type": "ui_button",
+        "z": "9219543f935faca2",
+        "name": "",
+        "group": "4178bf61.05d97",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Delete",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "371e73f7b5756b1e"
+            ]
+        ]
+    },
+    {
+        "id": "bd3f81aa4f3adbaf",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "selectedFile",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3a0356257f43d58",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "getFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & req.files[0].originalname",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.files[0].buffer",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "6dcb937467dc5c58"
+            ]
+        ]
+    },
+    {
+        "id": "c37f02a88fdbf51f",
+        "type": "file",
+        "z": "9219543f935faca2",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "04af89a71a442e97"
+            ]
+        ]
+    },
+    {
+        "id": "c446d1ebcca983d7",
+        "type": "inject",
+        "z": "9219543f935faca2",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "d16d9d61199da9dd"
+            ]
+        ]
+    },
+    {
+        "id": "371e73f7b5756b1e",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "getSelectedFile",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('UPLOAD_DIR')  & '/' & $flowContext('selectedFile')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Delete File ?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "9fcf0636ec999326"
+            ]
+        ]
+    },
+    {
+        "id": "2c3e026f887814eb",
+        "type": "file",
+        "z": "9219543f935faca2",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "965e95ab660c281a"
+            ]
+        ]
+    },
+    {
+        "id": "9fcf0636ec999326",
+        "type": "ui_toast",
+        "z": "9219543f935faca2",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "b9c0fedab39c3b7f"
+            ]
+        ]
+    },
+    {
+        "id": "b9c0fedab39c3b7f",
+        "type": "switch",
+        "z": "9219543f935faca2",
+        "name": "OK ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "2c3e026f887814eb"
+            ]
+        ]
+    },
+    {
+        "id": "b1ae34f467c5c2a8",
+        "type": "catch",
+        "z": "9219543f935faca2",
+        "name": "",
+        "scope": null,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "f2da206290382bee"
+            ]
+        ]
+    },
+    {
+        "id": "2a2fcdd5760ad2ee",
+        "type": "ui_toast",
+        "z": "9219543f935faca2",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 530,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f2da206290382bee",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "getError",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "2a2fcdd5760ad2ee"
+            ]
+        ]
+    },
+    {
+        "id": "965e95ab660c281a",
+        "type": "link out",
+        "z": "9219543f935faca2",
+        "name": "refreshAfterDelete",
+        "links": [
+            "2aab0748f17afb21"
+        ],
+        "x": 1135,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "18250047ce912449",
+        "type": "link out",
+        "z": "9219543f935faca2",
+        "name": "refreshAfterUpload",
+        "links": [
+            "2aab0748f17afb21"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b11e9c5dd627291b",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'File ' & req.files[0].originalname & ' uploaded.'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "bf443b454c31f6f2"
+            ]
+        ]
+    },
+    {
+        "id": "d16d9d61199da9dd",
+        "type": "delay",
+        "z": "9219543f935faca2",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "7fd36f08ef7c7b9e"
+            ]
+        ]
+    },
+    {
+        "id": "799528fdad7836c7",
+        "type": "watch",
+        "z": "9219543f935faca2",
+        "name": "",
+        "files": "$(UPLOAD_DIR)",
+        "recursive": "",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "d16d9d61199da9dd"
+            ]
+        ]
+    },
+    {
+        "id": "bc4b8876eb0e6b6e",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "b9c31ef22fbd39e2"
+            ]
+        ]
+    },
+    {
+        "id": "6dcb937467dc5c58",
+        "type": "switch",
+        "z": "9219543f935faca2",
+        "name": "extensionAllowed ?",
+        "property": "$env('EXTENSIONS')",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "$split(filename, '.')[-1]",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "c37f02a88fdbf51f"
+            ],
+            [
+                "29fe2e27fc0274b8"
+            ]
+        ]
+    },
+    {
+        "id": "29fe2e27fc0274b8",
+        "type": "function",
+        "z": "9219543f935faca2",
+        "name": "Error",
+        "func": "node.error(`Error: only ${env.get('EXTENSIONS')} files are allowed.`, msg)\n",
+        "outputs": 0,
+        "noerr": 0,
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "04af89a71a442e97",
+        "type": "change",
+        "z": "9219543f935faca2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 340,
+        "wires": [
+            [
+                "18250047ce912449"
+            ]
+        ]
+    },
+    {
         "id": "c40feb7825e478d4",
         "type": "comment",
         "z": "f8d31b3f79add29b",
@@ -4693,20 +8004,21 @@
         "id": "3b18ad5734fc996b",
         "type": "function",
         "z": "f8d31b3f79add29b",
-        "name": "Variable Setup",
-        "func": "//Setting up directory path of the file upload\nmsg.config ={}\nmsg.config.start = msg.filedir\n\n//Setting up vars to handle archive decompress operations\nvar filenameUpper = msg.file.split(\".\")[0];\nvar filename = filenameUpper.toLowerCase();\nmsg.tstamp = new Date().toISOString().substring(0,19).replace(/-/g,\"\").replace(/:/g,\"\");\nvar dirnameUpper = filename + msg.tstamp + \"Z\";\nmsg.dirname = dirnameUpper.toLowerCase();\nmsg.plasofname = msg.dirname;\n//msg.filename = msg.payload;\n\n//Setting up decompress parameters\nmsg.unzipdir = msg.filedir + '/' + msg.dirname;\nmsg.unzipcli = \"-qo \" + msg.filename + \" -d \" + msg.unzipdir;\nmsg.sevzipcli = \" x \" + msg.filename + \" -o\" + msg.unzipdir;\nmsg.targzcli = \" xzf \" + msg.filename + \" -C \" + msg.unzipdir;\nmsg.tarbz2cli = \" xjf \" + msg.filename + \" -C \" + msg.unzipdir;\nmsg.unrarcli = \"x \" + msg.filename + \" \" + msg.unzipdir;\n\nreturn msg;",
+        "name": "Prepare Archive Decompression API Call",
+        "func": "// This Function node prepares an API call to TITAN_Processor to decompress an archive.\n// It assumes msg.filename is the full path to the uploaded archive, and msg.filedir is its directory.\n\nnode.log(\"Node-RED: Preparing API call for /decompress_archive.\");\n\nif (!msg.filename || typeof msg.filename !== 'string' || !msg.filedir || typeof msg.filedir !== 'string') {\n    // Corrected: Only pass the string message to node.error\n    node.error(\"msg.filename or msg.filedir is missing or invalid for archive processing.\");\n    return null; // Stop the flow\n}\n\nvar archiveFullPath = msg.filename;\nvar archiveFileDirectory = msg.filedir;\n\nvar archiveBasenameWithExt = archiveFullPath.split('/').pop();\nvar archiveBasenameNoExt = \"\";\nvar archiveExtension = \"\";\n\nvar parts = archiveBasenameWithExt.split('.');\nif (parts.length > 1) {\n    archiveExtension = parts.pop().toLowerCase();\n    // Handle complex extensions like .tar.gz\n    if ((parts.length > 1) && (parts[parts.length - 1].toLowerCase() === \"tar\")) {\n        archiveExtension = \"tar.\" + archiveExtension;\n        parts.pop();\n    }\n    archiveBasenameNoExt = parts.join('.').toLowerCase();\n} else {\n    archiveBasenameNoExt = parts.length > 0 ? parts[0].toLowerCase() : \"unknown_archive\";\n    // Corrected: Only pass the string message to node.warn\n    node.warn(\"Archive file may have no extension: \" + archiveFullPath);\n}\n\nif (!archiveExtension) {\n    // Corrected: Only pass the string message to node.error\n    node.error(\"Could not determine archive type for: \" + archiveFullPath);\n    return null; // Stop flow\n}\n\nvar timestamp = new Date().toISOString().substring(0, 19).replace(/-/g, \"\").replace(/:/g, \"\");\nvar uniqueOutputDirectoryName = archiveBasenameNoExt + \"_\" + timestamp + \"_extracted\";\n\n// Use safe string concatenation to build the full path\nvar outputDirectoryFullPath = \"\";\nif (archiveFileDirectory.endsWith('/')) {\n    outputDirectoryFullPath = archiveFileDirectory + uniqueOutputDirectoryName;\n} else {\n    outputDirectoryFullPath = archiveFileDirectory + '/' + uniqueOutputDirectoryName;\n}\n\n\n// Store paths and names for subsequent nodes (these are attached to the msg object)\nmsg.archive_type_detected = archiveExtension;\nmsg.extraction_path = outputDirectoryFullPath; // Path where files will be unzipped\nmsg.job_base_name = archiveBasenameNoExt + \"_\" + timestamp; // For naming downstream jobs\n\n// Prepare the JSON payload for the /decompress_archive API endpoint\nmsg.payload = {\n    archive_file_path: archiveFullPath,\n    output_directory_path: outputDirectoryFullPath,\n    archive_type: archiveExtension\n};\n\n// Set up the properties for the 'http request' node that will follow this Function node\nmsg.url = \"http://titan_processor:5005/decompress_archive\";\nmsg.method = \"POST\";\nmsg.headers = { \"Content-Type\": \"application/json\" };\n\n// Corrected: Only pass the string message to node.warn\nnode.warn(\"Node-RED: API Payload for /decompress_archive: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
+        "x": 760,
         "y": 360,
         "wires": [
             [
                 "b6ecf5f15136a82b",
-                "de949eecbb53d66e"
+                "de949eecbb53d66e",
+                "5beb4c8cbfb504ea"
             ]
         ]
     },
@@ -4782,20 +8094,21 @@
         "id": "e4e7063f519ed216",
         "type": "function",
         "z": "f8d31b3f79add29b",
-        "name": "KAPE Hayabusa Process Variables",
-        "func": "//Create a variable to store the EVTX directory path\nmsg.kape = msg.dirname + '/C/Windows/System32/winevt/logs/';\nmsg.hayabusa_job = msg.plasofname + '-hayabusa';\nmsg.hayabusa_out = '/cases/evtxproc/' + msg.hayabusa_job;\nmsg.hayabusa_exec =  'csv-timeline -d ' +msg.kape+ ' --RFC-3339 -o ' + msg.hayabusa_out + '.csv' + ' -p timesketch-verbose -U --no-wizard'\nmsg.hayabusa_ts = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name \" + msg.hayabusa_job + \" --sketch_id \" + \"1 \" + msg.hayabusa_out + '.csv';\nreturn msg;",
+        "name": "Prepare Hayabusa API Call",
+        "func": "// Node-RED Function node: \"Prepare Hayabusa API Call\"\n// Assumes msg.dirname contains the path to the root of the mounted/extracted image's C: drive \n// (e.g., /cases/processor/myimage_extracted/C or /cases/mounted/myimage_partitions/p1 if p1 is C:)\n// Assumes msg.job_base_name (e.g., \"myimage_timestamp\") is available from an earlier step for consistent job/file naming.\n// If msg.job_base_name is not available, it will try to derive one from msg.filename.\n\nnode.warn(\"Node-RED: Preparing API call for /run_hayabusa\");\n\n// 1. Determine the EVTX directory path\nvar evtxDirectory = \"\";\nif (msg.dirname && typeof msg.dirname === 'string') {\n    // Path to Windows Event Logs relative to the root of the C: drive partition\n    // Ensure msg.dirname correctly points to the root of the mounted C: drive partition.\n    evtxDirectory = msg.dirname + (msg.dirname.endsWith('/') ? '' : '/') + 'Windows/System32/winevt/Logs/';\n    node.log(\"Using EVTX directory: \" + evtxDirectory);\n} else {\n    node.error(\"msg.dirname (path to mounted image root/C: drive) is missing or invalid for Hayabusa EVTX path.\", msg);\n    return null; // Stop the flow\n}\n\n// 2. Determine a base name for this Hayabusa job and its output file\nvar hayabusaJobNameBase = \"\";\nif (msg.job_base_name && typeof msg.job_base_name === 'string') {\n    hayabusaJobNameBase = msg.job_base_name;\n} else if (msg.plasofname && typeof msg.plasofname === 'string') { \n    // Use msg.plasofname if it's a clean base name\n    hayabusaJobNameBase = msg.plasofname.includes('/') ? msg.plasofname.split(\"/\").pop() : msg.plasofname;\n} else if (msg.filename && typeof msg.filename === 'string') {\n    // Fallback to original E01 filename\n    try {\n        hayabusaJobNameBase = msg.filename.split(\"/\").pop().split(\".\")[0].toLowerCase();\n    } catch (e) {\n        node.warn(\"Error deriving basename from msg.filename for Hayabusa: \" + e.message);\n        var ts = new Date().toISOString().substring(0,10).replace(/-/g,\"\");\n        hayabusaJobNameBase = \"hayabusa_generic_\" + ts;\n    }\n} else {\n    var ts = new Date().toISOString().substring(0,10).replace(/-/g,\"\");\n    hayabusaJobNameBase = \"hayabusa_generic_\" + ts;\n    // Corrected the warning to not pass the full 'msg' object as the second argument directly\n    // if it's causing issues. If you need to see the full msg, use a separate debug node.\n    node.warn(\"Could not determine Hayabusa job base name from msg.job_base_name, msg.plasofname, or msg.filename. Using generic: \" + hayabusaJobNameBase);\n}\n\nvar fullHayabusaJobName = hayabusaJobNameBase + \"-hayabusa\";\n\n// 3. Define the output CSV path for Hayabusa\n// This path is where TITAN_Processor will instruct Hayabusa to save the CSV.\nvar outputCsvPath = '/cases/evtxproc/' + fullHayabusaJobName + '.csv';\n\n// 4. Store information needed for the *next* step (Timesketch import of this CSV)\n// These will be passed along on the msg object, NOT in the payload for the /run_hayabusa call.\nmsg.hayabusa_output_csv_for_timesketch = outputCsvPath;\nmsg.hayabusa_timeline_name_for_timesketch = fullHayabusaJobName; // Or customize further if needed\nmsg.timesketch_sketch_id_for_hayabusa = \"1\"; // VERIFY this is the correct Sketch ID\n\n// 5. Prepare the JSON payload for the /run_hayabusa API endpoint\nmsg.payload = {\n    evtx_dir_path: evtxDirectory,\n    output_csv_path: outputCsvPath\n    // Optional: If your /run_hayabusa API endpoint in processor.py supports an 'options_str'\n    // for Hayabusa, you can add it here:\n    // \"hayabusa_options_str\": \"--profile security -L critical\" \n};\n\n// 6. Set up properties for the 'http request' node\nmsg.url = \"http://titan_processor:5005/run_hayabusa\";\nmsg.method = \"POST\";\nmsg.headers = { \"Content-Type\": \"application/json\" };\n\nnode.warn(\"Node-RED: API Payload for /run_hayabusa: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
+        "x": 300,
         "y": 640,
         "wires": [
             [
                 "52415c7bb8e16c3a",
-                "430a7da8abd665c9"
+                "430a7da8abd665c9",
+                "b7de806260036814"
             ]
         ]
     },
@@ -5053,8 +8366,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 680,
+        "x": 270,
+        "y": 720,
         "wires": [
             [
                 "52415c7bb8e16c3a",
@@ -5332,36 +8645,7 @@
         "x": 560,
         "y": 940,
         "wires": [
-            [
-                "da0236f64e679945"
-            ]
-        ]
-    },
-    {
-        "id": "da0236f64e679945",
-        "type": "exec",
-        "z": "f8d31b3f79add29b",
-        "command": "",
-        "addpay": "l2tcli",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Log2timeline Process",
-        "x": 720,
-        "y": 820,
-        "wires": [
-            [
-                "38680517166d75f2"
-            ],
-            [
-                "38680517166d75f2"
-            ],
-            [
-                "38680517166d75f2",
-                "aef29c2f6fb1ae0e"
-            ]
+            []
         ]
     },
     {
@@ -5533,7 +8817,7 @@
         "type": "function",
         "z": "f8d31b3f79add29b",
         "name": "Timesketch CLI params",
-        "func": "var plasofullpath = \"/cases/plaso/\"+ msg.plasofname + \".plaso\";\nmsg.tsimport = \"-u titan -p admin --host http://127.0.0.1 --timeline_name \" + msg.plasofname + \"-triage\" + \" --sketch_id \" + \"7\" + \" \" + plasofullpath;\nreturn msg;",
+        "func": "// This Function node prepares the API call to TITAN_Processor to import a Plaso file into Timesketch.\n// It assumes the PREVIOUS step was a successful call to the /run_log2timeline API\n// and that its JSON response is in msg.payload.\n\nnode.warn(\"Node-RED: Preparing API call to import Plaso file into Timesketch.\");\n\n// 1. Check for success from the log2timeline step and get the path to the .plaso file.\n//    The successful response should have a 'status' of \"success\" and an 'output_file' key.\nif (!msg.payload || msg.payload.status !== \"success\" || !msg.payload.output_file) {\n    node.error(\"Previous log2timeline step did not report success or did not return an output_file. Halting Timesketch import.\", msg);\n    return null; // Stop the flow if the required Plaso path is missing.\n}\nvar plasoFilePath = msg.payload.output_file;\nnode.log(\"Plaso file to import: \" + plasoFilePath);\n\n\n// 2. Construct a descriptive name for the timeline in Timesketch.\n//    We can use the `job_base_name` that was set by the function that prepared the log2timeline call.\nvar timelineName = \"\";\nif (msg.job_base_name && typeof msg.job_base_name === 'string') {\n    timelineName = msg.job_base_name + \"-timeline\";\n} else {\n    // Fallback if job_base_name is not available, using the Plaso filename as a base.\n    timelineName = plasoFilePath.split(\"/\").pop();\n    node.warn(\"Could not find msg.job_base_name, using Plaso filename for timeline name: \" + timelineName);\n}\n\n// 3. Set the Timesketch connection details.\n//    The host is now the Docker service name for the Timesketch container.\nvar timesketchHost = \"http://timesketch:5000\"; // <-- Correct URL for container-to-container communication\nvar timesketchUser = \"titan\";                   // <-- VERIFY/CHANGE: This is the default from the Timesketch compose file\nvar timesketchPass = \"admin\";                   // <-- VERIFY/CHANGE: This is the default password\nvar sketchId = \"1\";                           // <-- VERIFY: Ensure a sketch with this ID exists in your Timesketch instance\n\n// 4. Prepare the JSON payload for the /import_to_timesketch API endpoint.\n//    This will be sent in the body of the HTTP POST request.\nvar apiPayload = {\n    plaso_file_path: plasoFilePath,\n    host: timesketchHost,\n    user: timesketchUser,\n    password: timesketchPass,\n    timeline_name: timelineName,\n    sketch_id: sketchId\n};\n// Overwrite msg.payload with the data for the *new* API call.\nmsg.payload = apiPayload; \n\n// 5. Set up the HTTP request properties for the 'http request' node that follows.\nmsg.url = \"http://titan_processor:5005/import_to_timesketch\";\nmsg.method = \"POST\";\nmsg.headers = { \"Content-Type\": \"application/json\" };\n\nnode.warn(\"Node-RED: API Payload for Timesketch Import: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -5544,29 +8828,7 @@
         "y": 960,
         "wires": [
             [
-                "2b3a6c9be610f3ec"
-            ]
-        ]
-    },
-    {
-        "id": "2b3a6c9be610f3ec",
-        "type": "exec",
-        "z": "f8d31b3f79add29b",
-        "command": "timesketch_importer",
-        "addpay": "tsimport",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Timesketch Import Process",
-        "x": 1220,
-        "y": 960,
-        "wires": [
-            [],
-            [],
-            [
-                "381d356754cbd5b7"
+                "9faaba4eb1d9fb68"
             ]
         ]
     },
@@ -5642,7 +8904,7 @@
         "type": "function",
         "z": "f8d31b3f79add29b",
         "name": "Set-Log2timeline CLI params",
-        "func": "var plasodir = \"/cases/plaso/\";\nvar plasoname = msg.dirname.replace('processor', 'plaso');\nmsg.l2tcli = \"log2timeline.py --status_view none --parsers filestat,winreg,esedb,binary_cookies,chrome_cache,chrome_preferences,custom_destinations,czip,firefox_cache,firefox_cache2,java_idx,jsonl,lnk,mcafee_protection,msiecf,olecf,opera_global,opera_typed_history,pe,prefetch,recycle_bin,recycle_bin_info2,sqlite,symantec_scanlog,text,trendmicro_url,trendmicro_vd,windefender_history,winevt,winevtx,winjob --storage-file\" + \" \" + plasoname + \".plaso\" + \" \" + msg.unzipdir;\nreturn msg;",
+        "func": "// This Function node prepares an API call to run log2timeline on an unzipped directory\n// (e.g., from a KAPE or Velociraptor triage collection).\n// It assumes the previous step was a successful call to the /decompress_archive API\n// and that its response is in the current msg.payload.\n\nnode.warn(\"Node-RED: Preparing to run log2timeline on unzipped triage directory.\");\n\n// 1. Check for success from the decompression step and get the path to the unzipped folder.\nif (!msg.payload || msg.payload.status !== \"success\" || !msg.payload.output_directory) {\n    node.error(\"The previous decompression step did not succeed or did not return an output_directory. Halting log2timeline.\", msg);\n    return null; // Stop the flow if decompression failed.\n}\n\nvar unzippedDirectoryPath = msg.payload.output_directory;\nnode.log(\"Triage directory to process: \" + unzippedDirectoryPath);\n\n// 2. Create a unique name for the output Plaso file.\n//    We can use the `job_base_name` that was likely set on the msg object\n//    by the function node that prepared the decompression call.\nvar plasoBaseName = msg.job_base_name || unzippedDirectoryPath.split('/').pop();\nvar plasoOutputDir = \"/cases/plaso/\";\nvar outputPlasoFile = plasoOutputDir + plasoBaseName + \".plaso\";\n\n// 3. Store the output path on the msg object for the subsequent Timesketch import step.\n//    We use a distinct name like 'plaso_output_file_triage' to avoid conflict if\n//    other plaso files are processed in the same flow.\nmsg.plaso_output_file_triage = outputPlasoFile;\n\n// 4. Define log2timeline options for processing a directory.\n//    NOTE: The --partitions flag is REMOVED as it's not needed when the source is a directory.\nvar log2timelineOptions = \"--status_view none --parsers filestat,winreg,esedb,binary_cookies,chrome_cache,chrome_preferences,custom_destinations,czip,firefox_cache,firefox_cache2,java_idx,jsonl,lnk,mcafee_protection,msiecf,olecf,opera_global,opera_typed_history,pe,prefetch,recycle_bin,recycle_bin_info2,sqlite,symantec_scanlog,text,trendmicro_url,trendmicro_vd,windefender_history,winevt,winevtx,winjob\";\n\n// 5. Prepare the JSON payload for the /run_log2timeline API endpoint.\nvar apiPayload = {\n    input_file: unzippedDirectoryPath,   // The input is now the path to the unzipped DIRECTORY\n    output_file: outputPlasoFile,        // The path where the new .plaso file will be saved\n    options_str: log2timelineOptions     // The options for log2timeline\n};\nmsg.payload = apiPayload; // Overwrite msg.payload with the new data for the API call.\n\n// 6. Set up the HTTP request properties.\nmsg.url = \"http://titan_processor:5005/run_log2timeline\"; // We reuse the same API endpoint\nmsg.method = \"POST\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nnode.warn(\"Node-RED: API Payload for log2timeline on directory: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -5653,7 +8915,7 @@
         "y": 1020,
         "wires": [
             [
-                "da0236f64e679945"
+                "e41651cb0e3cc5dc"
             ]
         ]
     },
@@ -5716,6 +8978,100 @@
         "wires": []
     },
     {
+        "id": "b7de806260036814",
+        "type": "http request",
+        "z": "f8d31b3f79add29b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5beb4c8cbfb504ea",
+        "type": "http request",
+        "z": "f8d31b3f79add29b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 440,
+        "wires": [
+            [
+                "0abb6da646da8e2a"
+            ]
+        ]
+    },
+    {
+        "id": "e41651cb0e3cc5dc",
+        "type": "http request",
+        "z": "f8d31b3f79add29b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 730,
+        "y": 840,
+        "wires": [
+            [
+                "aef29c2f6fb1ae0e"
+            ]
+        ]
+    },
+    {
+        "id": "9faaba4eb1d9fb68",
+        "type": "http request",
+        "z": "f8d31b3f79add29b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1210,
+        "y": 980,
+        "wires": [
+            [
+                "381d356754cbd5b7"
+            ]
+        ]
+    },
+    {
         "id": "4a312f7b0984b364",
         "type": "exec",
         "z": "44cf1917690496d8",
@@ -5762,41 +9118,12 @@
         "y": 200,
         "wires": [
             [
-                "bf88463397855b7a",
                 "a1b64661a3ee175c",
-                "88bbb0dccda88902"
+                "88bbb0dccda88902",
+                "d8bdb8cfae1290b6"
             ],
             [
                 "0974be28f22e530d"
-            ]
-        ]
-    },
-    {
-        "id": "bf88463397855b7a",
-        "type": "exec",
-        "z": "44cf1917690496d8",
-        "command": "timesketch_importer",
-        "addpay": "hayabusa_ts",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Ingest Hayabusa data",
-        "x": 900,
-        "y": 140,
-        "wires": [
-            [
-                "288080687e42e36c",
-                "ee1072af983209c4"
-            ],
-            [
-                "288080687e42e36c",
-                "ee1072af983209c4"
-            ],
-            [
-                "288080687e42e36c",
-                "ee1072af983209c4"
             ]
         ]
     },
@@ -5967,6 +9294,7 @@
         "id": "d16c6f5299b56c8b",
         "type": "exec",
         "z": "44cf1917690496d8",
+        "d": true,
         "command": "/opt/chainsaw/./chainsaw ",
         "addpay": "chainsaw_exec",
         "append": "",
@@ -6138,19 +9466,20 @@
         "id": "179dd871fee9e505",
         "type": "function",
         "z": "44cf1917690496d8",
-        "name": "KAPE Chainsaw Process Variables",
-        "func": "//Create a variable to store the EVTX directory path\nmsg.kape = msg.dirname + '/C/Windows/System32/winevt/logs/';\nmsg.chainsaw_job = + msg.plasofname + '-chainsaw';\nmsg.chainsaw_dir = msg.plasofname;\nmsg.chainsaw_files = '/cases/evtxproc/chainsaw/' + msg.plasofname + '/';\nmsg.chainsaw_out = '/cases/evtxproc/chainsaw/' + msg.chainsaw_dir;\n//msg.chainsaw_out = '/cases/evtxproc/chainsaw/' + msg.plasofname ;\nmsg.chainsaw_exec = 'hunt -q ' + msg.kape + ' -s /opt/chainsaw/sigma/ --mapping /opt/chainsaw/mappings/sigma-event-logs-all.yml -r /opt/chainsaw/rules/ --csv --output ' + msg.chainsaw_out;\nmsg.chainsaw_ts1 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_antivirus\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"antivirus.csv\";\nmsg.chainsaw_ts2 = \"-u dfir -p admin --host http://127.0.0.1 ---timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_microsoft_rds_events_-_user_profile_disk\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"microsoft_rds_events_-_user_profile_disk.csv\";\nmsg.chainsaw_ts3 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-hainsaw_powershell_script.\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"powershell_script.csv\";\nmsg.chainsaw_ts4 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_rdp_events\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"rdp_events.csv\";\nmsg.chainsaw_ts5 = \"-u dfir -p admin --host http://127.0.0.1 ---timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_service_installation\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"service_installation.csv\";\nmsg.chainsaw_ts6 = \"-u dfir -p admin --host http://127.0.0.1 ---timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_sigma\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"sigma.csv\";\nmsg.chainsaw_ts7 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_account_tampering\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"account_tampering.csv\";\nmsg.chainsaw_ts8 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_applocker\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"applocker.csv\";\nmsg.chainsaw_ts9 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_credential_access\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"credential_access.csv\";\nmsg.chainsaw_ts10 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_defensive_evasion\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"defensive_evasion.csv\";\nmsg.chainsaw_ts11 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_lateral_movement\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"lateral_movement.csv\";\nmsg.chainsaw_ts12 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_log_tampering\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"log_tampering.csv\";\nmsg.chainsaw_ts13 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_login_attacks\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"login_attacks.csv\";\nmsg.chainsaw_ts14 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_microsoft_rasvpn_events\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"microsoft_rasvpn_events.csv\";\nmsg.chainsaw_ts15 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_service_installation\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"service_installation.csv\";\nmsg.chainsaw_ts16 = \"-u dfir -p admin --host http://127.0.0.1 --timeline_name\" + \" \" + msg.plasofname + \"-chainsaw_service_tampering\" + \" --sketch_id \" + \"1 \" + msg.chainsaw_files + \"service_tampering.csv\";\n\nreturn msg;",
+        "name": "Prepare Chainsaw API Call",
+        "func": "// Node-RED Function node: \"Prepare Chainsaw API Call\"\n// Assumes msg.dirname (e.g., /cases/processor/myimage_extracted/) and \n// msg.plasofname (e.g., myimage or similar base for job naming) are available.\n\nnode.warn(\"Node-RED: Preparing API call for /run_chainsaw\");\n\nvar evtxDirectory = \"\";\n// Construct path to EVTX logs based on where your mount/extraction places them\nif (msg.dirname && typeof msg.dirname === 'string') {\n    evtxDirectory = msg.dirname + '/C/Windows/System32/winevt/Logs/';\n} else {\n    node.error(\"msg.dirname is missing or invalid for Chainsaw EVTX path.\", msg);\n    return null;\n}\n\nvar chainsawJobName = \"\"; // Initialize as an empty string\nif (msg.plasofname && typeof msg.plasofname === 'string') {\n    chainsawJobName = msg.plasofname.includes('/') ? msg.plasofname.split(\"/\").pop() : msg.plasofname;\n    chainsawJobName += \"-chainsaw\";\n} else if (msg.filename && typeof msg.filename === 'string') {\n    try {\n        chainsawJobName = msg.filename.split(\"/\").pop().split(\".\")[0].toLowerCase() + \"-chainsaw\";\n    } catch (e) {\n        node.warn(\"Error splitting msg.filename for chainsawJobName: \" + e.message);\n        // Fallback if splitting fails\n        var ts = new Date().toISOString().substring(0,10).replace(/-/g,\"\");\n        chainsawJobName = \"chainsaw_job_\" + ts;\n    }\n}\n\n// If chainsawJobName is still empty after trying the above, create a generic one.\nif (!chainsawJobName) { // Check if it's empty\n    var ts = new Date().toISOString().substring(0,10).replace(/-/g,\"\");\n    chainsawJobName = \"chainsaw_job_\" + ts;\n    // Simplified warning - just the string. Add a separate debug node if you need to see the full msg object here.\n    node.warn(\"Could not determine Chainsaw job name from msg.plasofname or msg.filename. Using generic: \" + chainsawJobName);\n}\n\n\n// This is the base directory where Chainsaw will store its multiple CSV outputs\nvar chainsawOutputBaseDirectory = '/cases/evtxproc/chainsaw/' + chainsawJobName + '/'; // Note trailing slash for directory\n\n// Store information for the *next* stage (importing these CSVs to Timesketch)\nmsg.timesketch_sketch_id_for_chainsaw = \"1\"; // Or your desired sketch ID\nmsg.chainsaw_timeline_prefix = chainsawJobName; // Base for naming individual timelines\n\n// Prepare the JSON payload for the /run_chainsaw API endpoint\nmsg.payload = {\n    evtx_dir_path: evtxDirectory,\n    output_directory: chainsawOutputBaseDirectory\n};\n\nmsg.url = \"http://titan_processor:5005/run_chainsaw\";\nmsg.method = \"POST\";\nmsg.headers = { \"Content-Type\": \"application/json\" };\n\nnode.warn(\"Node-RED: API Payload for /run_chainsaw: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 340,
         "y": 380,
         "wires": [
             [
-                "d16c6f5299b56c8b"
+                "d16c6f5299b56c8b",
+                "0d799067e797df8a"
             ]
         ]
     },
@@ -6189,6 +9518,70 @@
         "x": 1070,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "0d799067e797df8a",
+        "type": "http request",
+        "z": "44cf1917690496d8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8bdb8cfae1290b6",
+        "type": "function",
+        "z": "44cf1917690496d8",
+        "name": "Prepare Hayabusa CSV Import to Timesketch",
+        "func": "// Node-RED Function node: \"Prepare Hayabusa CSV Import to Timesketch\"\nnode.warn(\"Node-RED: Preparing API call to import Hayabusa CSV to Timesketch.\");\n\nvar hayabusaCsvFile = msg.hayabusa_output_csv_for_timesketch;\nvar timelineName = msg.hayabusa_timeline_name_for_timesketch;\nvar sketchId = msg.timesketch_sketch_id_for_hayabusa || \"1\"; // Default if not set\n\nif (!hayabusaCsvFile) {\n    node.error(\"Hayabusa output CSV path (msg.hayabusa_output_csv_for_timesketch) is missing!\", msg);\n    return null;\n}\n\nvar timesketchHost = \"http://timesketch:5000\"; // Your Timesketch host:port\nvar timesketchUser = \"titan\"; // Your Timesketch user\nvar timesketchPass = \"admin\"; // Your Timesketch password\n\nmsg.payload = {\n    plaso_file_path: hayabusaCsvFile, // The /import_to_timesketch API expects 'plaso_file_path' for any file\n    host: timesketchHost,\n    user: timesketchUser,\n    password: timesketchPass,\n    timeline_name: timelineName,\n    sketch_id: sketchId\n};\n\nmsg.url = \"http://titan_processor:5005/import_to_timesketch\";\nmsg.method = \"POST\";\nmsg.headers = { \"Content-Type\": \"application/json\" };\n\nnode.warn(\"Node-RED: API Payload for Hayabusa CSV Timesketch Import: \" + JSON.stringify(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 140,
+        "wires": [
+            [
+                "8d4b35e0588683e0"
+            ]
+        ]
+    },
+    {
+        "id": "8d4b35e0588683e0",
+        "type": "http request",
+        "z": "44cf1917690496d8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 220,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "a8a370357488b800",
@@ -8541,6 +11934,7 @@
         "id": "ee130db70346c33f",
         "type": "exec",
         "z": "018a08567380648f",
+        "d": true,
         "command": "",
         "addpay": "l2tcli",
         "append": "",
@@ -8550,7 +11944,7 @@
         "oldrc": false,
         "name": "Log2timeline Process",
         "x": 980,
-        "y": 140,
+        "y": 200,
         "wires": [
             [
                 "0f932134f11e8b6e"
@@ -8723,7 +12117,7 @@
         "type": "function",
         "z": "018a08567380648f",
         "name": "Set-Log2timeline CLI params - backup",
-        "func": "var plasodir = \"/cases/plaso/\";  // Correct directory for .plaso files\nvar plasoname = msg.filename.split(\"/\").pop().split(\".\")[0].toLowerCase();  // Extract the base name from msg.filename\n\n// Creating a Timestamp\nmsg.tstamp = new Date().toISOString().substring(0, 19).replace(/-/g, \"\").replace(/:/g, \"\");\n\n// Creating the full storage file path\nvar storageFilePath = plasodir + plasoname + msg.tstamp + \".plaso\";\n\n// Construct the log2timeline command with the correct path\nmsg.l2tcli = \"/home/titan/.local/bin/log2timeline --partitions all --status_view none --parsers filestat,winreg,esedb,binary_cookies,chrome_cache,chrome_preferences,custom_destinations,czip,firefox_cache,firefox_cache2,java_idx,jsonl,lnk,mcafee_protection,msiecf,olecf,opera_global,opera_typed_history,pe,prefetch,recycle_bin,recycle_bin_info2,sqlite,symantec_scanlog,text,trendmicro_url,trendmicro_vd,windefender_history,winevt,winevtx,winjob --storage-file \" + storageFilePath + \" \" + msg.filename;\n\nreturn msg;\n\n//var plasodir = \"/cases/processor/\";\n//var plasofname = msg.plasoname.replace('processor', 'plaso');\n//msg.l2tcli = \"/home/titan/.local/bin/log2timeline --partitions all --status_view none --storage-file \" + plasofname + msg.tstamp + \".plaso\" + \" \" + msg.filename;\n//return msg;",
+        "func": "// This Function node prepares an HTTP request for the TITAN_Processor API to run log2timeline.\n// It assumes msg.filename contains the full path to the input image file, \n// e.g., /cases/processor/your_image.e01\n\nnode.warn(\"Node-RED: Preparing to call TITAN_Processor API at http://titan_processor:5005/run_log2timeline\");\n\nvar plasoOutputDir = \"/cases/plaso/\";  // Directory where .plaso files will be stored\n\n// Extract a base filename (e.g., \"your_image\" from \"/cases/processor/your_image.e01\")\nvar baseFilename = \"\";\nif (msg.filename && typeof msg.filename === 'string') {\n    try {\n        baseFilename = msg.filename.split(\"/\").pop().split(\".\")[0].toLowerCase();\n    } catch (e) {\n        node.error(\"Could not derive baseFilename from msg.filename: \" + e.message, msg);\n        baseFilename = \"unknown_image\";\n    }\n} else {\n    node.error(\"msg.filename is missing or not a string! Cannot create Plaso output name.\", msg);\n    return null; // Stop flow if filename is invalid\n}\n\n// Creating a Timestamp for unique filenames\nvar timestamp = new Date().toISOString().substring(0, 19).replace(/-/g, \"\").replace(/:/g, \"\");\nmsg.tstamp = timestamp; // Store timestamp on msg if needed by later nodes\n\n// Creating the full storage file path for the .plaso output.\nvar outputPlasoFile = plasoOutputDir + baseFilename + \"_\" + timestamp + \".plaso\";\n\n// Store this output path on the msg object so subsequent nodes (like the one\n// preparing the timesketch_importer command) can access it.\nmsg.plaso_output_file = outputPlasoFile;\n\n// Store a clean base name for other jobs if needed. This is useful for consistency.\nmsg.job_base_name = baseFilename + \"_\" + timestamp;\n\n// Log2timeline Options string (these are the command-line flags for log2timeline.py)\nvar log2timelineOptions = \"--partitions all --status_view none --parsers filestat,winreg,esedb,binary_cookies,chrome_cache,chrome_preferences,custom_destinations,czip,firefox_cache,firefox_cache2,java_idx,jsonl,lnk,mcafee_protection,msiecf,olecf,opera_global,opera_typed_history,pe,prefetch,recycle_bin,recycle_bin_info2,sqlite,symantec_scanlog,text,trendmicro_url,trendmicro_vd,windefender_history,winevt,winevtx,winjob\";\n\n// Prepare the JSON payload to be sent to the TITAN_Processor API\nmsg.payload = {\n    input_file: msg.filename,         // Full path to the source E01 file\n    output_file: outputPlasoFile,     // Full path where TITAN_Processor should save the .plaso file\n    options_str: log2timelineOptions  // Options string for log2timeline.py\n};\n\n// Set up the properties for the 'http request' node that will follow this Function node\nmsg.url = \"http://titan_processor:5005/run_log2timeline\"; // URL of your Flask API endpoint\nmsg.method = \"POST\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nnode.warn(\"Node-RED: API Payload for /run_log2timeline: \" + JSON.stringify(msg.payload));\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -8734,7 +12128,8 @@
         "y": 160,
         "wires": [
             [
-                "ee130db70346c33f"
+                "ee130db70346c33f",
+                "ac1ef0954e83d3e1"
             ]
         ]
     },
@@ -9521,6 +12916,28 @@
         "x": 890,
         "y": 1940,
         "wires": []
+    },
+    {
+        "id": "ac1ef0954e83d3e1",
+        "type": "http request",
+        "z": "018a08567380648f",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 910,
+        "y": 280,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "236dcee18367a244",
