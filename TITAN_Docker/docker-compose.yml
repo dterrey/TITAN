@@ -138,8 +138,8 @@ services:
     image: us-docker.pkg.dev/osdfir-registry/timesketch/dev:latest
     command: timesketch
     ports:
-      - "127.0.0.1:5000:5000" # Timesketch UI
-      - "127.0.0.1:8080:8080" # Timesketch API
+      - "5000:5000" # Timesketch UI
+      - "8080:8080" # Timesketch API
     depends_on:
       - ts_opensearch
       - ts_postgres
